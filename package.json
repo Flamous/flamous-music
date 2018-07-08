@@ -1,0 +1,19 @@
+{
+  "name": "flamous-music",
+  "version": "1.0.0",
+  "description": "Platform for your music",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christian Kaindl",
+  "license": "MIT",
+  "dependencies": {
+    "hyperapp": "^1.2.6",
+    "popmotion": "^8.3.3"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.9.4",
+    "standard": "^11.0.1"
+  }
+}
