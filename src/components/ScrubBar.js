@@ -100,8 +100,8 @@ const Bubble = style('div')((props) => ({
   width: '100%',
   maxWidth: '400px',
   padding: '0.4em',
-  position: 'relative',
   display: 'flex',
+  position: 'relative',
   height: '4em',
   cursor: 'default',
   boxShadow: '0 1px 17px -3px rgba(0,0,0, 0.1)'
@@ -145,18 +145,27 @@ const Info = style('div')({
   alignSelf: 'center'
 })
 
+const Wrapper = style('div')({
+  width: '100%',
+  display: 'flex',
+  position: 'absolute',
+  bottom: '0px'
+})
+
 const ScrubBar = (props) =>
-  <Bubble playingState={props.playingState} oncreate={((props) => (element) => makeInteractive(element, props))(props)}>
-    <Indicator />
-    <SongCover draggable='false' src={props.image} />
-    <Info>
-      <Song>
-        {props.name}
-      </Song>
-      <Artist>
-        {props.artist}
-      </Artist>
-    </Info>
-  </Bubble>
+  <Wrapper>
+    <Bubble playingState={props.playingState} oncreate={((props) => (element) => makeInteractive(element, props))(props)}>
+      <Indicator />
+      <SongCover draggable='false' src={props.image} />
+      <Info>
+        <Song>
+          {props.name}
+        </Song>
+        <Artist>
+          {props.artist}
+        </Artist>
+      </Info>
+    </Bubble>
+  </Wrapper>
 
 export default ScrubBar

@@ -82,9 +82,11 @@
 
 import { h, app } from 'hyperapp'
 import Amplitude from 'amplitudejs'
-// import picostyle from 'picostyle'
+import picostyle from 'picostyle'
 import ScrubBar from './components/ScrubBar.js'
+import Home from './components/Home.js'
 import songList from './songs.js'
+
 
 // const h = (name, attributes, children) => {
 //   let vNode = hyper(name, attributes, children)
@@ -98,6 +100,14 @@ import songList from './songs.js'
 // }
 import placeholder from './public/placeholder.jpg'
 // placeholder.load()
+
+const style = picostyle(h)
+
+const AppShell = style('div')({
+  height: '100%',
+  width: '100%',
+  position: 'relative'
+})
 
 Amplitude.setDebug(true)
 Amplitude.init({
@@ -129,13 +139,15 @@ const flamous = app(
   },
   {
     updateMetaData: (metaData) => {
-      navigator.mediaSession.metadata = new window.MediaMetadata({
-        title: metaData.name,
-        artist: metaData.artist,
-        artwork: [{
-          src: metaData.cover_art_url
-        }]
-      })
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new window.MediaMetadata({
+          title: metaData.name,
+          artist: metaData.artist,
+          artwork: [{
+            src: metaData.cover_art_url
+          }]
+        })
+      }
 
       return {
         playingContext: {
@@ -152,14 +164,17 @@ const flamous = app(
     }
   },
   ({playingContext, playingState}) =>
-    <ScrubBar
-      playingState={playingState}
-      playPause={playPause}
-      nextSong={Amplitude.next}
-      previousSong={Amplitude.prev}
-      artist={playingContext.artist}
-      name={playingContext.name}
-      image={playingContext.cover_art_url} />,
+    <AppShell>
+      <Home />
+      <ScrubBar
+        playingState={playingState}
+        playPause={playPause}
+        nextSong={Amplitude.next}
+        previousSong={Amplitude.prev}
+        artist={playingContext.artist}
+        name={playingContext.name}
+        image={playingContext.cover_art_url} />
+    </AppShell>,
   document.body
 )
 
@@ -174,8 +189,10 @@ function playPause () {
   }
 }
 
-let meta = navigator.mediaSession.setActionHandler
-meta('play', Amplitude.play)
-meta('pause', Amplitude.pause)
-meta('previoustrack', Amplitude.prev)
-meta('nexttrack', Amplitude.next)
+if ('mediaSession' in navigator) {
+  let meta = navigator.mediaSession.setActionHandler
+  meta('play', Amplitude.play)
+  meta('pause', Amplitude.pause)
+  meta('previoustrack', Amplitude.prev)
+  meta('nexttrack', Amplitude.next)
+}
