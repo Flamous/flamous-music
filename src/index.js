@@ -129,6 +129,14 @@ const flamous = app(
   },
   {
     updateMetaData: (metaData) => {
+      navigator.mediaSession.metadata = new window.MediaMetadata({
+        title: metaData.name,
+        artist: metaData.artist,
+        artwork: [{
+          src: metaData.cover_art_url
+        }]
+      })
+
       return {
         playingContext: {
           artist: metaData.artist,
@@ -165,3 +173,9 @@ function playPause () {
     Amplitude.play()
   }
 }
+
+let meta = navigator.mediaSession.setActionHandler
+meta('play', Amplitude.play)
+meta('pause', Amplitude.pause)
+meta('previoustrack', Amplitude.prev)
+meta('nexttrack', Amplitude.next)
