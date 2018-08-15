@@ -149,7 +149,10 @@ const Wrapper = style('div')({
   width: '100%',
   display: 'flex',
   position: 'absolute',
-  bottom: '0px'
+  bottom: '0px',
+  padding: '1em',
+  boxSizing: 'border-box',
+  justifyContent: 'center'
 })
 
 const ScrubBar = (props) =>
@@ -159,7 +162,7 @@ const ScrubBar = (props) =>
       <SongCover draggable='false' src={props.image} />
       <Info>
         <Song>
-          {props.name}
+          {props.playingState ? '► ' : ''}{props.name}
         </Song>
         <Artist>
           {props.artist}

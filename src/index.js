@@ -86,20 +86,7 @@ import picostyle from 'picostyle'
 import ScrubBar from './components/ScrubBar.js'
 import Home from './components/Home.js'
 import songList from './songs.js'
-
-
-// const h = (name, attributes, children) => {
-//   let vNode = hyper(name, attributes, children)
-
-//   // // Force classes down the component chain
-//   vNode.attributes.class = [vNode.attributes.class, attributes.class]
-//     .filter(Boolean)
-//     .join(' ')
-
-//   return vNode
-// }
 import placeholder from './public/placeholder.jpg'
-// placeholder.load()
 
 const style = picostyle(h)
 
