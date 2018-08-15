@@ -86,7 +86,7 @@ import picostyle from 'picostyle'
 import ScrubBar from './components/ScrubBar.js'
 import Home from './components/Home.js'
 import songList from './songs.js'
-import placeholder from './public/placeholder.jpg'
+import placeholder from './public/song_placeholder.svg'
 
 const style = picostyle(h)
 
@@ -102,8 +102,21 @@ Amplitude.init({
   default_album_art: placeholder,
   callbacks: {
     song_change: () => {
-      let meta = Amplitude.getActiveSongMetadata()
-      console.log(meta)
+      let meta = JSON.parse(JSON.stringify(Amplitude.getActiveSongMetadata())) // Deep copy so we don't modify the original object
+      let image = new window.Image()
+
+      if (meta.cover_art_url) {
+        image.src = meta.cover_art_url
+
+        if (!image.complete) {
+          meta.cover_art_url = placeholder
+          image.onload = () => {
+            meta.cover_art_url = image.src
+            flamous.updateMetaData(meta)
+          }
+        }
+      }
+
       flamous.updateMetaData(meta)
     },
     before_play: () => {
