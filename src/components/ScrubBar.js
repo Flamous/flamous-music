@@ -92,8 +92,9 @@ function makeInteractive (element, {playPause, nextSong, previousSong}) {
 
 const style = picostyle(h)
 
-const Bubble = style('div')({
-  backgroundColor: '#fcfcff',
+const Bubble = style('div')((props) => ({
+  backgroundColor: props.playingState ? '#fce9c7' : '#fcfcff',
+  transition: 'background-color 100ms',
   borderRadius: '20px',
   border: '1px solid rgba(0, 0, 0, 0.1)',
   width: '100%',
@@ -104,7 +105,7 @@ const Bubble = style('div')({
   height: '4em',
   cursor: 'default',
   boxShadow: '0 1px 17px -3px rgba(0,0,0, 0.1)'
-})
+}))
 
 const Indicator = () => style('div')({
   width: '100%',
@@ -145,7 +146,7 @@ const Info = style('div')({
 })
 
 const ScrubBar = (props) =>
-  <Bubble oncreate={((props) => (element) => makeInteractive(element, props))(props)}>
+  <Bubble playingState={props.playingState} oncreate={((props) => (element) => makeInteractive(element, props))(props)}>
     <Indicator />
     <SongCover draggable='false' src={props.image} />
     <Info>

@@ -97,7 +97,7 @@ import songList from './songs.js'
 //   return vNode
 // }
 import placeholder from './public/placeholder.jpg'
-placeholder.load()
+// placeholder.load()
 
 Amplitude.setDebug(true)
 Amplitude.init({
@@ -108,12 +108,19 @@ Amplitude.init({
       let meta = Amplitude.getActiveSongMetadata()
       console.log(meta)
       flamous.updateMetaData(meta)
+    },
+    before_play: () => {
+      flamous.setPlayState(true)
+    },
+    before_pause: () => {
+      flamous.setPlayState(false)
     }
   }
 })
 
 const flamous = app(
   {
+    playingState: false,
     playingContext: {
       artist: songList[0].artist,
       name: songList[0].name,
@@ -129,10 +136,16 @@ const flamous = app(
           cover_art_url: metaData.cover_art_url || Amplitude.getDefaultAlbumArt()
         }
       }
+    },
+    setPlayState: (isPlaying) => {
+      return {
+        playingState: isPlaying
+      }
     }
   },
-  ({playingContext}) =>
+  ({playingContext, playingState}) =>
     <ScrubBar
+      playingState={playingState}
       playPause={playPause}
       nextSong={Amplitude.next}
       previousSong={Amplitude.prev}
