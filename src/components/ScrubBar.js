@@ -1,10 +1,10 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { styler, value, listen, pointer, spring } from 'popmotion'
+import { styler, value, listen, pointer, spring, chain } from 'popmotion'
 import { nonlinearSpring } from 'popmotion/lib/transformers'
+import { smooth } from 'popmotion/lib/calc'
 
 function makeInteractive (element, {playPause, nextSong, previousSong}) {
-  console.log(element)
   const THRESHOLD = 10
 
   const handleStyler = styler(element)
@@ -25,15 +25,13 @@ function makeInteractive (element, {playPause, nextSong, previousSong}) {
         .start(({x, y}) => {
           if (Math.abs(x) > THRESHOLD) {
             direction = x > 0 ? 'right' : 'left'
-            stopPointer = pointerX(0).pipe(v => nonlinearSpring(3, 0)(v), v => {
-              return v
-            })
+            stopPointer = chain(pointerX(0).pipe(v => nonlinearSpring(3, 0)(v)), smooth(25))
               .start(handleX)
             currentHandle = handleX
             stop()
           } else if (Math.abs(y) > THRESHOLD) {
             direction = (y > 0) ? 'bottom' : 'top'
-            stopPointer = pointerY(0).pipe((v) => nonlinearSpring(1, 0)(v))
+            stopPointer = chain(pointerY(0).pipe((v) => nonlinearSpring(1, 0)(v)), smooth(25))
               .start(handleY)
             // direction = 'top'
             currentHandle = handleY
@@ -60,7 +58,8 @@ function makeInteractive (element, {playPause, nextSong, previousSong}) {
       }
       direction = 'none'
       spring({
-        from: currentHandle.get()
+        from: currentHandle.get(),
+        velocity: currentHandle.getVelocity()
       })
         .start(currentHandle)
     })
@@ -103,7 +102,8 @@ const SongCover = style('img')({
   height: '100%',
   borderRadius: '15px',
   boxSizing: 'border-box',
-  border: '1px solid rgba(0, 0, 0, 0.16)'
+  border: '1px solid rgba(0, 0, 0, 0.16)',
+  pointerEvents: 'none'
 })
 
 const Song = style('div')({
@@ -122,7 +122,7 @@ const Info = style('div')({
 const ScrubBar = (props) =>
   <Bubble oncreate={((props) => (element) => makeInteractive(element, props))(props)}>
     <Indicator />
-    <SongCover src={props.image} />
+    <SongCover draggable='false' src={props.image} />
     <Info>
       <Song>
         {props.name}
