@@ -8,41 +8,65 @@ function makeInteractive (element, {playPause, nextSong, previousSong}) {
   const THRESHOLD = 10
 
   const handleStyler = styler(element)
-  const handleX = value(0, handleStyler.set('x'))
-  const handleY = value(0, handleStyler.set('y'))
+  const handle = {
+    x: value(0, handleStyler.set('x')),
+    y: value(0, handleStyler.set('y'))
+  }
 
-  const pointerXY = (val) => pointer(val)
-  const pointerX = (x) => pointer({x}).pipe(v => v.x)
-  const pointerY = y => pointer({y}).pipe(v => v.y)
+  const oneDirectionalPointer = axis => pointer({[axis]: 0}).pipe(v => v[axis])
 
   let currentHandle
   let direction = 'none'
   let stopPointer
+  let axis
+  let springCurve
 
   listen(element, 'mousedown touchstart')
     .start((e) => {
-      let {stop} = pointerXY({x: 0, y: 0})
+      let {stop} = pointer({x: 0, y: 0})
         .start(({x, y}) => {
           if (Math.abs(x) > THRESHOLD) {
-            direction = x > 0 ? 'right' : 'left'
-            stopPointer = chain(pointerX(0).pipe(v => nonlinearSpring(3, 0)(v)), smooth(25))
-              .start(handleX)
-            currentHandle = handleX
+            axis = 'x'
+            direction = (x < 0)
+              ? 'left'
+              : 'right'
             stop()
           } else if (Math.abs(y) > THRESHOLD) {
-            direction = (y > 0) ? 'bottom' : 'top'
-            stopPointer = chain(pointerY(0).pipe((v) => nonlinearSpring(1, 0)(v)), smooth(25))
-              .start(handleY)
-            // direction = 'top'
-            currentHandle = handleY
+            axis = 'y'
+            direction = (y < 0)
+              ? 'top'
+              : 'bottom'
             stop()
           }
+
+          if (direction === 'none') return
+
+          switch (direction) {
+            case 'top':
+              springCurve = nonlinearSpring(1, 0)
+              break
+            case 'bottom':
+              springCurve = nonlinearSpring(0.2, 0)
+              break
+            case 'right':
+            case 'left':
+              springCurve = nonlinearSpring(3, 0)
+          }
+
+          currentHandle = handle[axis]
+
+          stopPointer = chain(
+            oneDirectionalPointer(axis),
+            smooth(30))
+            .pipe(springCurve)
+            .start(currentHandle)
         })
     })
 
   listen(document, 'mouseup touchend')
     .start((e) => {
       stopPointer.stop()
+
       switch (direction) {
         case 'top':
           playPause()
@@ -57,6 +81,7 @@ function makeInteractive (element, {playPause, nextSong, previousSong}) {
           console.log('clicked!')
       }
       direction = 'none'
+      axis = 'none'
       spring({
         from: currentHandle.get(),
         velocity: currentHandle.getVelocity()
