@@ -5,16 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "standard",
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "author": "Christian Kaindl",
   "license": "MIT",
   "dependencies": {
-    "hyperapp": "^1.2.6",
+    "@hyperapp/router": "^0.7.0",
+    "amplitudejs": "^3.3.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "components": "^0.1.0",
+    "hyperapp": "^1.2.8",
+    "npm": "^6.3.0",
+    "picostyle": "^2.0.1",
     "popmotion": "^8.3.3"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.9.4",
+    "parcel-bundler": "^1.9.7",
     "standard": "^11.0.1"
   }
 }
