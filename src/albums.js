@@ -4,41 +4,41 @@ export default [
   {
     name: 'Wowa CC0',
     artist: 'Wowa',
-    albumCoverUrl: placeholder
+    cover_art_url: placeholder
   },
   {
     name: 'Bach Collection',
     artist: '...',
-    albumCoverUrl: placeholder
+    cover_art_url: placeholder
   },
   {
     name: 'Wowa CC0',
     artist: 'Wowa',
-    albumCoverUrl: placeholder
+    cover_art_url: placeholder
   },
   {
     name: 'Bach Collection',
     artist: '...',
-    albumCoverUrl: placeholder
+    cover_art_url: placeholder
   },
   {
     name: 'Wowa CC0',
     artist: 'Wowa',
-    albumCoverUrl: placeholder
+    cover_art_url: placeholder
   },
   {
     name: 'Bach Collection',
     artist: '...',
-    albumCoverUrl: placeholder
+    cover_art_url: placeholder
   },
   {
     name: 'Wowa CC0',
     artist: 'Wowa',
-    albumCoverUrl: placeholder
+    cover_art_url: placeholder
   },
   {
     name: 'Bach Collection',
     artist: '...',
-    albumCoverUrl: placeholder
+    cover_art_url: placeholder
   }
 ]
