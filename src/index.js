@@ -87,13 +87,17 @@ import ScrubBar from './components/ScrubBar.js'
 import Home from './components/Home.js'
 import songList from './songs.js'
 import placeholder from './public/song_placeholder.svg'
+import Page from './components/Page.js'
+
+// const Page = import('./components/Page.js')
 
 const style = picostyle(h)
 
 const AppShell = style('div')({
   height: '100%',
   width: '100%',
-  position: 'relative'
+  position: 'relative',
+  overflow: 'hidden'
 })
 
 Amplitude.setDebug(true)
@@ -135,7 +139,8 @@ const flamous = app(
       artist: songList[0].artist,
       name: songList[0].name,
       cover_art_url: songList[0].cover_art_url || Amplitude.getDefaultAlbumArt()
-    }
+    },
+    pages: []
   },
   {
     updateMetaData: (metaData) => {
@@ -157,15 +162,26 @@ const flamous = app(
         }
       }
     },
+    addPage: () => (state) => {
+      console.log('DID SHIT')
+      state.pages.push(
+        <h1>WOHIOO</h1>
+      )
+      console.log(state)
+      return {
+        pages: state.pages
+      }
+    },
     setPlayState: (isPlaying) => {
       return {
         playingState: isPlaying
       }
     }
   },
-  ({playingContext, playingState}) =>
+  ({playingContext, playingState, pages}) =>
     <AppShell>
       <Home />
+      { pages.map((item) => {console.log(item); return <Page>{item}</Page>}) }
       <ScrubBar
         playingState={playingState}
         playPause={playPause}
@@ -196,3 +212,9 @@ if ('mediaSession' in navigator) {
   meta('previoustrack', Amplitude.prev)
   meta('nexttrack', Amplitude.next)
 }
+
+// window.setTimeout(() => {
+//   flamous.addPage()
+// }, 3000);
+
+export default flamous
