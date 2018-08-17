@@ -1,6 +1,5 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import flamous from '../index.js'
 import placeholder from '../public/song_placeholder.svg'
 
 const style = picostyle(h)

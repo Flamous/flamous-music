@@ -72,7 +72,9 @@ const Page = (props, children) => style('article')({
 })({
   oncreate: !props.hasOwnProperty('nonInteractive') && makeInteractive
 },
-children
+<div>
+  {children}
+</div>
 )
 
 export default Page
