@@ -15,7 +15,7 @@ const Gallery = (props) => style('div')({
   {},
   <FlexWrapper>
     {props.data.map((item) => {
-      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (window.clickLock) return; flamous.addPage() }} />
+      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (window.clickLock) return; window.flamous.addPage() }} />
     })}
   </FlexWrapper>
 )

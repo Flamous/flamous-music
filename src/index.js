@@ -221,4 +221,4 @@ if ('mediaSession' in navigator) {
 //   flamous.addPage()
 // }, 3000);
 
-export default flamous
+window.flamous = flamous
