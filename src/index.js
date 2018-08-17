@@ -165,13 +165,19 @@ const flamous = app(
       }
     },
     addPage: () => (state) => {
-      console.log('DID SHIT')
       state.pages.push([
         <Header title='Awesome' />,
         <Gallery data={songList} />
       ]
       )
-      console.log(state)
+      // console.log(state)
+      return {
+        pages: state.pages
+      }
+    },
+    killPage: () => (state) => {
+      state.pages.pop()
+
       return {
         pages: state.pages
       }
@@ -185,7 +191,7 @@ const flamous = app(
   ({playingContext, playingState, pages}) =>
     <AppShell>
       <Home />
-      { pages.map((item) => {console.log(item); return <Page>{item}</Page>}) }
+      { pages.map((item) => { return <Page>{item}</Page> }) }
       <ScrubBar
         playingState={playingState}
         playPause={playPause}

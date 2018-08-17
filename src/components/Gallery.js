@@ -4,7 +4,6 @@ import placeholder from '../public/song_placeholder.svg'
 
 const style = picostyle(h)
 
-console.log('hadsf')
 const Gallery = (props) => style('div')({
   width: '100%',
   padding: '1em',

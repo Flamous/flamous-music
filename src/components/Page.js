@@ -10,10 +10,11 @@ function makeInteractive (element) {
   element.style.transform = 'translateX(100%)'
 
   const AXIS_LOCK_THRESHOLD = 15
+  let isAxisLocked = false
   const handleStyler = styler(element)
   const handleX = value(0, handleStyler.set('x'))
 
-  const pointerX = () => pointer({x: 0, preventDefault: false}).pipe(val => val.x).filter(x => x > 0)
+  const pointerX = (preventDefault = false) => pointer({x: 0, preventDefault: preventDefault}).pipe(val => val.x).filter(x => x > 0)
 
   // Initial slide-in
   spring({
@@ -22,42 +23,66 @@ function makeInteractive (element) {
     damping: 20,
     mass: 0.5
   }).start(handleStyler.set)
-  let stopP2
+  let handleSub
   // Swipe-mechanism
   listen(element, 'mousedown touchstart')
     .start((e) => {
-      let stopPointer = chain(pointerX(), smooth(30)).start((x) => {
-        if (Math.abs(x) <= AXIS_LOCK_THRESHOLD) return
+      if (handleX.get() > 0) {
+        handleSub.unsubscribe()
+      }
+      let currentPointer
+      currentPointer = chain(pointerX(), smooth(30)).start((x) => {
+        if (Math.abs(x) <= AXIS_LOCK_THRESHOLD) {
+          return
+        }
 
         window.clickLock = true
-        stopPointer.stop()
-        stopP2 = chain(pointerX(), smooth(30)).start(handleX)
+        isAxisLocked = true
+        currentPointer.stop()
+
+        currentPointer = chain(pointerX(true), smooth(30)).start(handleX)
       })
 
-      let upListener = listen(document, 'mouseup touchend')
+      let upListener = listen(element, 'mouseup touchend')
         .start((e) => {
-          upListener.stop()
-          stopPointer.stop()
-          stopP2.stop && stopP2.stop()
-          let snapper = snap([
-            0,
-            (document.body.clientWidth * 1.1)
-          ])
-          let pos = handleX.get()
-          let velocity = handleX.getVelocity()
+          if (!isAxisLocked) {
+            currentPointer.stop()
+            upListener.stop()
+            return
+          }
 
-          spring({
-            from: pos,
-            to: snapper(pos + velocity),
-            damping: 20,
-            mass: 0.5,
-            velocity: velocity
-          }).filter(val => val > 0).start({
-            update: val => handleStyler.set('x', val),
-            complete: () => {
+          upListener.stop()
+          currentPointer.stop()
+
+          let currentPos = handleX.get()
+          let velocity = handleX.getVelocity()
+          let isGoingBack = Boolean(!snap([
+            0,
+            (document.body.clientWidth / 1.5)
+          ])(currentPos + velocity))
+          let pageWidth = document.body.clientWidth
+
+          handleSub = handleX.subscribe(val => {
+            console.log(val)
+            if (val >= pageWidth) {
+              console.log('Way to often: ', val)
+              handleSub.unsubscribe()
+              window.clickLock = false
+              stopSpring()
+              
+              window.flamous.killPage()
+            } else if (val === 0) {
+              handleSub.unsubscribe()
               window.clickLock = false
             }
           })
+          let {stop: stopSpring} = spring({
+            from: currentPos,
+            to: !isGoingBack ? pageWidth * 1.2 : 0,
+            damping: 20,
+            mass: 0.5,
+            velocity: velocity
+          }).start(handleX)
         })
     })
 }
@@ -72,8 +97,7 @@ const Page = (props, children) => style('article')({
   boxShadow: '0 0 2px 0 #848484'
 })({
   oncreate: !props.hasOwnProperty('nonInteractive') && makeInteractive
-},
-<div>
+}, <div>
   {children}
 </div>
 )
