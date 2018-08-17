@@ -96,7 +96,7 @@ const Bubble = style('div')((props) => ({
   backgroundColor: props.playingState ? '#fce9c7' : '#fcfcff',
   transition: 'background-color 100ms',
   borderRadius: '20px',
-  border: '1px solid rgba(0, 0, 0, 0.1)',
+  border: props.playingState ? '1px solid rgb(239, 197, 124)' : '1px solid #eee',
   width: '100%',
   maxWidth: '400px',
   padding: '0.4em',
@@ -128,7 +128,6 @@ const SongCover = style('img')({
   height: '100%',
   borderRadius: '15px',
   boxSizing: 'border-box',
-  border: '1px solid rgba(0, 0, 0, 0.16)',
   pointerEvents: 'none'
 })
 
