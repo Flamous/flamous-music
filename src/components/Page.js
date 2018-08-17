@@ -31,7 +31,7 @@ function makeInteractive (element) {
         handleSub.unsubscribe()
       }
       let currentPointer
-      currentPointer = chain(pointer({x: 0, y: 0}), smooth(30)).start(({ x, y }) => {
+      currentPointer = chain(pointer({x: 0, y: 0, preventDefault: false}), smooth(30)).start(({ x, y }) => {
         if (Math.abs(y) >= AXIS_LOCK_THRESHOLD && !isAxisLocked) {
           currentPointer.stop()
           upListener.stop()
