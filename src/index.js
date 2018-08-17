@@ -210,11 +210,18 @@ function playPause () {
 }
 
 if ('mediaSession' in navigator) {
-  let meta = navigator.mediaSession.setActionHandler
-  meta('play', Amplitude.play)
-  meta('pause', Amplitude.pause)
-  meta('previoustrack', Amplitude.prev)
-  meta('nexttrack', Amplitude.next)
+  navigator.mediaSession.metadata = new window.MediaMetadata({
+    title: songList[0].name,
+    artist: songList[0].artist,
+    artwork: [{
+      src: songList[0].cover_art_url
+    }]
+  })
+
+  navigator.mediaSession.setActionHandler('play', Amplitude.play)
+  navigator.mediaSession.setActionHandler('pause', Amplitude.pause)
+  navigator.mediaSession.setActionHandler('previoustrack', Amplitude.prev)
+  navigator.mediaSession.setActionHandler('nexttrack', Amplitude.next)
 }
 
 // window.setTimeout(() => {
