@@ -31,7 +31,13 @@ function makeInteractive (element) {
         handleSub.unsubscribe()
       }
       let currentPointer
-      currentPointer = chain(pointerX(), smooth(30)).start((x) => {
+      currentPointer = chain(pointer({x: 0, y: 0}), smooth(30)).start(({ x, y }) => {
+        if (Math.abs(y) >= AXIS_LOCK_THRESHOLD && !isAxisLocked) {
+          currentPointer.stop()
+          upListener.stop()
+          isAxisLocked = false
+          return
+        }
         if (Math.abs(x) <= AXIS_LOCK_THRESHOLD) {
           return
         }
@@ -51,6 +57,7 @@ function makeInteractive (element) {
             return
           }
 
+          isAxisLocked = false
           upListener.stop()
           currentPointer.stop()
 
@@ -69,7 +76,7 @@ function makeInteractive (element) {
               handleSub.unsubscribe()
               window.clickLock = false
               stopSpring()
-              
+
               window.flamous.killPage()
             } else if (val === 0) {
               handleSub.unsubscribe()
