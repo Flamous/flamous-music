@@ -1,7 +1,8 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { styler, spring, value, listen, pointer } from 'popmotion'
+import { styler, spring, value, listen, pointer, chain } from 'popmotion'
 import { snap } from 'popmotion/lib/transformers'
+import { smooth } from 'popmotion/lib/calc'
 
 const style = picostyle(h)
 
@@ -25,12 +26,12 @@ function makeInteractive (element) {
   // Swipe-mechanism
   listen(element, 'mousedown touchstart')
     .start((e) => {
-      let stopPointer = pointerX().start((x) => {
+      let stopPointer = chain(pointerX(), smooth(30)).start((x) => {
         if (Math.abs(x) <= AXIS_LOCK_THRESHOLD) return
 
         window.clickLock = true
         stopPointer.stop()
-        stopP2 = pointerX().start(handleX)
+        stopP2 = chain(pointerX(), smooth(30)).start(handleX)
       })
 
       let upListener = listen(document, 'mouseup touchend')
@@ -51,7 +52,7 @@ function makeInteractive (element) {
             damping: 20,
             mass: 0.5,
             velocity: velocity
-          }).start({
+          }).filter(val => val > 0).start({
             update: val => handleStyler.set('x', val),
             complete: () => {
               window.clickLock = false
