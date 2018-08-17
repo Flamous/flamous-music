@@ -1,6 +1,8 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import placeholder from '../public/song_placeholder.svg'
+import Header from './Header.js'
+import songList from '../songs.js'
 
 const style = picostyle(h)
 
@@ -13,7 +15,7 @@ const Gallery = (props) => style('div')({
   {},
   <FlexWrapper>
     {props.data.map((item) => {
-      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (window.clickLock) return; window.flamous.addPage() }} />
+      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (window.clickLock) return; window.flamous.addPage([<Header title='Awesome' />, <Gallery data={songList} />]) }} />
     })}
   </FlexWrapper>
 )

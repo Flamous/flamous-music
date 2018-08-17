@@ -88,8 +88,8 @@ import Home from './components/Home.js'
 import songList from './songs.js'
 import placeholder from './public/song_placeholder.svg'
 import Page from './components/Page.js'
-import Gallery from './components/Gallery.js'
-import Header from './components/Header.js'
+// import Gallery from './components/Gallery.js'
+// import Header from './components/Header.js'
 
 // const Page = import('./components/Page.js')
 
@@ -164,12 +164,8 @@ const flamous = app(
         }
       }
     },
-    addPage: () => (state) => {
-      state.pages.push([
-        <Header title='Awesome' />,
-        <Gallery data={songList} />
-      ]
-      )
+    addPage: (page) => (state) => {
+      state.pages.push(page)
       // console.log(state)
       return {
         pages: state.pages
