@@ -17,6 +17,7 @@ const Header = (props, children) => style('header')({
   fontSize: '2em',
   maxWidth: '1100px',
   margin: '1em',
+  textAlign: props.alignment === 'center' ? 'center' : 'left',
   '@media (min-width: 1000px)': {
     fontSize: '3em'
   },
