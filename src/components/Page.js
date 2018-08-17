@@ -18,11 +18,12 @@ function makeInteractive (element) {
 
   // Initial slide-in
   spring({
-    from: {x: '100%'},
-    to: {x: 0},
+    from: '100%',
+    to: '0%',
     damping: 20,
     mass: 0.5
-  }).start(handleStyler.set)
+  }).start(handleX)
+
   let handleSub
   // Swipe-mechanism
   listen(element, 'mousedown touchstart')
