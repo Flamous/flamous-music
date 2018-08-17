@@ -12,7 +12,7 @@ function makeInteractive (element) {
   const handleStyler = styler(element)
   const handleX = value(0, handleStyler.set('x'))
 
-  const pointerX = () => pointer({x: 0}).pipe(val => val.x).filter(x => x > 0)
+  const pointerX = () => pointer({x: 0, preventDefault: false}).pipe(val => val.x).filter(x => x > 0)
 
   // Initial slide-in
   spring({
@@ -37,7 +37,7 @@ function makeInteractive (element) {
         .start((e) => {
           upListener.stop()
           stopPointer.stop()
-          stopP2.stop()
+          stopP2.stop && stopP2.stop()
           let snapper = snap([
             0,
             (document.body.clientWidth * 1.1)
