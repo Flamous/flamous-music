@@ -18,9 +18,11 @@
     "hyperapp": "^1.2.8",
     "npm": "^6.3.0",
     "picostyle": "^2.0.1",
-    "popmotion": "^8.3.3"
+    "popmotion": "^8.3.3",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "aws-sdk": "^2.296.0",
     "parcel-bundler": "^1.9.7",
     "standard": "^11.0.1"
   }
