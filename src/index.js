@@ -93,6 +93,8 @@ import Page from './components/Page.js'
 
 // const Page = import('./components/Page.js')
 
+window.Amplitude = Amplitude
+
 const style = picostyle(h)
 
 const AppShell = style('div')({

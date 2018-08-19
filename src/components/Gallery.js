@@ -15,7 +15,7 @@ const Gallery = (props) => style('div')({
   {},
   <FlexWrapper>
     {props.data.map((item) => {
-      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (window.clickLock) return; window.flamous.addPage([<Header title='Awesome' />, <Gallery data={songList} />]) }} />
+      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { console.log(props);if (props.onclick) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
     })}
   </FlexWrapper>
 )
