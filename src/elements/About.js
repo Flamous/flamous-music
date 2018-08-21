@@ -1,9 +1,15 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import Header from '../components/Header.js'
+// import fmLogo from '../flamous_logo.svg'
 
 const style = picostyle(h)
-
+// const Logo = style('img')({
+//   width: '100%',
+//   display: 'block',
+//   maxWidth: '128px',
+//   margin: '3em auto -1.7em'
+// })
 const Wrapper = style('div')({
   margin: '0 auto',
   maxWidth: '40em',
@@ -14,6 +20,7 @@ const Wrapper = style('div')({
 })
 const About = () =>
   [
+    // <Logo src={fmLogo} />,
     <Header title='About Flamous' alignment='center' />,
     <Wrapper>
       <p>Contact: <a href='mailto:hello@flamous.io'>hello@flamous.io</a></p>
