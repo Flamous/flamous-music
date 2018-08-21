@@ -31,13 +31,13 @@ const Item = (props) => style('div')({
   color: '#212121',
   textAlign: 'center',
   fontWeight: 'bold',
-  fontSize: '1.3em',
   padding: '1em',
   width: '50%',
   minWidth: '150px',
   // maxWidth: '250px',
   '@media (min-width: 1000px)': {
     width: '250px',
+    fontSize: '1.2em',
     maxWidth: '33%'
   },
   position: 'relative',
