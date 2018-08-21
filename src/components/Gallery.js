@@ -1,8 +1,8 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import placeholder from '../public/song_placeholder.svg'
-import Header from './Header.js'
-import songList from '../songs.js'
+// import Header from './Header.js'
+// import songList from '../songs.js'
 
 const style = picostyle(h)
 
@@ -15,7 +15,10 @@ const Gallery = (props) => style('div')({
   {},
   <FlexWrapper>
     {props.data.map((item) => {
-      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { console.log(props);if (props.onclick) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
+      // console.log('isPlaying: ', props.playingState, ', playingId: ', props.playingId, ', itemId: ', item.id)
+      // class={(props.playingState && props.playingId === item.id) ? 'playing' : ''}
+
+      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (props.onclick) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
     })}
   </FlexWrapper>
 )
@@ -46,6 +49,9 @@ const Item = (props) => style('div')({
   ' .secondary': {
     marginTop: '-1em',
     color: '#848484'
+  },
+  '.playing': {
+    transform: 'scale(1.2)'
   }
 })(
   props,

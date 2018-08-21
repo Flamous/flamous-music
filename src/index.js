@@ -142,7 +142,8 @@ const flamous = app(
     playingContext: {
       artist: songList[0].artist,
       name: songList[0].name,
-      cover_art_url: songList[0].cover_art_url || Amplitude.getDefaultAlbumArt()
+      cover_art_url: songList[0].cover_art_url || Amplitude.getDefaultAlbumArt(),
+      id: 0
     },
     pages: []
   },
@@ -162,7 +163,8 @@ const flamous = app(
         playingContext: {
           artist: metaData.artist,
           name: metaData.name,
-          cover_art_url: metaData.cover_art_url || Amplitude.getDefaultAlbumArt()
+          cover_art_url: metaData.cover_art_url || Amplitude.getDefaultAlbumArt(),
+          id: metaData.id
         }
       }
     },
@@ -188,7 +190,7 @@ const flamous = app(
   },
   ({playingContext, playingState, pages}) =>
     <AppShell>
-      <Home />
+      <Home playingId={playingContext.id} playingState={playingState} />
       { pages.map((item) => { return <Page>{item}</Page> }) }
       <ScrubBar
         playingState={playingState}
