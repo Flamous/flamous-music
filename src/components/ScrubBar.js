@@ -3,6 +3,7 @@ import picostyle from 'picostyle'
 import { styler, value, listen, pointer, spring, chain } from 'popmotion'
 import { nonlinearSpring } from 'popmotion/lib/transformers'
 import { smooth } from 'popmotion/lib/calc'
+import playImage from '../public/play.svg'
 
 function makeInteractive (element) {
   const THRESHOLD = 10
@@ -170,7 +171,7 @@ const ScrubBar = (props) =>
       <SongCover draggable='false' src={props.image} />
       <Info>
         <Song>
-          {props.playingState ? '► ' : ''}{props.name}
+          {props.playingState ? <img src={playImage} style={{paddingRight: '0.35em'}} /> : ''}{props.name}
         </Song>
         <Artist>
           {props.artist}
