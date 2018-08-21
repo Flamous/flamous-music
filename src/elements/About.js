@@ -8,6 +8,7 @@ const Wrapper = style('div')({
   margin: '0 auto',
   maxWidth: '40em',
   padding: '2em',
+  paddingBottom: '6em',
   textAlign: 'center',
   fontSize: '1.2em'
 })
