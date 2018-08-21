@@ -4,7 +4,7 @@ import { styler, value, listen, pointer, spring, chain } from 'popmotion'
 import { nonlinearSpring } from 'popmotion/lib/transformers'
 import { smooth } from 'popmotion/lib/calc'
 
-function makeInteractive (element, {playPause, nextSong, previousSong}) {
+function makeInteractive (element) {
   const THRESHOLD = 10
 
   element.style.transform = 'translateY(150%)'
@@ -77,13 +77,13 @@ function makeInteractive (element, {playPause, nextSong, previousSong}) {
 
       switch (direction) {
         case 'top':
-          playPause()
+          window.flamous.playPause()
           break
         case 'left':
-          previousSong()
+          window.Amplitude.prev()
           break
         case 'right':
-          nextSong()
+          window.Amplitude.next()
           break
         default:
           console.log('clicked!')
@@ -153,6 +153,7 @@ const Info = style('div')({
 })
 
 const Wrapper = style('div')({
+  zIndex: '1000',
   width: '100%',
   display: 'flex',
   position: 'absolute',
@@ -164,7 +165,7 @@ const Wrapper = style('div')({
 
 const ScrubBar = (props) =>
   <Wrapper>
-    <Bubble playingState={props.playingState} oncreate={((props) => (element) => makeInteractive(element, props))(props)}>
+    <Bubble playingState={props.playingState} oncreate={ makeInteractive }>
       <Indicator />
       <SongCover draggable='false' src={props.image} />
       <Info>

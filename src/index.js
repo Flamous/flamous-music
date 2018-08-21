@@ -148,6 +148,13 @@ const flamous = app(
     pages: []
   },
   {
+    playPause: () => {
+      if (!Amplitude.audio().paused) {
+        Amplitude.pause()
+      } else {
+        Amplitude.play()
+      }
+    },
     updateMetaData: (metaData) => {
       if ('mediaSession' in navigator) {
         navigator.mediaSession.metadata = new window.MediaMetadata({
@@ -191,29 +198,15 @@ const flamous = app(
   ({playingContext, playingState, pages}) =>
     <AppShell>
       <Home playingId={playingContext.id} playingState={playingState} />
-      { pages.map((item) => { return <Page>{item}</Page> }) }
       <ScrubBar
         playingState={playingState}
-        playPause={playPause}
-        nextSong={Amplitude.next}
-        previousSong={Amplitude.prev}
         artist={playingContext.artist}
         name={playingContext.name}
         image={playingContext.cover_art_url} />
+      { pages.map((item) => { return <Page>{item}</Page> }) }
     </AppShell>,
   document.body
 )
-
-function playPause () {
-  console.log(Amplitude.audio())
-  if (!Amplitude.audio().paused) {
-    console.info('paused')
-    Amplitude.pause()
-  } else {
-    console.info('playing')
-    Amplitude.play()
-  }
-}
 
 if ('mediaSession' in navigator) {
   navigator.mediaSession.metadata = new window.MediaMetadata({
