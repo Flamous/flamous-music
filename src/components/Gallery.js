@@ -6,6 +6,10 @@ import placeholder from '../public/song_placeholder.svg'
 
 const style = picostyle(h)
 
+const Heading = style('h2')({
+  marginLeft: '1rem'
+})
+
 const Gallery = (props) => style('div')({
   width: '100%',
   padding: '1em',
@@ -13,28 +17,34 @@ const Gallery = (props) => style('div')({
   marginBottom: '6em'
 })(
   {},
-  <FlexWrapper>
-    {props.data.map((item) => {
-      // console.log('isPlaying: ', props.playingState, ', playingId: ', props.playingId, ', itemId: ', item.id)
-      // class={(props.playingState && props.playingId === item.id) ? 'playing' : ''}
+  <Wrapper>
+    {props.heading ? <Heading>{props.heading}</Heading> : ''}
+    <FlexWrapper>
+      {props.data.map((item) => {
+        // console.log('isPlaying: ', props.playingState, ', playingId: ', props.playingId, ', itemId: ', item.id)
+        // class={(props.playingState && props.playingId === item.id) ? 'playing' : ''}
 
-      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (props.onclick && item.artist) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
-    })}
-  </FlexWrapper>
+        return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (props.onclick && item.artist) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
+      })}
+    </FlexWrapper>
+  </Wrapper>
 )
+
+const Wrapper = style('div')({
+  maxWidth: '1250px',
+  margin: '0 auto'
+})
 
 const FlexWrapper = style('div')({
   display: 'flex',
-  flexWrap: 'wrap',
-  maxWidth: '1250px',
-  margin: '0 auto'
+  flexWrap: 'wrap'
 })
 
 const Item = (props) => style('div')({
   color: '#212121',
   textAlign: 'center',
   fontWeight: 'bold',
-  padding: '1em',
+  padding: '1rem',
   width: '50%',
   minWidth: '150px',
   // maxWidth: '250px',

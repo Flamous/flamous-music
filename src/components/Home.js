@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <Page nonInteractive>
       <Header title='Flamous Music' sub='The best of Public Domain music.' button={{text: 'About Flamous >', link: <About />}} />
-      <Gallery data={albums} onclick={() => { if (window.clickLock) return; window.flamous.addPage([<Header title='Wowa' sub='Free music by Wowa (www.wowa.me)' />, <Gallery data={songList} />]) }} />
+      <Gallery heading='Playlists' data={albums} onclick={() => { if (window.clickLock) return; window.flamous.addPage([<Header title='Wowa' sub='Free music by Wowa (www.wowa.me)' />, <Gallery data={songList} />]) }} />
     </Page>
   )
 }
