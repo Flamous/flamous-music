@@ -1,85 +1,3 @@
-// import { h, app } from 'hyperapp'
-// import songList from './songs.js'
-// import ScrubBar from './components/ScrubBar.js'
-
-// console.log(songList)
-
-// const state = {
-//   pages: [ // High level state of pages
-//   ],
-//   music: {
-//     history: [],
-//     isPlaying: false,
-//     shuffle: true,
-//     playingContext: null,
-//     songs: songList
-//   }
-// }
-
-// const actions = {
-//   addPage: () => ({pages}) => ({
-//     pages: (pages.push({id: pages.length}), pages)
-//   }),
-//   removePage: () => ({pages}) => ({
-//     pages: (pages.pop(), pages)
-//   }),
-//   music: {
-//     play: (id) => (state) => {
-//       console.log(state)
-//       console.log(id)
-//       switch (id) {
-//         case undefined:
-//           if (state.playingContext) {
-//             console.log('would continue to play song')
-//           }
-//           if (!state.playingContext) {
-//             console.log('would start shuffle play')
-//           }
-//           break
-
-//         default:
-//           console.log('default')
-//       }
-//     },
-//     pause: () => ({playingContext}) => {
-//       if (!playingContext) {
-//         console.log('nothing to pause')
-//         return
-//       }
-
-//       console.log('would pause now')
-//     }
-//   }
-// }
-
-// const Page = ({id: pageNumber, addPage, removePage}) =>
-//   h('div', { class: 'page-container' }, [
-//     h('h1', {}, pageNumber),
-//     h('button', {onclick: addPage}, '+ Add Page'),
-//     h('button', {onclick: removePage}, '- Remove Page')
-//   ])
-
-// // const view = ({pages}, {addPage, removePage, music: {play, pause}}) =>
-// //   h('div', {}, [
-// //     h('h1', {}, 'Lowest level'),
-// //     h('button', {onclick: () => play()}, 'play'),
-// //     h('button', {onclick: () => pause()}, 'pause'),
-// //     h('button', {onclick: addPage}, '+ Add Page'),
-// //     // console.log(state)
-// //     pages.map(({id}) => (
-// //       Page({id, addPage, removePage})
-// //     ))
-// //   ])
-
-// const view =
-//   <main>
-//     <ScrubBar />
-//     <p>This is some Bodytext</p>
-//   </main>
-
-// console.info(ScrubBar)
-// app(state, actions, view, document.body)
-
 import { h, app } from 'hyperapp'
 import Amplitude from 'amplitudejs'
 import picostyle from 'picostyle'
@@ -88,10 +6,6 @@ import Home from './components/Home.js'
 import songList from './songs.js'
 import placeholder from './public/song_placeholder.svg'
 import Page from './components/Page.js'
-// import Gallery from './components/Gallery.js'
-// import Header from './components/Header.js'
-
-// const Page = import('./components/Page.js')
 
 window.Amplitude = Amplitude
 
@@ -222,9 +136,5 @@ if ('mediaSession' in navigator) {
   navigator.mediaSession.setActionHandler('previoustrack', Amplitude.prev)
   navigator.mediaSession.setActionHandler('nexttrack', Amplitude.next)
 }
-
-// window.setTimeout(() => {
-//   flamous.addPage()
-// }, 3000);
 
 window.flamous = flamous
