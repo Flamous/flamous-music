@@ -18,7 +18,7 @@ const Gallery = (props) => style('div')({
       // console.log('isPlaying: ', props.playingState, ', playingId: ', props.playingId, ', itemId: ', item.id)
       // class={(props.playingState && props.playingId === item.id) ? 'playing' : ''}
 
-      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (props.onclick) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
+      return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (props.onclick && item.artist) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
     })}
   </FlexWrapper>
 )
@@ -58,7 +58,7 @@ const Item = (props) => style('div')({
   [
     <Cover src={props.image} />,
     <p>{props.name}</p>,
-    <p class='secondary'>by {props.artist}</p>
+    <p class='secondary'>{props.artist ? `by ${props.artist}` : ''}</p>
   ]
 )
 
