@@ -7,11 +7,19 @@ import { smooth } from 'popmotion/lib/calc'
 function makeInteractive (element, {playPause, nextSong, previousSong}) {
   const THRESHOLD = 10
 
+  element.style.transform = 'translateY(150%)'
+
   const handleStyler = styler(element)
   const handle = {
     x: value(0, handleStyler.set('x')),
-    y: value(0, handleStyler.set('y'))
+    y: value(200, handleStyler.set('y'))
   }
+
+  window.setTimeout(() => spring({
+    from: '100%',
+    to: '0%',
+    damping: 15
+  }).start(handle.y), 1000)
 
   const oneDirectionalPointer = axis => pointer({[axis]: 0}).pipe(v => v[axis])
 
