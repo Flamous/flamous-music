@@ -50,6 +50,7 @@ export const GalleryItem = (props) => style('div')({
   padding: '1rem',
   width: '50%',
   minWidth: '150px',
+  transition: 'transform 300ms',
   // maxWidth: '250px',
   '@media (min-width: 1000px)': {
     width: '250px',
@@ -66,13 +67,11 @@ export const GalleryItem = (props) => style('div')({
   },
   '.playing .primary': {
     color: '#007AFF'
-    // width: '100%',
-    // textOverflow: 'ellipsis',
-    // whiteSpace: 'nowrap'
+  },
+  ':active': {
+    transition: 'transform 100ms',
+    transform: 'scale(1.07)'
   }
-  // '.playing .secondary': {
-  //   color: '#007AFF'
-  // }
 })(
   props,
   [
