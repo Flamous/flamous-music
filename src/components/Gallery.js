@@ -10,7 +10,7 @@ const Heading = style('h2')({
   marginLeft: '1rem'
 })
 
-const Gallery = (props) => style('div')({
+const Gallery = (props, children) => style('div')({
   width: '100%',
   padding: '1em',
   boxSizing: 'border-box',
@@ -20,12 +20,13 @@ const Gallery = (props) => style('div')({
   <Wrapper>
     {props.heading ? <Heading>{props.heading}</Heading> : ''}
     <FlexWrapper>
-      {props.data.map((item) => {
+      {children}
+      {/* {props.data.map((item) => {
         // console.log('isPlaying: ', props.playingState, ', playingId: ', props.playingId, ', itemId: ', item.id)
         // class={(props.playingState && props.playingId === item.id) ? 'playing' : ''}
 
-        return <Item image={item.cover_art_url || placeholder} name={item.name} artist={item.artist} onclick={() => { if (props.onclick && item.artist) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
-      })}
+        return <GalleryItem image={item.cover_art_url || placeholder} title={item.name} sub={item.artist} onclick={() => { if (props.onclick && item.artist) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
+      })} */}
     </FlexWrapper>
   </Wrapper>
 )
@@ -40,7 +41,9 @@ const FlexWrapper = style('div')({
   flexWrap: 'wrap'
 })
 
-const Item = (props) => style('div')({
+export const GalleryItem = (props) => {
+  console.log(props)
+  return style('div')({
   color: '#212121',
   textAlign: 'center',
   fontWeight: 'bold',
@@ -67,11 +70,11 @@ const Item = (props) => style('div')({
   props,
   [
     <Cover src={props.image} />,
-    <p>{props.name}</p>,
-    <p class='secondary'>{props.artist ? `by ${props.artist}` : ''}</p>
+    <p>{props.title}</p>,
+    <p class='secondary'>{props.sub ? `by ${props.sub}` : ''}</p>
   ]
 )
-
+}
 const Cover = (props) => style('img')({
   width: '100%',
   pointerEvents: 'none'

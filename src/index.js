@@ -7,6 +7,9 @@ import songList from './songs.js'
 import placeholder from './public/song_placeholder.svg'
 import Page from './components/Page.js'
 
+import { location, Route, Link } from '@hyperapp/router'
+import PlaylistView from './components/PlaylistView.js';
+
 window.Amplitude = Amplitude
 
 const style = picostyle(h)
@@ -52,6 +55,7 @@ Amplitude.init({
 
 const flamous = app(
   {
+    location: location.state,
     playingState: false,
     playingContext: {
       artist: songList[0].artist,
@@ -62,6 +66,7 @@ const flamous = app(
     pages: []
   },
   {
+    location: location.actions,
     playPause: () => {
       if (!Amplitude.audio().paused) {
         Amplitude.pause()
@@ -111,7 +116,9 @@ const flamous = app(
   },
   ({playingContext, playingState, pages}) =>
     <AppShell>
+      {/* <Route path='/' render={Home} playingId={playingContext.id} playingState={playingState} /> */}
       <Home playingId={playingContext.id} playingState={playingState} />
+      <Route path='/playlists' render={PlaylistView} playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
         playingState={playingState}
         artist={playingContext.artist}
@@ -138,3 +145,5 @@ if ('mediaSession' in navigator) {
 }
 
 window.flamous = flamous
+
+location.subscribe(flamous.location)
