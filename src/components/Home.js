@@ -19,7 +19,7 @@ const Home = () => {
         heading='Playlists'>
         {/* <GalleryItem /> */}
         {albums.map((item, index) => {
-          return <Link to={item.name ? '/playlists' : '/'}>
+          return <Link to={item.name ? '/playlists' : '/'} style={{display: 'contents'}}>
             <GalleryItem title={albums[index].name} sub={albums[index].artist} image={albums[index].cover_art_url} />
           </Link>
         })}
