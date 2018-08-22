@@ -1,6 +1,8 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import { Link } from '@hyperapp/router'
+import leftArrow from '../public/blue_left.svg'
+import rightArrow from '../public/blue_right.svg'
 
 // const { Link } = import('@hyperapp/router')
 
@@ -14,14 +16,14 @@ const Button = (props) => style('span')({
 
   },
   <Link to={props.to}>
-    {props.text}
+    {[props.text, <img src={rightArrow} style={{height: '0.6em', marginLeft: '0.4em', marginTop: '0.1em'}} />]}
   </Link>
 )
 
 const Header = (props, children) => style('header')({
   fontSize: '2em',
   maxWidth: '1100px',
-  margin: '1em',
+  margin: '1em 0.8em',
   position: 'relative',
   textAlign: props.alignment === 'center' ? 'center' : 'left',
   '@media (min-width: 1000px)': {
@@ -35,19 +37,22 @@ const Header = (props, children) => style('header')({
   },
   ' .sub': {
     fontSize: '0.6em',
-    marginTop: '-2em'
+    marginTop: '-2em',
+    lineHeight: '2em'
   },
   ' .back': {
     position: 'absolute',
     fontSize: '0.6em',
-    top: '-1em'
+    top: '-1em',
+    display: 'block',
+    width: '100%'
   }
 })(
   {},
   [
     <span class='back'>{
       props.back
-        ? <Link to={props.back.to}>{`< ${props.back.name}`}</Link>
+        ? <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '0.6em', marginRight: '0.4em', marginTop: '0.1em'}} />, <span>{props.back.name}</span>]}</Link>
         : ''}
     </span>,
     <h1 class='title'>{props.title}</h1>,
