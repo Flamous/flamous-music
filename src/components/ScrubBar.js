@@ -102,10 +102,10 @@ function makeInteractive (element) {
 const style = picostyle(h)
 
 const Bubble = style('div')((props) => ({
-  backgroundColor: props.playingState ? '#fce9c7' : '#fcfcff',
-  transition: 'background-color 100ms',
+  backgroundColor: props.playingState ? '#fce9c7' : 'whitesmoke',
+  transition: 'background-color 150ms',
   borderRadius: '20px',
-  border: props.playingState ? '1px solid rgb(239, 197, 124)' : '1px solid #eee',
+  border: props.playingState ? '2px solid rgb(239, 197, 124)' : '2px solid #dedede',
   width: '100%',
   maxWidth: '400px',
   padding: '0.4em',
@@ -113,7 +113,7 @@ const Bubble = style('div')((props) => ({
   position: 'relative',
   height: '4em',
   cursor: 'default',
-  boxShadow: '0 1px 17px -3px rgba(0,0,0, 0.1)'
+  boxShadow: '0 4px 20px -3px rgba(0,0,0, 0.16)'
 }))
 
 const Indicator = () => style('div')({
