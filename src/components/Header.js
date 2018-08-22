@@ -1,5 +1,6 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
+import { Link } from '@hyperapp/router'
 
 const style = picostyle(h)
 
@@ -8,9 +9,11 @@ const Button = (props) => style('span')({
   color: '#007AFF'
 })(
   {
-    onclick: () => window.flamous.addPage(props.link)
+    
   },
-  props.text
+  <Link to={props.to}>
+    {props.text}
+  </Link>
 )
 
 const Header = (props, children) => style('header')({
@@ -35,7 +38,7 @@ const Header = (props, children) => style('header')({
     <h1>{props.title}</h1>,
     <p class='sub'>{props.sub}
       {props.button
-        ? [<br />, <Button text={props.button.text} link={props.button.link} />]
+        ? [<br />, <Button text={props.button.text} to={props.button.to} />]
         : ''}
     </p>
   ]

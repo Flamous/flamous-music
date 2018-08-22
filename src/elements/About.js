@@ -1,6 +1,7 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import Header from '../components/Header.js'
+import Page from '../components/Page'
 // import fmLogo from '../flamous_logo.svg'
 
 const style = picostyle(h)
@@ -19,8 +20,7 @@ const Wrapper = style('div')({
   fontSize: '1.2em'
 })
 const About = () =>
-  [
-    // <Logo src={fmLogo} />,
+  <Page>
     <Header title='About Flamous' alignment='center' />,
     <Wrapper>
       <p>Contact: <a href='mailto:hello@flamous.io'>hello@flamous.io</a></p>
@@ -28,6 +28,6 @@ const About = () =>
       <p>Pubic Domain music is the gift of awesome musicians who care about the creative impact of their work. You do not need to give any credit to the authors.</p>
       <p>This is a project by <a href='https://www.christiankaindl.at/' target='_blank'>Christian Kaindl</a> and Timon Röhrbacher.</p>
     </Wrapper>
-  ]
+  </Page>
 
 export default About

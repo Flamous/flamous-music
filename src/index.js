@@ -6,6 +6,7 @@ import Home from './components/Home.js'
 import songList from './songs.js'
 import placeholder from './public/song_placeholder.svg'
 import Page from './components/Page.js'
+import About from './elements/About'
 
 import { location, Route, Link } from '@hyperapp/router'
 import PlaylistView from './components/PlaylistView.js';
@@ -119,6 +120,7 @@ const flamous = app(
       {/* <Route path='/' render={Home} playingId={playingContext.id} playingState={playingState} /> */}
       <Home playingId={playingContext.id} playingState={playingState} />
       <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
+      <Route path='/about' render={About} />
       <ScrubBar
         playingState={playingState}
         artist={playingContext.artist}
