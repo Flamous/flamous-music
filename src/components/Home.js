@@ -14,7 +14,7 @@ console.log(GalleryItem)
 const Home = () => {
   return (
     <Page nonInteractive>
-      <Header title='Flamous Music' sub='The best of Public Domain music.' button={{text: 'About Flamous >', link: <About />}} />
+      <Header title='Flamous Music' sub='The best of Public Domain music.' button={{text: 'About Flamous >', to: '/about'}} />
       <Gallery
         heading='Playlists'>
         {/* <GalleryItem /> */}
