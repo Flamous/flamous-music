@@ -5,14 +5,15 @@ import { snap } from 'popmotion/lib/transformers'
 import { smooth, getProgressFromValue } from 'popmotion/lib/calc'
 
 const style = picostyle(h)
-
+let handleStyler
+let handleX
 function makeInteractive (element) {
   element.style.transform = 'translateX(100%)'
 
   const AXIS_LOCK_THRESHOLD = 15
   let isAxisLocked = false
-  const handleStyler = styler(element)
-  const handleX = value('0%', handleStyler.set('x'))
+  handleStyler = styler(element)
+  handleX = value('0%', handleStyler.set('x'))
 
   const pointerX = (preventDefault = false) => pointer({x: 0, preventDefault: preventDefault}).pipe(val => val.x)
 
@@ -46,7 +47,7 @@ function makeInteractive (element) {
         window.clickLock = true
         isAxisLocked = true
         currentPointer.stop()
-        let sub = handleX.subscribe((v) => console.log(v))
+        // let sub = handleX.subscribe((v) => console.log(v))
 
         currentPointer = chain(pointerX(true), smooth(30)).pipe((val) => `${getProgressFromValue(0, document.body.clientWidth, val)*100}%`).start(handleX)
       })
@@ -63,11 +64,16 @@ function makeInteractive (element) {
           upListener.stop()
           currentPointer.stop()
 
-          let currentPos = handleX.get()
-          let velocity = handleX.getVelocity()
+          // Everyhthing in percent
+          let currentPos = Number(`${handleX.get().replace('%', '')}`)
+          // console.log(currentPos)
+          let velocity = Number(handleX.getVelocity() / document.body.clientWidth * 100)
+          // console.log(velocity)
+          // console.log(currentPos + velocity)
+
           let isGoingBack = Boolean(!snap([
             0,
-            (document.body.clientWidth / 1.5)
+            60
           ])(currentPos + velocity))
           // let pageWidth = document.body.clientWidth
 
@@ -85,15 +91,16 @@ function makeInteractive (element) {
           //     window.clickLock = false
           //   }
           // })
+          // console.log(isGoingBack)
           if (!isGoingBack) {
             window.flamous.location.go('/')
           } else {
             spring({
-              from: currentPos,
+              from: handleX.get(),
               to: 0,
               damping: 20,
               mass: 0.5,
-              velocity: velocity
+              velocity: handleX.getVelocity()
             }).start(handleX)
           }
         })
@@ -111,15 +118,21 @@ const Page = (props, children) => style('article')({
 })({
   oncreate: !props.hasOwnProperty('nonInteractive') && makeInteractive,
   onremove: (element, done) => {
-    let handleStyler = styler(element)
-    let handleX = value(handleStyler.get('x'), {update: handleStyler.set('x'), complete: done})
-    console.log(handleX.get())
-    // let from = handleX.get() == 
+    // console.log(handleX.getVelocity())
+    handleX.subscribe((val) => { if (val.replace('%', '') >= 100) { done() } })
+    // let handleStyler = styler(element)
+    // let setter = handleStyler.set('x')
+    // let handleX = value(handleStyler.get('x'), {update: (val) => { if (val.replace('%', '') >= 100) { done(); return }; setter(val) }})
+    // console.log(handleX.getVelocity())
+    // // let from = handleX.get() == 
 
     spring({
       from: handleX.get(),
       to: '100%',
-      damping: 15
+      velocity: handleX.getVelocity(),
+      damping: 20,
+      stiffness: 100,
+      mass: 0.5
     }).start(handleX)
   }
 }, <div>
