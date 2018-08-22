@@ -1,6 +1,7 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import placeholder from '../public/song_placeholder.svg'
+import playImage from '../public/play.svg'
 // import Header from './Header.js'
 // import songList from '../songs.js'
 
@@ -41,10 +42,9 @@ const FlexWrapper = style('div')({
   flexWrap: 'wrap'
 })
 
-export const GalleryItem = (props) => {
-  console.log(props)
-  return style('div')({
+export const GalleryItem = (props) => style('div')({
   color: '#212121',
+  textOverflow: 'ellipsis',
   textAlign: 'center',
   fontWeight: 'bold',
   padding: '1rem',
@@ -61,20 +61,28 @@ export const GalleryItem = (props) => {
   boxSizing: 'border-box',
   ' .secondary': {
     marginTop: '-1em',
-    color: '#848484'
+    color: '#848484',
+    fontWeight: 'normal'
   },
-  '.playing': {
-    transform: 'scale(1.2)'
+  '.playing .primary': {
+    color: '#007AFF'
+    // width: '100%',
+    // textOverflow: 'ellipsis',
+    // whiteSpace: 'nowrap'
   }
+  // '.playing .secondary': {
+  //   color: '#007AFF'
+  // }
 })(
   props,
   [
     <Cover src={props.image} />,
-    <p>{props.title}</p>,
+    <p class='primary'>{props.title}</p>,
+    // {props.class === 'playing' ? <img src={playImage} style={{paddingRight: '0.35em'}} /> : ''}
     <p class='secondary'>{props.sub ? `by ${props.sub}` : ''}</p>
   ]
 )
-}
+
 const Cover = (props) => style('img')({
   width: '100%',
   pointerEvents: 'none'

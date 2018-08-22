@@ -118,7 +118,7 @@ const flamous = app(
     <AppShell>
       {/* <Route path='/' render={Home} playingId={playingContext.id} playingState={playingState} /> */}
       <Home playingId={playingContext.id} playingState={playingState} />
-      <Route path='/playlists' render={PlaylistView} playingId={playingContext.id} playingState={playingState} />
+      <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
       <ScrubBar
         playingState={playingState}
         artist={playingContext.artist}

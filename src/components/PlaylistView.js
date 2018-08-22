@@ -12,7 +12,7 @@ const PlaylistView = (props) => {
     <Header title='Wowa' sub='Free music by Wowa (www.wowa.me)' />
     <Gallery heading='Songs'>
       {songList.map((item) => {
-        // console.log('isPlaying: ', props.playingState, ', playingId: ', props.playingId, ', itemId: ', item.id)
+        console.log('isPlaying: ', props.playingState, ', playingId: ', props.playingId, ', itemId: ', item.id)
         // class={(props.playingState && props.playingId === item.id) ? 'playing' : ''}
 
         return <GalleryItem class={(props.playingState && props.playingId === item.id) ? 'playing' : ''} image={item.cover_art_url || placeholder} title={item.name} sub={item.artist} onclick={() => { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) }} />
