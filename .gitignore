@@ -4,6 +4,7 @@ jspm_packages
 
 .cache
 dist
+build
 
 # Serverless directories
 .serverless

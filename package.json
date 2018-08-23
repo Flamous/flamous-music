@@ -6,7 +6,7 @@
   "scripts": {
     "test": "standard",
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build ./src/index.html --out-dir  build/ --public-url ./"
   },
   "author": "Christian Kaindl",
   "license": "MIT",
