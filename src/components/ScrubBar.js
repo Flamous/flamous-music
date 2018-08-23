@@ -111,7 +111,7 @@ const Bubble = style('div')((props) => ({
   padding: '0.4em',
   display: 'flex',
   position: 'relative',
-  height: '4em',
+  height: '4.64em',
   cursor: 'default',
   boxShadow: '0 4px 20px -3px rgba(0,0,0, 0.16)'
 }))
