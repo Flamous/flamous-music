@@ -165,7 +165,7 @@ const Wrapper = style('div')({
 })
 
 const ScrubBar = (props) =>
-  <Wrapper>
+  <Wrapper key={props.key}>
     <Bubble playingState={props.playingState} oncreate={makeInteractive}>
       <Indicator />
       <SongCover draggable='false' src={props.image} />

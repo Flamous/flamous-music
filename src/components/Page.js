@@ -46,7 +46,7 @@ function makeInteractive (element) {
         currentPointer.stop()
         // let sub = handleX.subscribe((v) => console.log(v))
 
-        currentPointer = chain(pointerX(true), smooth(30)).pipe((val) => `${getProgressFromValue(0, document.body.clientWidth, val)*100}%`).start(handleX)
+        currentPointer = chain(pointerX(true), smooth(30)).pipe((val) => `${getProgressFromValue(0, document.body.clientWidth, val) * 100}%`).start(handleX)
       })
 
       let upListener = listen(element, 'mouseup touchend')
@@ -114,6 +114,8 @@ const Page = (props, children) => style('article')({
   backgroundColor: 'white',
   boxShadow: '0 0 2px 0 #848484'
 })({
+  class: 'page',
+  key: props.key,
   oncreate: !props.hasOwnProperty('nonInteractive') && makeInteractive,
   onremove: (element, done) => {
     // Prevent clicking links as this somehow screws up hyperapp (when switchign to a new url before the slide-out animation is finished)

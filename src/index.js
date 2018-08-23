@@ -116,17 +116,17 @@ const flamous = app(
     }
   },
   ({playingContext, playingState, pages}) =>
-    <AppShell>
-      {/* <Route path='/' render={Home} playingId={playingContext.id} playingState={playingState} /> */}
-      <Home playingId={playingContext.id} playingState={playingState} />
-      <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
-      <Route path='/about' render={About} />
+    <AppShell key='container'>
+      <Home key='home' playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
+        key='scrub-bar'
         playingState={playingState}
         artist={playingContext.artist}
         name={playingContext.name}
         image={playingContext.cover_art_url} />
-      { pages.map((item) => { return <Page>{item}</Page> }) }
+
+      <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
+      <Route path='/about' render={About} />
     </AppShell>,
   document.body
 )

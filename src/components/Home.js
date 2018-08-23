@@ -7,9 +7,9 @@ import Gallery from './Gallery'
 import Header from './Header.js'
 import { Link } from '@hyperapp/router'
 
-const Home = () => {
+const Home = (props) => {
   return (
-    <Page nonInteractive>
+    <Page nonInteractive key={props.key}>
       <Header title='Flamous Music' sub='The best of Public Domain music.' button={{text: 'About', to: '/about'}} />
       <Gallery
         heading='Playlists'>

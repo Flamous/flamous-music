@@ -18,7 +18,7 @@ const Gallery = (props, children) => style('div')({
   marginBottom: '6em'
 })(
   {},
-  <Wrapper>
+  <Wrapper key={props.key}>
     {props.heading ? <Heading>{props.heading}</Heading> : ''}
     <FlexWrapper>
       {children}

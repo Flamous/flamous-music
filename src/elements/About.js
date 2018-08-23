@@ -20,7 +20,7 @@ const Wrapper = style('div')({
   fontSize: '1.2em'
 })
 const About = () =>
-  <Page>
+  <Page key='about'>
     <Header title='About Flamous' alignment='center' />
     <Wrapper>
       <p>Contact: <a href='mailto:hello@flamous.io'>hello@flamous.io</a></p>
