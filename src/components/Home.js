@@ -5,21 +5,16 @@ import Page from './Page.js'
 import { GalleryItem } from './Gallery'
 import Gallery from './Gallery'
 import Header from './Header.js'
-import About from '../elements/About.js'
-import songList from '../songs'
 import { Link } from '@hyperapp/router'
 
-// const style = picostyle(h)
-console.log(GalleryItem)
 const Home = () => {
   return (
     <Page nonInteractive>
       <Header title='Flamous Music' sub='The best of Public Domain music.' button={{text: 'About', to: '/about'}} />
       <Gallery
         heading='Playlists'>
-        {/* <GalleryItem /> */}
         {albums.map((item, index) => {
-          return <Link to={item.name ? '/playlists' : '/'} style={{display: 'contents'}}>
+          return <Link to={item.name ? '/playlists' : '/'} style={{display: 'contents'}} onclick={(e) => { if (window.clickLock) { e.preventDefault() } }}>
             <GalleryItem title={albums[index].name} sub={albums[index].artist} image={albums[index].cover_art_url} />
           </Link>
         })}
@@ -29,5 +24,3 @@ const Home = () => {
 }
 
 export default Home
-
-        // onclick={() => { if (window.clickLock) return; window.flamous.addPage([<Header title='Wowa' sub='Free music by Wowa (www.wowa.me)' />, <Gallery data={songList} />]) }}

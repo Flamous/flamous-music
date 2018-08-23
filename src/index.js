@@ -8,7 +8,7 @@ import placeholder from './public/song_placeholder.svg'
 import Page from './components/Page.js'
 import About from './elements/About'
 
-import { location, Route, Link } from '@hyperapp/router'
+import { location, Route } from '@hyperapp/router'
 import PlaylistView from './components/PlaylistView.js';
 
 window.Amplitude = Amplitude

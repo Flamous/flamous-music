@@ -7,6 +7,7 @@ import { smooth, getProgressFromValue } from 'popmotion/lib/calc'
 const style = picostyle(h)
 let handleStyler
 let handleX
+
 function makeInteractive (element) {
   element.style.transform = 'translateX(100%)'
 
@@ -25,13 +26,9 @@ function makeInteractive (element) {
     mass: 0.5
   }).start(handleX)
 
-  let handleSub
   // Swipe-mechanism
   listen(element, 'mousedown touchstart')
     .start((e) => {
-      if (handleX.get() > 0) {
-        handleSub.unsubscribe()
-      }
       let currentPointer
       currentPointer = chain(pointer({x: 0, y: 0, preventDefault: false}), smooth(30)).start(({ x, y }) => {
         if (Math.abs(y) >= AXIS_LOCK_THRESHOLD && !isAxisLocked) {
@@ -93,6 +90,7 @@ function makeInteractive (element) {
           // })
           // console.log(isGoingBack)
           if (!isGoingBack) {
+            window.clickLock = true
             window.flamous.location.go('/')
           } else {
             spring({
@@ -118,13 +116,16 @@ const Page = (props, children) => style('article')({
 })({
   oncreate: !props.hasOwnProperty('nonInteractive') && makeInteractive,
   onremove: (element, done) => {
-    // console.log(handleX.getVelocity())
-    handleX.subscribe((val) => { if (val.replace('%', '') >= 100) { done() } })
-    // let handleStyler = styler(element)
-    // let setter = handleStyler.set('x')
-    // let handleX = value(handleStyler.get('x'), {update: (val) => { if (val.replace('%', '') >= 100) { done(); return }; setter(val) }})
-    // console.log(handleX.getVelocity())
-    // // let from = handleX.get() == 
+    // Prevent clicking links as this somehow screws up hyperapp (when switchign to a new url before the slide-out animation is finished)
+    // still not ideal when user is navigating with browser back/forward buttons
+    window.clickLock = true
+
+    handleX.subscribe((val) => {
+      if (val.replace('%', '') >= 100) {
+        done()
+        window.clickLock = false
+      }
+    })
 
     spring({
       from: handleX.get(),
