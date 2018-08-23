@@ -21,7 +21,7 @@ const Wrapper = style('div')({
 })
 const About = () =>
   <Page>
-    <Header title='About Flamous' alignment='center' />,
+    <Header title='About Flamous' alignment='center' />
     <Wrapper>
       <p>Contact: <a href='mailto:hello@flamous.io'>hello@flamous.io</a></p>
       <p>Free, public-domain music (CC0). Do whatever you want with it, it's free. Like, really. <a href='https://creativecommons.org/share-your-work/public-domain/' target='_blank'>CC0</a> means that there is no copyright owner (“No Rights Reserved”). The music is still credited to the original authors, but they do not own more copyrights than you do.</p>
