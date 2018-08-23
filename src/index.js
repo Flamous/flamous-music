@@ -7,9 +7,13 @@ import songList from './songs.js'
 import placeholder from './public/song_placeholder.svg'
 import Page from './components/Page.js'
 import About from './elements/About'
+import nativeWebApp from 'native-web-app'
+import '../node_modules/native-web-app/native.css'
 
 import { location, Route } from '@hyperapp/router'
-import PlaylistView from './components/PlaylistView.js';
+import PlaylistView from './components/PlaylistView.js'
+
+nativeWebApp()
 
 window.Amplitude = Amplitude
 
