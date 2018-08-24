@@ -70,7 +70,7 @@ function makeInteractive (element) {
 
           let isGoingBack = Boolean(!snap([
             0,
-            60
+            47.5
           ])(currentPos + velocity))
           // let pageWidth = document.body.clientWidth
 
@@ -133,9 +133,9 @@ const Page = (props, children) => style('article')({
       from: handleX.get(),
       to: '100%',
       velocity: handleX.getVelocity(),
-      damping: 20,
+      damping: 10,
       stiffness: 100,
-      mass: 0.5
+      mass: 0.6
     }).start(handleX)
   }
 }, <div>
