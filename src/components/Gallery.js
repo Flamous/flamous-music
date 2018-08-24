@@ -47,13 +47,13 @@ export const GalleryItem = (props) => style('div')({
   textOverflow: 'ellipsis',
   textAlign: 'center',
   fontWeight: 'bold',
-  padding: '1rem',
-  width: '50%',
+  padding: '0.7em',
+  width: '33%',
   minWidth: '150px',
   transition: 'transform 300ms',
   // maxWidth: '250px',
   '@media (min-width: 1000px)': {
-    width: '250px',
+    width: '200px',
     fontSize: '1.2em',
     maxWidth: '33%'
   },
