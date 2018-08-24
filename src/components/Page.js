@@ -112,7 +112,7 @@ const Page = (props, children) => style('article')({
   overflowY: 'auto',
   color: '#212121',
   backgroundColor: 'white',
-  boxShadow: '0 0 2px 0 #848484'
+  boxShadow: '0 0 10px 0 #848484'
 })({
   class: 'page',
   key: props.key,
