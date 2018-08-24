@@ -52,10 +52,10 @@ function makeInteractive (element) {
 
           switch (direction) {
             case 'top':
-              springCurve = nonlinearSpring(1, 0)
+              springCurve = nonlinearSpring(2.2, 0)
               break
             case 'bottom':
-              springCurve = nonlinearSpring(0.2, 0)
+              springCurve = nonlinearSpring(0.8, 0)
               break
             case 'right':
             case 'left':
@@ -73,9 +73,8 @@ function makeInteractive (element) {
 
       let upListener = listen(document, 'mouseup touchend')
         .start((e) => {
-          console.log('here')
           upListener.stop()
-          stopPointer.stop()
+          stopPointer && stopPointer.stop()
           stop()
 
           switch (direction) {
@@ -89,8 +88,11 @@ function makeInteractive (element) {
               window.Amplitude.next()
               break
             default:
-              console.log('clicked!')
+              console.info('Clicked ScrubBar')
           }
+
+          if (!currentHandle) return
+
           direction = 'none'
           axis = 'none'
           spring({
