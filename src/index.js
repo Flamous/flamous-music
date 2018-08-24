@@ -20,10 +20,7 @@ window.Amplitude = Amplitude
 const style = picostyle(h)
 
 const AppShell = style('div')({
-  height: '100%',
-  width: '100%',
-  position: 'relative',
-  overflow: 'hidden'
+  display: 'contents'
 })
 
 Amplitude.setDebug(true)
