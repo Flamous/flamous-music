@@ -71,6 +71,14 @@ function makeInteractive (element) {
             .start(currentHandle)
         })
 
+      function playPause () {
+        if (!window.Amplitude.audio().paused) {
+          window.Amplitude.pause()
+        } else {
+          window.Amplitude.play()
+        }
+      }
+
       let upListener = listen(document, 'mouseup touchend')
         .start((e) => {
           upListener.stop()
@@ -79,7 +87,7 @@ function makeInteractive (element) {
 
           switch (direction) {
             case 'top':
-              window.flamous.playPause()
+              playPause()
               break
             case 'left':
               window.Amplitude.prev()
