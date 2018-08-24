@@ -70,32 +70,35 @@ function makeInteractive (element) {
             .pipe(springCurve)
             .start(currentHandle)
         })
-    })
 
-  listen(document, 'mouseup touchend')
-    .start((e) => {
-      stopPointer.stop()
+      let upListener = listen(document, 'mouseup touchend')
+        .start((e) => {
+          console.log('here')
+          upListener.stop()
+          stopPointer.stop()
+          stop()
 
-      switch (direction) {
-        case 'top':
-          window.flamous.playPause()
-          break
-        case 'left':
-          window.Amplitude.prev()
-          break
-        case 'right':
-          window.Amplitude.next()
-          break
-        default:
-          console.log('clicked!')
-      }
-      direction = 'none'
-      axis = 'none'
-      spring({
-        from: currentHandle.get(),
-        velocity: currentHandle.getVelocity()
-      })
-        .start(currentHandle)
+          switch (direction) {
+            case 'top':
+              window.flamous.playPause()
+              break
+            case 'left':
+              window.Amplitude.prev()
+              break
+            case 'right':
+              window.Amplitude.next()
+              break
+            default:
+              console.log('clicked!')
+          }
+          direction = 'none'
+          axis = 'none'
+          spring({
+            from: currentHandle.get(),
+            velocity: currentHandle.getVelocity()
+          })
+            .start(currentHandle)
+        })
     })
 }
 
