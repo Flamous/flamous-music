@@ -150,9 +150,3 @@ if ('mediaSession' in navigator) {
 window.flamous = flamous
 
 location.subscribe(flamous.location)
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/sw.js')
-  })
-}
