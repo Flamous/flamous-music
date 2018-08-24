@@ -6,7 +6,7 @@
   "scripts": {
     "test": "standard",
     "start": "parcel src/index.html",
-    "build": "parcel build ./src/index.html --out-dir  build/ --public-url ./"
+    "build": "parcel build ./src/index.html --out-dir  build/ --public-url ./ && workbox generateSW workbox-config.js"
   },
   "author": "Christian Kaindl",
   "license": "MIT",
@@ -21,7 +21,8 @@
     "npm": "^6.3.0",
     "picostyle": "^2.0.1",
     "popmotion": "^8.3.6",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "workbox-cli": "^3.4.1"
   },
   "devDependencies": {
     "aws-sdk": "^2.300.0",
