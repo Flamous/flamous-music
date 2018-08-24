@@ -21,29 +21,28 @@ const Button = (props) => style('span')({
 )
 
 const Header = (props, children) => style('header')({
-  fontSize: '2em',
   maxWidth: '1100px',
-  margin: '2em 0.8em 1em',
+  margin: '3em 1.7em 1em',
   position: 'relative',
   textAlign: props.alignment === 'center' ? 'center' : 'left',
   '@media (min-width: 1000px)': {
-    fontSize: '3em'
+    fontSize: '1.2rem'
   },
   '@media (min-width: 1250px)': {
-    margin: '2em auto 0em'
+    margin: '3em auto 0em'
   },
   ' .title': {
-    marginTop: '0px'
+    marginTop: '0px',
+    fontSize: '2.5em'
   },
   ' .sub': {
-    fontSize: '0.6em',
     marginTop: '-2em',
     lineHeight: '2em'
   },
   ' .back': {
+    fontSize: '1.2em',
     position: 'absolute',
-    fontSize: '0.6em',
-    top: '-2em',
+    top: '-1.8em',
     display: 'block',
     width: '100%',
     transition: 'opacity 120ms'
