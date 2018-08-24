@@ -55,7 +55,7 @@ const Header = (props, children) => style('header')({
   [
     <span class='back'>{
       props.back
-        ? <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '0.6em', marginRight: '0.4em', marginTop: '0.1em'}} />, <span>{props.back.name}</span>]}</Link>
+        ? <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '0.8em', marginRight: '0.4em', marginTop: '0.07em'}} />, <span>{props.back.name}</span>]}</Link>
         : ''}
     </span>,
     <h1 class='title'>{props.title}</h1>,
