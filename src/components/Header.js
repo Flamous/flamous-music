@@ -22,14 +22,14 @@ const Button = (props) => style('span')({
 
 const Header = (props, children) => style('header')({
   maxWidth: '1100px',
-  margin: '3em 1.7em 1em',
+  margin: '4.4em 1.7em 1em',
   position: 'relative',
   textAlign: props.alignment === 'center' ? 'center' : 'left',
   '@media (min-width: 1000px)': {
     fontSize: '1.2rem'
   },
   '@media (min-width: 1250px)': {
-    margin: '3em auto 0em'
+    margin: '4.4em auto 0em'
   },
   ' .title': {
     marginTop: '0px',
@@ -42,13 +42,13 @@ const Header = (props, children) => style('header')({
   ' .back': {
     fontSize: '1.2em',
     position: 'absolute',
-    top: '-1.8em',
+    top: '-2.5em',
     display: 'block',
     width: '100%',
     transition: 'opacity 120ms'
   },
   ' .back:active': {
-    opacity: '0.55'
+    opacity: '0.4'
   }
 })(
   {},

@@ -50,7 +50,7 @@ export const GalleryItem = (props) => style('div')({
   padding: '0.7em',
   width: '33%',
   minWidth: '150px',
-  transition: 'transform 300ms',
+  transition: 'opacity 300ms',
   // maxWidth: '250px',
   '@media (min-width: 1000px)': {
     width: '200px',
@@ -69,8 +69,8 @@ export const GalleryItem = (props) => style('div')({
     color: '#007AFF'
   },
   ':active': {
-    transition: 'opacity 120ms',
-    opacity: '0.4'
+    transition: 'opacity 70ms',
+    opacity: '0.6'
   }
 })(
   props,
