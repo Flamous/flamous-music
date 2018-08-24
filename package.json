@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@hyperapp/router": "^0.7.0",
-    "amplitudejs": "^3.3.0",
+    "amplitudejs": "^3.3.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "components": "^0.1.0",
     "hyperapp": "^1.2.8",
@@ -20,11 +20,11 @@
     "native-web-app": "^1.0.0",
     "npm": "^6.3.0",
     "picostyle": "^2.0.1",
-    "popmotion": "^8.3.3",
+    "popmotion": "^8.3.6",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "aws-sdk": "^2.296.0",
+    "aws-sdk": "^2.299.0",
     "parcel-bundler": "^1.9.7",
     "standard": "^11.0.1"
   }
