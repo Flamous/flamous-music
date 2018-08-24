@@ -69,8 +69,8 @@ export const GalleryItem = (props) => style('div')({
     color: '#007AFF'
   },
   ':active': {
-    transition: 'transform 100ms',
-    transform: 'scale(1.07)'
+    transition: 'opacity 120ms',
+    opacity: '0.4'
   }
 })(
   props,
