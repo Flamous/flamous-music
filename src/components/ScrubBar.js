@@ -7,7 +7,7 @@ import playImage from '../public/play.svg'
 
 function makeInteractive (element) {
   const AXIS_LOCK_THRESHOLD = 13 // Pixel
-  const ACTIONABLE_THRESHOLD = 30 // Pixel
+  const ACTIONABLE_THRESHOLD = 25 // Pixel
 
   element.style.transform = 'translateY(150%)'
 
@@ -68,7 +68,7 @@ function makeInteractive (element) {
           stopPointer = chain(
             oneDirectionalPointer(axis),
             smooth(30))
-            .pipe(springCurve)
+            .pipe(springCurve, (val) => { if (Math.abs(val) > ACTIONABLE_THRESHOLD) { element.classList.add('active') } else { element.classList.remove('active') }; return val })
             .start(currentHandle)
         })
 
@@ -87,6 +87,8 @@ function makeInteractive (element) {
           stop()
 
           if (!currentHandle) return
+
+          element.classList.remove('active')
 
           if (Math.abs(currentHandle.get() + currentHandle.getVelocity()) >= ACTIONABLE_THRESHOLD) {
             switch (direction) {
@@ -117,10 +119,10 @@ function makeInteractive (element) {
 const style = picostyle(h)
 
 const Bubble = style('div')((props) => ({
-  backgroundColor: props.playingState ? '#fce9c7' : 'whitesmoke',
-  transition: 'background-color 150ms',
+  backgroundColor: 'whitesmoke',
+  transition: 'border-color 150ms',
   borderRadius: '20px',
-  border: props.playingState ? '2px solid rgb(239, 197, 124)' : '2px solid #dedede',
+  border: props.playingState ? '1px solid #007AFF' : '1px solid #dedede',
   width: '100%',
   maxWidth: '400px',
   padding: '0.4em',
@@ -128,7 +130,11 @@ const Bubble = style('div')((props) => ({
   position: 'relative',
   height: '4.64em',
   cursor: 'default',
-  boxShadow: '0 4px 20px -3px rgba(0,0,0, 0.16)'
+  boxShadow: '0 4px 20px -3px rgba(0,0,0, 0.16)',
+  '.active .indicator div': {
+    backgroundColor: '#007AFF',
+    width: '2.6em'
+  }
 }))
 
 const Indicator = () => style('div')({
@@ -140,12 +146,13 @@ const Indicator = () => style('div')({
   top: '0px',
   marginTop: '0.4em'
 })(
-  {},
+  {class: 'indicator'},
   style('div')({
     height: '4px',
-    width: '30px',
-    backgroundColor: '#848484',
-    borderRadius: '100px'
+    width: '2.1em',
+    backgroundColor: '#CCC',
+    borderRadius: '100px',
+    transition: 'width 100ms'
   })
 )
 const SongCover = style('img')({
@@ -182,7 +189,7 @@ const Wrapper = style('div')({
 const ScrubBar = (props) =>
   <Wrapper key={props.key}>
     <Bubble playingState={props.playingState} oncreate={makeInteractive}>
-      <Indicator />
+      <Indicator class='indicator' />
       <SongCover draggable='false' src={props.image} />
       <Info>
         <Song>
