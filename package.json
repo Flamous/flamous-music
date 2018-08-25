@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "aws-sdk": "^2.300.0",
+    "cli-real-favicon": "0.0.6",
     "parcel-bundler": "^1.9.7",
     "standard": "^11.0.1"
   }
