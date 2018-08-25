@@ -6,7 +6,8 @@ import { smooth } from 'popmotion/lib/calc'
 import playImage from '../public/play.svg'
 
 function makeInteractive (element) {
-  const THRESHOLD = 10
+  const AXIS_LOCK_THRESHOLD = 13 // Pixel
+  const ACTIONABLE_THRESHOLD = 30 // Pixel
 
   element.style.transform = 'translateY(150%)'
 
@@ -34,13 +35,13 @@ function makeInteractive (element) {
     .start((e) => {
       let {stop} = pointer({x: 0, y: 0})
         .start(({x, y}) => {
-          if (Math.abs(x) > THRESHOLD) {
+          if (Math.abs(x) > AXIS_LOCK_THRESHOLD) {
             axis = 'x'
             direction = (x < 0)
               ? 'left'
               : 'right'
             stop()
-          } else if (Math.abs(y) > THRESHOLD) {
+          } else if (Math.abs(y) > AXIS_LOCK_THRESHOLD) {
             axis = 'y'
             direction = (y < 0)
               ? 'top'
@@ -85,22 +86,23 @@ function makeInteractive (element) {
           stopPointer && stopPointer.stop()
           stop()
 
-          switch (direction) {
-            case 'top':
-              playPause()
-              break
-            case 'left':
-              window.Amplitude.prev()
-              break
-            case 'right':
-              window.Amplitude.next()
-              break
-            default:
-              console.info('Clicked ScrubBar')
-          }
-
           if (!currentHandle) return
 
+          if (Math.abs(currentHandle.get() + currentHandle.getVelocity()) >= ACTIONABLE_THRESHOLD) {
+            switch (direction) {
+              case 'top':
+                playPause()
+                break
+              case 'left':
+                window.Amplitude.prev()
+                break
+              case 'right':
+                window.Amplitude.next()
+                break
+              default:
+                console.info('Clicked ScrubBar')
+            }
+          }
           direction = 'none'
           axis = 'none'
           spring({
