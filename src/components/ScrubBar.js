@@ -33,6 +33,7 @@ function makeInteractive (element) {
 
   listen(element, 'mousedown touchstart')
     .start((e) => {
+      let handleSub
       let {stop} = pointer({x: 0, y: 0})
         .start(({x, y}) => {
           if (Math.abs(x) > AXIS_LOCK_THRESHOLD) {
@@ -65,10 +66,18 @@ function makeInteractive (element) {
 
           currentHandle = handle[axis]
 
+          handleSub = currentHandle.subscribe((val) => {
+            if (Math.abs(val) > ACTIONABLE_THRESHOLD) {
+              element.classList.add('active')
+            } else {
+              element.classList.remove('active')
+            }
+          })
+
           stopPointer = chain(
             oneDirectionalPointer(axis),
             smooth(30))
-            .pipe(springCurve, (val) => { if (Math.abs(val) > ACTIONABLE_THRESHOLD) { element.classList.add('active') } else { element.classList.remove('active') }; return val })
+            .pipe(springCurve)
             .start(currentHandle)
         })
 
@@ -84,13 +93,14 @@ function makeInteractive (element) {
         .start((e) => {
           upListener.stop()
           stopPointer && stopPointer.stop()
+          handleSub && handleSub.unsubscribe()
           stop()
 
           if (!currentHandle) return
 
           element.classList.remove('active')
 
-          if (Math.abs(currentHandle.get() + currentHandle.getVelocity()) >= ACTIONABLE_THRESHOLD) {
+          if (Math.abs(currentHandle.get()) >= ACTIONABLE_THRESHOLD) {
             switch (direction) {
               case 'top':
                 playPause()
