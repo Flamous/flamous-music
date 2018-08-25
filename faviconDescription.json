@@ -1,0 +1,65 @@
+{
+	"masterPicture": "src/assets/flamous_logo.svg",
+	"iconsPath": "./",
+	"design": {
+		"ios": {
+			"pictureAspect": "backgroundAndMargin",
+			"backgroundColor": "#007aff",
+			"margin": "0%",
+			"assets": {
+				"ios6AndPriorIcons": false,
+				"ios7AndLaterIcons": false,
+				"precomposedIcons": false,
+				"declareOnlyDefaultIcon": true
+			},
+			"appName": "Flamous Music"
+		},
+		"desktopBrowser": {},
+		"windows": {
+			"pictureAspect": "noChange",
+			"backgroundColor": "#2b5797",
+			"onConflict": "override",
+			"assets": {
+				"windows80Ie10Tile": false,
+				"windows10Ie11EdgeTiles": {
+					"small": false,
+					"medium": true,
+					"big": false,
+					"rectangle": false
+				}
+			},
+			"appName": "Flamous Music"
+		},
+		"androidChrome": {
+			"pictureAspect": "shadow",
+			"themeColor": "#007aff",
+			"manifest": {
+				"name": "Flamous",
+				"display": "standalone",
+				"orientation": "notSet",
+				"onConflict": "override",
+				"declared": true
+			},
+			"assets": {
+				"legacyIcon": false,
+				"lowResolutionIcons": false
+			}
+		},
+		"safariPinnedTab": {
+			"pictureAspect": "blackAndWhite",
+			"threshold": 70.3125,
+			"themeColor": "#007aff"
+		}
+	},
+	"settings": {
+		"scalingAlgorithm": "Mitchell",
+		"errorOnImageTooSmall": false,
+		"readmeFile": false,
+		"htmlCodeFile": true,
+		"usePathAsIs": false
+	},
+	"versioning": {
+		"paramName": "v1",
+		"paramValue": "00zQGABoWl"
+	}
+}
