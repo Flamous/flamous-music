@@ -8,6 +8,7 @@ import playImage from '../public/play.svg'
 function makeInteractive (element) {
   const AXIS_LOCK_THRESHOLD = 13 // Pixel
   const ACTIONABLE_THRESHOLD = 25 // Pixel
+  const indicator = element.querySelector('#indicator div')
 
   element.style.transform = 'translateY(150%)'
 
@@ -33,7 +34,6 @@ function makeInteractive (element) {
 
   listen(element, 'mousedown touchstart')
     .start((e) => {
-      let handleSub
       let {stop} = pointer({x: 0, y: 0})
         .start(({x, y}) => {
           if (Math.abs(x) > AXIS_LOCK_THRESHOLD) {
@@ -66,7 +66,8 @@ function makeInteractive (element) {
 
           currentHandle = handle[axis]
 
-          handleSub = currentHandle.subscribe((val) => {
+          currentHandle.subscribe((val) => {
+            indicator.style.width = `${2.1 + (0.6 * (Math.abs(val) / ACTIONABLE_THRESHOLD))}em`
             if (Math.abs(val) > ACTIONABLE_THRESHOLD) {
               element.classList.add('active')
             } else {
@@ -93,7 +94,6 @@ function makeInteractive (element) {
         .start((e) => {
           upListener.stop()
           stopPointer && stopPointer.stop()
-          handleSub && handleSub.unsubscribe()
           stop()
 
           if (!currentHandle) return
@@ -142,8 +142,7 @@ const Bubble = style('div')((props) => ({
   cursor: 'default',
   boxShadow: '0 4px 20px -3px rgba(0,0,0, 0.16)',
   '.active .indicator div': {
-    backgroundColor: '#007AFF',
-    width: '2.6em'
+    backgroundColor: '#007AFF'
   }
 }))
 
@@ -156,13 +155,13 @@ const Indicator = () => style('div')({
   top: '0px',
   marginTop: '0.4em'
 })(
-  {class: 'indicator'},
+  {class: 'indicator', id: 'indicator'},
   style('div')({
     height: '4px',
     width: '2.1em',
     backgroundColor: '#CCC',
     borderRadius: '100px',
-    transition: 'width 100ms'
+    transition: 'background-color 150ms'
   })
 )
 const SongCover = style('img')({
