@@ -46,7 +46,7 @@ function makeInteractive (element) {
         currentPointer.stop()
         // let sub = handleX.subscribe((v) => console.log(v))
 
-        currentPointer = chain(pointerX(true), smooth(30)).pipe((val) => `${getProgressFromValue(0, document.body.clientWidth, val) * 100}%`).start(handleX)
+        currentPointer = chain(pointerX(true), smooth(30)).pipe((val) => { val = getProgressFromValue(0, document.body.clientWidth, val) * 100; return `${val > 0 ? val : 0}%` }).start(handleX)
       })
 
       let upListener = listen(element, 'mouseup touchend')
@@ -99,7 +99,7 @@ function makeInteractive (element) {
               damping: 20,
               mass: 0.5,
               velocity: handleX.getVelocity()
-            }).start(handleX)
+            }).pipe(val => { val = Number(val.replace('%', '')); return `${val >= 0 ? val : 0}%` }).start(handleX)
           }
         })
     })
