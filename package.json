@@ -4,7 +4,7 @@
   "description": "Platform for your music",
   "main": "index.js",
   "scripts": {
-    "test": "standard",
+    "test": "standard && real-favicon check-for-update --fail-on-update ../faviconData.json",
     "start": "parcel src/index.html",
     "build": "parcel build ./src/index.html --out-dir  build/ --public-url ./ && workbox generateSW workbox-config.js"
   },
