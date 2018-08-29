@@ -106,10 +106,10 @@ function makeInteractive (element) {
                 playPause()
                 break
               case 'left':
-                window.Amplitude.prev()
+                window.Amplitude.next()
                 break
               case 'right':
-                window.Amplitude.next()
+                window.Amplitude.prev()
                 break
               default:
                 console.info('Clicked ScrubBar')
