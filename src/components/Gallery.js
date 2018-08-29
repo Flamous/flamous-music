@@ -2,6 +2,7 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import LazyImage from './LazyImage'
 import LazyLoad from 'vanilla-lazyload'
+import playImage from '../public/play.svg'
 
 const style = picostyle(h)
 
@@ -25,9 +26,25 @@ function initLazyLoad (elem) {
 }
 
 const Heading = style('h2')({
-  marginLeft: '1rem'
+  marginLeft: '1rem',
+  display: 'inline-block',
+  marginRight: '1.6em'
 })
-
+const PlayAllButton = (props) => style('span')({
+  borderRadius: '100px',
+  backgroundColor: 'lightgreen',
+  padding: '0.8em 1.8em',
+  transition: 'opacity 120ms',
+  ':active': {
+    opacity: '0.4'
+  }
+})(
+  {onclick: window.Amplitude.play},
+  [
+    <img src={playImage} style={{paddingRight: '0.35em'}} />,
+    'Play All'
+  ]
+)
 const Gallery = (props, children) => style('div')({
   width: '100%',
   padding: '1em',
@@ -42,6 +59,7 @@ const Gallery = (props, children) => style('div')({
   },
   <Wrapper key={props.key}>
     {props.heading ? <Heading>{props.heading}</Heading> : ''}
+    {props.hasOwnProperty('playAllButton') ? <PlayAllButton /> : ''}
     <FlexWrapper>
       {children}
       {/* {props.data.map((item) => {
