@@ -15,6 +15,22 @@ import PlaylistView from './components/PlaylistView.js'
 
 nativeWebApp()
 
+window.addEventListener('touchend', unlockiOSAudio)
+
+function unlockiOSAudio () { // On iOs, audio has to be unlocked first by a user action. Thanks to Simon_Weaver on StackOverflow: https://stackoverflow.com/questions/12517000/no-sound-on-ios-6-web-audio-api
+  window.AudioContext = window.AudioContext || window.webkitAudioContext
+  var context = new window.AudioContext()
+
+  // create a dummy sound - and play it immediately in same 'thread'
+  var oscillator = context.createOscillator()
+  oscillator.frequency.value = 400
+  oscillator.connect(context.destination)
+  oscillator.start(0)
+  oscillator.stop(0)
+
+  window.removeEventListener('touchend', unlockiOSAudio)
+}
+
 window.Amplitude = Amplitude
 
 const style = picostyle(h)
