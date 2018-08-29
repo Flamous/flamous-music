@@ -1,11 +1,28 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import placeholder from '../public/song_placeholder.svg'
-import playImage from '../public/play.svg'
-// import Header from './Header.js'
-// import songList from '../songs.js'
+import LazyImage from './LazyImage'
+import LazyLoad from 'vanilla-lazyload'
 
 const style = picostyle(h)
+
+function updateLazyLoad (elem) {
+  elem.lazyLoader.update()
+}
+function removeLazyLoad (elem) {
+  elem.lazyLoader.destroy()
+}
+function initLazyLoad (elem) {
+  let config = {
+    container: elem,
+    element_selector: '.image',
+    callback_load: (elem) => elem.classList.add('show')
+  }
+  if (!elem.lazyLoader) {
+    elem.lazyLoader = new LazyLoad(config)
+  }
+
+  elem.lazyLoader.update()
+}
 
 const Heading = style('h2')({
   marginLeft: '1rem'
@@ -17,7 +34,12 @@ const Gallery = (props, children) => style('div')({
   boxSizing: 'border-box',
   marginBottom: '6em'
 })(
-  {},
+  {
+    oncreate: initLazyLoad,
+    // onupdate: updateLazyLoad,
+    onremove: removeLazyLoad,
+    class: 'gallery'
+  },
   <Wrapper key={props.key}>
     {props.heading ? <Heading>{props.heading}</Heading> : ''}
     <FlexWrapper>
@@ -82,11 +104,22 @@ export const GalleryItem = (props) => style('div')({
   ]
 )
 
-const Cover = (props) => style('img')({
+const Cover = (props) => style('div')({
   width: '100%',
-  pointerEvents: 'none'
-})({
-  src: props.src
-})
+  position: 'relative',
+  paddingBottom: '100%',
+  ' .image': {
+    width: '100%',
+    position: 'absolute',
+    left: '0',
+    pointerEvents: 'none',
+    transition: 'opacity 200ms 300ms',
+    opacity: '1'
+  },
+  ' .image:not([src])': {
+    opacity: '0'
+  }
+})({}, <LazyImage class='image' alt={props.alt} src={props.src} />
+)
 
 export default Gallery
