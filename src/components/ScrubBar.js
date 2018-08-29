@@ -7,7 +7,11 @@ import playImage from '../public/play.svg'
 
 function makeInteractive (element) {
   const AXIS_LOCK_THRESHOLD = 13 // Pixel
-  const ACTIONABLE_THRESHOLD = 25 // Pixel
+  const ACTIONABLE_THRESHOLD = {
+    'top': 13,
+    'left': 25,
+    'right': 25
+  } // Pixel
   const indicator = element.querySelector('#indicator div')
 
   element.style.transform = 'translateY(150%)'
@@ -34,6 +38,7 @@ function makeInteractive (element) {
 
   listen(element, 'mousedown touchstart')
     .start((e) => {
+      let currentThreshold
       let {stop} = pointer({x: 0, y: 0})
         .start(({x, y}) => {
           if (Math.abs(x) > AXIS_LOCK_THRESHOLD) {
@@ -64,11 +69,12 @@ function makeInteractive (element) {
               springCurve = nonlinearSpring(3, 0)
           }
 
+          currentThreshold = ACTIONABLE_THRESHOLD[direction]
           currentHandle = handle[axis]
 
           currentHandle.subscribe((val) => {
-            indicator.style.width = `${2.1 + (0.6 * (Math.abs(val) / ACTIONABLE_THRESHOLD))}em`
-            if (Math.abs(val) > ACTIONABLE_THRESHOLD) {
+            indicator.style.width = `${2.1 + (0.6 * (Math.abs(val) / currentThreshold))}em`
+            if (Math.abs(val) > currentThreshold) {
               element.classList.add('active')
             } else {
               element.classList.remove('active')
@@ -100,7 +106,7 @@ function makeInteractive (element) {
 
           element.classList.remove('active')
 
-          if (Math.abs(currentHandle.get()) >= ACTIONABLE_THRESHOLD) {
+          if (Math.abs(currentHandle.get()) >= currentThreshold) {
             switch (direction) {
               case 'top':
                 playPause()
