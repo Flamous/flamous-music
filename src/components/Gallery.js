@@ -131,7 +131,7 @@ const Cover = (props) => style('div')({
     position: 'absolute',
     left: '0',
     pointerEvents: 'none',
-    transition: 'opacity 200ms 300ms',
+    transition: 'opacity 300ms 400ms',
     opacity: '1'
   },
   ' .image:not([src])': {
