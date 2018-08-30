@@ -1,6 +1,6 @@
 {
   "name": "flamous-music",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Platform for your music",
   "main": "index.js",
   "scripts": {
