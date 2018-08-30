@@ -3,6 +3,9 @@
   publish = "build"
   command = "npm run build"
 
+[context.production]
+  command = "STAGE=prod npm run build"
+
 # Always redirect any request to our index.html
 # and return the status code 200.
 [[redirects]]
