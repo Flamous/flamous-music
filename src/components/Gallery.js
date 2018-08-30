@@ -15,8 +15,7 @@ function removeLazyLoad (elem) {
 function initLazyLoad (elem) {
   let config = {
     container: elem,
-    element_selector: '.image',
-    callback_load: (elem) => elem.classList.add('show')
+    element_selector: '.image'
   }
   if (!elem.lazyLoader) {
     elem.lazyLoader = new LazyLoad(config)
@@ -131,7 +130,7 @@ const Cover = (props) => style('div')({
     position: 'absolute',
     left: '0',
     pointerEvents: 'none',
-    transition: 'opacity 300ms 400ms',
+    transition: 'opacity 350ms 300ms',
     opacity: '1'
   },
   ' .image:not([src])': {
