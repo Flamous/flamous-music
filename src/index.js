@@ -171,6 +171,9 @@ const flamous = app(
         updateWorker: updateWorker
       }
     },
+    isUpdateAvailable: () => ({updateAvailable}) => {
+      return updateAvailable
+    },
     update: () => ({updateWorker, updateAvailable}) => {
       console.log(updateAvailable)
       updateWorker.waiting.postMessage('skipWaiting')

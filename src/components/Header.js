@@ -22,7 +22,7 @@ const Button = (props) => style('span')({
 
 const Header = (props, children) => style('header')({
   maxWidth: '1100px',
-  margin: '4.4em 1.7em 1em',
+  margin: '4.4em 1.7em 3em',
   position: 'relative',
   textAlign: props.alignment === 'center' ? 'center' : 'left',
   '@media (min-width: 1000px)': {

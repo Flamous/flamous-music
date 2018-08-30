@@ -8,9 +8,6 @@ if (workbox) {
   console.log('nay :(')
 }
 workbox.precaching.precacheAndRoute([])
-// self.addEventListener('install', (e) => {
-
-// })
 
 self.addEventListener('message', messageEvent => {
   if (messageEvent.data === 'skipWaiting') return skipWaiting()
