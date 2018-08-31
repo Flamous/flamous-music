@@ -13,23 +13,29 @@ const style = picostyle(h)
 //   margin: '3em auto -1.7em'
 // })
 const Wrapper = style('div')({
-  margin: '0 2em',
-  maxWidth: '1100px',
+  margin: '0 auto',
+  maxWidth: '40em',
   padding: '0',
   paddingBottom: '12em',
+  ' p.first': {
+    paddingTop: '1.2em'
+  },
   ' p': {
-    maxWidth: '40em'
+    marginLeft: '1.7em',
+    marginRight: '1.7em'
   },
   '@media (min-width: 1250px)': {
-    margin: '4.4em auto 0em'
+    'p': {
+      margin: '1.2em auto'
+    }
   }
 })
 
 const About = (props) =>
   <Page key='about' oncreate={window.flamous.checkForUpdate}>
-    <Header title='About Flamous' />
     <Wrapper>
-      <p style={{color: '#424242', fontStyle: 'italic'}}>
+      <Header title='About Flamous' />
+      <p class='first' style={{color: '#424242', fontStyle: 'italic'}}>
         Version: {`${process.env.npm_package_version}${process.env.STAGE === 'prod' ? '' : '-dev'} (${process.env.COMMIT_REF ? `build ${process.env.COMMIT_REF.substring(0, 6)}` : 'local build'})`}
         <br />
         {props.updateAvailable ? <UpdateBanner /> : <span>&#9989; Up-to-date</span>}
