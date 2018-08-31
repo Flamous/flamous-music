@@ -20,7 +20,7 @@ const Wrapper = style('div')({
   ' p.first': {
     paddingTop: '1.2em'
   },
-  ' p': {
+  '> p': {
     marginLeft: '1.7em',
     marginRight: '1.7em'
   },
