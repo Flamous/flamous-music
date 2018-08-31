@@ -39,7 +39,7 @@ const About = (props) =>
     <Header title='About Flamous' />
     <Wrapper>
       <p style={{color: '#424242', fontStyle: 'italic'}}>
-        Version: {`${process.env.npm_package_version}${process.env.STAGE === 'prod' ? '' : '-dev'}`}
+        Version: {`${process.env.npm_package_version}${process.env.STAGE === 'prod' ? '' : '-dev'} (${process.env.COMMIT_REF ? ` build ${process.env.COMMIT_REF}` : 'local build'})`}
         <br />
         {props.updateAvailable ? <UpdateBanner /> : <span>&#9989; Up-to-date</span>}
       </p>
