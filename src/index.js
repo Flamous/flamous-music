@@ -168,7 +168,7 @@ const flamous = app(
     updateAvailable: (updateWorker, isUpdateAvailable = true) => (state) => {
       state.updateAvailable = isUpdateAvailable
       state.updateWorker = updateWorker
-      console.log(state)
+      console.info('Update Available')
       return state
     },
     checkForUpdate: () => async (state, {updateAvailable}) => {
@@ -182,12 +182,12 @@ const flamous = app(
       }
     },
     update: () => ({updateWorker, updateAvailable}) => {
-      console.info(updateAvailable)
+      console.info('Updating...')
       updateWorker.waiting.postMessage('skipWaiting')
     }
   },
   ({playingContext, playingState, pages, updateAvailable}) =>
-    <AppShell key='container'>
+    <AppShell key='container' oncreate={window.flamous.checkForUpdate}>
       <Home key='home' updateAvailable={updateAvailable} playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
         key='scrub-bar'
