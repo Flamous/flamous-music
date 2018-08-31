@@ -9,6 +9,7 @@ if (workbox) {
 }
 workbox.precaching.precacheAndRoute([])
 
+console.log('blub')
 self.addEventListener('message', messageEvent => {
   if (messageEvent.data === 'skipWaiting') return skipWaiting()
 })

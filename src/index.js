@@ -165,17 +165,24 @@ const flamous = app(
         playingState: isPlaying
       }
     },
-    updateAvailable: (updateWorker, isUpdateAvailable = true) => {
-      return {
-        updateAvailable: isUpdateAvailable,
-        updateWorker: updateWorker
+    updateAvailable: (updateWorker, isUpdateAvailable = true) => (state) => {
+      state.updateAvailable = isUpdateAvailable
+      state.updateWorker = updateWorker
+      console.log(state)
+      return state
+    },
+    checkForUpdate: () => async (state, {updateAvailable}) => {
+      // Don't need to do anything when already set
+      if (state.updateAvailable && state.updateWorker) return
+
+      // Check for update
+      if (!state.updateAvailable) {
+        let worker = await navigator.serviceWorker.update()
+        worker && updateAvailable(worker)
       }
     },
-    isUpdateAvailable: () => ({updateAvailable}) => {
-      return updateAvailable
-    },
     update: () => ({updateWorker, updateAvailable}) => {
-      console.log(updateAvailable)
+      console.info(updateAvailable)
       updateWorker.waiting.postMessage('skipWaiting')
     }
   },
@@ -190,7 +197,7 @@ const flamous = app(
         image={playingContext.cover_art_url} />
 
       <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
-      <Route path='/about' render={About} />
+      <Route path='/about' render={() => <About updateAvailable={updateAvailable} />} />
     </AppShell>,
   document.body
 )
