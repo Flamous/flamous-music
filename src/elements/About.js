@@ -25,16 +25,17 @@ const Wrapper = style('div')({
     marginRight: '1.7em'
   },
   '@media (min-width: 1250px)': {
-    'p': {
+    '> p': {
       margin: '1.2em auto'
     }
   }
 })
 
 const About = (props) =>
-  <Page key='about' oncreate={window.flamous.checkForUpdate}>
-    <Wrapper>
-      <Header title='About Flamous' />
+  <Page key='about'>
+    <Wrapper oncreate={window.flamous.checkForUpdate}>
+      <Header title='About Flamous' back={{name: 'Flamous Music', to: '/'}} />
+      <div onclick={window.flamous.checkForUpdate}>test</div>
       <p class='first' style={{color: '#424242', fontStyle: 'italic'}}>
         Version: {`${process.env.npm_package_version}${process.env.STAGE === 'prod' ? '' : '-dev'} (${process.env.COMMIT_REF ? `build ${process.env.COMMIT_REF.substring(0, 6)}` : 'local build'})`}
         <br />

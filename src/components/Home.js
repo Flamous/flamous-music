@@ -28,7 +28,7 @@ const Button = (props) => style('span')({
 
 const Home = (props) => {
   return (
-    <Page nonInteractive key={props.key} oncreate={window.flamous.checkForUpdate}>
+    <Page nonInteractive key={props.key}>
       {/* {props.updateAvailable ? <UpdateBanner /> : <UpdateBanner />} */}
       {props.updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
       <Header title='Flamous Music' sub='The best of Public Domain music.' button={{text: 'About', to: '/about'}} />

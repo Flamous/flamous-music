@@ -1,6 +1,6 @@
 {
   "name": "flamous-music",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Platform for your music",
   "main": "index.js",
   "scripts": {
@@ -14,19 +14,20 @@
     "@hyperapp/router": "^0.7.0",
     "amplitudejs": "^3.3.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
     "components": "^0.1.0",
     "hyperapp": "^1.2.8",
     "modern-normalize": "^0.5.0",
     "native-web-app": "^1.0.1",
     "npm": "^6.4.1",
     "picostyle": "^2.0.1",
-    "popmotion": "^8.3.6",
+    "popmotion": "^8.3.8",
     "uuid": "^3.3.2",
-    "vanilla-lazyload": "^8.15.0",
+    "vanilla-lazyload": "^8.15.1",
     "workbox-cli": "^3.4.1"
   },
   "devDependencies": {
-    "aws-sdk": "^2.305.0",
+    "aws-sdk": "^2.306.0",
     "cli-real-favicon": "0.0.6",
     "parcel-bundler": "^1.9.7",
     "standard": "^11.0.1"

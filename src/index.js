@@ -9,6 +9,7 @@ import Page from './components/Page.js'
 import About from './elements/About'
 import nativeWebApp from 'native-web-app'
 import '../node_modules/native-web-app/native.css'
+import 'babel-polyfill'
 
 import { location, Route } from '@hyperapp/router'
 import PlaylistView from './components/PlaylistView.js'
@@ -168,23 +169,26 @@ const flamous = app(
     updateAvailable: (updateWorker, isUpdateAvailable = true) => (state) => {
       state.updateAvailable = isUpdateAvailable
       state.updateWorker = updateWorker
-      console.info('Update Available')
+      console.info('New update available')
       return state
     },
     checkForUpdate: () => async (state, {updateAvailable}) => {
-      // Don't need to do anything when already set
-      if (state.updateAvailable && state.updateWorker) return
-
-      // Check for update
-      if (!state.updateAvailable) {
-        let worker = await navigator.serviceWorker.update()
+      console.log('in')
+      if (state.updateAvailable && state.updateWorker) {
+        console.info('Updated Service Worker is waiting')
+      } else if (!state.updateAvailable) {
+        console.log('No waiting Service Worker. Checking for update...')
+        let registration = await navigator.serviceWorker.getRegistration()
+        let worker = await registration.update()
+        !worker && console.log('No update available')
         worker && updateAvailable(worker)
       }
     },
     update: () => ({updateWorker, updateAvailable}) => {
       console.info('Updating...')
       updateWorker.waiting.postMessage('skipWaiting')
-    }
+    },
+    getState: () => state => state
   },
   ({playingContext, playingState, pages, updateAvailable}) =>
     <AppShell key='container' oncreate={window.flamous.checkForUpdate}>
