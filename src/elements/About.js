@@ -3,7 +3,6 @@ import picostyle from 'picostyle'
 import Header from '../components/Header.js'
 import Page from '../components/Page'
 import UpdateBanner from '../components/UpdateBanner.js'
-import bgImage from '../assets/header-graphic.svg'
 // import fmLogo from '../flamous_logo.svg'
 
 const style = picostyle(h)
@@ -25,21 +24,13 @@ const Wrapper = style('div')({
     margin: '4.4em auto 0em'
   }
 })
-const FancyImage = style('div')({
-  height: '20em',
-  backgroundImage: `url(${bgImage})`,
-  backgroundSize: 'auto 100%',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat'
-})
 
 const About = (props) =>
   <Page key='about' oncreate={window.flamous.checkForUpdate}>
-    <FancyImage />
     <Header title='About Flamous' />
     <Wrapper>
       <p style={{color: '#424242', fontStyle: 'italic'}}>
-        Version: {`${process.env.npm_package_version}${process.env.STAGE === 'prod' ? '' : '-dev'} (${process.env.COMMIT_REF ? ` build ${process.env.COMMIT_REF}` : 'local build'})`}
+        Version: {`${process.env.npm_package_version}${process.env.STAGE === 'prod' ? '' : '-dev'} (${process.env.COMMIT_REF ? `build ${process.env.COMMIT_REF.substring(0, 6)}` : 'local build'})`}
         <br />
         {props.updateAvailable ? <UpdateBanner /> : <span>&#9989; Up-to-date</span>}
       </p>
