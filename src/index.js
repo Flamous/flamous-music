@@ -187,7 +187,7 @@ const flamous = app(
     getState: () => state => state
   },
   ({playingContext, playingState, pages, updateAvailable}) =>
-    <AppShell oncreate={window.flamous.checkForUpdate}>
+    <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' updateAvailable={updateAvailable} playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
         key='scrub-bar'
