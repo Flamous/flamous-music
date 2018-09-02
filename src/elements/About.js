@@ -35,7 +35,6 @@ const About = (props) =>
   <Page key='about'>
     <Wrapper oncreate={window.flamous.checkForUpdate}>
       <Header title='About Flamous' back={{name: 'Flamous Music', to: '/'}} />
-      <div onclick={window.flamous.checkForUpdate}>test</div>
       <p class='first' style={{color: '#424242', fontStyle: 'italic'}}>
         Version: {`${process.env.npm_package_version}${process.env.STAGE === 'prod' ? '' : '-dev'} (${process.env.COMMIT_REF ? `build ${process.env.COMMIT_REF.substring(0, 6)}` : 'local build'})`}
         <br />
