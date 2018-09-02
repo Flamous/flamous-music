@@ -29,6 +29,7 @@ function unlockiOSAudio () { // On iOs, audio has to be unlocked first by a user
   oscillator.start(0)
   oscillator.stop(0)
 
+  console.info('Unlocked audio (for iOS devices)')
   window.removeEventListener('touchend', unlockiOSAudio)
 }
 
@@ -115,8 +116,7 @@ const flamous = app(
       id: 0
     },
     pages: [],
-    updateAvailable: false,
-    updateWorker: null
+    updateAvailable: false
   },
   {
     location: location.actions,
@@ -166,32 +166,28 @@ const flamous = app(
         playingState: isPlaying
       }
     },
-    updateAvailable: (updateWorker, isUpdateAvailable = true) => (state) => {
-      state.updateAvailable = isUpdateAvailable
-      state.updateWorker = updateWorker
+    updateAvailable: () => (state) => {
+      state.updateAvailable = true
       console.info('New update available')
-      return state
-    },
-    checkForUpdate: () => async (state, {updateAvailable}) => {
-      console.log('in')
-      if (state.updateAvailable && state.updateWorker) {
-        console.info('Updated Service Worker is waiting')
-      } else if (!state.updateAvailable) {
-        console.log('No waiting Service Worker. Checking for update...')
-        let registration = await navigator.serviceWorker.getRegistration()
-        let worker = await registration.update()
-        !worker && console.log('No update available')
-        worker && updateAvailable(worker)
+      return {
+        updateAvailable: true
       }
     },
-    update: () => ({updateWorker, updateAvailable}) => {
+    checkForUpdate: () => async (state, {updateAvailable}) => {
+      console.info('Checking for updates...')
+
+      let registration = await navigator.serviceWorker.getRegistration()
+      registration.update()
+    },
+    update: () => async ({updateWorker, updateAvailable}) => {
       console.info('Updating...')
-      updateWorker.waiting.postMessage('skipWaiting')
+      let registration = await navigator.serviceWorker.getRegistration()
+      registration.waiting.postMessage('skipWaiting')
     },
     getState: () => state => state
   },
   ({playingContext, playingState, pages, updateAvailable}) =>
-    <AppShell key='container' oncreate={window.flamous.checkForUpdate}>
+    <AppShell oncreate={window.flamous.checkForUpdate}>
       <Home key='home' updateAvailable={updateAvailable} playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
         key='scrub-bar'
