@@ -31,15 +31,22 @@ const Home = (props) => {
     <Page nonInteractive key={props.key}>
       {/* {props.updateAvailable ? <UpdateBanner /> : <UpdateBanner />} */}
       {props.updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
-      <Header title='Flamous Music' sub='The best of Public Domain music.' button={{text: 'About', to: '/about'}} />
+      <Header title='Flamous Music' />
       <Gallery
-        heading='Playlists'>
+        heading='Featured artists'>
         {albums.map((item, index) => {
           return <Link to={item.name ? '/playlists' : '/'} style={{display: 'contents'}} onclick={(e) => { if (window.clickLock) { e.preventDefault() } }}>
             <GalleryItem title={albums[index].name} sub={albums[index].artist} image={albums[index].cover_art_url} />
           </Link>
         })}
       </Gallery>
+      <p style={{textAlign: 'center'}}>
+        <Link style={{color: '#767676'}} to='/about'>About Flamous</Link>
+        <span style={{margin: '0 0.4em'}}>
+        &middot;
+        </span>
+        <a target='_blank' style={{color: '#767676'}} href='https://github.com/christiankaindl/flamous-music'>View on GitHub</a>
+      </p>
     </Page>
   )
 }

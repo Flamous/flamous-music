@@ -138,7 +138,7 @@ const Page = (props, children) => style('article')({
       mass: 0.6
     }).start(handleX)
   }
-}, <div>
+}, <div style={{paddingBottom: '6.5em'}}>
   {children}
 </div>
 )

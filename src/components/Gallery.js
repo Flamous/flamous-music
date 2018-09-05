@@ -47,8 +47,7 @@ const PlayAllButton = (props) => style('span')({
 const Gallery = (props, children) => style('div')({
   width: '100%',
   padding: '1em',
-  boxSizing: 'border-box',
-  marginBottom: '6em'
+  boxSizing: 'border-box'
 })(
   {
     oncreate: initLazyLoad,

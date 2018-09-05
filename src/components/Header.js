@@ -22,15 +22,16 @@ const Button = (props) => style('span')({
 
 const Header = (props, children) => style('header')({
   maxWidth: '1100px',
-  margin: '4.4em 1.7em 3em',
+  margin: '2.8em auto 1.4em',
+  padding: '0 1em',
   position: 'relative',
   textAlign: props.alignment === 'center' ? 'center' : 'left',
   '@media (min-width: 1000px)': {
     fontSize: '1.2rem'
   },
-  '@media (min-width: 1250px)': {
-    margin: '4.4em auto 0em'
-  },
+  // '@media (min-width: 1250px)': {
+  //   margin: '4.4em auto 0em'
+  // },
   ' .title': {
     marginTop: '0px',
     fontSize: '2.5em'
@@ -42,10 +43,10 @@ const Header = (props, children) => style('header')({
   ' .back': {
     fontSize: '1.2em',
     position: 'absolute',
-    top: '-2.5em',
+    top: '-1.5em',
     display: 'block',
     width: '100%',
-    transition: 'opacity 120ms'
+    transition: 'opacity 200ms  80ms linear'
   },
   ' .back:active': {
     opacity: '0.4'
@@ -55,7 +56,7 @@ const Header = (props, children) => style('header')({
   [
     <span class='back'>{
       props.back
-        ? <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '0.8em', marginRight: '0.4em', marginTop: '0.01em'}} />, <span>{props.back.name}</span>]}</Link>
+        ? <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '0.9em', marginRight: '0.2em', marginTop: '0.01em'}} />, <span>{props.back.name}</span>]}</Link>
         : ''}
     </span>,
     <h1 class='title'>{props.title}</h1>,
