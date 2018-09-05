@@ -132,10 +132,7 @@ const Page = (props, children) => style('article')({
     spring({
       from: handleX.get(),
       to: '100%',
-      velocity: handleX.getVelocity(),
-      damping: 10,
-      stiffness: 100,
-      mass: 0.6
+      velocity: handleX.getVelocity()
     }).start(handleX)
   }
 }, <div style={{paddingBottom: '6.5em'}}>
