@@ -26,13 +26,23 @@ function initLazyLoad (elem) {
 
 const Heading = style('h2')({
   marginLeft: '1rem',
+  marginBottom: '0.3em',
+  marginTop: '0.3em',
+  // fontWeight: 'normal',
+  color: '#424242',
+  fontSize: '1.4em',
   display: 'inline-block',
   marginRight: '1.6em'
+  // display: 'flex',
+  // justifyContent: 'space-between'
 })
 const PlayAllButton = (props) => style('span')({
-  borderRadius: '100px',
-  backgroundColor: 'lightgreen',
-  padding: '0.8em 1.8em',
+  borderRadius: '13px',
+  backgroundColor: '#007AFF',
+  color: 'white',
+  padding: '0.6em 1em',
+  marginRight: '1em',
+  fontWeight: 'bold',
   transition: 'opacity 120ms',
   ':active': {
     opacity: '0.4'
@@ -47,7 +57,8 @@ const PlayAllButton = (props) => style('span')({
 const Gallery = (props, children) => style('div')({
   width: '100%',
   padding: '1em',
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
+  borderTop: '1px solid #DDD'
 })(
   {
     oncreate: initLazyLoad,
@@ -56,8 +67,10 @@ const Gallery = (props, children) => style('div')({
     class: 'gallery'
   },
   <Wrapper key={props.key}>
-    {props.heading ? <Heading>{props.heading}</Heading> : ''}
-    {props.hasOwnProperty('playAllButton') ? <PlayAllButton /> : ''}
+    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      {props.heading ? <Heading>{props.heading}</Heading> : ''}
+      {props.hasOwnProperty('playAllButton') ? <PlayAllButton /> : ''}
+    </div>
     <FlexWrapper>
       {children}
       {/* {props.data.map((item) => {
@@ -95,6 +108,12 @@ export const GalleryItem = (props) => style('div')({
     fontSize: '1.2em',
     maxWidth: '33%'
   },
+  // ':first-child': {
+  //   paddingLeft: '0'
+  // },
+  // ':last-child': {
+  //   paddingRight: '0'
+  // },
   position: 'relative',
   flexGrow: '1',
   boxSizing: 'border-box',

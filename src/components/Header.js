@@ -22,8 +22,8 @@ const Button = (props) => style('span')({
 
 const Header = (props, children) => style('header')({
   maxWidth: '1100px',
-  margin: '2.8em auto 1.4em',
-  padding: '0 1em',
+  margin: '0 auto',
+  padding: '2.4em 1em 1em',
   position: 'relative',
   textAlign: props.alignment === 'center' ? 'center' : 'left',
   '@media (min-width: 1000px)': {
@@ -43,7 +43,7 @@ const Header = (props, children) => style('header')({
   ' .back': {
     fontSize: '1.2em',
     position: 'absolute',
-    top: '-1.5em',
+    top: '0.9em',
     display: 'block',
     width: '100%',
     transition: 'opacity 200ms  80ms linear'

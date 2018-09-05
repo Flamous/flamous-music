@@ -33,7 +33,7 @@ const Home = (props) => {
       {props.updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
       <Header title='Flamous Music' />
       <Gallery
-        heading='Featured artists'>
+        heading='Featured Artists'>
         {albums.map((item, index) => {
           return <Link to={item.name ? '/playlists' : '/'} style={{display: 'contents'}} onclick={(e) => { if (window.clickLock) { e.preventDefault() } }}>
             <GalleryItem title={albums[index].name} sub={albums[index].artist} image={albums[index].cover_art_url} />
