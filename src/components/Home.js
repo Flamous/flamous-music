@@ -6,7 +6,6 @@ import { GalleryItem } from './Gallery'
 import Gallery from './Gallery'
 import Header from './Header.js'
 import { Link } from '@hyperapp/router'
-import UpdateBanner from './UpdateBanner'
 import rightArrow from '../public/blue_right.svg'
 
 const style = picostyle(h)

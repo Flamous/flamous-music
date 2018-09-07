@@ -5,7 +5,6 @@ import { GalleryItem } from '../components/Gallery'
 import Gallery from '../components/Gallery'
 import songList from '../songs'
 import placeholder from '../public/song_placeholder.svg'
-import { Link } from '@hyperapp/router'
 
 const PlaylistView = (props) => {
   return <Page key='playlist'>

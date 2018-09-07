@@ -26,5 +26,5 @@ export default [
     name: '',
     artist: '',
     cover_art_url: album_placeholder
-  },
+  }
 ]

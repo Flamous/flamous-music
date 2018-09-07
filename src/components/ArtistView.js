@@ -37,7 +37,7 @@ const SongListStyle = style('div')({
   ' .song-list-item': {
     display: 'flex',
     padding: '1em',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   ' .song-list-item *:not(img)': {
     margin: '0'

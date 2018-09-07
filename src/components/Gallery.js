@@ -6,9 +6,6 @@ import playImage from '../public/play.svg'
 
 const style = picostyle(h)
 
-function updateLazyLoad (elem) {
-  elem.lazyLoader.update()
-}
 function removeLazyLoad (elem) {
   elem.lazyLoader.destroy()
 }
