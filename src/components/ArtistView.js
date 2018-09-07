@@ -92,5 +92,5 @@ const Album = (props) => {
 
 export default (props) => <Page>
 
-  <Route parent path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Album {...matchProps} /> }} />
+  <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Album {...matchProps} /> }} />
 </Page>
