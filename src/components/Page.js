@@ -108,7 +108,7 @@ function makeInteractive (element) {
 const Page = (props, children) => style('article')({
   height: '100%',
   width: '100%',
-  position: 'absolute',
+  position: 'fixed',
   overflowY: 'auto',
   color: '#212121',
   backgroundColor: 'white',
