@@ -17,7 +17,7 @@ const HeaderStyles = style('div')((props) => ({
   },
   ' .title': {
     margin: '0px',
-    padding: '1em 0.34em 0.2em',
+    padding: '1.2em 0.4em 0.24em',
     fontSize: '2.5em'
   },
   ' .sub': {
@@ -37,7 +37,7 @@ const HeaderStyles = style('div')((props) => ({
     opacity: '0.4'
   },
   ' .back > *': {
-    padding: '0.7em 0.4em 0.58em',
+    padding: '1em 0.6em 0.9em',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     zIndex: '100000'
   }
@@ -47,7 +47,7 @@ export default (props, children) =>
   <HeaderStyles>
     {props.back
       ? <span class='back'>
-        <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '1em', marginRight: '0.2em', marginTop: '0.05em'}} />, <span>{props.back.text}</span>]}</Link>
+        <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
       </span>
       : ''}
     <header>
