@@ -13,6 +13,7 @@ import 'babel-polyfill'
 
 import { location, Route } from '@hyperapp/router'
 import PlaylistView from './components/PlaylistView.js'
+import ArtistView from './components/ArtistView.js'
 
 nativeWebApp()
 
@@ -197,6 +198,7 @@ const flamous = app(
         image={playingContext.cover_art_url} />
 
       <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
+      <Route parent path='/artist' render={(props) => <ArtistView {...props} playingId={playingContext.id} playingState={playingState} />} />
       <Route path='/about' render={() => <About updateAvailable={updateAvailable} />} />
     </AppShell>,
   document.body

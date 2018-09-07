@@ -136,7 +136,7 @@ export const GalleryItem = (props) => style('div')({
     <Cover src={props.image} />,
     <p class='primary'>{props.title}</p>,
     // {props.class === 'playing' ? <img src={playImage} style={{paddingRight: '0.35em'}} /> : ''}
-    <p class='secondary'>{props.sub ? `by ${props.sub}` : ''}</p>
+    <p class='secondary'>{props.sub ? `${props.sub}` : ''}</p>
   ]
 )
 

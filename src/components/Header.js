@@ -129,7 +129,7 @@ export default (props, children) =>
   <HeaderStyles>
     {props.back
       ? <span class='back'>
-        <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '0.9em', marginRight: '0.2em', marginTop: '0.01em'}} />, <span>{props.back.text}</span>]}</Link>
+        <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '1em', marginRight: '0.2em', marginTop: '0.05em'}} />, <span>{props.back.text}</span>]}</Link>
       </span>
       : ''}
     <header>

@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import albums from '../albums.js'
+import artists from '../artists.js'
 import Page from './Page.js'
 import { GalleryItem } from './Gallery'
 import Gallery from './Gallery'
@@ -34,9 +34,9 @@ const Home = (props) => {
       <Header title='Flamous Music' />
       <Gallery
         heading='Featured Artists'>
-        {albums.map((item, index) => {
-          return <Link to={item.name ? '/playlists' : '/'} style={{display: 'contents'}} onclick={(e) => { if (window.clickLock) { e.preventDefault() } }}>
-            <GalleryItem title={albums[index].name} sub={albums[index].artist} image={albums[index].cover_art_url} />
+        {artists.map((item, index) => {
+          return <Link to={item.name ? '/artist/wowa' : '/'} style={{display: 'contents'}} onclick={(e) => { if (window.clickLock) { e.preventDefault() } }}>
+            <GalleryItem title={artists[index].name} sub='Artist' image={artists[index].cover_art_url} />
           </Link>
         })}
       </Gallery>
