@@ -36,7 +36,7 @@ const SongListStyle = style('div')({
   },
   ' .song-list-item': {
     display: 'flex',
-    padding: '1em',
+    padding: '0.6em 1em 0.6em 1.5em',
     alignItems: 'center'
   },
   ' .song-list-item *:not(img)': {
@@ -49,9 +49,9 @@ const SongListStyle = style('div')({
 })
 
 const Thumbnail = style(LazyImage)({
-  height: '4em',
-  width: '4em',
-  marginRight: '1em',
+  height: '3.3em',
+  width: '3.3em',
+  marginRight: '0.8em',
   transition: 'opacity 350ms 300ms',
   ':not([src])': {
     opacity: '0'
@@ -62,7 +62,7 @@ const ListItem = (props) => {
   return <li {...props} class='song-list-item'>
     <Thumbnail src={props.image} />
     <div>
-      <h3>{props.title}</h3>
+      <p style={{fontWeight: 'bold'}}>{props.title}</p>
       <p>{props.sub}</p>
     </div>
   </li>
@@ -73,7 +73,7 @@ const SongList = (props) => {
     <ul>
       {
         props.songs.map((song, index) => {
-          return <ListItem onclick={() => { console.log(song.id); window.Amplitude.playSongAtIndex(song.id) }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
+          return <ListItem onclick={() => { window.Amplitude.playSongAtIndex(song.id) }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
         })
       }
     </ul>
@@ -84,6 +84,7 @@ const Album = (props) => {
   return props.match.params.artistId === 'wowa'
     ? <div oncreate={initLazyLoad} onremove={removeLazyLoad} onupdate={updateLazyLoad}>
       <Header title='Wowa' back={{text: 'Back', to: '/'}} />
+      <p style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Singles</p>
       <SongList songs={songs} />
     </div>
     : <h2>Artist not found</h2>
@@ -91,5 +92,5 @@ const Album = (props) => {
 
 export default (props) => <Page>
 
-  <Route parent path={`${props.match.path}/:artistId`} render={(matchProps) => { console.log(matchProps); return <Album {...matchProps} /> }} />
+  <Route parent path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Album {...matchProps} /> }} />
 </Page>
