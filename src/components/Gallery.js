@@ -98,6 +98,7 @@ export const GalleryItem = (props) => style('div')({
   textOverflow: 'ellipsis',
   textAlign: 'center',
   fontWeight: 'bold',
+  zIndex: '0',
   padding: '0.7em',
   width: '33%',
   minWidth: '150px',
