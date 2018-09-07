@@ -10,6 +10,24 @@ import rightArrow from '../public/blue_right.svg'
 
 const style = picostyle(h)
 
+const FlamousHeaderStyle = style('header')({
+  zIndex: '100',
+  position: 'sticky',
+  display: 'block',
+  width: '100%',
+  top: '0',
+  padding: '1em',
+  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  fontWeight: 'bold',
+  textAlign: 'center'
+})
+
+const FlmaousHeader = (props) => {
+  return <FlamousHeaderStyle>
+    Flamous Music
+  </FlamousHeaderStyle>
+}
+
 const Button = (props) => style('span')({
   fontWeight: 'bold',
   color: '#007AFF',
@@ -30,7 +48,8 @@ const Home = (props) => {
     <Page nonInteractive key={props.key}>
       {/* {props.updateAvailable ? <UpdateBanner /> : <UpdateBanner />} */}
       {props.updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
-      <Header title='Flamous Music' />
+      {/* <Header title='Flamous Music' /> */}
+      <FlmaousHeader />
       <Gallery
         heading='Featured Artists'>
         {artists.map((item, index) => {

@@ -53,7 +53,7 @@ const PlayAllButton = (props) => style('span')({
 )
 const Gallery = (props, children) => style('div')({
   width: '100%',
-  padding: '1em',
+  padding: '1em 0',
   boxSizing: 'border-box',
   borderTop: '1px solid #DDD'
 })(
