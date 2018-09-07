@@ -135,18 +135,18 @@ function makeInteractive (element) {
 const style = picostyle(h)
 
 const Bubble = style('div')((props) => ({
-  backgroundColor: 'whitesmoke',
+  backgroundColor: '#f9f9f9',
   transition: 'border-color 150ms',
-  borderRadius: '20px',
+  borderRadius: '16px',
   border: props.playingState ? '1px solid #007AFF' : '1px solid #dedede',
   width: '100%',
   maxWidth: '400px',
-  padding: '0.4em',
+  padding: '0.3em',
   display: 'flex',
   position: 'relative',
-  height: '4.64em',
+  height: '4.2em',
   cursor: 'default',
-  boxShadow: '0 4px 20px -3px rgba(0,0,0, 0.16)',
+  boxShadow: '0 3px 11px -2px rgba(0,0,0, 0.16)',
   '.active .indicator div': {
     backgroundColor: '#007AFF'
   }
@@ -172,7 +172,7 @@ const Indicator = () => style('div')({
 )
 const SongCover = style('img')({
   height: '100%',
-  borderRadius: '15px',
+  borderRadius: '14px',
   boxSizing: 'border-box',
   pointerEvents: 'none'
 })
@@ -196,7 +196,7 @@ const Wrapper = style('div')({
   display: 'flex',
   position: 'absolute',
   bottom: '0px',
-  padding: '1em',
+  padding: '1em 0.5em',
   boxSizing: 'border-box',
   justifyContent: 'center'
 })
