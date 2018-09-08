@@ -1,4 +1,4 @@
-import image from './public/500/2.jpg'
+import image from './assets/wowa.jpg'
 import artist_placeholder from './album_placeholder.svg'
 
 export default [
