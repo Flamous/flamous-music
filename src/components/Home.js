@@ -7,7 +7,7 @@ import Gallery from './Gallery'
 import Header from './Header.js'
 import { Link } from '@hyperapp/router'
 import rightArrow from '../public/blue_right.svg'
-import LazyImage from './LazyImage.js';
+import LazyImage from './LazyImage.js'
 
 const style = picostyle(h)
 
@@ -76,8 +76,8 @@ const Home = (props) => {
     <Page nonInteractive key={props.key}>
       {/* {props.updateAvailable ? <UpdateBanner /> : <UpdateBanner />} */}
       {props.updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
-      {/* <Header title='Flamous Music' /> */}
-      <FlamousHeader />
+      <Header title='Flamous Music' />
+      {/* <FlamousHeader /> */}
       <Gallery>
         <Artist to='/artist/wowa'>
           <LazyImage src={artists[0].cover_art_url} />
