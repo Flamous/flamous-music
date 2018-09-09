@@ -114,8 +114,8 @@ const Page = (props, children) => style('article')({
   overflowY: 'auto',
   color: '#212121',
   backgroundColor: 'white',
-  boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
-  transition: 'boxShadow 1000ms'
+  boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)'
+  // transition: 'boxShadow 1000ms'
 })({
   class: 'page',
   key: props.key,
@@ -135,7 +135,7 @@ const Page = (props, children) => style('article')({
     spring({
       from: element.handleX.get(),
       to: '100%',
-      velocity: element.handleX.getVelocity()
+      velocity: element.handleX.getVelocity() * 3
     }).start(element.handleX)
   }
 }, <div style={{paddingBottom: '6.5em'}}>
