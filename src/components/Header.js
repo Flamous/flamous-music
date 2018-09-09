@@ -12,16 +12,16 @@ const HeaderStyles = style('div')((props) => ({
   position: 'relative',
   display: 'contents',
   textAlign: props.alignment === 'center' ? 'center' : 'left',
-  '@media (min-width: 1000px)': {
-    fontSize: '1.2rem'
-  },
-  ' .title': {
-    margin: '0px',
-    padding: '1.2em 0.4em 0.24em',
-    fontSize: '2.5em',
-    backgroundColor: '#fdfdfd',
-    borderBottom: '1px solid rgba(0, 0, 0, 0.04)'
-  },
+  // '@media (min-width: 1000px)': {
+  //   fontSize: '1.2rem'
+  // },
+  // ' .title': {
+  //   margin: '0px',
+  //   padding: '1.2em 0.4em 0.24em',
+  //   fontSize: '2.5em',
+  //   backgroundColor: '#fdfdfd',
+  //   borderBottom: '1px solid rgba(0, 0, 0, 0.04)'
+  // },
   ' .sub': {
     marginTop: '-2em',
     lineHeight: '2em'
@@ -61,7 +61,9 @@ const HeaderImage = (props) => {
 const HeaderBoldStyle = style('h1')({
   margin: '0px',
   padding: '1.35em 0.4em 0.24em',
-  fontSize: '2.5em',
+  // fontSize: '2.5em',
+  // font-size: calc(16px + 2 * ((100vw - 360px) / 768px));
+  fontSize: 'calc(2.5em + 16*(100vw - 400px)/(1250 - 400))',
   backgroundColor: '#fdfdfd',
   borderBottom: '1px solid rgba(0, 0, 0, 0.04)'
 })
