@@ -55,12 +55,18 @@ const ArtistStyle = style(Link)({
   },
   ' .artist-line': {
     fontSize: '1.2em',
-    padding: '0.2em 0.4em',
+    padding: '0.1em 0.4em',
     backgroundColor: 'rgba(251, 251, 251, 0.9)',
     borderRadius: '10px',
     transform: 'translateY(-1.2em)',
     display: 'inline-block',
-    border: '1px solid rgba(0, 0, 0, 0.14)'
+    border: '1px solid rgba(0, 0, 0, 0.14)',
+    color: '#212121'
+  },
+  ' .secondary': {
+    color: '#212121',
+    transform: 'translateY(-1em)',
+    display: 'inline-block'
   }
 })
 const Artist = ArtistStyle
@@ -78,7 +84,7 @@ const Home = (props) => {
           <div>
             <span class='artist-line'>{artists[0].name}</span>
             <br />
-            {/* <span class='artist-line'>Artist</span> */}
+            <span class='secondary'>14 songs</span>
           </div>
         </Artist>
       </Gallery>
