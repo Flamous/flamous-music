@@ -45,14 +45,40 @@ const HeaderStyles = style('div')((props) => ({
   }
 }))
 
-export default (props, children) =>
-  <HeaderStyles>
+const HeaderImageStyle = style('img')({
+  borderRadius: '100%',
+  width: '10rem',
+  height: '9.9rem',
+  border: '1px solid rgba(0, 0, 0, 0.14)'
+})
+
+const HeaderImage = (props) => {
+  return <div>
+    <HeaderImageStyle {...props} />
+  </div>
+}
+
+const HeaderBoldStyle = style('h1')({
+  margin: '0px',
+  padding: '1.35em 0.4em 0.24em',
+  fontSize: '2.5em',
+  backgroundColor: '#fdfdfd',
+  borderBottom: '1px solid rgba(0, 0, 0, 0.04)'
+})
+const HeaderBold = HeaderBoldStyle
+
+export default (props, children) => {
+  console.log(children)
+  return <HeaderStyles>
     {props.back
       ? <span class='back'>
         <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
       </span>
       : ''}
     <header>
-      <h1 class='title'>{props.title}</h1>
+      {children.length === 0 ? <HeaderBold class='title'>{props.title}</HeaderBold> : children}
     </header>
   </HeaderStyles>
+}
+
+export { HeaderBold, HeaderImage }

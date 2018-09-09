@@ -1,10 +1,11 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import Page from './Page'
-import Header from './Header'
+import Header, { HeaderBold, HeaderImage } from './Header'
 import { Route } from '@hyperapp/router'
 import LazyLoad from 'vanilla-lazyload'
 import LazyImage from './LazyImage'
+import profilePic from '../assets/wowa.jpg'
 
 import songs from '../songs'
 
@@ -83,7 +84,12 @@ const SongList = (props) => {
 const Album = (props) => {
   return props.match.params.artistId === 'wowa'
     ? <div oncreate={initLazyLoad} onremove={removeLazyLoad} onupdate={updateLazyLoad}>
-      <Header title='Wowa' back={{text: 'Back', to: '/'}} />
+      <Header title='Wowa' back={{text: 'Back', to: '/'}}>
+        <HeaderBold style={{textAlign: 'center'}}>
+          <HeaderImage src={profilePic} />
+          Wowa
+        </HeaderBold>
+      </Header>
       <p style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Singles</p>
       <SongList songs={songs} />
     </div>
