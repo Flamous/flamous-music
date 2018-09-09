@@ -1,4 +1,4 @@
-import images from './public/64/*.jpg'
+import images from './public/128/*.jpg'
 import songs from './public/songs/*.mp3'
 
 export default [{
