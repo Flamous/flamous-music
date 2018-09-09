@@ -84,7 +84,7 @@ const Home = (props) => {
           <div>
             <span class='artist-line'>{artists[0].name}</span>
             <br />
-            <span class='secondary'>14 songs</span>
+            <span class='secondary'>12 songs</span>
           </div>
         </Artist>
       </Gallery>

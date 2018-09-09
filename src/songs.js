@@ -1,7 +1,15 @@
-import images from './public/128/*.jpg'
+import images from './public/64/*.jpg'
 import songs from './public/songs/*.mp3'
 
 export default [{
+  id: 9,
+  name: 'They Say',
+  artist: 'Wowa & Pipo',
+  album: 'Wowa CC0',
+  url: songs[9],
+  cover_art_url: images[9]
+},
+{
   id: 7,
   name: 'Just Cool',
   artist: 'Wowa & eckskwisit',
@@ -68,6 +76,22 @@ export default [{
   // currentPosition: null
 },
 {
+  id: 11,
+  name: 'Please Wait',
+  artist: 'Wowa & Chris Rede',
+  album: 'Wowa CC0',
+  url: songs[11],
+  cover_art_url: images[11]
+},
+{
+  id: 10,
+  name: 'White',
+  artist: 'Wowa',
+  album: 'Wowa CC0',
+  url: songs[10],
+  cover_art_url: images[10]
+},
+{
   id: 0,
   name: 'Trumpets in Your Ears',
   artist: 'Wowa & Chris Rede',
@@ -77,6 +101,14 @@ export default [{
   // audio: new Audio(),
   // length: null,
   // currentPosition: null
+},
+{
+  id: 8,
+  name: 'Easy [iPhone Production]',
+  artist: 'Wowa',
+  album: 'Wowa CC0',
+  url: songs[8],
+  cover_art_url: images[8]
 },
 {
   id: 3,
