@@ -6,6 +6,7 @@ import { Route } from '@hyperapp/router'
 import LazyLoad from 'vanilla-lazyload'
 import LazyImage from './LazyImage'
 import profilePic from '../assets/wowa.jpg'
+import playImage from '../public/play_white.svg'
 
 import songs from '../songs'
 
@@ -28,6 +29,26 @@ function initLazyLoad (elem) {
 }
 
 const style = picostyle(h)
+
+const ShuffleButtonStyle = style('span')({
+  borderRadius: '13px',
+  backgroundColor: '#007AFF',
+  color: 'white',
+  padding: '0.6em 1em',
+  marginRight: '1em',
+  fontWeight: 'bold',
+  transition: 'opacity 120ms',
+  ':active': {
+    opacity: '0.4'
+  }
+})
+
+const PlayAllButton = (props) => {
+  return <ShuffleButtonStyle onclick={window.Amplitude.play}>
+    <img src={playImage} style={{paddingRight: '0.35em'}} />
+    Shuffle All
+  </ShuffleButtonStyle>
+}
 
 const SongListStyle = style('div')({
   transition: 'opacity 70ms',
@@ -90,7 +111,10 @@ const Album = (props) => {
           Wowa
         </HeaderBold>
       </Header>
-      <p style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Singles</p>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Singles</h3>
+        <PlayAllButton />
+      </div>
       <SongList songs={songs} />
     </div>
     : <h2>Artist not found</h2>
