@@ -18,7 +18,9 @@ const HeaderStyles = style('div')((props) => ({
   ' .title': {
     margin: '0px',
     padding: '1.2em 0.4em 0.24em',
-    fontSize: '2.5em'
+    fontSize: '2.5em',
+    backgroundColor: '#fdfdfd',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.04)'
   },
   ' .sub': {
     marginTop: '-2em',
@@ -38,7 +40,7 @@ const HeaderStyles = style('div')((props) => ({
   },
   ' .back > *': {
     padding: '1em 0.6em 0.9em',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: 'rgba(253, 253, 253, 0.9)',
     zIndex: '100000'
   }
 }))
