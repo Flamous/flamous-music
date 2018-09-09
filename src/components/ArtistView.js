@@ -74,7 +74,7 @@ const SongList = (props) => {
     <ul>
       {
         props.songs.map((song, index) => {
-          return <ListItem onclick={() => { window.Amplitude.playSongAtIndex(song.id) }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
+          return <ListItem onclick={() => { window.Amplitude.playSongAtIndex(index) }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
         })
       }
     </ul>
