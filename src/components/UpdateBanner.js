@@ -24,7 +24,7 @@ const UpdateBanner = () => style('div')({
 const Button = style('span')({
   fontWeight: 'bold',
   color: 'white',
-  backgroundColor: '007AFF',
+  backgroundColor: '#007AFF',
   display: 'inline-block',
   margin: '1em 0',
   padding: '0.5em 1em',
