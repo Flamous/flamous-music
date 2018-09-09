@@ -31,15 +31,17 @@ function initLazyLoad (elem) {
 const style = picostyle(h)
 
 const ShuffleButtonStyle = style('span')({
-  borderRadius: '13px',
+  borderRadius: '10px',
   backgroundColor: '#007AFF',
+  backgroundImage: 'linear-gradient(to top, rgb(0, 122, 255), rgb(59, 153, 255))',
   color: 'white',
   padding: '0.6em 1em',
   marginRight: '1em',
   fontWeight: 'bold',
-  transition: 'opacity 120ms',
+  transition: 'opacity 70ms 70ms',
+  border: '1px solid rgba(0, 0, 0, 0.1)',
   ':active': {
-    opacity: '0.4'
+    backgroundImage: 'linear-gradient(to top, rgb(0, 122, 255), rgb(32, 139, 255))'
   }
 })
 
