@@ -79,9 +79,6 @@ function makeInteractive (element) {
           let currentPos = Number(`${handleX.get().replace('%', '')}`)
           // console.log(currentPos)
           let velocity = Number(handleX.getVelocity() / document.body.clientWidth * 100)
-          // console.log(velocity)
-          // console.log(currentPos + velocity)
-
           let isGoingBack = Boolean(!snap([
             0,
             47.5
