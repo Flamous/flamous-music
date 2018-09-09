@@ -5,16 +5,18 @@ import { snap } from 'popmotion/lib/transformers'
 import { smooth, getProgressFromValue } from 'popmotion/lib/calc'
 
 const style = picostyle(h)
-let handleStyler
-let handleX
 
 function makeInteractive (element) {
+  let handleStyler
+  let handleX
   element.style.transform = 'translateX(100%)'
 
   const AXIS_LOCK_THRESHOLD = 15
   let isAxisLocked = false
   handleStyler = styler(element)
   handleX = value('0%', handleStyler.set('x'))
+
+  element.handleX = handleX
 
   const pointerX = (preventDefault = false) => pointer({x: 0, preventDefault: preventDefault}).pipe(val => val.x)
 
@@ -112,7 +114,8 @@ const Page = (props, children) => style('article')({
   overflowY: 'auto',
   color: '#212121',
   backgroundColor: 'white',
-  boxShadow: '0 0 10px 0 #848484'
+  boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
+  transition: 'boxShadow 1000ms'
 })({
   class: 'page',
   key: props.key,
@@ -122,7 +125,7 @@ const Page = (props, children) => style('article')({
     // still not ideal when user is navigating with browser back/forward buttons
     window.clickLock = true
 
-    handleX.subscribe((val) => {
+    element.handleX.subscribe((val) => {
       if (val.replace('%', '') >= 100) {
         done()
         window.clickLock = false
@@ -130,10 +133,10 @@ const Page = (props, children) => style('article')({
     })
 
     spring({
-      from: handleX.get(),
+      from: element.handleX.get(),
       to: '100%',
-      velocity: handleX.getVelocity()
-    }).start(handleX)
+      velocity: element.handleX.getVelocity()
+    }).start(element.handleX)
   }
 }, <div style={{paddingBottom: '6.5em'}}>
   {children}
