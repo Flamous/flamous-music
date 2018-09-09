@@ -1,8 +1,7 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { styler, value, listen, pointer, spring, chain } from 'popmotion'
-import { nonlinearSpring } from 'popmotion/lib/transformers'
-import { smooth } from 'popmotion/lib/calc'
+import { styler, value, listen, pointer, spring, chain, schedule, everyFrame } from 'popmotion'
+import { nonlinearSpring, smooth } from 'popmotion/lib/transformers'
 import playImage from '../public/play.svg'
 
 function makeInteractive (element) {
@@ -81,10 +80,10 @@ function makeInteractive (element) {
             }
           })
 
-          stopPointer = chain(
-            oneDirectionalPointer(axis),
-            smooth(30))
-            .pipe(springCurve)
+          stopPointer = schedule(
+            everyFrame(),
+            oneDirectionalPointer(axis))
+            .pipe(springCurve, smooth(50))
             .start(currentHandle)
         })
 
