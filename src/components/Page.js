@@ -55,7 +55,7 @@ function makeInteractive (element) {
               0,
               document.body.clientWidth,
               Number(handleX.get().replace('%', '')) / 100
-            ))).pipe(smooth(50), (val) => {
+            ))).pipe(smooth(25), (val) => {
           // Convert pixel to percentage value
           val = getProgressFromValue(0, document.body.clientWidth, val) * 100
 

@@ -83,7 +83,7 @@ function makeInteractive (element) {
           stopPointer = schedule(
             everyFrame(),
             oneDirectionalPointer(axis))
-            .pipe(springCurve, smooth(50))
+            .pipe(springCurve, smooth(25))
             .start(currentHandle)
         })
 
