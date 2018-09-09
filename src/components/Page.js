@@ -2,7 +2,7 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import { styler, spring, value, listen, pointer, chain } from 'popmotion'
 import { snap } from 'popmotion/lib/transformers'
-import { smooth, getProgressFromValue } from 'popmotion/lib/calc'
+import { smooth, getProgressFromValue, getValueFromProgress } from 'popmotion/lib/calc'
 
 const style = picostyle(h)
 
@@ -18,7 +18,7 @@ function makeInteractive (element) {
 
   element.handleX = handleX
 
-  const pointerX = (preventDefault = false) => pointer({x: 0, preventDefault: preventDefault}).pipe(val => val.x)
+  const pointerX = (preventDefault = false, x = 0) => pointer({x: x, preventDefault: preventDefault}).pipe(val => val.x)
 
   // Initial slide-in
   spring({
@@ -28,7 +28,7 @@ function makeInteractive (element) {
     mass: 0.5
   }).start(handleX)
 
-  // Swipe-mechanism
+  // Swipe-back mechanism
   listen(element, 'mousedown touchstart')
     .start((e) => {
       let currentPointer
@@ -46,9 +46,21 @@ function makeInteractive (element) {
         window.clickLock = true
         isAxisLocked = true
         currentPointer.stop()
-        // let sub = handleX.subscribe((v) => console.log(v))
 
-        currentPointer = chain(pointerX(true), smooth(30)).pipe((val) => { val = getProgressFromValue(0, document.body.clientWidth, val) * 100; return `${val > 0 ? val : 0}%` }).start(handleX)
+        currentPointer = chain(
+          pointerX(true,
+            // Set pointer starting point to current position of handleX
+            getValueFromProgress(
+              0,
+              document.body.clientWidth,
+              Number(handleX.get().replace('%', '')) / 100
+            )),
+          smooth(30)).pipe((val) => {
+          // Convert pixel to percentage value
+          val = getProgressFromValue(0, document.body.clientWidth, val) * 100
+
+          return `${val > 0 ? val : 0}%`
+        }).start(handleX)
       })
 
       let upListener = listen(element, 'mouseup touchend')
