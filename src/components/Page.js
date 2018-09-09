@@ -1,8 +1,8 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { styler, spring, value, listen, pointer, chain } from 'popmotion'
-import { snap } from 'popmotion/lib/transformers'
-import { smooth, getProgressFromValue, getValueFromProgress } from 'popmotion/lib/calc'
+import { styler, spring, value, listen, pointer, chain, everyFrame, schedule } from 'popmotion'
+import { snap, smooth } from 'popmotion/lib/transformers'
+import { getProgressFromValue, getValueFromProgress } from 'popmotion/lib/calc'
 
 const style = picostyle(h)
 
@@ -32,7 +32,7 @@ function makeInteractive (element) {
   listen(element, 'mousedown touchstart')
     .start((e) => {
       let currentPointer
-      currentPointer = chain(pointer({x: 0, y: 0, preventDefault: false}), smooth(30)).start(({ x, y }) => {
+      currentPointer = chain(pointer({x: 0, y: 0, preventDefault: false})).start(({ x, y }) => {
         if (Math.abs(y) >= AXIS_LOCK_THRESHOLD && !isAxisLocked) {
           currentPointer.stop()
           upListener.stop()
@@ -46,16 +46,30 @@ function makeInteractive (element) {
         window.clickLock = true
         isAxisLocked = true
         currentPointer.stop()
+        // let smoothener = smooth(300)
 
-        currentPointer = chain(
+        // currentPointer = pointerX(true,
+        //   // Set pointer starting point to current position of handleX
+        //   getValueFromProgress(
+        //     0,
+        //     document.body.clientWidth,
+        //     Number(handleX.get().replace('%', '')) / 100
+        //   ),
+        // (val) => {
+        //   // Convert pixel to percentage value
+        //   val = getProgressFromValue(0, document.body.clientWidth, val) * 100
+
+        //   return `${val > 0 ? val : 0}%`
+        //   }).start(handleX)
+        currentPointer = schedule(
+          everyFrame(),
           pointerX(true,
             // Set pointer starting point to current position of handleX
             getValueFromProgress(
               0,
               document.body.clientWidth,
               Number(handleX.get().replace('%', '')) / 100
-            )),
-          smooth(30)).pipe((val) => {
+            ))).pipe(smooth(50), (val) => {
           // Convert pixel to percentage value
           val = getProgressFromValue(0, document.body.clientWidth, val) * 100
 
