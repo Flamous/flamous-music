@@ -44,7 +44,7 @@ const ShuffleButtonStyle = style('span')({
 })
 
 const PlayAllButton = (props) => {
-  return <ShuffleButtonStyle onclick={window.Amplitude.play}>
+  return <ShuffleButtonStyle onclick={() => { window.Amplitude.setShuffle(true); window.Amplitude.next(); window.Amplitude.play() }}>
     <img src={playImage} style={{paddingRight: '0.35em'}} />
     Shuffle All
   </ShuffleButtonStyle>
