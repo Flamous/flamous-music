@@ -41,12 +41,17 @@ const ShuffleButtonStyle = style('span')({
   transition: 'opacity 70ms 70ms',
   border: '1px solid rgba(0, 0, 0, 0.1)',
   ':active': {
+    backgroundColor: 'rgb(59, 153, 255)',
     backgroundImage: 'linear-gradient(to top, rgb(0, 122, 255), rgb(32, 139, 255))'
   }
 })
 
 const PlayAllButton = (props) => {
-  return <ShuffleButtonStyle onclick={() => { window.Amplitude.setShuffle(true); window.Amplitude.next(); window.Amplitude.play() }}>
+  return <ShuffleButtonStyle onclick={() => {
+    !window.Amplitude.getShuffle() && window.Amplitude.setShuffle()
+    window.Amplitude.next()
+    window.Amplitude.play()
+  }}>
     <img src={playImage} style={{paddingRight: '0.35em'}} />
     Shuffle All
   </ShuffleButtonStyle>
@@ -97,7 +102,10 @@ const SongList = (props) => {
     <ul>
       {
         props.songs.map((song, index) => {
-          return <ListItem onclick={() => { window.Amplitude.playSongAtIndex(index) }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
+          return <ListItem onclick={() => {
+            window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
+            window.Amplitude.playSongAtIndex(index)
+          }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
         })
       }
     </ul>

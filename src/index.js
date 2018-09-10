@@ -81,6 +81,7 @@ Amplitude.setDebug(true)
 Amplitude.init({
   songs: songList,
   default_album_art: placeholder,
+  shuffle_on: 'false',
   callbacks: {
     song_change: () => {
       let meta = JSON.parse(JSON.stringify(Amplitude.getActiveSongMetadata())) // Deep copy so we don't modify the original object
