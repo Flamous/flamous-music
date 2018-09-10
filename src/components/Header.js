@@ -63,7 +63,7 @@ const HeaderBoldStyle = style('h1')({
   padding: '1.35em 0.4em 0.24em',
   // fontSize: '2.5em',
   // font-size: calc(16px + 2 * ((100vw - 360px) / 768px));
-  fontSize: 'calc(2.65em + 16*(100vw - 700px)/(1250 - 700))',
+  fontSize: 'calc(2.65em + 12*(100vw - 400px)/(1250 - 400))',
   backgroundColor: '#fdfdfd',
   borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
   boxShadow: '0 0 0 1px #fdfdfd'
