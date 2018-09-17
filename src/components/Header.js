@@ -29,6 +29,7 @@ const HeaderStyles = style('div')((props) => ({
   ' .back': {
     fontSize: '1em',
     position: 'sticky',
+    position: '-webkit-sticky',
     top: '0',
     display: 'block',
     width: '100%',
