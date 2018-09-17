@@ -1,10 +1,11 @@
 import { h } from 'hyperapp'
-// import picostyle from 'picostyle'
+import picostyle from 'picostyle'
 import { Link } from '@hyperapp/router'
 import leftArrow from '../public/blue_left.svg'
-import style from '../style'
+// import style from '../style'
+import { nestable } from 'hyperapp-context'
 
-// const style = picostyle(h)
+const style = picostyle(h)
 
 const HeaderStyles = style('div')((props) => ({
   maxWidth: '1100px',
@@ -28,29 +29,32 @@ const HeaderStyles = style('div')((props) => ({
     lineHeight: '2em'
   },
   ' .back': {
-    fontSize: '1em',
+    fontSize: '1.05em',
     position: 'sticky',
-    // position: '-webkit-sticky',
     top: '0',
-    display: 'block',
+    display: 'flex',
     width: '100%',
-    height: '0',
-    transition: 'opacity 200ms  80ms linear'
+    transition: 'opacity 200ms  80ms linear',
+    backgroundColor: 'rgba(253, 253, 253, 0.95)',
+    zIndex: '100000',
+    margin: '-1.5em 0'
   },
   ' .back:active': {
     opacity: '0.4'
   },
   ' .back > *': {
-    padding: '1em 0.6em 0.9em',
-    backgroundColor: 'rgba(253, 253, 253, 0.95)',
-    zIndex: '100000'
+    padding: '0.8em 0.6em 0.9em',
+    width: '33%'
   },
   '@supports (backdrop-filter: blur(10px))': {
-    ' .back > *': {
+    ' .back': {
       backgroundColor: 'rgba(253, 253, 253, 0.7)',
       backdropFilter: 'blur(10px)',
       WebkitBackdropFilter: 'blur(10px)'
     }
+  },
+  ' .show': {
+    opacity: '1 !important'
   }
 }))
 
@@ -79,18 +83,53 @@ const HeaderBoldStyle = style('h1')({
 })
 const HeaderBold = HeaderBoldStyle
 
-export default (props, children) => {
-  console.log(children)
-  return <HeaderStyles>
-    {props.back
-      ? <span class='back'>
-        <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
-      </span>
-      : ''}
-    <header>
-      {children.length === 0 ? <HeaderBold class='title'>{props.title}</HeaderBold> : children}
-    </header>
-  </HeaderStyles>
-}
+const Header = nestable(
+  {
+    isHeaderHidden: false,
+    observer: null,
+    threshold: 0.2
+  },
+  {
+    observerChange: (changes) => ({threshold}, {setHeaderHidden}) => {
+      if (changes[0].intersectionRatio < threshold) {
+        setHeaderHidden(true)
+      } else {
+        setHeaderHidden(false)
+      }
+    },
+    initObserver: (elem) => ({threshold}, {observerChange}) => {
+      let observer = null
+      if ('IntersectionObserver' in window) {
+        observer = new window.IntersectionObserver(observerChange, {
+          threshold: [threshold]
+        })
+        observer.observe(elem)
+      }
+
+      return {
+        observer: observer
+      }
+    },
+    setHeaderHidden: (isHidden) => {
+      return {
+        isHeaderHidden: isHidden
+      }
+    }
+  },
+  (state, actions) => (props, children) => {
+    return <HeaderStyles>
+      {props.back
+        ? <span class='back'>
+          <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
+          <span style={{textAlign: 'center', fontWeight: 'bold', opacity: '0', transition: 'opacity 100ms linear 60ms'}} class={`${state.isHeaderHidden ? 'show' : ''}`}>{props.title}</span>
+        </span>
+        : ''}
+      <header oncreate={actions.initObserver}>
+        {children.length === 0 ? <HeaderBold class='title'>{props.title}</HeaderBold> : children}
+      </header>
+    </HeaderStyles>
+  })
+
+export default Header
 
 export { HeaderBold, HeaderImage }
