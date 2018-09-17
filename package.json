@@ -13,6 +13,7 @@
   "dependencies": {
     "@hyperapp/router": "^0.7.1",
     "amplitudejs": "^3.3.1",
+    "autoprefixer": "^9.1.5",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "components": "^0.1.0",
@@ -22,6 +23,7 @@
     "npm": "^6.4.1",
     "picostyle": "^2.0.1",
     "popmotion": "^8.3.8",
+    "postcss-js": "^2.0.0",
     "uuid": "^3.3.2",
     "vanilla-lazyload": "^8.15.2",
     "workbox-cli": "^3.5.0"
