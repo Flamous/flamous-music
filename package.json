@@ -11,7 +11,7 @@
   "author": "Christian Kaindl",
   "license": "MIT",
   "dependencies": {
-    "@hyperapp/router": "^0.7.0",
+    "@hyperapp/router": "^0.7.1",
     "amplitudejs": "^3.3.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-polyfill": "^6.26.0",
@@ -24,10 +24,10 @@
     "popmotion": "^8.3.8",
     "uuid": "^3.3.2",
     "vanilla-lazyload": "^8.15.2",
-    "workbox-cli": "^3.4.1"
+    "workbox-cli": "^3.5.0"
   },
   "devDependencies": {
-    "aws-sdk": "^2.310.0",
+    "aws-sdk": "^2.315.0",
     "cli-real-favicon": "0.0.6",
     "parcel-bundler": "^1.9.7",
     "standard": "^11.0.1"
