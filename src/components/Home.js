@@ -101,7 +101,7 @@ const Home = (props) => {
         <span style={{margin: '0 0.4em'}}>
         &middot;
         </span>
-        <a target='_blank' style={{color: '#767676'}} href='https://github.com/christiankaindl/flamous-music'>View on GitHub</a>
+        <a target='_blank' rel='noopener' style={{color: '#767676'}} href='https://github.com/christiankaindl/flamous-music'>View on GitHub</a>
       </p>
     </Page>
   )
