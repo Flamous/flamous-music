@@ -1,9 +1,10 @@
 import { h } from 'hyperapp'
-import picostyle from 'picostyle'
+// import picostyle from 'picostyle'
 import { Link } from '@hyperapp/router'
 import leftArrow from '../public/blue_left.svg'
+import style from '../style'
 
-const style = picostyle(h)
+// const style = picostyle(h)
 
 const HeaderStyles = style('div')((props) => ({
   maxWidth: '1100px',
