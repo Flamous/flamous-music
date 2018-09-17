@@ -29,7 +29,7 @@ const HeaderStyles = style('div')((props) => ({
   ' .back': {
     fontSize: '1em',
     position: 'sticky',
-    position: '-webkit-sticky',
+    // position: '-webkit-sticky',
     top: '0',
     display: 'block',
     width: '100%',
@@ -41,8 +41,15 @@ const HeaderStyles = style('div')((props) => ({
   },
   ' .back > *': {
     padding: '1em 0.6em 0.9em',
-    backgroundColor: 'rgba(253, 253, 253, 0.9)',
+    backgroundColor: 'rgba(253, 253, 253, 0.95)',
     zIndex: '100000'
+  },
+  '@supports (backdrop-filter: blur(10px))': {
+    ' .back > *': {
+      backgroundColor: 'rgba(253, 253, 253, 0.7)',
+      backdropFilter: 'blur(10px)',
+      WebkitBackdropFilter: 'blur(10px)'
+    }
   }
 }))
 
