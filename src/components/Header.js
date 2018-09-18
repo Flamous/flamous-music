@@ -31,7 +31,7 @@ const HeaderStyles = style('div')((props) => ({
   ' .back': {
     fontSize: '1.05em',
     position: 'sticky',
-    top: '0',
+    top: '-1px',
     display: 'flex',
     width: '100%',
     transition: 'opacity 200ms  80ms linear',
