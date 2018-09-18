@@ -87,11 +87,11 @@ const Header = nestable(
   {
     isHeaderHidden: false,
     observer: null,
-    threshold: 0.2
+    threshold: 0
   },
   {
     observerChange: (changes) => ({threshold}, {setHeaderHidden}) => {
-      if (changes[0].intersectionRatio < threshold) {
+      if (changes[0].intersectionRatio <= threshold) {
         setHeaderHidden(true)
       } else {
         setHeaderHidden(false)
@@ -101,7 +101,8 @@ const Header = nestable(
       let observer = null
       if ('IntersectionObserver' in window) {
         observer = new window.IntersectionObserver(observerChange, {
-          threshold: [threshold]
+          threshold: [threshold],
+          rootMargin: '-75px 0px 0px 0px'
         })
         observer.observe(elem)
       }
