@@ -96,12 +96,13 @@ const Header = nestable(
       } else {
         setHeaderHidden(false)
       }
+      console.log(changes[0].intersectionRatio)
     },
     initObserver: (elem) => ({threshold}, {observerChange}) => {
       let observer = null
       if ('IntersectionObserver' in window) {
         observer = new window.IntersectionObserver(observerChange, {
-          threshold: [threshold],
+          threshold: [threshold, 0.01],
           rootMargin: '-75px 0px 0px 0px'
         })
         observer.observe(elem)
