@@ -26,10 +26,8 @@ function start (data) {
   let first = data.bounds
   let last = data.element.getBoundingClientRect()
 
-  // console.log('first top: ', first.top, 'last top: ', last.top)
   let invert = first.top - last.top
   let scale = first.width / last.width
-  // console.log('first: ', first, 'last: ', last)
 
   let handleStyler = styler(data.element)
 
@@ -39,8 +37,10 @@ function start (data) {
   data.element.style.transformOrigin = 'top'
   // data.element.style.border = '1px solid rgba(0, 0, 0, 0.14);'
   data.element.style.borderRadius = '3px'
+  // INVERT
   data.element.style.transform = `translateY(${invert}px) scale(${scale})`
 
+  // PLAY
   spring({
     from: handleScale.get(),
     to: 1,
@@ -57,10 +57,22 @@ function start (data) {
 
   listen('touchstart')
     .filter(({touches}) => touches.length >= 2)
-    .start((event) => {
+    .start({ update: (event) => {
       event.preventDefault()
       multitouch(handleScale.get())
         .start(handleScale)
+    },
+    complete: () => {
+      let scale = handleScale.get()
+      if (scale >= 1) return
+
+      spring({
+        from: scale,
+        to: 1,
+        velocity: handleScale.getVelocity(),
+        mass: 0.5
+      }).start(handleScale)
+    }
     })
 }
 
