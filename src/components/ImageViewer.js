@@ -54,12 +54,13 @@ function start (data) {
     mass: 0.5
   }).start(handleY)
 
+  let multitouchSub
   listen(data.element, 'touchstart')
     .filter(({touches}) => touches.length >= 2)
     .start((event) => {
       event.preventDefault()
       console.log('handleScale: ', handleScale.get())
-      multitouch({scale: handleScale.get()})
+      multitouchSub = multitouch({scale: handleScale.get()})
         .pipe(({scale}) => { console.log(scale); return scale })
         .start({
           update: (e) => { console.log(e); handleStyler.set({scale: e}) },
@@ -78,7 +79,7 @@ function start (data) {
 
   listen(document, 'touchend')
     .start(() => {
-      handleScale.stop()
+      multitouchSub && multitouchSub.stop()
     })
 }
 
