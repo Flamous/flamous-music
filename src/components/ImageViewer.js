@@ -31,7 +31,7 @@ function start (data) {
 
   let handleStyler = styler(data.element)
 
-  let handleScale = value({scale: scale}, handleStyler.set)
+  let handleScale = value(scale, handleStyler.set('scale'))
   let handleY = value(invert, handleStyler.set('y'))
 
   data.element.style.transformOrigin = 'top'
@@ -63,7 +63,7 @@ function start (data) {
       multitouch({scale: handleScale.get()})
         .pipe(({scale}) => scale)
         .start({
-          update: handleScale.set,
+          update: handleScale,
           complete: () => {
             let scale = handleScale.get()
             console.log(scale)
