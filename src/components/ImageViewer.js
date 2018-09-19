@@ -26,19 +26,17 @@ function start (data) {
   let first = data.bounds
   let last = data.element.getBoundingClientRect()
 
-  let invert = first.top - last.top
   let scale = first.width / last.width
+  let invert = (first.top - last.top) + ((last.height * scale) / 2) - (last.height / 2)
 
   let handleStyler = styler(data.element)
 
+  // INVERT
   let handleScale = value(scale, handleStyler.set('scale'))
   let handleY = value(invert, handleStyler.set('y'))
 
-  data.element.style.transformOrigin = 'top'
-  // data.element.style.border = '1px solid rgba(0, 0, 0, 0.14);'
+  data.element.style.transformOrigin = 'center'
   data.element.style.borderRadius = '3px'
-  // INVERT
-  data.element.style.transform = `translateY(${invert}px) scale(${scale})`
 
   // PLAY
   spring({
