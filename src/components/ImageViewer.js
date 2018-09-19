@@ -57,25 +57,24 @@ function start (data) {
 
   listen(data.element, 'touchstart')
     .filter(({touches}) => touches.length >= 2)
-    .start({
-      update: (event) => {
-        event.preventDefault()
-        console.log(event)
-        multitouch(handleScale.get())
-          .start(handleScale)
-      },
-      complete: () => {
-        let scale = handleScale.get()
-        console.log(scale)
-        if (scale >= 1) return
+    .start((event) => {
+      event.preventDefault()
 
-        spring({
-          from: scale,
-          to: 1,
-          velocity: handleScale.getVelocity(),
-          mass: 0.5
-        }).start(handleScale)
-      }
+      multitouch(handleScale.get())
+        .start({
+          update: handleScale,
+          complete: () => {
+            let scale = handleScale.get()
+            console.log(scale)
+            if (scale >= 1) return
+
+            spring({
+              from: scale,
+              to: 1,
+              velocity: handleScale.getVelocity(),
+              mass: 0.5
+            }).start(handleScale)
+          }})
     })
 
   listen(document, 'touchend')
