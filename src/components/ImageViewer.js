@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 import style from '../style'
-import { spring, styler, value } from 'popmotion'
+import { spring, styler, value, listen, multitouch } from 'popmotion'
 
 const ImageViewerStyles = style('div')({
   height: '100%',
@@ -54,6 +54,14 @@ function start (data) {
     damping: 10,
     mass: 0.5
   }).start(handleY)
+
+  listen('touchstart')
+    .filter(({touches}) => touches.length >= 2)
+    .start((event) => {
+      event.preventDefault()
+      multitouch(handleScale.get())
+        .start(handleScale)
+    })
 }
 
 const ImageViewer = (props) => {
