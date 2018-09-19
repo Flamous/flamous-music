@@ -59,21 +59,7 @@ function start (data) {
     .filter(({touches}) => touches.length >= 2)
     .start((event) => {
       event.preventDefault()
-      handleScale.subscribe({
-        complete: () => {
-          console.log('completed')
-          let scale = handleScale.get()
-          if (scale >= 1) return
 
-          spring({
-            from: scale,
-            to: 1,
-            velocity: handleScale.getVelocity(),
-            mass: 0.5
-          }).start(handleScale)
-        }
-      })
-      console.log('handleScale: ', handleScale.get())
       multitouchSub = multitouch({scale: handleScale.get()})
         .pipe(({scale}) => { console.log(scale); return scale })
         .start(handleScale)
@@ -81,7 +67,19 @@ function start (data) {
 
   listen(document, 'touchend')
     .start(() => {
-      multitouchSub && multitouchSub.stop()
+      if (multitouchSub) {
+        multitouchSub.stop()
+
+        let scale = handleScale.get()
+        if (scale >= 1) return
+
+        spring({
+          from: scale,
+          to: 1,
+          velocity: handleScale.getVelocity(),
+          mass: 0.5
+        }).start(handleScale)
+      }
     })
 }
 
