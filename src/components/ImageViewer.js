@@ -61,7 +61,7 @@ function start (data) {
       multitouch({scale: handleScale.get()})
         .pipe(({scale}) => scale)
         .start({
-          update: handleScale,
+          update: (e) => { console.log(e); handleScale.set(e) },
           complete: () => {
             let scale = handleScale.get()
             if (scale >= 1) return
