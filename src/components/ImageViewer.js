@@ -32,7 +32,7 @@ function start (data) {
   let handleStyler = styler(data.element)
 
   // INVERT
-  let handleScale = value(scale, handleStyler.set('scale'))
+  let handleScale = value({scale: scale}, handleStyler.set)
   let handleY = value(invert, handleStyler.set('y'))
 
   data.element.style.transformOrigin = 'center'
@@ -64,7 +64,6 @@ function start (data) {
           update: handleScale,
           complete: () => {
             let scale = handleScale.get()
-            console.log(scale)
             if (scale >= 1) return
 
             spring({
