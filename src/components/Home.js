@@ -78,7 +78,7 @@ const Home = (props) => {
       {props.updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
       <Header title='Flamous Music' />
       {/* <FlamousHeader /> */}
-      <Gallery>
+      <Gallery heading='Artists'>
         <Artist to='/artist/wowa'>
           <LazyImage src={artists[0].cover_art_url} />
           <div>
