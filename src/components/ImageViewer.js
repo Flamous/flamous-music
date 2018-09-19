@@ -60,7 +60,8 @@ function start (data) {
     .start((event) => {
       event.preventDefault()
 
-      multitouch(handleScale.get())
+      multitouch({scale: handleScale.get()})
+        .pipe(({scale}) => scale)
         .start({
           update: handleScale,
           complete: () => {
