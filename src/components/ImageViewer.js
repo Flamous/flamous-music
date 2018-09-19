@@ -30,9 +30,10 @@ function start (data) {
   let invert = (first.top - last.top) + ((last.height * scale) / 2) - (last.height / 2)
 
   let handleStyler = styler(data.element)
-
+  console.log(handleStyler.set('x'))
   // INVERT
-  let handleScale = value({scale: scale}, handleStyler.set)
+  let handleScale = value(scale, handleStyler.set('scale'))
+  console.log(handleScale)
   let handleY = value(invert, handleStyler.set('y'))
 
   data.element.style.transformOrigin = 'center'
@@ -57,11 +58,11 @@ function start (data) {
     .filter(({touches}) => touches.length >= 2)
     .start((event) => {
       event.preventDefault()
-
+      console.log('handleScale: ', handleScale.get())
       multitouch({scale: handleScale.get()})
-        .pipe(({scale}) => scale)
+        .pipe(({scale}) => { console.log(scale); return scale })
         .start({
-          update: (e) => { console.log(e); handleScale.set(e) },
+          update: (e) => { console.log(e); handleStyler.set({scale: e}) },
           complete: () => {
             let scale = handleScale.get()
             if (scale >= 1) return
