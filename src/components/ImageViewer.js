@@ -16,7 +16,9 @@ const ImageViewerStyles = style('div')({
 
 const Image = style('img')({
   borderRadius: '100%',
-  transition: 'border-radius 350ms'
+  transition: 'border-radius 150ms linear',
+  width: '500px',
+  maxWidth: '100%'
 })
 
 function start (data) {
@@ -36,7 +38,7 @@ function start (data) {
 
   data.element.style.transformOrigin = 'top'
   // data.element.style.border = '1px solid rgba(0, 0, 0, 0.14);'
-  data.element.style.borderRadius = '0px'
+  data.element.style.borderRadius = '3px'
   data.element.style.transform = `translateY(${invert}px) scale(${scale})`
 
   spring({
@@ -48,7 +50,7 @@ function start (data) {
   spring({
     from: handleY.get(),
     to: 0,
-    damping: 15
+    damping: 16
   }).start(handleY)
 }
 
