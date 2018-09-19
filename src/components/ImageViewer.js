@@ -31,7 +31,7 @@ function start (data) {
 
   let handleStyler = styler(data.element)
 
-  let handleScale = value(scale, handleStyler.set('scale'))
+  let handleScale = value({scale: scale}, handleStyler.set)
   let handleY = value(invert, handleStyler.set('y'))
 
   data.element.style.transformOrigin = 'top'
