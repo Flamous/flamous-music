@@ -6,7 +6,7 @@ const ImageViewerStyles = style('div')({
   height: '100%',
   width: '100%',
   backgroundColor: 'rgba(0, 0, 0, 0)',
-  transition: 'background-color 200ms',
+  transition: 'background-color 100ms linear',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -44,13 +44,15 @@ function start (data) {
   spring({
     from: handleScale.get(),
     to: 1,
-    damping: 15
+    damping: 10,
+    mass: 0.5
   }).start(handleScale)
 
   spring({
     from: handleY.get(),
     to: 0,
-    damping: 16
+    damping: 10,
+    mass: 0.5
   }).start(handleY)
 }
 
