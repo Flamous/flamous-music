@@ -117,7 +117,10 @@ const Album = (props) => {
     ? <div oncreate={initLazyLoad} onremove={removeLazyLoad} onupdate={updateLazyLoad}>
       <Header title='Wowa' back={{text: 'Back', to: '/'}}>
         <HeaderBold style={{textAlign: 'center'}}>
-          <HeaderImage src={profilePic} />
+          <HeaderImage onclick={(event) => {
+            let bounds = event.target.getBoundingClientRect()
+            window.flamous.imageViewer.showImageViewer({image: profilePic, bounds: bounds})
+          }} src={profilePic} />
           Wowa
         </HeaderBold>
       </Header>

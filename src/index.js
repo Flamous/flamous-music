@@ -14,6 +14,8 @@ import { location, Route } from '@hyperapp/router'
 import PlaylistView from './components/PlaylistView.js'
 import ArtistView from './components/ArtistView.js'
 
+import ImageViewer from './components/ImageViewer.js'
+
 nativeWebApp()
 
 window.addEventListener('touchend', unlockiOSAudio)
@@ -121,7 +123,12 @@ const flamous = app(
       id: 0
     },
     pages: [],
-    updateAvailable: false
+    updateAvailable: false,
+    imageViewer: {
+      isActive: false,
+      bounds: null,
+      image: null
+    }
   },
   {
     location: location.actions,
@@ -189,9 +196,24 @@ const flamous = app(
       let registration = await navigator.serviceWorker.getRegistration()
       registration.waiting.postMessage('skipWaiting')
     },
-    getState: () => state => state
+    getState: () => state => state,
+    imageViewer: {
+      showImageViewer: (data) => {
+        // console.log('data: ', data)
+        return {
+          isActive: true,
+          image: data.image,
+          bounds: data.bounds
+        }
+      },
+      hideImageViewer: () => {
+        return {
+          isActive: false
+        }
+      }
+    }
   },
-  ({playingContext, playingState, pages, updateAvailable}) =>
+  ({playingContext, playingState, pages, updateAvailable, imageViewer}) =>
     <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' updateAvailable={updateAvailable} playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
@@ -204,6 +226,10 @@ const flamous = app(
       <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
       <Route parent path='/artist' render={(props) => <ArtistView {...props} playingId={playingContext.id} playingState={playingState} />} />
       <Route path='/about' render={() => <About updateAvailable={updateAvailable} />} />
+
+      {
+        imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
+      }
     </AppShell>,
   document.body
 )
