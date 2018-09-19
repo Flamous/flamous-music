@@ -77,6 +77,11 @@ function start (data) {
         }).start(handleScale)
       }
     })
+
+  listen(document, 'touchend')
+    .start(() => {
+      handleScale.stop()
+    })
 }
 
 const ImageViewer = (props) => {
