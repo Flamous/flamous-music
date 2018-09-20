@@ -31,13 +31,19 @@ const multitouchPointer = ({x, y}) => {
     let lastPoints
     let lastPoint = {}
     let delta = {}
+    let currentTouches
     console.log('init!')
+
+    function getTouchesLength () {
+      return currentTouches.length
+    }
 
     function pointsChange (touches) {
       delta.x = 0
       delta.y = 0
+      currentTouches = JSON.parse(JSON.stringify(touches))
 
-      let newPoints = JSON.parse(JSON.stringify(touches))
+      let newPoints = currentTouches
       let newPoint = {}
 
       if (!lastPoints) {
@@ -76,6 +82,10 @@ const multitouchPointer = ({x, y}) => {
         return deltas
       })
       .start(pointsChange)
+
+    return {
+      getTouchesLength: getTouchesLength
+    }
   })
 }
 
@@ -117,15 +127,6 @@ function start (data) {
     .start((event) => {
       event.preventDefault()
 
-      // console.log(event)
-
-      // touchDragSub = pointer(handleXY.get())
-      //   .pipe((ev) => {
-      //     console.log(ev)
-
-      //     return ev
-      //   })
-      //   .start(handleXY)
       touchDragSub = multitouchPointer(handleXY.get())
         .start(handleXY)
     })
@@ -156,17 +157,19 @@ function start (data) {
           mass: 0.5
         }).start(handleScale)
       }
+      console.log('finger up')
+      console.log(touchDragSub.getTouchesLength())
+      if (touchDragSub && touchDragSub.getTouchesLength() <= 1) {
+        console.log('stopping')
+        touchDragSub.stop()
 
-      // if (touch) {
-      //   touchSub.stop()
-
-      spring({
-        from: handleXY.get(),
-        to: 0,
-        velocity: handleXY.getVelocity(),
-        mass: 0.5
-      }).start(handleXY)
-      // }
+        spring({
+          from: handleXY.get(),
+          to: 0,
+          velocity: handleXY.getVelocity(),
+          mass: 0.5
+        }).start(handleXY)
+      }
     })
 }
 
