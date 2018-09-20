@@ -27,14 +27,16 @@ function start (data) {
   let last = data.element.getBoundingClientRect()
 
   let scale = first.width / last.width
-  let invert = (first.top - last.top) + ((last.height * scale) / 2) - (last.height / 2)
+  let invertY = (first.top - last.top) + ((last.height * scale) / 2) - (last.height / 2)
+  // On desktop the scrollbars skey the coordinates so we also have to do stuff to match the original image position
+  let invertX = (first.left - last.left) + ((last.height * scale) / 2) - (last.height / 2) 
 
   let handleStyler = styler(data.element)
   console.log(handleStyler.set('x'))
   // INVERT
   let handleScale = value(scale, handleStyler.set('scale'))
   console.log(handleScale)
-  let handleY = value(invert, handleStyler.set('y'))
+  let handleXY = value({x: invertX, y: invertY}, handleStyler.set)
 
   data.element.style.transformOrigin = 'center'
   data.element.style.borderRadius = '3px'
@@ -48,11 +50,11 @@ function start (data) {
   }).start(handleScale)
 
   spring({
-    from: handleY.get(),
+    from: handleXY.get(),
     to: 0,
     damping: 10,
     mass: 0.5
-  }).start(handleY)
+  }).start(handleXY)
 
   let multitouchSub
   listen(data.element, 'touchstart')
