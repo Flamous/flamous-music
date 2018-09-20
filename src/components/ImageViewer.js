@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 import style from '../style'
-import { spring, styler, value, listen, multitouch } from 'popmotion'
+import { spring, styler, value, listen, multitouch, pointer } from 'popmotion'
 
 const ImageViewerStyles = style('div')({
   height: '100%',
@@ -56,6 +56,15 @@ function start (data) {
     mass: 0.5
   }).start(handleXY)
 
+  let touchSub
+  listen(data.element, 'mousedown touchstart')
+    .start((event) => {
+      event.preventDefault()
+
+      touchSub = pointer(handleXY.get())
+        .start(handleXY)
+    })
+
   let multitouchSub
   listen(data.element, 'touchstart')
     .filter(({touches}) => touches.length >= 2)
@@ -67,7 +76,7 @@ function start (data) {
         .start(handleScale)
     })
 
-  listen(document, 'touchend')
+  listen(document, 'mouseup touchend')
     .start(() => {
       if (multitouchSub) {
         multitouchSub.stop()
@@ -82,11 +91,22 @@ function start (data) {
           mass: 0.5
         }).start(handleScale)
       }
+
+      if (touchSub) {
+        touchSub.stop()
+
+        spring({
+          from: handleXY.get(),
+          to: 1,
+          velocity: handleXY.getVelocity(),
+          mass: 0.5
+        }).start(handleXY)
+      }
     })
 }
 
 const ImageViewer = (props) => {
-  return <ImageViewerStyles onclick={window.flamous.imageViewer.hideImageViewer} oncreate={(elem) => { elem.style.backgroundColor = '#212121' }}>
+  return <ImageViewerStyles oncreate={(elem) => { elem.style.backgroundColor = '#212121' }}>
     <Image src={props.image} oncreate={(elem) => start({element: elem, bounds: props.bounds})} />
   </ImageViewerStyles>
 }
