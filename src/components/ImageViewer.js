@@ -150,7 +150,8 @@ function start (data) {
           mass: 0.5
         }).start(handleScale)
       }
-      // console.log('touchend', event)
+      console.log('touchend length', event.touches.length)
+      console.log('evt', event)
       // console.log('finger up')
       // console.log(touchDragSub.getTouchesLength())
       if (event.touches.length === 0) {
