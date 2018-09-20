@@ -11,7 +11,8 @@ const ImageViewerStyles = style('div')({
   justifyContent: 'center',
   alignItems: 'center',
   position: 'fixed',
-  zIndex: '1001'
+  zIndex: '1001',
+  flexDirection: 'column'
 })
 
 const Image = style('img')({
@@ -105,6 +106,9 @@ function start (data) {
 
 const ImageViewer = (props) => {
   return <ImageViewerStyles oncreate={(elem) => { elem.style.backgroundColor = '#212121' }}>
+    <div style={{width: '500px', maxWidth: '100%', textAlign: 'right'}}>
+      <span style={{color: 'white', padding: '1em', transform: 'translateY(-1em)', display: 'inline-block', fontWeight: 'bold'}} onclick={window.flamous.imageViewer.hideImageViewer}>CLOSE</span>
+    </div>
     <Image src={props.image} oncreate={(elem) => start({element: elem, bounds: props.bounds})} />
   </ImageViewerStyles>
 }
