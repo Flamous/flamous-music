@@ -1,6 +1,7 @@
 import { h } from 'hyperapp'
 import style from '../style'
-import { spring, styler, value, listen, multitouch, pointer } from 'popmotion'
+import { spring, styler, value, listen, multitouch, pointer, action } from 'popmotion'
+import { applyOffset } from 'popmotion/lib/transformers'
 
 const ImageViewerStyles = style('div')({
   height: '100%',
@@ -22,6 +23,62 @@ const Image = style('img')({
   maxWidth: '100%'
 })
 
+const multitouchPointer = ({x, y}) => {
+  const applyXOffset = applyOffset(x || 0)
+  const applyYOffset = applyOffset(y || 0)
+
+  return action(({update}) => {
+    let lastPoints
+    let lastPoint = {}
+    let delta = {}
+    console.log('init!')
+
+    function pointsChange (touches) {
+      delta.x = 0
+      delta.y = 0
+
+      let newPoints = JSON.parse(JSON.stringify(touches))
+      let newPoint = {}
+
+      if (!lastPoints) {
+        lastPoint = {x: newPoints[0].x, y: newPoints[0].y}
+
+        lastPoints = newPoints
+        update(lastPoint)
+        return
+      }
+      newPoints.length = Math.min(lastPoints.length, newPoints.length)
+      // Calculate deltas
+      newPoints.forEach((touch, index) => {
+        delta.x += touch.x - lastPoints[index].x
+        delta.y += touch.y - lastPoints[index].y
+      })
+
+      lastPoints = newPoints
+      newPoint.x = lastPoint.x + delta.x
+      newPoint.y = lastPoint.y + delta.y
+
+      lastPoint = newPoint
+
+      update(newPoint)
+    }
+    let deltas
+    multitouch()
+      .pipe(({touches}) => touches, (touches) => {
+        deltas = touches.map((touch) => {
+          let obj = {
+            x: applyXOffset(touch.x),
+            y: applyYOffset(touch.y)
+          }
+          return obj
+        })
+
+        return deltas
+      })
+      .start(pointsChange)
+  })
+}
+
 function start (data) {
   // Using FLIP terminology: https://aerotwist.com/blog/flip-your-animations/
   let first = data.bounds
@@ -30,7 +87,7 @@ function start (data) {
   let scale = first.width / last.width
   let invertY = (first.top - last.top) + ((last.height * scale) / 2) - (last.height / 2)
   // On desktop the scrollbars skey the coordinates so we also have to do stuff to match the original image position
-  let invertX = (first.left - last.left) + ((last.height * scale) / 2) - (last.height / 2) 
+  let invertX = (first.left - last.left) + ((last.height * scale) / 2) - (last.height / 2)
 
   let handleStyler = styler(data.element)
   // INVERT
@@ -56,20 +113,20 @@ function start (data) {
   }).start(handleXY)
 
   let touchDragSub
-  listen(data.element, 'touchstart')
+  listen(data.element, 'mousedown touchstart')
     .start((event) => {
       event.preventDefault()
 
-      touchDragSub = multitouch()
-        .pipe(({touches}) => {
-          let delta = {}
-          console.log('touches', touches)
-          touches.forEach(element => {
-            console.log(element)
-          })
+      // console.log(event)
 
-          return touches
-        })
+      // touchDragSub = pointer(handleXY.get())
+      //   .pipe((ev) => {
+      //     console.log(ev)
+
+      //     return ev
+      //   })
+      //   .start(handleXY)
+      touchDragSub = multitouchPointer(handleXY.get())
         .start(handleXY)
     })
 
@@ -103,12 +160,12 @@ function start (data) {
       // if (touch) {
       //   touchSub.stop()
 
-        spring({
-          from: handleXY.get(),
-          to: 0,
-          velocity: handleXY.getVelocity(),
-          mass: 0.5
-        }).start(handleXY)
+      spring({
+        from: handleXY.get(),
+        to: 0,
+        velocity: handleXY.getVelocity(),
+        mass: 0.5
+      }).start(handleXY)
       // }
     })
 }
