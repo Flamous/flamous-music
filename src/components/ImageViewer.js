@@ -126,7 +126,9 @@ function start (data) {
   listen(data.element, 'mousedown touchstart')
     .start((event) => {
       event.preventDefault()
-
+      console.log('event tochstart', event)
+      touchDragSub && console.log('touchdragSub: ', touchDragSub.getTouchesLength())
+      if (touchDragSub && touchDragSub.getTouchesLength() >= 1) return
       touchDragSub = multitouchPointer(handleXY.get())
         .start(handleXY)
     })
@@ -157,6 +159,7 @@ function start (data) {
           mass: 0.5
         }).start(handleScale)
       }
+      console.log('touchend', event)
       console.log('finger up')
       console.log(touchDragSub.getTouchesLength())
       if (touchDragSub && touchDragSub.getTouchesLength() <= 1) {
