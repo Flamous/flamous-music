@@ -55,30 +55,39 @@ function start (data) {
     mass: 0.5
   }).start(handleXY)
 
-  let touchSub
-  listen(data.element, 'mousedown touchstart')
+  let touchDragSub
+  listen(data.element, 'touchstart')
     .start((event) => {
       event.preventDefault()
 
-      touchSub = pointer(handleXY.get())
+      touchDragSub = multitouch()
+        .pipe(({touches}) => {
+          let delta = {}
+          console.log('touches', touches)
+          touches.forEach(element => {
+            console.log(element)
+          })
+
+          return touches
+        })
         .start(handleXY)
     })
 
-  let multitouchSub
+  let touchScaleSub
   listen(data.element, 'touchstart')
     .filter(({touches}) => touches.length >= 2)
     .start((event) => {
       event.preventDefault()
 
-      multitouchSub = multitouch({scale: handleScale.get()})
+      touchScaleSub = multitouch({scale: handleScale.get()})
         .pipe(({scale}) => scale)
         .start(handleScale)
     })
 
   listen(document, 'mouseup touchend')
     .start(() => {
-      if (multitouchSub) {
-        multitouchSub.stop()
+      if (touchScaleSub) {
+        touchScaleSub.stop()
 
         let scale = handleScale.get()
         if (scale >= 1) return
@@ -91,8 +100,8 @@ function start (data) {
         }).start(handleScale)
       }
 
-      if (touchSub) {
-        touchSub.stop()
+      // if (touch) {
+      //   touchSub.stop()
 
         spring({
           from: handleXY.get(),
@@ -100,7 +109,7 @@ function start (data) {
           velocity: handleXY.getVelocity(),
           mass: 0.5
         }).start(handleXY)
-      }
+      // }
     })
 }
 
