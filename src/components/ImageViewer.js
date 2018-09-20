@@ -125,21 +125,17 @@ function start (data) {
     })
 
   let touchScaleSub
-  listen(data.element, 'touchstart')
+  listen(data.element, 'touchstart', {preventDefault: false})
     .filter(({touches}) => touches.length >= 2)
     .start((event) => {
-      event.preventDefault()
-
       touchScaleSub = multitouch({scale: handleScale.get()})
         .pipe(({scale}) => scale)
         .start(handleScale)
     })
 
-  listen(document, 'mouseup touchend')
+  listen(document, 'mouseup touchend', {preventDefault: false})
     .start((event) => {
       if (touchScaleSub) {
-        touchScaleSub.stop()
-
         let scale = handleScale.get()
         if (scale >= 1) return
 
