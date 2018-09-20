@@ -32,10 +32,8 @@ function start (data) {
   let invertX = (first.left - last.left) + ((last.height * scale) / 2) - (last.height / 2) 
 
   let handleStyler = styler(data.element)
-  console.log(handleStyler.set('x'))
   // INVERT
   let handleScale = value(scale, handleStyler.set('scale'))
-  console.log(handleScale)
   let handleXY = value({x: invertX, y: invertY}, handleStyler.set)
 
   data.element.style.transformOrigin = 'center'
@@ -72,7 +70,7 @@ function start (data) {
       event.preventDefault()
 
       multitouchSub = multitouch({scale: handleScale.get()})
-        .pipe(({scale}) => { console.log(scale); return scale })
+        .pipe(({scale}) => scale)
         .start(handleScale)
     })
 
@@ -97,7 +95,7 @@ function start (data) {
 
         spring({
           from: handleXY.get(),
-          to: 1,
+          to: 0,
           velocity: handleXY.getVelocity(),
           mass: 0.5
         }).start(handleXY)
@@ -112,5 +110,3 @@ const ImageViewer = (props) => {
 }
 
 export default ImageViewer
-
-// export default () => '<p>Test</p>'
