@@ -34,10 +34,6 @@ const multitouchPointer = ({x, y}) => {
     let currentTouches
     console.log('init!')
 
-    function getTouchesLength () {
-      return currentTouches.length
-    }
-
     function pointsChange (touches) {
       delta.x = 0
       delta.y = 0
@@ -82,10 +78,6 @@ const multitouchPointer = ({x, y}) => {
         return deltas
       })
       .start(pointsChange)
-
-    return {
-      getTouchesLength: getTouchesLength
-    }
   })
 }
 
@@ -126,9 +118,8 @@ function start (data) {
   listen(data.element, 'mousedown touchstart')
     .start((event) => {
       event.preventDefault()
-      console.log('event tochstart', event)
-      touchDragSub && console.log('touchdragSub: ', touchDragSub.getTouchesLength())
-      if (touchDragSub && touchDragSub.getTouchesLength() >= 1) return
+
+      console.info('adding finger')
       touchDragSub = multitouchPointer(handleXY.get())
         .start(handleXY)
     })
@@ -145,7 +136,7 @@ function start (data) {
     })
 
   listen(document, 'mouseup touchend')
-    .start(() => {
+    .start((event) => {
       if (touchScaleSub) {
         touchScaleSub.stop()
 
@@ -159,10 +150,10 @@ function start (data) {
           mass: 0.5
         }).start(handleScale)
       }
-      console.log('touchend', event)
-      console.log('finger up')
-      console.log(touchDragSub.getTouchesLength())
-      if (touchDragSub && touchDragSub.getTouchesLength() <= 1) {
+      // console.log('touchend', event)
+      // console.log('finger up')
+      // console.log(touchDragSub.getTouchesLength())
+      if (event.touches.length === 0) {
         console.log('stopping')
         touchDragSub.stop()
 
@@ -172,6 +163,11 @@ function start (data) {
           velocity: handleXY.getVelocity(),
           mass: 0.5
         }).start(handleXY)
+      } else {
+        // Restart with updated touches
+        console.info('Removing finger')
+        touchDragSub = multitouchPointer(handleXY.get())
+          .start(handleXY)
       }
     })
 }
