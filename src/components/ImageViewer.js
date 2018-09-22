@@ -119,7 +119,7 @@ function start (data) {
     .start((event) => {
       event.preventDefault()
 
-      console.info('adding finger')
+      console.info('adding finger', ', total fingers: ', event.touches.length)
       touchDragSub = multitouchPointer(handleXY.get())
         .start(handleXY)
     })
@@ -135,9 +135,12 @@ function start (data) {
 
   listen(document, 'mouseup touchend', {preventDefault: false})
     .start((event) => {
+      let numTouches = event.target.touches
+
       if (touchScaleSub) {
         let scale = handleScale.get()
 
+        numTouches <= 1 && touchScaleSub.stop()
         scale < 1 && spring({
           from: scale,
           to: 1,
@@ -146,9 +149,7 @@ function start (data) {
         }).start(handleScale)
       }
       console.log('touchend length', event.touches.length)
-      console.log('evt', event)
-      // console.log('finger up')
-      // console.log(touchDragSub.getTouchesLength())
+
       if (event.touches.length === 0) {
         console.log('stopping')
         touchDragSub.stop()
