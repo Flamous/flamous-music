@@ -137,9 +137,8 @@ function start (data) {
     .start((event) => {
       if (touchScaleSub) {
         let scale = handleScale.get()
-        if (scale >= 1) return
 
-        spring({
+        scale < 1 && spring({
           from: scale,
           to: 1,
           velocity: handleScale.getVelocity(),
