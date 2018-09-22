@@ -163,6 +163,7 @@ function start (data) {
       } else {
         // Restart with updated touches
         console.info('Removing finger')
+        touchDragSub && touchDragSub.stop()
         touchDragSub = multitouchPointer(handleXY.get())
           .start(handleXY)
       }
