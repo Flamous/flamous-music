@@ -138,7 +138,7 @@ function start (data) {
 
   listen(document, 'mouseup touchend', {preventDefault: false})
     .start((event) => {
-      let numTouches = event.target.touches
+      let numTouches = event.touches.length
 
       if (touchScaleSub) {
         let scale = handleScale.get()
