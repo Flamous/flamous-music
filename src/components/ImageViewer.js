@@ -53,7 +53,7 @@ const multitouchPointer = ({x, y}) => {
         update(lastPoint)
         return
       }
-      newPoints.length = Math.min(lastPoints.length, newPoints.length)
+      // newPoints.length = Math.min(lastPoints.length, newPoints.length)
       // Calculate deltas
       newPoints.forEach((touch, index) => {
         delta.x += touch.x - lastPoints[index].x
@@ -121,8 +121,6 @@ function start (data) {
   let touchDragSub
   listen(data.element, 'mousedown touchstart')
     .start((event) => {
-      event.preventDefault()
-
       touchDragSub = multitouchPointer(handleXY.get())
         .start(handleXY)
     })
@@ -143,7 +141,7 @@ function start (data) {
       if (touchScaleSub) {
         let scale = handleScale.get()
 
-        console.log('new number of touches: ', numTouches)
+        // console.log('new number of touches: ', numTouches)
         numTouches <= 1 && touchScaleSub.stop()
         scale < 1 && spring({
           from: scale,
@@ -168,8 +166,10 @@ function start (data) {
         // Restart with updated touches
         // console.info('Removing finger')
         touchDragSub && touchDragSub.stop()
-        touchDragSub = multitouchPointer(handleXY.get())
-          .start(handleXY)
+        window.setTimeout(() => {
+          touchDragSub = multitouchPointer(handleXY.get())
+            .start(handleXY)
+        }, 0)
       }
     })
 }
