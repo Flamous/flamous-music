@@ -35,7 +35,7 @@ const multitouchPointer = ({x, y}) => {
     console.log('init!')
 
     function pointsChange (touches) {
-      console.log('touches: ', touches)
+      // console.log('touches: ', touches)
       delta.x = 0
       delta.y = 0
       currentTouches = JSON.parse(JSON.stringify(touches))
@@ -52,6 +52,7 @@ const multitouchPointer = ({x, y}) => {
         update(lastPoint)
         return
       }
+      console.log(lastPoints)
       console.log(lastPoints.length === newPoints.length)
       newPoints.length = Math.min(lastPoints.length, newPoints.length)
       // Calculate deltas
