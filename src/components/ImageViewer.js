@@ -46,7 +46,7 @@ const multitouchPointer = ({x, y}) => {
         lastPoint = {x: x, y: y}
 
         console.log('was not before')
-
+        console.log(newPoints)
         lastPoints = JSON.parse(JSON.stringify(newPoints))
         update(lastPoint)
         return
