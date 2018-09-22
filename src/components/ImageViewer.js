@@ -121,7 +121,9 @@ function start (data) {
 
       console.info('adding finger', ', total fingers: ', event.touches.length)
       touchDragSub = multitouchPointer(handleXY.get())
-        .start(handleXY)
+        .start((values) => {
+          console.log(values)
+        })
     })
 
   let touchScaleSub
