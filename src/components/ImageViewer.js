@@ -35,6 +35,7 @@ const multitouchPointer = ({x, y}) => {
     console.log('init!')
 
     function pointsChange (touches) {
+      console.log('touches: ', touches)
       delta.x = 0
       delta.y = 0
       currentTouches = JSON.parse(JSON.stringify(touches))
@@ -154,7 +155,7 @@ function start (data) {
       console.log('touchend length', numTouches)
 
       if (event.touches.length === 0) {
-        console.log('stopping')
+        // console.log('stopping')
         touchDragSub.stop()
 
         spring({
@@ -165,7 +166,7 @@ function start (data) {
         }).start(handleXY)
       } else {
         // Restart with updated touches
-        console.info('Removing finger')
+        // console.info('Removing finger')
         touchDragSub && touchDragSub.stop()
         touchDragSub = multitouchPointer(handleXY.get())
           .start(handleXY)
