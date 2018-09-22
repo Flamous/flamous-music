@@ -143,6 +143,7 @@ function start (data) {
       if (touchScaleSub) {
         let scale = handleScale.get()
 
+        console.log('new number of touches: ', numTouches)
         numTouches <= 1 && touchScaleSub.stop()
         scale < 1 && spring({
           from: scale,
@@ -151,7 +152,7 @@ function start (data) {
           mass: 0.5
         }).start(handleScale)
       }
-      console.log('touchend length', event.touches.length)
+      console.log('touchend length', numTouches)
 
       if (event.touches.length === 0) {
         console.log('stopping')
