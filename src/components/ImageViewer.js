@@ -94,7 +94,7 @@ function start (data) {
   let handleStyler = styler(data.element)
   // INVERT
   let handleScale = value(scale, handleStyler.set('scale'))
-  let handleXY = value({x: invertX, y: invertY}, handleStyler.set)
+  let handleXY = value({x: invertX, y: invertY}, ({x, y}) => handleStyler.set({x, y}))
 
   data.element.style.transformOrigin = 'center'
   data.element.style.borderRadius = '3px'
@@ -121,11 +121,12 @@ function start (data) {
 
       console.info('adding finger', ', total fingers: ', event.touches.length)
       touchDragSub = multitouchPointer(handleXY.get())
-        .start((values) => {
-          console.log(values)
-        })
+        .start(handleXY)
     })
 
+  handleScale.subscribe((v) => {
+    console.log(v)
+  })
   let touchScaleSub
   listen(data.element, 'touchstart', {preventDefault: false})
     .filter(({touches}) => touches.length >= 2)
