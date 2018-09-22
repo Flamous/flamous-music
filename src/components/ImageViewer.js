@@ -53,7 +53,7 @@ const multitouchPointer = ({x, y}) => {
       }
       
       console.log(lastPoints.length === newPoints.length)
-      newPoints.length = Math.min(lastPoints.length, newPoints.length)
+      // newPoints.length = Math.min(lastPoints.length, newPoints.length)
       // Calculate deltas
       newPoints.forEach((touch, index) => {
         delta.x += touch.x - lastPoints[index].x
