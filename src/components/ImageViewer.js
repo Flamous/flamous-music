@@ -38,21 +38,20 @@ const multitouchPointer = ({x, y}) => {
       // console.log('touches: ', touches)
       delta.x = 0
       delta.y = 0
-      currentTouches = JSON.parse(JSON.stringify(touches))
 
-      let newPoints = currentTouches
+      let newPoints = JSON.parse(JSON.stringify(touches))
       let newPoint = {}
-
+      console.log(lastPoints)
       if (!lastPoints) {
         lastPoint = {x: x, y: y}
 
         console.log('was not before')
 
-        lastPoints = newPoints
+        lastPoints = JSON.parse(JSON.stringify(newPoints))
         update(lastPoint)
         return
       }
-      console.log(lastPoints)
+      
       console.log(lastPoints.length === newPoints.length)
       newPoints.length = Math.min(lastPoints.length, newPoints.length)
       // Calculate deltas
@@ -61,11 +60,11 @@ const multitouchPointer = ({x, y}) => {
         delta.y += touch.y - lastPoints[index].y
       })
 
-      lastPoints = newPoints
+      lastPoints = JSON.parse(JSON.stringify(newPoints))
       newPoint.x = lastPoint.x + delta.x
       newPoint.y = lastPoint.y + delta.y
 
-      lastPoint = newPoint
+      lastPoint = JSON.parse(JSON.stringify(newPoint))
 
       update(newPoint)
     }
