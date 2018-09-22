@@ -43,7 +43,10 @@ const multitouchPointer = ({x, y}) => {
       let newPoint = {}
 
       if (!lastPoints) {
-        lastPoint = {x: newPoints[0].x, y: newPoints[0].y}
+        lastPoint = {x: x, y: y}
+
+        console.log('was not before')
+        console.log(lastPoints)
 
         lastPoints = newPoints
         update(lastPoint)
@@ -119,14 +122,10 @@ function start (data) {
     .start((event) => {
       event.preventDefault()
 
-      console.info('adding finger', ', total fingers: ', event.touches.length)
       touchDragSub = multitouchPointer(handleXY.get())
         .start(handleXY)
     })
 
-  handleScale.subscribe((v) => {
-    console.log(v)
-  })
   let touchScaleSub
   listen(data.element, 'touchstart', {preventDefault: false})
     .filter(({touches}) => touches.length >= 2)
