@@ -28,30 +28,28 @@ const multitouchPointer = ({x, y}) => {
   const applyYOffset = applyOffset(y || 0)
 
   return action(({update}) => {
-    let lastPoints
+    let lastPoints = {}
     let lastPoint = {}
     let delta = {}
-    let currentTouches
+
     console.log('init!')
 
     function pointsChange (touches) {
-      // console.log('touches: ', touches)
       delta.x = 0
       delta.y = 0
 
       let newPoints = JSON.parse(JSON.stringify(touches))
       let newPoint = {}
-      console.log(lastPoints)
+      // console.log(lastPoints)
       if (!lastPoints) {
         lastPoint = {x: x, y: y}
 
-        console.log('was not before')
-        console.log(newPoints)
+        console.log('newPoins right before lastPoints init: ', newPoints)
         lastPoints = JSON.parse(JSON.stringify(newPoints))
         update(lastPoint)
         return
       }
-      
+
       console.log(lastPoints.length === newPoints.length)
       // newPoints.length = Math.min(lastPoints.length, newPoints.length)
       // Calculate deltas
@@ -70,7 +68,7 @@ const multitouchPointer = ({x, y}) => {
     }
     let deltas
     multitouch()
-      .pipe(({touches}) => touches, (touches) => {
+      .pipe(({touches}) => { console.log('touches on init: ', touches); return touches }, (touches) => {
         deltas = touches.map((touch) => {
           let obj = {
             x: applyXOffset(touch.x),
