@@ -134,6 +134,18 @@ const Wrapper = style('div')({
   width: '100%',
   maxWidth: '400px'
 })
+const Progress = style('progress')({
+  WebkitAppearance: 'none',
+  MozAppearance: 'none',
+  appearance: 'none',
+  width: '70%',
+  height: '0.7em',
+  borderRadius: '100px',
+  border: '1px solid #e0e0e0',
+  marginTop: '1em',
+  overflow: 'hidden',
+  backgroundColor: '#f0f0f0'
+})
 
 const StreamView = (props) => {
   return <StreamViewStyles key='stream-view' oncreate={init} onremove={exit}>
@@ -144,7 +156,7 @@ const StreamView = (props) => {
       <span>
         {props.playingContext.artist}
       </span>
-      <progress max={props.playingContext.duration || '300'} value={props.playbackTime}></progress>
+      <Progress max={props.playingContext.duration || '300'} value={props.playbackTime}></Progress>
       <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em'}}>
         <OtherButton onclick={() => window.Amplitude.prev()}>
           <img style={{height: '100%'}} src={prevImage} />
