@@ -11,7 +11,7 @@ function makeInteractive (element) {
     'left': 25,
     'right': 25
   } // Pixel
-  const indicator = element.querySelector('#indicator div')
+  // const indicator = element.querySelector('#indicator div')
 
   // element.style.transform = 'translateY(150%)'
 
@@ -39,20 +39,22 @@ function makeInteractive (element) {
     .start((e) => {
       let currentThreshold
       let {stop} = pointer({x: 0, y: 0})
-        .start(({x, y}) => {
+        .pipe(({x}) => x)
+        .start((x) => {
           if (Math.abs(x) > AXIS_LOCK_THRESHOLD) {
             axis = 'x'
             direction = (x < 0)
               ? 'left'
               : 'right'
             stop()
-          } else if (Math.abs(y) > AXIS_LOCK_THRESHOLD) {
-            axis = 'y'
-            direction = (y < 0)
-              ? 'top'
-              : 'bottom'
-            stop()
           }
+          // else if (Math.abs(y) > AXIS_LOCK_THRESHOLD) {
+          //   axis = 'y'
+          //   direction = (y < 0)
+          //     ? 'top'
+          //     : 'bottom'
+          //   stop()
+          // }
 
           if (direction === 'none') return
 
@@ -71,14 +73,14 @@ function makeInteractive (element) {
           currentThreshold = ACTIONABLE_THRESHOLD[direction]
           currentHandle = handle[axis]
 
-          currentHandle.subscribe((val) => {
-            indicator.style.width = `${2.1 + (0.6 * (Math.abs(val) / currentThreshold))}em`
-            if (Math.abs(val) > currentThreshold) {
-              element.classList.add('active')
-            } else {
-              element.classList.remove('active')
-            }
-          })
+          // currentHandle.subscribe((val) => {
+          //   indicator.style.width = `${2.1 + (0.6 * (Math.abs(val) / currentThreshold))}em`
+          //   if (Math.abs(val) > currentThreshold) {
+          //     element.classList.add('active')
+          //   } else {
+          //     element.classList.remove('active')
+          //   }
+          // })
 
           stopPointer = schedule(
             everyFrame(),
@@ -103,7 +105,7 @@ function makeInteractive (element) {
 
           if (!currentHandle) return
 
-          element.classList.remove('active')
+          // element.classList.remove('active')
 
           if (Math.abs(currentHandle.get()) >= currentThreshold) {
             switch (direction) {
@@ -145,10 +147,10 @@ const BubbleStyles = style('div')((props) => ({
   position: 'relative',
   height: '4.2em',
   cursor: 'default',
-  boxShadow: '0 3px 11px -2px rgba(0,0,0, 0.16)',
-  '.active .indicator div': {
-    backgroundColor: '#007AFF'
-  }
+  boxShadow: '0 3px 11px -2px rgba(0,0,0, 0.16)'
+  // '.active .indicator div': {
+  //   backgroundColor: '#007AFF'
+  // }
 }))
 
 const Bubble = BubbleStyles
