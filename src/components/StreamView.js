@@ -138,25 +138,44 @@ const Progress = style('progress')({
   WebkitAppearance: 'none',
   MozAppearance: 'none',
   appearance: 'none',
-  width: '70%',
+  width: '100%',
   height: '0.7em',
   borderRadius: '100px',
   border: '1px solid #e0e0e0',
-  marginTop: '1em',
+  margin: '1em 0 1em',
   overflow: 'hidden',
   backgroundColor: '#f0f0f0'
 })
 
+function formatTime (seconds) {
+  const h = Math.floor(seconds / 3600)
+  const m = Math.floor((seconds % 3600) / 60)
+  const s = seconds % 60
+  return [
+    h,
+    m > 9 ? m : (h ? '0' + m : m || '0'),
+    s > 9 ? s : '0' + s
+  ].filter(a => a).join(':')
+}
+
 const StreamView = (props) => {
   return <StreamViewStyles key='stream-view' oncreate={init} onremove={exit}>
     <Wrapper>
-      <img src={props.playingContext.cover_art_url} />
-      <h3>{props.playingContext.name}</h3>
+      <img style={{width: '70%'}} src={props.playingContext.cover_art_url} />
+      <span style={{marginTop: '2em', fontWeight: 'bold', fontSize: '1.2em'}}>{props.playingContext.name}</span>
       <br />
       <span>
         {props.playingContext.artist}
       </span>
-      <Progress max={props.playingContext.duration || '300'} value={props.playbackTime}>{props.playbackTime}/{props.playingContext.duration}</Progress>
+      <div style={{display: 'flex', width: '90%', alignItems: 'center', marginTop: '1em'}}>
+        <div style={{width: '4em'}}>
+          {formatTime(Math.round(props.playbackTime))}
+        </div>
+        <Progress max={props.playingContext.duration || '300'} value={props.playbackTime}>{props.playbackTime}/{props.playingContext.duration}</Progress>
+        <div style={{width: '4em', textAlign: 'right'}}>
+          {formatTime(Math.round(props.playingContext.duration))}
+        </div>
+      </div>
       <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em'}}>
         <OtherButton onclick={() => window.Amplitude.prev()}>
           <img style={{height: '100%'}} src={prevImage} />
