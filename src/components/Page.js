@@ -136,6 +136,7 @@ const Page = (props, children) => style('article')({
 
     element.handleX.subscribe((val) => {
       if (val.replace('%', '') >= 100) {
+        element.handleX.stop()
         done()
         window.clickLock = false
       }
