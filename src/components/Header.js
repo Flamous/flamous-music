@@ -46,11 +46,11 @@ const HeaderStyles = style('div')((props) => ({
     padding: '0.8em 0.6em 0.9em',
     width: '33%'
   },
-  '@supports (backdrop-filter: blur(10px))': {
+  '@supports (backdrop-filter: blur(30px))': {
     ' .back': {
-      backgroundColor: 'rgba(253, 253, 253, 0.7)',
-      backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)'
+      backgroundColor: 'rgba(253, 253, 253, 0.6)',
+      backdropFilter: 'blur(30px)',
+      WebkitBackdropFilter: 'blur(30px)'
     }
   },
   ' .show': {
