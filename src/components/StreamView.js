@@ -156,7 +156,7 @@ const StreamView = (props) => {
       <span>
         {props.playingContext.artist}
       </span>
-      <Progress max={props.playingContext.duration || '300'} value={props.playbackTime}></Progress>
+      <Progress max={props.playingContext.duration || '300'} value={props.playbackTime}>{props.playbackTime}/{props.playingContext.duration}</Progress>
       <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em'}}>
         <OtherButton onclick={() => window.Amplitude.prev()}>
           <img style={{height: '100%'}} src={prevImage} />

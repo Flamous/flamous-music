@@ -217,10 +217,25 @@ const Wrapper = style('div')({
   backgroundColor: '#fdfdfd',
   boxShadow: 'rgba(0, 0, 0, 0.16) 0px 0px 23px -7px'
 })
+const Progress = style('progress')({
+  WebkitAppearance: 'none',
+  MozAppearance: 'none',
+  appearance: 'none',
+  width: '100%',
+  height: '0.2em',
+  // borderRadius: '100px',
+  border: 'none',
+  // overflow: 'hidden',
+  backgroundColor: '#f0f0f0',
+  position: 'absolute',
+  bottom: '0px',
+  left: '0px'
+})
 
 const ScrubBar = (props) =>
   <Wrapper key={props.key}>
     <Bubble playingState={props.playingState} oncreate={makeInteractive} onclick={window.flamous.streamView.show}>
+      <Progress max={props.duration || '300'} value={props.playbackTime}>{props.playbackTime}/{props.duration}</Progress>
       <div style={{display: 'flex', height: '100%'}}>
         <SongCover draggable='false' src={props.image} />
         <Info>

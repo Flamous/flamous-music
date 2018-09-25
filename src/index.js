@@ -257,7 +257,8 @@ const flamous = app(
         playingState={playingState}
         artist={playingContext.artist}
         name={playingContext.name}
-        image={playingContext.cover_art_url} />
+        image={playingContext.cover_art_url}
+        playingContext={playingContext} />
 
       <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
       <Route parent path='/artist' render={(props) => <ArtistView {...props} playingId={playingContext.id} playingState={playingState} />} />
