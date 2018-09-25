@@ -2,7 +2,7 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import LazyImage from './LazyImage'
 import LazyLoad from 'vanilla-lazyload'
-import playImage from '../public/play.svg'
+import playImage from '../assets/inline_play.svg'
 
 const style = picostyle(h)
 
