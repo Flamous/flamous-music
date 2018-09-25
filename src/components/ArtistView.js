@@ -87,14 +87,21 @@ const Thumbnail = style(LazyImage)({
   }
 })
 
+const StyledListItem = style('li')({
+  transition: 'background-color 100ms',
+  '&:hover': {
+    backgroundColor: '#f0f0f0'
+  }
+})
+
 const ListItem = (props) => {
-  return <li {...props} class='song-list-item'>
+  return <StyledListItem {...props} class='song-list-item'>
     <Thumbnail src={props.image} />
     <div>
       <p style={{fontWeight: 'bold'}}>{props.title}</p>
       <p>{props.sub}</p>
     </div>
-  </li>
+  </StyledListItem>
 }
 
 const SongList = (props) => {
