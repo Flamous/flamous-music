@@ -215,7 +215,8 @@ const Wrapper = style('div')({
   border: '1px solid #f0f0f0',
   borderRadius: '5px 5px 0px 0px',
   backgroundColor: '#fdfdfd',
-  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 0px 23px -7px'
+  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 0px 23px -7px',
+  overflow: 'hidden'
 })
 const Progress = style('progress')({
   WebkitAppearance: 'none',
@@ -226,10 +227,11 @@ const Progress = style('progress')({
   // borderRadius: '100px',
   border: 'none',
   // overflow: 'hidden',
-  backgroundColor: '#f0f0f0',
+  backgroundColor: '#e0e0e0',
   position: 'absolute',
-  bottom: '0px',
-  left: '0px'
+  top: '0px',
+  left: '0px',
+  transform: 'translateY(-1px)'
 })
 
 const ScrubBar = (props) =>
