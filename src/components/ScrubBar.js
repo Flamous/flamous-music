@@ -220,7 +220,7 @@ const Wrapper = style('div')({
 
 const ScrubBar = (props) =>
   <Wrapper key={props.key}>
-    <Bubble playingState={props.playingState} oncreate={makeInteractive}>
+    <Bubble playingState={props.playingState} oncreate={makeInteractive} onclick={window.flamous.streamView.show}>
       <div style={{display: 'flex', height: '100%'}}>
         <SongCover draggable='false' src={props.image} />
         <Info>
@@ -233,7 +233,7 @@ const ScrubBar = (props) =>
         </Info>
       </div>
       <div>
-        <PlayButton onclick={window.flamous.playPause}>
+        <PlayButton onclick={(e) => { e.preventDefault(); e.stopImmediatePropagation(); window.flamous.playPause() }}>
           { !props.playingState
             ? <img style={{height: '100%'}} src={playImage} />
             : <img style={{height: '100%'}} src={pauseImage} />

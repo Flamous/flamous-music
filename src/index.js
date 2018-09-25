@@ -15,6 +15,7 @@ import PlaylistView from './components/PlaylistView.js'
 import ArtistView from './components/ArtistView.js'
 
 import ImageViewer from './components/ImageViewer.js'
+import StreamView from './components/StreamView.js'
 
 nativeWebApp()
 
@@ -112,6 +113,10 @@ Amplitude.init({
   }
 })
 
+window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
+window.Amplitude.playSongAtIndex(0)
+window.Amplitude.pause()
+
 const flamous = app(
   {
     location: location.state,
@@ -128,6 +133,9 @@ const flamous = app(
       isActive: false,
       bounds: null,
       image: null
+    },
+    streamView: {
+      isActive: false
     }
   },
   {
@@ -211,9 +219,22 @@ const flamous = app(
           isActive: false
         }
       }
+    },
+    streamView: {
+      show: () => {
+        console.log('here')
+        return {
+          isActive: true
+        }
+      },
+      hide: () => {
+        return {
+          isActive: false
+        }
+      }
     }
   },
-  ({playingContext, playingState, pages, updateAvailable, imageViewer}) =>
+  ({playingContext, playingState, pages, updateAvailable, imageViewer, streamView}) =>
     <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' updateAvailable={updateAvailable} playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
@@ -229,6 +250,10 @@ const flamous = app(
 
       {
         imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
+      }
+      {
+        // TODO: Use Hyperapp nestables context to pass the playingContext!
+        streamView.isActive && <StreamView playingContext={playingContext} playingState={playingState} />
       }
     </AppShell>,
   document.body
