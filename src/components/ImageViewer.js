@@ -41,7 +41,7 @@ const multitouchPointer = ({x, y}) => {
       let newPoints = JSON.parse(JSON.stringify(touches))
       let newPoint = {}
       // console.log(lastPoints)
-      if (!lastPoints) {
+      if (Object.getOwnPropertyNames(lastPoints).length === 0) {
         lastPoint = {x: x, y: y}
 
         console.log('newPoins right before lastPoints init: ', newPoints)
@@ -59,6 +59,7 @@ const multitouchPointer = ({x, y}) => {
       })
 
       lastPoints = JSON.parse(JSON.stringify(newPoints))
+      console.log('lastPoints at the end: ', lastPoints)
       newPoint.x = lastPoint.x + delta.x
       newPoint.y = lastPoint.y + delta.y
 
