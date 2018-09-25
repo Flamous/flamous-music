@@ -139,8 +139,9 @@ const style = picostyle(h)
 const BubbleStyles = style('div')((props) => ({
   backgroundColor: '#fdfdfd',
   // transition: 'border-color 150ms',
-  borderRadius: '3px 3px 0px 0px',
+  borderRadius: '5px 5px 0px 0px',
   // border: props.playingState ? '1px solid #007AFF' : '1px solid #dedede',
+  border: '1px solid #f0f0f0',
   width: '100%',
   maxWidth: '400px',
   padding: '0.4em',
@@ -148,7 +149,7 @@ const BubbleStyles = style('div')((props) => ({
   position: 'relative',
   height: '4.2em',
   cursor: 'default',
-  boxShadow: '0 3px 11px -2px rgba(0,0,0, 0.16)',
+  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 0px 23px -7px',
   justifyContent: 'space-between',
   alignItems: 'center'
   // '.active .indicator div': {
