@@ -6,8 +6,8 @@ import { GalleryItem } from './Gallery'
 import Gallery from './Gallery'
 import Header from './Header.js'
 import { Link } from '@hyperapp/router'
-import rightArrow from '../public/blue_right.svg'
 import LazyImage from './LazyImage.js'
+import rightArrow from '../assets/blue_right.svg'
 
 const style = picostyle(h)
 
@@ -99,12 +99,19 @@ const Home = (props) => {
           </Link>
         })}
       </Gallery> */}
-      <p style={{textAlign: 'center'}}>
-        <Link style={{color: '#767676'}} to='/about'>About Flamous</Link>
+      <p style={{maxWidth: '500px', margin: '0 auto', padding: '1em', textAlign: 'center'}}>
+        <p>
+        We see Public Domain content as the future of creative art. Music is no exception.<br />
+        Share, mix, download or cover music you discover on Flamous.
+        </p>
+        <Link to='/about' style={{display: 'flex', justifyContent: 'center'}}>
+          <span style={{display: 'inline-block'}}>Learn about Flamous Music</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
+        </Link>
+        {/* <Link style={{color: '#767676'}} to='/about'>About Flamous</Link>
         <span style={{margin: '0 0.4em'}}>
         &middot;
-        </span>
-        <a target='_blank' rel='noopener' style={{color: '#767676'}} href='https://github.com/christiankaindl/flamous-music'>View on GitHub</a>
+        </span> */}
+        {/* <a target='_blank' rel='noopener' style={{color: '#767676'}} href='https://github.com/christiankaindl/flamous-music'>View on GitHub</a> */}
       </p>
     </Page>
   )
