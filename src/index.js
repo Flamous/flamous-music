@@ -125,8 +125,10 @@ const flamous = app(
       artist: songList[0].artist,
       name: songList[0].name,
       cover_art_url: songList[0].cover_art_url || Amplitude.getDefaultAlbumArt(),
-      id: 0
+      id: 0,
+      duration: null
     },
+    playbackTime: 0,
     pages: [],
     updateAvailable: false,
     imageViewer: {
@@ -232,13 +234,26 @@ const flamous = app(
           isActive: false
         }
       }
+    },
+    setTime: (time) => {
+      return {
+        playbackTime: time
+      }
+    },
+    playingContext: {
+      setDuration: (duration) => (state) => {
+        return {
+          duration: duration
+        }
+      }
     }
   },
-  ({playingContext, playingState, pages, updateAvailable, imageViewer, streamView}) =>
+  ({playingContext, playingState, pages, updateAvailable, imageViewer, streamView, playbackTime}) =>
     <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' updateAvailable={updateAvailable} playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
         key='scrub-bar'
+        playbackTime={playbackTime}
         playingState={playingState}
         artist={playingContext.artist}
         name={playingContext.name}
@@ -253,7 +268,7 @@ const flamous = app(
       }
       {
         // TODO: Use Hyperapp nestables context to pass the playingContext!
-        streamView.isActive && <StreamView playingContext={playingContext} playingState={playingState} />
+        streamView.isActive && <StreamView playbackTime={playbackTime} playingContext={playingContext} playingState={playingState} />
       }
     </AppShell>,
   document.body
@@ -275,5 +290,12 @@ if ('mediaSession' in navigator) {
 }
 
 window.flamous = flamous
+
+window.Amplitude.audio().addEventListener('timeupdate', (event) => {
+  window.flamous.setTime(event.target.currentTime)
+})
+window.Amplitude.audio().addEventListener('durationchange', (event) => {
+  window.flamous.playingContext.setDuration(event.target.duration)
+})
 
 location.subscribe(flamous.location)

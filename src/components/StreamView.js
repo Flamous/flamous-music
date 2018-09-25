@@ -23,14 +23,11 @@ function init (element) {
   // Initial slide-in
   spring({
     from: document.body.clientHeight,
-    to: '0px',
+    to: 0,
     damping: 20,
     mass: 0.5
   }).start(handleY)
 
-  handleY.subscribe((val) => {
-    console.log('newVal: ', val)
-  })
   let sub
   listen(element, 'mousedown touchstart')
     .start((event) => {
@@ -147,7 +144,7 @@ const StreamView = (props) => {
       <span>
         {props.playingContext.artist}
       </span>
-      <progress />
+      <progress max={props.playingContext.duration || '300'} value={props.playbackTime}></progress>
       <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em'}}>
         <OtherButton onclick={() => window.Amplitude.prev()}>
           <img style={{height: '100%'}} src={prevImage} />
