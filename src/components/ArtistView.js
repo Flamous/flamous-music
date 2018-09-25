@@ -121,6 +121,7 @@ const Album = (props) => {
             let bounds = event.target.getBoundingClientRect()
             window.flamous.imageViewer.showImageViewer({image: profilePic, bounds: bounds})
           }} src={profilePic} />
+          <p style={{fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem', textTransform: 'uppercase'}}>Artist</p>
           Wowa
         </HeaderBold>
       </Header>

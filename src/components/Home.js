@@ -65,8 +65,9 @@ const ArtistStyle = style(Link)({
   },
   ' .secondary': {
     color: '#212121',
-    transform: 'translateY(-1em)',
-    display: 'inline-block'
+    transform: 'translateY(-1.2em)',
+    display: 'inline-block',
+    fontSize: '0.94em'
   }
 })
 const Artist = ArtistStyle
@@ -84,7 +85,9 @@ const Home = (props) => {
           <div>
             <span class='artist-line'>{artists[0].name}</span>
             <br />
-            <span class='secondary'>12 songs</span>
+            {/* <span class='secondary'>ARTIST</span>
+            <br /> */}
+            <span class='secondary'>Artist, 12 songs</span>
           </div>
         </Artist>
       </Gallery>
