@@ -137,24 +137,20 @@ function makeInteractive (element) {
 const style = picostyle(h)
 
 const BubbleStyles = style('div')((props) => ({
-  backgroundColor: '#fdfdfd',
-  // transition: 'border-color 150ms',
-  borderRadius: '5px 5px 0px 0px',
-  // border: props.playingState ? '1px solid #007AFF' : '1px solid #dedede',
-  border: '1px solid #f0f0f0',
   width: '100%',
-  maxWidth: '400px',
   padding: '0.4em',
   display: 'flex',
   position: 'relative',
   height: '4.2em',
   cursor: 'default',
-  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 0px 23px -7px',
   justifyContent: 'space-between',
-  alignItems: 'center'
-  // '.active .indicator div': {
-  //   backgroundColor: '#007AFF'
-  // }
+  alignItems: 'center',
+  '@media (min-width: 768px)': {
+    '&': {
+      maxWidth: '440px',
+      borderRight: '1px solid #f0f0f0'
+    }
+  }
 }))
 
 const Bubble = BubbleStyles
@@ -214,20 +210,21 @@ const Wrapper = style('div')({
   display: 'flex',
   position: 'absolute',
   bottom: '0px',
-  // padding: '1em 0.5em',
   boxSizing: 'border-box',
-  justifyContent: 'center'
+  justifyContent: 'space-between',
+  border: '1px solid #f0f0f0',
+  borderRadius: '5px 5px 0px 0px',
+  backgroundColor: '#fdfdfd',
+  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 0px 23px -7px'
 })
 
 const ScrubBar = (props) =>
   <Wrapper key={props.key}>
     <Bubble playingState={props.playingState} oncreate={makeInteractive}>
-      {/* <Indicator class='indicator' /> */}
       <div style={{display: 'flex', height: '100%'}}>
         <SongCover draggable='false' src={props.image} />
         <Info>
           <Song>
-            {/* {props.playingState ? <img src={playImage} style={{paddingRight: '0.35em'}} /> : ''} */}
             {props.name}
           </Song>
           <Artist>
