@@ -2,7 +2,8 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import { styler, value, listen, pointer, spring, chain, schedule, everyFrame } from 'popmotion'
 import { nonlinearSpring, smooth } from 'popmotion/lib/transformers'
-import playImage from '../public/play.svg'
+import playImage from '../assets/play.svg'
+import pauseImage from '../assets/pause.svg'
 
 function makeInteractive (element) {
   const AXIS_LOCK_THRESHOLD = 13 // Pixel
@@ -147,7 +148,9 @@ const BubbleStyles = style('div')((props) => ({
   position: 'relative',
   height: '4.2em',
   cursor: 'default',
-  boxShadow: '0 3px 11px -2px rgba(0,0,0, 0.16)'
+  boxShadow: '0 3px 11px -2px rgba(0,0,0, 0.16)',
+  justifyContent: 'space-between',
+  alignItems: 'center'
   // '.active .indicator div': {
   //   backgroundColor: '#007AFF'
   // }
@@ -184,6 +187,17 @@ const Song = style('div')({
   fontWeight: 'bold'
 })
 
+const PlayButton = style('span')({
+  backgroundColor: '#fafafa',
+  borderRadius: '100%',
+  border: '1px solid #f0f0f0',
+  display: 'inline-block',
+  height: '3em',
+  width: '3em',
+  padding: '4px',
+  marginRight: '5px'
+})
+
 const Artist = style('div')({
   fontWeight: 'normal'
 })
@@ -208,15 +222,26 @@ const ScrubBar = (props) =>
   <Wrapper key={props.key}>
     <Bubble playingState={props.playingState} oncreate={makeInteractive}>
       {/* <Indicator class='indicator' /> */}
-      <SongCover draggable='false' src={props.image} />
-      <Info>
-        <Song>
-          {props.playingState ? <img src={playImage} style={{paddingRight: '0.35em'}} /> : ''}{props.name}
-        </Song>
-        <Artist>
-          {props.artist}
-        </Artist>
-      </Info>
+      <div style={{display: 'flex', height: '100%'}}>
+        <SongCover draggable='false' src={props.image} />
+        <Info>
+          <Song>
+            {/* {props.playingState ? <img src={playImage} style={{paddingRight: '0.35em'}} /> : ''} */}
+            {props.name}
+          </Song>
+          <Artist>
+            {props.artist}
+          </Artist>
+        </Info>
+      </div>
+      <div>
+        <PlayButton onclick={window.flamous.playPause}>
+          { !props.playingState
+            ? <img style={{height: '100%'}} src={playImage} />
+            : <img style={{height: '100%'}} src={pauseImage} />
+          }
+        </PlayButton>
+      </div>
     </Bubble>
   </Wrapper>
 
