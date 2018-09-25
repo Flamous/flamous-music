@@ -16,8 +16,7 @@ const UpdateBanner = () => style('div')({
   [
     <span>&#11014; Update available</span>,
     <br />,
-    <Button onclick={window.flamous.update}>Update</Button>,
-    ' (Interrupts any playing music)'
+    <Button onclick={window.flamous.update}>Update</Button>
   ]
 )
 
