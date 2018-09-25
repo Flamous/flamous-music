@@ -97,12 +97,12 @@ Amplitude.init({
           meta.cover_art_url = placeholder
           image.onload = () => {
             meta.cover_art_url = image.src
-            flamous.updateMetaData(meta)
+            flamous.playingContext.updateMetaData(meta)
           }
         }
       }
 
-      flamous.updateMetaData(meta)
+      flamous.playingContext.updateMetaData(meta)
     },
     before_play: () => {
       flamous.setPlayState(true)
@@ -126,7 +126,7 @@ const flamous = app(
       name: songList[0].name,
       cover_art_url: songList[0].cover_art_url || Amplitude.getDefaultAlbumArt(),
       id: 0,
-      duration: null
+      duration: 0
     },
     playbackTime: 0,
     pages: [],
@@ -147,26 +147,6 @@ const flamous = app(
         Amplitude.pause()
       } else {
         Amplitude.play()
-      }
-    },
-    updateMetaData: (metaData) => {
-      if ('mediaSession' in navigator) {
-        navigator.mediaSession.metadata = new window.MediaMetadata({
-          title: metaData.name,
-          artist: metaData.artist,
-          artwork: [{
-            src: metaData.cover_art_url
-          }]
-        })
-      }
-
-      return {
-        playingContext: {
-          artist: metaData.artist,
-          name: metaData.name,
-          cover_art_url: metaData.cover_art_url || Amplitude.getDefaultAlbumArt(),
-          id: metaData.id
-        }
       }
     },
     addPage: (page) => (state) => {
@@ -224,7 +204,6 @@ const flamous = app(
     },
     streamView: {
       show: () => {
-        console.log('here')
         return {
           isActive: true
         }
@@ -241,9 +220,27 @@ const flamous = app(
       }
     },
     playingContext: {
-      setDuration: (duration) => (state) => {
+      updateMetaData: (metaData) => {
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.metadata = new window.MediaMetadata({
+            title: metaData.name,
+            artist: metaData.artist,
+            artwork: [{
+              src: metaData.cover_art_url
+            }]
+          })
+        }
+
         return {
-          duration: duration
+          artist: metaData.artist,
+          name: metaData.name,
+          cover_art_url: metaData.cover_art_url || Amplitude.getDefaultAlbumArt(),
+          id: metaData.id
+        }
+      },
+      setDuration: (duration) => {
+        return {
+          duration
         }
       }
     }
@@ -258,7 +255,7 @@ const flamous = app(
         artist={playingContext.artist}
         name={playingContext.name}
         image={playingContext.cover_art_url}
-        playingContext={playingContext} />
+        duration={playingContext.duration} />
 
       <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
       <Route parent path='/artist' render={(props) => <ArtistView {...props} playingId={playingContext.id} playingState={playingState} />} />
