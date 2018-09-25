@@ -155,24 +155,6 @@ const BubbleStyles = style('div')((props) => ({
 
 const Bubble = BubbleStyles
 
-// const Indicator = () => style('div')({
-//   width: '100%',
-//   display: 'flex',
-//   justifyContent: 'center',
-//   position: 'absolute',
-//   left: '0px',
-//   top: '0px',
-//   marginTop: '0.4em'
-// })(
-//   {class: 'indicator', id: 'indicator'},
-//   style('div')({
-//     height: '4px',
-//     width: '2.1em',
-//     backgroundColor: '#CCC',
-//     borderRadius: '100px',
-//     transition: 'background-color 150ms'
-//   })
-// )
 const SongCover = style('img')({
   height: '100%',
   borderRadius: '16%',
@@ -224,9 +206,7 @@ const Progress = style('progress')({
   appearance: 'none',
   width: '100%',
   height: '0.2em',
-  // borderRadius: '100px',
   border: 'none',
-  // overflow: 'hidden',
   backgroundColor: '#e0e0e0',
   position: 'absolute',
   top: '0px',
