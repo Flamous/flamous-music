@@ -180,16 +180,16 @@ const StreamView = (props) => {
         </div>
       </div>
       <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em'}}>
-        <OtherButton onclick={() => window.Amplitude.prev()}>
+        <OtherButton title='Previous Song' onclick={() => window.Amplitude.prev()}>
           <img style={{height: '100%'}} src={prevImage} />
         </OtherButton>
-        <PlayButton onclick={window.flamous.playPause}>
+        <PlayButton title={`${props.playingState ? 'Pause' : 'Play'}`} onclick={window.flamous.playPause}>
           { !props.playingState
             ? <img style={{height: '100%'}} src={playImage} />
             : <img style={{height: '100%'}} src={pauseImage} />
           }
         </PlayButton>
-        <OtherButton onclick={() => window.Amplitude.next()}>
+        <OtherButton title='Next Song' onclick={() => window.Amplitude.next()}>
           <img style={{height: '100%'}} src={nextImage} />
         </OtherButton>
       </div>
