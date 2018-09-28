@@ -216,7 +216,7 @@ const Progress = style('progress')({
 
 const ScrubBar = (props) =>
   <Wrapper key={props.key}>
-    <Bubble playingState={props.playingState} oncreate={makeInteractive} onclick={window.flamous.streamView.show}>
+    <Bubble playingState={props.playingState} oncreate={makeInteractive} onclick={() => window.flamous.location.go('/stream-view')}>
       <Progress max={props.duration || '300'} value={props.playbackTime}>{props.playbackTime}/{props.duration}</Progress>
       <div style={{display: 'flex', height: '100%'}}>
         <SongCover draggable='false' src={props.image} />

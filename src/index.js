@@ -260,13 +260,15 @@ const flamous = app(
       <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
       <Route parent path='/artist' render={(props) => <ArtistView {...props} playingId={playingContext.id} playingState={playingState} />} />
       <Route path='/about' render={() => <About updateAvailable={updateAvailable} />} />
+      {/* <Route path='/stream-view' render={() => <StreamView playbackTime={playbackTime} playingContext={playingContext} playingState={playingState} />} /> */}
+      <Route path='/stream-view' render={() => <StreamView playbackTime={playbackTime} playingContext={playingContext} playingState={playingState} />} />
 
       {
         imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
       }
       {
         // TODO: Use Hyperapp nestables context to pass the playingContext!
-        streamView.isActive && <StreamView playbackTime={playbackTime} playingContext={playingContext} playingState={playingState} />
+        // streamView.isActive && <StreamView playbackTime={playbackTime} playingContext={playingContext} playingState={playingState} />
       }
     </AppShell>,
   document.body
