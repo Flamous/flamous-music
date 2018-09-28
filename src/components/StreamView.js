@@ -7,6 +7,7 @@ import pauseImage from '../assets/pause.svg'
 import prevImage from '../assets/prev.svg'
 import nextImage from '../assets/next.svg'
 import downArrow from '../assets/down.svg'
+import downloadImage from '../assets/download.svg'
 
 let {snap} = transform
 
@@ -190,6 +191,13 @@ const StreamView = (props) => {
         </PlayButton>
         <OtherButton onclick={() => window.Amplitude.next()}>
           <img style={{height: '100%'}} src={nextImage} />
+        </OtherButton>
+      </div>
+      <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em'}}>
+        <OtherButton>
+          <a title='Download Song' style={{display: 'block', padding: '0.6em'}} href={window.Amplitude.audio().src} download={`${props.playingContext.name} - ${props.playingContext.artist} | Flamous Music.mp3`}>
+            <img style={{width: '100%'}} src={downloadImage} />
+          </a>
         </OtherButton>
       </div>
     </Wrapper>
