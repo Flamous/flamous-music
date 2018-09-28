@@ -68,6 +68,9 @@ const ArtistStyle = style(Link)({
     transform: 'translateY(-1.2em)',
     display: 'inline-block',
     fontSize: '0.94em'
+  },
+  '&:active': {
+    backgroundColor: '#f0f0f0'
   }
 })
 const Artist = ArtistStyle
