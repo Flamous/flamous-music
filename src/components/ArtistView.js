@@ -7,6 +7,7 @@ import LazyLoad from 'vanilla-lazyload'
 import LazyImage from './LazyImage'
 import profilePic from '../assets/wowa.jpg'
 import playImage from '../public/play_white.svg'
+import artists from '../artists'
 
 import songs from '../songs'
 
@@ -121,16 +122,25 @@ const SongList = (props) => {
 }
 
 const Album = (props) => {
-  return props.match.params.artistId === 'wowa'
+  let artist
+  switch (props.match.params.artistId) {
+    case 'wowa':
+      artist = artists[0]
+      break
+    case 'kimiko_ishizaka':
+      artist = artists[1]
+      break
+  }
+  return artist
     ? <div oncreate={initLazyLoad} onremove={removeLazyLoad} onupdate={updateLazyLoad}>
-      <Header title='Wowa' back={{text: 'Back', to: '/'}}>
+      <Header title={artist.name} back={{text: 'Back', to: '/'}}>
         <HeaderBold style={{textAlign: 'center'}}>
           <HeaderImage onclick={(event) => {
             let bounds = event.target.getBoundingClientRect()
-            window.flamous.imageViewer.showImageViewer({image: profilePic, bounds: bounds})
-          }} src={profilePic} />
+            window.flamous.imageViewer.showImageViewer({image: artist.cover_art_url, bounds: bounds})
+          }} src={artist.cover_art_url} />
           <p style={{fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem', textTransform: 'uppercase'}}>Artist</p>
-          Wowa
+          {artist.name}
         </HeaderBold>
       </Header>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
