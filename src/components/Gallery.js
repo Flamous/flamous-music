@@ -100,18 +100,11 @@ export const GalleryItem = (props) => style('div')({
   width: '33%',
   minWidth: '150px',
   transition: 'opacity 300ms',
-  // maxWidth: '250px',
   '@media (min-width: 1000px)': {
     width: '200px',
     fontSize: '1.2em',
     maxWidth: '33%'
   },
-  // ':first-child': {
-  //   paddingLeft: '0'
-  // },
-  // ':last-child': {
-  //   paddingRight: '0'
-  // },
   position: 'relative',
   flexGrow: '1',
   boxSizing: 'border-box',
