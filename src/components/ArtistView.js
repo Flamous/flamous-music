@@ -171,6 +171,5 @@ let Album = (props) => {
 }
 
 export default (props) => <Page>
-  <div>lel</div>
   <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Album {...matchProps} /> }} />
 </Page>
