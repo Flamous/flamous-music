@@ -115,8 +115,7 @@ function makeInteractive (element) {
         })
     })
 }
-
-const Page = (props, children) => style('article')({
+const StyledPage = style('article')({
   height: '100%',
   width: '100%',
   position: 'fixed',
@@ -124,33 +123,36 @@ const Page = (props, children) => style('article')({
   color: '#212121',
   backgroundColor: 'white',
   boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)'
-  // transition: 'boxShadow 1000ms'
-})({
-  class: 'page',
-  key: props.key,
-  oncreate: !props.hasOwnProperty('nonInteractive') && makeInteractive,
-  onremove: (element, done) => {
-    // Prevent clicking links as this somehow screws up hyperapp (when switchign to a new url before the slide-out animation is finished)
-    // still not ideal when user is navigating with browser back/forward buttons
-    window.clickLock = true
+})
 
-    element.handleX.subscribe((val) => {
-      if (val.replace('%', '') >= 100) {
-        element.handleX.stop()
-        done()
-        window.clickLock = false
-      }
-    })
+const Page = (props, children) => {
+  return <StyledPage
+    class='page'
+    key={props.key}
+    oncreate={!props.hasOwnProperty('nonInteractive') && makeInteractive}
+    onremove={(element, done) => {
+      // Prevent clicking links as this somehow screws up hyperapp (when switchign to a new url before the slide-out animation is finished)
+      // still not ideal when user is navigating with browser back/forward buttons
+      window.clickLock = true
 
-    spring({
-      from: element.handleX.get(),
-      to: '100%',
-      velocity: element.handleX.getVelocity() * 3
-    }).start(element.handleX)
-  }
-}, <div style={{paddingBottom: '6.5em'}}>
-  {children}
-</div>
-)
+      element.handleX.subscribe((val) => {
+        if (val.replace('%', '') >= 100) {
+          element.handleX.stop()
+          done()
+          window.clickLock = false
+        }
+      })
+
+      spring({
+        from: element.handleX.get(),
+        to: '100%',
+        velocity: element.handleX.getVelocity() * 3
+      }).start(element.handleX)
+    }}>
+    <div style={{paddingBottom: '6.5em'}}>
+      {children}
+    </div>
+  </StyledPage>
+}
 
 export default Page
