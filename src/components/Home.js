@@ -99,13 +99,13 @@ const Home = (props) => {
           </Link>
         })}
       </Gallery> */}
-      <p style={{maxWidth: '500px', margin: '0 auto', padding: '1em', textAlign: 'center'}}>
+      <p style={{maxWidth: '500px', margin: '0 auto', padding: '0 2em', textAlign: 'center'}}>
         <p>
-        We see Public Domain content as the future of creative art. Music is no exception.<br />
+        We see Public Domain content as the future of creative art. Music is no exception.<br /><br />
         Share, mix, download or cover music you discover on Flamous.
         </p>
         <Link to='/about' style={{display: 'flex', justifyContent: 'center'}}>
-          <span style={{display: 'inline-block'}}>Learn about Flamous Music</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
+          <span style={{display: 'inline-block'}}>About Flamous</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
         </Link>
         {/* <Link style={{color: '#767676'}} to='/about'>About Flamous</Link>
         <span style={{margin: '0 0.4em'}}>
