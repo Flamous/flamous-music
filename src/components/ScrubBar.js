@@ -145,6 +145,9 @@ const BubbleStyles = style('div')((props) => ({
   cursor: 'default',
   justifyContent: 'space-between',
   alignItems: 'center',
+  '&:active': {
+    backgroundColor: '#f0f0f0'
+  },
   '@media (min-width: 768px)': {
     '&': {
       maxWidth: '440px',
