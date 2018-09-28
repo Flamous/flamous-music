@@ -15,8 +15,9 @@ const Wrapper = style('div')({
     textAlign: 'center'
   },
   '> p': {
-    marginLeft: '1.2em',
-    marginRight: '1.2em',
+    margin: '1.3em 1.2em',
+    fontSize: '1.1rem',
+    lineHeight: '1.3em',
     '-moz-user-select': 'all',
     '-webkit-user-select': 'all',
     userSelect: 'all'
@@ -33,7 +34,7 @@ const About = (props) =>
     <Wrapper oncreate={window.flamous.checkForUpdate}>
       <Header title='About' back={{text: 'Back', to: '/'}} />
 
-      <p class='first'>Flamous Music is a player for awesome, free music.</p>
+      <p class='first'>"Flamous Music is a player for awesome, free music."</p>
       <p>
       On Flamous you can listen to the best of Public Domain music, which is completely free to use.
       </p>
