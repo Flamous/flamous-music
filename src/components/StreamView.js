@@ -125,8 +125,7 @@ const PlayButton = style('span')({
   display: 'inline-block',
   height: '4em',
   width: '4em',
-  padding: '4px',
-  marginRight: '5px'
+  padding: '4px'
 })
 
 const Wrapper = style('div')({
@@ -135,7 +134,8 @@ const Wrapper = style('div')({
   justifyContent: 'center',
   alignItems: 'center',
   width: '100%',
-  maxWidth: '400px'
+  maxWidth: '400px',
+  marginTop: '3em'
 })
 const Progress = style('progress')({
   WebkitAppearance: 'none',
@@ -166,11 +166,10 @@ const StreamView = (props) => {
     <Wrapper>
       <img style={{width: '70%'}} src={props.playingContext.cover_art_url} />
       <span style={{marginTop: '2em', fontWeight: 'bold', fontSize: '1.2em'}}>{props.playingContext.name}</span>
-      <br />
       <span>
         {props.playingContext.artist}
       </span>
-      <div style={{display: 'flex', width: '90%', alignItems: 'center', marginTop: '1em'}}>
+      <div style={{display: 'flex', width: '90%', alignItems: 'center'}}>
         <div style={{width: '4em'}}>
           {formatTime(Math.round(props.playbackTime))}
         </div>
@@ -179,7 +178,7 @@ const StreamView = (props) => {
           {formatTime(Math.round(props.playingContext.duration))}
         </div>
       </div>
-      <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em'}}>
+      <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '0.5em 3em'}}>
         <OtherButton title='Previous Song' onclick={() => window.Amplitude.prev()}>
           <img style={{height: '100%'}} src={prevImage} />
         </OtherButton>
@@ -193,7 +192,7 @@ const StreamView = (props) => {
           <img style={{height: '100%'}} src={nextImage} />
         </OtherButton>
       </div>
-      <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em'}}>
+      <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '0.5em 3em'}}>
         <OtherButton>
           <a title='Download Song' style={{display: 'block', padding: '0.6em'}} href={window.Amplitude.audio().src} download={`${props.playingContext.name} - ${props.playingContext.artist} | Flamous Music.mp3`}>
             <img style={{width: '100%'}} src={downloadImage} />
