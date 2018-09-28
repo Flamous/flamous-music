@@ -70,10 +70,6 @@ const SongListStyle = style('div')({
   },
   ' .song-list-item *:not(img)': {
     margin: '0'
-  },
-  ' .song-list-item:active': {
-    transition: 'opacity 70ms',
-    opacity: '0.6'
   }
 })
 
@@ -90,7 +86,12 @@ const Thumbnail = style(LazyImage)({
 const StyledListItem = style('li')({
   transition: 'background-color 100ms',
   '&:hover': {
-    backgroundColor: '#f0f0f0'
+    backgroundColor: '#fafafa'
+  },
+  '&:active': {
+    backgroundColor: '#f0f0f0',
+    transform: 'scale(0.95)',
+    opacity: '0.7'
   }
 })
 
