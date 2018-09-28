@@ -3,7 +3,7 @@ import Amplitude from 'amplitudejs'
 import picostyle from 'picostyle'
 import ScrubBar from './components/ScrubBar.js'
 import Home from './components/Home.js'
-import songList from './songs.js'
+import songList from './songs/wowa.js'
 import placeholder from './public/song_placeholder.svg'
 import About from './elements/About'
 import nativeWebApp from 'native-web-app'
@@ -16,6 +16,8 @@ import ArtistView from './components/ArtistView.js'
 
 import ImageViewer from './components/ImageViewer.js'
 import StreamView from './components/StreamView.js'
+
+console.log(songList)
 
 nativeWebApp()
 

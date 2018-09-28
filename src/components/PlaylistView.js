@@ -3,7 +3,7 @@ import Page from '../components/Page'
 import Header from '../components/Header'
 import { GalleryItem } from '../components/Gallery'
 import Gallery from '../components/Gallery'
-import songList from '../songs'
+import songList from '../songs/wowa'
 import placeholder from '../public/song_placeholder.svg'
 
 const PlaylistView = (props) => {

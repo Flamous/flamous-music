@@ -5,11 +5,12 @@ import Header, { HeaderBold, HeaderImage } from './Header'
 import { Route } from '@hyperapp/router'
 import LazyLoad from 'vanilla-lazyload'
 import LazyImage from './LazyImage'
-import profilePic from '../assets/wowa.jpg'
+// import profilePic from '../assets/wowa.jpg'
 import playImage from '../public/play_white.svg'
 import artists from '../artists'
 
-import songs from '../songs'
+import wowaSongs from '../songs/wowa'
+import kimikoSongs from '../songs/kimiko_ishizaka'
 
 function updateLazyLoad (elem) {
   elem.lazyLoader.update()
@@ -107,6 +108,7 @@ const ListItem = (props) => {
 }
 
 const SongList = (props) => {
+  console.log(props.songs)
   return <SongListStyle>
     <ul>
       {
@@ -121,17 +123,29 @@ const SongList = (props) => {
   </SongListStyle>
 }
 
-const Album = (props) => {
+let Album = (props) => {
   let artist
+  let songs
+
   switch (props.match.params.artistId) {
     case 'wowa':
       artist = artists[0]
+      songs = wowaSongs
+      // lel = import('../songs/wowa').then((res) => {
+      //   song = res.default
+      //   return renderArtist()
+      // })
       break
     case 'kimiko_ishizaka':
       artist = artists[1]
+      songs = kimikoSongs
+      // import('../songs/kimiko_ishizaka').then((res) => {
+      //   songs = res.default
+      // })
       break
   }
-  return artist
+
+  let out = artist
     ? <div oncreate={initLazyLoad} onremove={removeLazyLoad} onupdate={updateLazyLoad}>
       <Header title={artist.name} back={{text: 'Back', to: '/'}}>
         <HeaderBold style={{textAlign: 'center'}}>
@@ -149,10 +163,14 @@ const Album = (props) => {
       </div>
       <SongList songs={songs} />
     </div>
-    : <h2>Artist not found</h2>
+    : <div>
+      <h2>Artist not found</h2>
+    </div>
+
+  return out
 }
 
 export default (props) => <Page>
-
+  <div>lel</div>
   <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Album {...matchProps} /> }} />
 </Page>
