@@ -12,7 +12,7 @@ let {snap} = transform
 
 const style = picostyle(h)
 
-const oneDPointer = (initY) => pointer({x: 0, y: 0, preventDefault: false}).pipe(({y}) => y)
+const oneDPointer = (initY) => pointer({x: 0, y: 0, preventDefault: false}).pipe(({y}) => y > 0 ? y : 0)
 
 function init (element) {
   const THRESHOLD = 10 // Pixel
