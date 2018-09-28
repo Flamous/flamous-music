@@ -83,16 +83,21 @@ const Home = (props) => {
       <Header title='Flamous Music' />
       {/* <FlamousHeader /> */}
       <Gallery heading='Artists'>
-        <Artist to='/artist/wowa'>
-          <LazyImage src={artists[0].cover_art_url} />
-          <div>
-            <span class='artist-line'>{artists[0].name}</span>
-            <br />
-            {/* <span class='secondary'>ARTIST</span>
+        {
+          artists.map((artist, index) => {
+            return <Artist to={`/artist/${artist.name.toLowerCase().replace(' ', '_')}`}>
+              <LazyImage src={artist.cover_art_url} />
+              <div>
+                <span class='artist-line'>{artist.name}</span>
+                <br />
+                {/* <span class='secondary'>ARTIST</span>
             <br /> */}
-            <span class='secondary'>Artist, 12 songs</span>
-          </div>
-        </Artist>
+                <span class='secondary'>Artist, {artist.songCount} songs</span>
+              </div>
+            </Artist>
+          })
+        }
+
       </Gallery>
       {/* <Gallery
         heading='Featured Artists'>
