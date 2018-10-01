@@ -1,7 +1,6 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { styler, value, listen, pointer, spring, chain, schedule, everyFrame } from 'popmotion'
-import { nonlinearSpring, smooth } from 'popmotion/lib/transformers'
+import { styler, value, listen, pointer, spring, chain, schedule, everyFrame, nonlinearSpring, smooth } from 'popmotion'
 import playImage from '../assets/play.svg'
 import pauseImage from '../assets/pause.svg'
 

@@ -1,8 +1,6 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { styler, spring, value, listen, pointer, chain, everyFrame, schedule } from 'popmotion'
-import { snap, smooth } from 'popmotion/lib/transformers'
-import { getProgressFromValue, getValueFromProgress } from 'popmotion/lib/calc'
+import { styler, spring, value, listen, pointer, chain, everyFrame, schedule, getProgressFromValue, getValueFromProgress, snap, smooth } from 'popmotion'
 
 const style = picostyle(h)
 
