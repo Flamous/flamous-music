@@ -133,7 +133,9 @@ const flamous = app(
       duration: 0
     },
     playbackTime: 0,
-    pages: [],
+    pages: {
+      stack: []
+    },
     updateAvailable: false,
     imageViewer: {
       isActive: false,
@@ -153,18 +155,27 @@ const flamous = app(
         Amplitude.play()
       }
     },
-    addPage: (page) => (state) => {
-      state.pages.push(page)
-      // console.log(state)
-      return {
-        pages: state.pages
-      }
-    },
-    killPage: () => (state) => {
-      state.pages.pop()
-
-      return {
-        pages: state.pages
+    pages: {
+      add: (comp) => ({stack}, {location}) => {
+        console.log(comp)
+        console.log(stack)
+        
+        if (stack[0] && stack[stack.length - 1].name === comp.name) {
+          console.log('RETURNED!')
+          return
+        }
+        stack.push(comp)
+        console.log(stack)
+        return {
+          stack: stack
+        }
+      },
+      back: () => ({stack}) => {
+        stack.pop()
+        window.history.back()
+        return {
+          stack: stack
+        }
       }
     },
     setPlayState: (isPlaying) => {
@@ -249,7 +260,7 @@ const flamous = app(
     }
   },
   (state, actions) => (context, setContext) => {
-    let {imageViewer} = state
+    let {imageViewer, pages} = state
     setContext(state)
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' />
@@ -257,18 +268,23 @@ const flamous = app(
         key='scrub-bar'
       />
 
-      {/* <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} /> */}
-      <Route parent path='/artist' render={(props) => <ArtistView {...props} />} />
-      <Route path='/about' render={() => <About />} />
+      {
+        pages.stack.map((item) => {
+          return item.page
+        })
+      }
+
+      <Route parent path='/artist' render={(props) => {
+        actions.pages.add({page: <ArtistView {...props} />, name: 'ArtistView'})
+      }} />
+      <Route parent path='/about' render={(props) => {
+        actions.pages.add({page: <About {...props} />, name: 'About'})
+      }} />
 
       <Route path='/stream-view' render={() => <StreamView />} />
 
       {
         imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
-      }
-      {
-        // TODO: Use Hyperapp nestables context to pass the playingContext!
-        // streamView.isActive && <StreamView playbackTime={playbackTime} playingContext={playingContext} playingState={playingState} />
       }
     </AppShell>
   },

@@ -103,7 +103,7 @@ function makeInteractive (element) {
           // console.log(isGoingBack)
           if (!isGoingBack) {
             window.clickLock = true
-            window.flamous.location.go('/')
+            window.flamous.pages.back()
           } else {
             spring({
               from: handleX.get(),

@@ -66,15 +66,13 @@ function init (element) {
             spring(config)
               .start(handleY)
           } else {
-            // window.flamous.streamView.hide()
-            window.flamous.location.go('/')
+            window.flamous.pages.back()
           }
         })
     })
 }
 
 function exit (element, done) {
-  console.log(element)
   let handleY = element.handleY
   let velocity = handleY.getVelocity()
   let pos = handleY.get()
