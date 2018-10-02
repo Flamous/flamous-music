@@ -163,6 +163,7 @@ const StreamView = (props) => (context) => {
   let {playingContext, playbackTime, playingState, actions} = context
   return <StreamViewStyles key='stream-view' oncreate={init} onremove={exit}>
     <Wrapper>
+      <div onclick={() => context.actions.pages.back()} style={{position: 'absolute', top: '0', height: '4em', width: '100%'}} />
       <img style={{width: '70%'}} src={playingContext.cover_art_url} />
       <span style={{marginTop: '2em', fontWeight: 'bold', fontSize: '1.2em'}}>{playingContext.name}</span>
       <span>
