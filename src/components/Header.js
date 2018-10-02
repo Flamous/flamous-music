@@ -124,7 +124,7 @@ const Header = nestable(
     return <HeaderStyles>
       {props.back
         ? <span class='back'>
-          <Link style={{display: 'flex', alignItems: 'center'}} to={props.back.to}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
+          <Link style={{display: 'flex', alignItems: 'center'}} to={context.location.previous}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
           <span style={{textAlign: 'center', fontWeight: 'bold', opacity: '0', transition: 'opacity 100ms linear 60ms'}} class={`${state.isHeaderHidden ? 'show' : ''}`}>{props.title}</span>
           {updateAvailable ? <props.updateButton /> : ''}
         </span>
