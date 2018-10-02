@@ -216,24 +216,26 @@ const Progress = style('progress')({
   transform: 'translateY(-1px)'
 })
 
-const ScrubBar = (props) =>
-  <Wrapper key={props.key}>
-    <Bubble playingState={props.playingState} oncreate={makeInteractive} onclick={() => window.flamous.location.go('/stream-view')}>
-      <Progress max={props.duration || '300'} value={props.playbackTime}>{props.playbackTime}/{props.duration}</Progress>
+const ScrubBar = (props) => (context) => {
+  let {playingState, playbackTime, playingContext} = context
+  let {duration, name, artist, image} = playingContext
+  return <Wrapper key={props.key}>
+    <Bubble playingState={playingState} oncreate={makeInteractive} onclick={() => window.flamous.location.go('/stream-view')}>
+      <Progress max={duration || '300'} value={playbackTime}>{playbackTime}/{duration}</Progress>
       <div style={{display: 'flex', height: '100%', flexGrow: '1'}}>
-        <SongCover draggable='false' src={props.image} />
+        <SongCover draggable='false' src={image} />
         <Info>
           <Song>
-            {props.name}
+            {name}
           </Song>
           <Artist>
-            {props.artist}
+            {artist}
           </Artist>
         </Info>
       </div>
       <div>
         <PlayButton onclick={(e) => { e.preventDefault(); e.stopImmediatePropagation(); window.flamous.playPause() }}>
-          { !props.playingState
+          { !playingState
             ? <img style={{height: '100%'}} src={playImage} />
             : <img style={{height: '100%'}} src={pauseImage} />
           }
@@ -241,5 +243,6 @@ const ScrubBar = (props) =>
       </div>
     </Bubble>
   </Wrapper>
+}
 
 export default ScrubBar

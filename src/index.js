@@ -256,12 +256,7 @@ const flamous = app(
       <Home key='home' updateAvailable={updateAvailable} playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
         key='scrub-bar'
-        playbackTime={playbackTime}
-        playingState={playingState}
-        artist={playingContext.artist}
-        name={playingContext.name}
-        image={playingContext.cover_art_url}
-        duration={playingContext.duration} />
+      />
 
       <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
       <Route parent path='/artist' render={(props) => <ArtistView {...props} playingId={playingContext.id} playingState={playingState} />} />
