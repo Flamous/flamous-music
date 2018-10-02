@@ -253,7 +253,7 @@ const flamous = app(
     let {playingContext, playingState, updateAvailable, imageViewer, playbackTime} = state
     setContext(state)
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
-      <Home key='home' updateAvailable={updateAvailable} playingId={playingContext.id} playingState={playingState} />
+      <Home key='home' />
       <ScrubBar
         key='scrub-bar'
       />
@@ -292,7 +292,6 @@ if ('mediaSession' in navigator) {
 }
 
 window.flamous = flamous
-console.log(flamous.getState())
 
 window.Amplitude.audio().addEventListener('timeupdate', (event) => {
   window.flamous.setTime(event.target.currentTime)

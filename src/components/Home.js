@@ -2,7 +2,6 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import artists from '../artists.js'
 import Page from './Page.js'
-import { GalleryItem } from './Gallery'
 import Gallery from './Gallery'
 import Header from './Header.js'
 import { Link } from '@hyperapp/router'
@@ -10,24 +9,6 @@ import LazyImage from './LazyImage.js'
 import rightArrow from '../assets/blue_right.svg'
 
 const style = picostyle(h)
-
-const FlamousHeaderStyle = style('header')({
-  zIndex: '100',
-  position: 'sticky',
-  display: 'block',
-  width: '100%',
-  top: '0',
-  padding: '1em',
-  backgroundColor: 'rgba(255, 255, 255, 0.9)',
-  fontWeight: 'bold',
-  textAlign: 'center'
-})
-
-const FlamousHeader = (props) => {
-  return <FlamousHeaderStyle>
-    Flamous Music
-  </FlamousHeaderStyle>
-}
 
 const Button = (props) => style('span')({
   fontWeight: 'bold',
@@ -75,13 +56,12 @@ const ArtistStyle = style(Link)({
 })
 const Artist = ArtistStyle
 
-const Home = (props) => {
+const Home = (props) => (context) => {
+  let {updateAvailable} = context
   return (
     <Page nonInteractive key={props.key}>
-      {/* {props.updateAvailable ? <UpdateBanner /> : <UpdateBanner />} */}
-      {props.updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
+      {updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
       <Header title='Flamous Music' />
-      {/* <FlamousHeader /> */}
       <Gallery heading='Artists'>
         {
           artists.map((artist, index) => {
@@ -90,8 +70,6 @@ const Home = (props) => {
               <div>
                 <span class='artist-line'>{artist.name}</span>
                 <br />
-                {/* <span class='secondary'>ARTIST</span>
-            <br /> */}
                 <span class='secondary'>Artist, {artist.songCount} songs</span>
               </div>
             </Artist>
@@ -115,11 +93,6 @@ const Home = (props) => {
         <Link to='/about' style={{display: 'flex', justifyContent: 'center'}}>
           <span style={{display: 'inline-block'}}>About Flamous</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
         </Link>
-        {/* <Link style={{color: '#767676'}} to='/about'>About Flamous</Link>
-        <span style={{margin: '0 0.4em'}}>
-        &middot;
-        </span> */}
-        {/* <a target='_blank' rel='noopener' style={{color: '#767676'}} href='https://github.com/christiankaindl/flamous-music'>View on GitHub</a> */}
       </p>
     </Page>
   )
