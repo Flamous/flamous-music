@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { styler, value, listen, pointer, spring, chain, schedule, everyFrame, nonlinearSpring, smooth } from 'popmotion'
+import { styler, value, listen, pointer, spring, schedule, everyFrame, nonlinearSpring, smooth } from 'popmotion'
 import playImage from '../assets/play.svg'
 import pauseImage from '../assets/pause.svg'
 
@@ -11,21 +11,12 @@ function makeInteractive (element) {
     'left': 25,
     'right': 25
   } // Pixel
-  // const indicator = element.querySelector('#indicator div')
-
-  // element.style.transform = 'translateY(150%)'
 
   const handleStyler = styler(element)
   const handle = {
     x: value(0, handleStyler.set('x')),
     y: value(0, handleStyler.set('y'))
   }
-
-  // window.setTimeout(() => spring({
-  //   from: '100%',
-  //   to: '0%',
-  //   damping: 15
-  // }).start(handle.y), 1000)
 
   const oneDirectionalPointer = axis => pointer({[axis]: 0}).pipe(v => v[axis])
 
@@ -218,7 +209,7 @@ const Progress = style('progress')({
 
 const ScrubBar = (props) => (context) => {
   let {playingState, playbackTime, playingContext} = context
-  let {duration, name, artist, image} = playingContext
+  let {duration, name, artist, cover_art_url: image} = playingContext
   return <Wrapper key={props.key}>
     <Bubble playingState={playingState} oncreate={makeInteractive} onclick={() => window.flamous.location.go('/stream-view')}>
       <Progress max={duration || '300'} value={playbackTime}>{playbackTime}/{duration}</Progress>
