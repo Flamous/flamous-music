@@ -29,9 +29,10 @@ const Wrapper = style('div')({
   }
 })
 
-const About = (props) =>
-  <Page key='about'>
-    <Wrapper oncreate={window.flamous.checkForUpdate}>
+const About = () => (context) => {
+  let {checkForUpdate, updateAvailable} = context
+  return <Page key='about'>
+    <Wrapper oncreate={checkForUpdate}>
       <Header title='About' back={{text: 'Back', to: '/'}} />
 
       <p class='first'>"Flamous Music is a player for awesome, free music."</p>
@@ -55,7 +56,7 @@ const About = (props) =>
           <br />
           {`${process.env.COMMIT_REF && process.env.STAGE === 'prod' ? `build ${process.env.COMMIT_REF.substring(0, 6)}` : '(local build)'}`}
           <br />
-          {props.updateAvailable ? <UpdateBanner /> : <span>&#9989; Up-to-date</span>}
+          {updateAvailable ? <UpdateBanner /> : <span>&#9989; Up-to-date</span>}
         </span>
       </p>
       <p style={{color: '#636363', display: 'flex'}}>
@@ -78,5 +79,6 @@ const About = (props) =>
       </p>
     </Wrapper>
   </Page>
+}
 
 export default About

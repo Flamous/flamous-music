@@ -250,7 +250,7 @@ const flamous = app(
     }
   },
   (state, actions) => (context, setContext) => {
-    let {playingContext, playingState, updateAvailable, imageViewer, playbackTime} = state
+    let {playingContext, playingState, imageViewer, playbackTime} = state
     setContext(state)
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' />
@@ -260,7 +260,7 @@ const flamous = app(
 
       <Route path='/playlists' render={() => <PlaylistView playingId={playingContext.id} playingState={playingState} />} />
       <Route parent path='/artist' render={(props) => <ArtistView {...props} playingId={playingContext.id} playingState={playingState} />} />
-      <Route path='/about' render={() => <About updateAvailable={updateAvailable} />} />
+      <Route path='/about' render={() => <About />} />
       {/* <Route path='/stream-view' render={() => <StreamView playbackTime={playbackTime} playingContext={playingContext} playingState={playingState} />} /> */}
       <Route path='/stream-view' render={() => <StreamView playbackTime={playbackTime} playingContext={playingContext} playingState={playingState} />} />
 
