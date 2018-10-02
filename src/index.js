@@ -157,24 +157,24 @@ const flamous = app(
     },
     pages: {
       add: (comp) => ({stack}, {location}) => {
-        console.log(comp)
-        console.log(stack)
-        
-        if (stack[0] && stack[stack.length - 1].name === comp.name) {
-          console.log('RETURNED!')
-          return
-        }
         stack.push(comp)
-        console.log(stack)
+
         return {
           stack: stack
         }
       },
-      back: () => ({stack}) => {
+      back: (setHistory = true) => ({stack}) => {
         stack.pop()
-        window.history.back()
+        setHistory && window.history.back()
         return {
           stack: stack
+        }
+      },
+      clear: () => ({stack}) => {
+        console.info('Clearing Stack')
+        if (stack.length === 0) return
+        return {
+          stack: []
         }
       }
     },
@@ -259,9 +259,11 @@ const flamous = app(
       }
     }
   },
-  (state, actions) => (context, setContext) => {
+  (state, actions) => (_, setContext) => {
     let {imageViewer, pages} = state
-    setContext(state)
+    let context = Object.assign({}, state, {actions: actions})
+
+    setContext(context)
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' />
       <ScrubBar
@@ -274,14 +276,18 @@ const flamous = app(
         })
       }
 
+      <Route path='/' render={(props) => {
+        actions.pages.clear()
+      }} />
       <Route parent path='/artist' render={(props) => {
-        actions.pages.add({page: <ArtistView {...props} />, name: 'ArtistView'})
+        return new Container({page: () => <ArtistView {...props} />, name: 'ArtistView'})
       }} />
       <Route parent path='/about' render={(props) => {
-        actions.pages.add({page: <About {...props} />, name: 'About'})
+        return new Container({page: About, name: 'About'})
       }} />
-
-      <Route path='/stream-view' render={() => <StreamView />} />
+      <Route parent path='/stream-view' render={(props) => {
+        return <Container key='StreamView' {...props} page={StreamView} name='StreamView' />
+      }} />
 
       {
         imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
@@ -316,3 +322,27 @@ window.Amplitude.audio().addEventListener('durationchange', (event) => {
 })
 
 location.subscribe(flamous.location)
+
+const Container = (props, children) => (context) => {
+  let {pages} = context
+  let stack = pages.stack
+
+  console.log(stack)
+  if ((stack.length >= 2 && stack[stack.length - 2].name === props.name)) {
+    console.info('went back (in container)')
+    context.actions.pages.back(false)
+  } else if ((stack.length >= 1 && stack[stack.length - 1].name !== props.name)) {
+    console.info('Added stuff (in Container)')
+    context.actions.pages.add({
+      page: props.page,
+      name: props.name
+    })
+  } else if (stack.length === 0) {
+    context.actions.pages.add({
+      page: props.page,
+      name: props.name
+    })
+  } else {
+    console.info('did nothing (in container)')
+  }
+}
