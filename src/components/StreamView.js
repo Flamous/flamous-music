@@ -160,7 +160,7 @@ function formatTime (seconds) {
 }
 
 const StreamView = (props) => (context) => {
-  let {playingContext, playbackTime, playingState, playPause} = context
+  let {playingContext, playbackTime, playingState, actions} = context
   return <StreamViewStyles key='stream-view' oncreate={init} onremove={exit}>
     <Wrapper>
       <img style={{width: '70%'}} src={playingContext.cover_art_url} />
@@ -181,7 +181,7 @@ const StreamView = (props) => (context) => {
         <OtherButton title='Previous Song' onclick={() => window.Amplitude.prev()}>
           <img style={{height: '100%'}} src={prevImage} />
         </OtherButton>
-        <PlayButton title={`${playingState ? 'Pause' : 'Play'}`} onclick={playPause}>
+        <PlayButton title={`${playingState ? 'Pause' : 'Play'}`} onclick={actions.playPause}>
           { !playingState
             ? <img style={{height: '100%'}} src={playImage} />
             : <img style={{height: '100%'}} src={pauseImage} />
