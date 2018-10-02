@@ -193,7 +193,6 @@ const flamous = app(
     getState: () => state => state,
     imageViewer: {
       showImageViewer: (data) => {
-        // console.log('data: ', data)
         return {
           isActive: true,
           image: data.image,

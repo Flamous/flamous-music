@@ -62,7 +62,8 @@ const HeaderImageStyle = style('img')({
   borderRadius: '100%',
   width: '10rem',
   height: '9.9rem',
-  border: '1px solid rgba(0, 0, 0, 0.14)'
+  border: '1px solid rgba(0, 0, 0, 0.14)',
+  pointerEvents: 'auto'
 })
 
 const HeaderImage = (props) => {

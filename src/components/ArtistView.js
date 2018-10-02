@@ -108,7 +108,6 @@ const ListItem = (props) => {
 }
 
 const SongList = (props) => {
-  console.log(props.songs)
   return <SongListStyle>
     <ul>
       {
