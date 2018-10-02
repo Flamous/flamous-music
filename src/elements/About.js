@@ -33,7 +33,7 @@ const About = () => (context) => {
   let {checkForUpdate, updateAvailable} = context
   return <Page key='about'>
     <Wrapper oncreate={checkForUpdate}>
-      <Header title='About' back={{text: 'Back', to: '/'}} />
+      <Header title='About' back={{text: 'Back', to: '/'}} updateButton={UpdateBanner} />
 
       <p class='first'>"Flamous Music is a player for awesome, free music."</p>
       <p>

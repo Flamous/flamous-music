@@ -11,11 +11,10 @@ const UpdateBanner = () => style('div')({
   // position: 'absolute',
   // top: '0',
   // left: '0'
+  textAlign: 'right'
 })(
   {},
   [
-    <span>&#11014; Update available</span>,
-    <br />,
     <Button onclick={window.flamous.update}>Update</Button>
   ]
 )
@@ -25,8 +24,8 @@ const Button = style('span')({
   color: 'white',
   backgroundColor: '#007AFF',
   display: 'inline-block',
-  margin: '1em 0',
-  padding: '0.5em 1em',
+  // margin: '1em 0',
+  padding: '0.3em 0.7em',
   borderRadius: '5px',
   fontStyle: 'normal'
 })
