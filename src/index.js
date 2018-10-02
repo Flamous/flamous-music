@@ -1,4 +1,4 @@
-import { h, app } from 'hyperapp'
+import { h, app as _app } from 'hyperapp'
 import Amplitude from 'amplitudejs'
 import picostyle from 'picostyle'
 import ScrubBar from './components/ScrubBar.js'
@@ -17,7 +17,9 @@ import ArtistView from './components/ArtistView.js'
 import ImageViewer from './components/ImageViewer.js'
 import StreamView from './components/StreamView.js'
 
-console.log(songList)
+import { withContext } from 'hyperapp-context'
+
+const app = withContext(_app)
 
 nativeWebApp()
 
@@ -247,8 +249,10 @@ const flamous = app(
       }
     }
   },
-  ({playingContext, playingState, pages, updateAvailable, imageViewer, streamView, playbackTime}) =>
-    <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
+  (state, actions) => (context, setContext) => {
+    let {playingContext, playingState, updateAvailable, imageViewer, playbackTime} = state
+    setContext(state)
+    return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' updateAvailable={updateAvailable} playingId={playingContext.id} playingState={playingState} />
       <ScrubBar
         key='scrub-bar'
@@ -272,7 +276,8 @@ const flamous = app(
         // TODO: Use Hyperapp nestables context to pass the playingContext!
         // streamView.isActive && <StreamView playbackTime={playbackTime} playingContext={playingContext} playingState={playingState} />
       }
-    </AppShell>,
+    </AppShell>
+  },
   document.body
 )
 
@@ -292,6 +297,7 @@ if ('mediaSession' in navigator) {
 }
 
 window.flamous = flamous
+console.log(flamous.getState())
 
 window.Amplitude.audio().addEventListener('timeupdate', (event) => {
   window.flamous.setTime(event.target.currentTime)
