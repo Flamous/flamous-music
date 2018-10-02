@@ -2,7 +2,7 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import Page from './Page'
 import Header, { HeaderBold, HeaderImage } from './Header'
-import { Route } from '@hyperapp/router'
+import { Route, Link } from '@hyperapp/router'
 import LazyLoad from 'vanilla-lazyload'
 import LazyImage from './LazyImage'
 // import profilePic from '../assets/wowa.jpg'
@@ -161,6 +161,7 @@ let Album = (props) => (context) => {
         <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Singles</h3>
         <PlayAllButton />
       </div>
+      <Link to='/about'>Demo Link (About)</Link>
       <SongList songs={songs} />
     </div>
     : <div>
