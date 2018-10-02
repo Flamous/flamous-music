@@ -1,8 +1,10 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { styler, value, listen, pointer, spring, schedule, everyFrame, nonlinearSpring, smooth } from 'popmotion'
+import { styler, value, listen, pointer, spring, schedule, everyFrame, transform } from 'popmotion'
 import playImage from '../assets/play.svg'
 import pauseImage from '../assets/pause.svg'
+
+const {nonlinearSpring, smooth} = transform
 
 function makeInteractive (element) {
   const AXIS_LOCK_THRESHOLD = 13 // Pixel
