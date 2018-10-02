@@ -161,29 +161,30 @@ function formatTime (seconds) {
   ].filter(a => a).join(':')
 }
 
-const StreamView = (props) => {
+const StreamView = (props) => (context) => {
+  let {playingContext, playbackTime, playingState, playPause} = context
   return <StreamViewStyles key='stream-view' oncreate={init} onremove={exit}>
     <Wrapper>
-      <img style={{width: '70%'}} src={props.playingContext.cover_art_url} />
-      <span style={{marginTop: '2em', fontWeight: 'bold', fontSize: '1.2em'}}>{props.playingContext.name}</span>
+      <img style={{width: '70%'}} src={playingContext.cover_art_url} />
+      <span style={{marginTop: '2em', fontWeight: 'bold', fontSize: '1.2em'}}>{playingContext.name}</span>
       <span>
-        {props.playingContext.artist}
+        {playingContext.artist}
       </span>
       <div style={{display: 'flex', width: '90%', alignItems: 'center'}}>
         <div style={{width: '4em'}}>
-          {formatTime(Math.round(props.playbackTime))}
+          {formatTime(Math.round(playbackTime))}
         </div>
-        <Progress max={props.playingContext.duration || '300'} value={props.playbackTime}>{props.playbackTime}/{props.playingContext.duration}</Progress>
+        <Progress max={playingContext.duration || '300'} value={playbackTime}>{playbackTime}/{playingContext.duration}</Progress>
         <div style={{width: '4em', textAlign: 'right'}}>
-          {formatTime(Math.round(props.playingContext.duration))}
+          {formatTime(Math.round(playingContext.duration))}
         </div>
       </div>
       <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '0.5em 3em'}}>
         <OtherButton title='Previous Song' onclick={() => window.Amplitude.prev()}>
           <img style={{height: '100%'}} src={prevImage} />
         </OtherButton>
-        <PlayButton title={`${props.playingState ? 'Pause' : 'Play'}`} onclick={window.flamous.playPause}>
-          { !props.playingState
+        <PlayButton title={`${playingState ? 'Pause' : 'Play'}`} onclick={playPause}>
+          { !playingState
             ? <img style={{height: '100%'}} src={playImage} />
             : <img style={{height: '100%'}} src={pauseImage} />
           }
@@ -194,7 +195,7 @@ const StreamView = (props) => {
       </div>
       <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '0.5em 3em'}}>
         <OtherButton>
-          <a title='Download Song' style={{display: 'block', padding: '0.6em'}} href={window.Amplitude.audio().src} download={`${props.playingContext.name} - ${props.playingContext.artist} | Flamous Music.mp3`}>
+          <a title='Download Song' style={{display: 'block', padding: '0.6em'}} href={window.Amplitude.audio().src} download={`${playingContext.name} - ${playingContext.artist} | Flamous Music.mp3`}>
             <img style={{width: '100%'}} src={downloadImage} />
           </a>
         </OtherButton>
