@@ -1,6 +1,8 @@
 import { h } from 'hyperapp'
 import style from '../style'
-import { spring, styler, value, listen, multitouch, pointer, action, applyOffset } from 'popmotion'
+import { spring, styler, value, listen, multitouch, action, transform } from 'popmotion'
+
+const {applyOffset} = transform
 
 const ImageViewerStyles = style('div')({
   height: '100%',
