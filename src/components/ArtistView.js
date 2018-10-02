@@ -123,7 +123,8 @@ const SongList = (props) => {
   </SongListStyle>
 }
 
-let Album = (props) => {
+let Album = (props) => (context) => {
+  let {playingState, playingContext: {id}} = context
   let artist
   let songs
 
