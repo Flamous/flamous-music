@@ -146,7 +146,7 @@ let Album = (props) => (context) => {
   }
 
   let out = artist
-    ? <div oncreate={initLazyLoad} onremove={removeLazyLoad} onupdate={updateLazyLoad}>
+    ? <div key={props.match.params.artistId} oncreate={initLazyLoad} onremove={removeLazyLoad} onupdate={updateLazyLoad}>
       <Header title={artist.name} back={{text: 'Back', to: '/'}}>
         <HeaderBold style={{textAlign: 'center'}}>
           <HeaderImage onclick={(event) => {
@@ -172,5 +172,6 @@ let Album = (props) => (context) => {
 }
 
 export default (props) => <Page>
+  <h1>tEST</h1>
   <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Album {...matchProps} /> }} />
 </Page>

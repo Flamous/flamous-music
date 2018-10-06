@@ -329,10 +329,10 @@ const Container = (props, children) => (context) => {
 
   console.log(stack)
   if ((stack.length >= 2 && stack[stack.length - 2].name === props.name)) {
-    console.info('went back (in container)')
+    console.info('went back (in container): ', props.name)
     context.actions.pages.back(false)
   } else if ((stack.length >= 1 && stack[stack.length - 1].name !== props.name)) {
-    console.info('Added stuff (in Container)')
+    console.info('Added stuff (in Container): ', props.name)
     context.actions.pages.add({
       page: props.page,
       name: props.name
