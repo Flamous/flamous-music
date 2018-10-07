@@ -118,60 +118,60 @@ function start (data) {
     mass: 0.5
   }).start(handleXY)
 
-  let touchDragSub
-  listen(data.element, 'mousedown touchstart')
-    .start((event) => {
-      touchDragSub = multitouchPointer(handleXY.get())
-        .start(handleXY)
-    })
+  // let touchDragSub
+  // listen(data.element, 'mousedown touchstart')
+  //   .start((event) => {
+  //     touchDragSub = multitouchPointer(handleXY.get())
+  //       .start(handleXY)
+  //   })
 
-  let touchScaleSub
-  listen(data.element, 'touchstart', {preventDefault: false})
-    .filter(({touches}) => touches.length >= 2)
-    .start((event) => {
-      touchScaleSub = multitouch({scale: handleScale.get()})
-        .pipe(({scale}) => scale)
-        .start(handleScale)
-    })
+  // let touchScaleSub
+  // listen(data.element, 'touchstart', {preventDefault: false})
+  //   .filter(({touches}) => touches.length >= 2)
+  //   .start((event) => {
+  //     touchScaleSub = multitouch({scale: handleScale.get()})
+  //       .pipe(({scale}) => scale)
+  //       .start(handleScale)
+  //   })
 
-  listen(document, 'mouseup touchend', {preventDefault: false})
-    .start((event) => {
-      let numTouches = event.touches.length
+  // listen(document, 'mouseup touchend', {preventDefault: false})
+  //   .start((event) => {
+  //     let numTouches = event.touches.length
 
-      if (touchScaleSub) {
-        let scale = handleScale.get()
+  //     if (touchScaleSub) {
+  //       let scale = handleScale.get()
 
-        // console.log('new number of touches: ', numTouches)
-        numTouches <= 1 && touchScaleSub.stop()
-        scale < 1 && spring({
-          from: scale,
-          to: 1,
-          velocity: handleScale.getVelocity(),
-          mass: 0.5
-        }).start(handleScale)
-      }
-      console.log('touchend length', numTouches)
+  //       // console.log('new number of touches: ', numTouches)
+  //       numTouches <= 1 && touchScaleSub.stop()
+  //       scale < 1 && spring({
+  //         from: scale,
+  //         to: 1,
+  //         velocity: handleScale.getVelocity(),
+  //         mass: 0.5
+  //       }).start(handleScale)
+  //     }
+  //     console.log('touchend length', numTouches)
 
-      if (event.touches.length === 0) {
-        // console.log('stopping')
-        touchDragSub.stop()
+  //     if (event.touches.length === 0) {
+  //       // console.log('stopping')
+  //       touchDragSub.stop()
 
-        spring({
-          from: handleXY.get(),
-          to: 0,
-          velocity: handleXY.getVelocity(),
-          mass: 0.5
-        }).start(handleXY)
-      } else {
-        // Restart with updated touches
-        // console.info('Removing finger')
-        touchDragSub && touchDragSub.stop()
-        window.setTimeout(() => {
-          touchDragSub = multitouchPointer(handleXY.get())
-            .start(handleXY)
-        }, 0)
-      }
-    })
+  //       spring({
+  //         from: handleXY.get(),
+  //         to: 0,
+  //         velocity: handleXY.getVelocity(),
+  //         mass: 0.5
+  //       }).start(handleXY)
+  //     } else {
+  //       // Restart with updated touches
+  //       // console.info('Removing finger')
+  //       touchDragSub && touchDragSub.stop()
+  //       window.setTimeout(() => {
+  //         touchDragSub = multitouchPointer(handleXY.get())
+  //           .start(handleXY)
+  //       }, 0)
+  //     }
+  //   })
 }
 
 const ImageViewer = (props) => {
