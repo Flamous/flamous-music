@@ -146,6 +146,7 @@ const Page = nestable(
       }
     },
     makeInteractive: (element) => (state, actions) => {
+      console.info('Making interactive')
       let {startSwipeBack} = actions
       // let handleStyler = !state.hasOwnProperty('nonInteractive') ? styler(element) : ''
       // let handleX = !state.hasOwnProperty('nonInteractive') ? value('0%', handleStyler.set('x')) : ''
@@ -217,20 +218,18 @@ const Page = nestable(
     endSwipeBack: (e) => (state, actions) => {
       let { isAxisLocked, currentPointer, upListener, handleX } = state
       let { setAxisLock } = actions
+
       if (!isAxisLocked) {
         currentPointer.stop()
         upListener.stop()
-        console.log('WEYO')
         return
       }
-      console.log('WIUUU')
       setAxisLock(false)
       upListener.stop()
       currentPointer.stop()
 
       // Everyhthing in percent
       let currentPos = Number(`${handleX.get().replace('%', '')}`)
-      // console.log(currentPos)
       let velocity = Number(handleX.getVelocity() / document.body.clientWidth * 100)
       let isGoingBack = Boolean(!snap([
         0,
@@ -239,7 +238,21 @@ const Page = nestable(
 
       if (!isGoingBack) {
         window.clickLock = true
-        window.flamous.location.go(window.flamous.getState().location.previous)
+
+        // BUG: onremove events are not fired! That's why we finish the animation here and not in the onremove handler
+        handleX.subscribe((val) => {
+          if (val.replace('%', '') >= 100) {
+            handleX.stop()
+            window.flamous.pages.back()
+            window.clickLock = false
+          }
+        })
+
+        spring({
+          from: handleX.get(),
+          to: '100%',
+          velocity: handleX.getVelocity() * 3
+        }).start(handleX)
       } else {
         spring({
           from: handleX.get(),
@@ -261,30 +274,13 @@ const Page = nestable(
       class='page'
       key={props.key}
       oncreate={!props.hasOwnProperty('nonInteractive') && actions.makeInteractive}
-      onremove={(element, done) => {
-      // Prevent clicking links as this somehow screws up hyperapp (when switchign to a new url before the slide-out animation is finished)
-      // still not ideal when user is navigating with browser back/forward buttons
-        window.clickLock = true
-
-        element.handleX.subscribe((val) => {
-          if (val.replace('%', '') >= 100) {
-            element.handleX.stop()
-            done()
-            window.clickLock = false
-          }
-        })
-
-        spring({
-          from: element.handleX.get(),
-          to: '100%',
-          velocity: element.handleX.getVelocity() * 3
-        }).start(element.handleX)
-      }}>
+    >
       <div style={{paddingBottom: '6.5em'}}>
         {console.log(children)}
         {children}
       </div>
     </StyledPage>
-  })
+  },
+  'flamous-page')
 
-export default Page
+export default (props, children) => <Page {...props} onremove={(event) => { console.log('test') }}>{children}</Page>
