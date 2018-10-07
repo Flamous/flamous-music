@@ -18,8 +18,9 @@ const ImageViewerStyles = style('div')({
 })
 
 const Image = style('img')({
-  borderRadius: '100%',
-  transition: 'border-radius 150ms linear',
+  borderRadius: '5px',
+  opacity: '0.01',
+  transition: 'opacity 100ms linear',
   width: '500px',
   maxWidth: '100%'
 })
@@ -101,7 +102,8 @@ function start (data) {
   let handleXY = value({x: invertX, y: invertY}, ({x, y}) => handleStyler.set({x, y}))
 
   data.element.style.transformOrigin = 'center'
-  data.element.style.borderRadius = '3px'
+  // data.element.style.borderRadius = '3px'
+  data.element.style.opacity = '1'
 
   // PLAY
   spring({
@@ -175,7 +177,7 @@ function start (data) {
 }
 
 const ImageViewer = (props) => {
-  return <ImageViewerStyles oncreate={(elem) => { elem.style.backgroundColor = '#212121' }}>
+  return <ImageViewerStyles oncreate={(elem) => { elem.style.backgroundColor = 'rgba(0, 0, 0, 0.85)' }}>
     <div style={{width: '500px', maxWidth: '100%', textAlign: 'right'}}>
       <span style={{color: 'white', padding: '1em', transform: 'translateY(-1em)', display: 'inline-block', fontWeight: 'bold'}} onclick={window.flamous.imageViewer.hideImageViewer}>CLOSE</span>
     </div>
