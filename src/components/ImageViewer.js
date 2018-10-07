@@ -1,6 +1,7 @@
 import { h } from 'hyperapp'
 import style from '../style'
 import { spring, styler, value, listen, multitouch, action, transform } from 'popmotion'
+import closeImage from '../assets/close_white.svg'
 
 const {applyOffset} = transform
 
@@ -188,7 +189,7 @@ function fadeOut (element, done) {
 const ImageViewer = (props) => {
   return <ImageViewerStyles onremove={fadeOut} oncreate={(elem) => { elem.style.backgroundColor = 'rgba(0, 0, 0, 0.85)' }}>
     <div style={{width: '500px', maxWidth: '100%', textAlign: 'right'}}>
-      <span style={{color: 'white', padding: '1em', transform: 'translateY(-1em)', display: 'inline-block', fontWeight: 'bold'}} onclick={window.flamous.imageViewer.hideImageViewer}>CLOSE</span>
+      <span title='Close' style={{color: 'white', padding: '0.6em', transform: 'translateY(-1em)', display: 'inline-block', fontWeight: 'bold'}} onclick={window.flamous.imageViewer.hideImageViewer}><img style={{height: '2.25em'}} src={closeImage} /></span>
     </div>
     <Image src={props.image} oncreate={(elem) => start({element: elem, bounds: props.bounds})} />
   </ImageViewerStyles>
