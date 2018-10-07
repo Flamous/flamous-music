@@ -8,7 +8,7 @@ const ImageViewerStyles = style('div')({
   height: '100%',
   width: '100%',
   backgroundColor: 'rgba(0, 0, 0, 0)',
-  transition: 'background-color 100ms linear',
+  transition: 'background-color 100ms linear, opacity 100ms linear',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -178,8 +178,15 @@ function start (data) {
   //   })
 }
 
+function fadeOut (element, done) {
+  element.addEventListener('transitionend', () => {
+    done()
+  })
+  element.style.opacity = '0'
+}
+
 const ImageViewer = (props) => {
-  return <ImageViewerStyles oncreate={(elem) => { elem.style.backgroundColor = 'rgba(0, 0, 0, 0.85)' }}>
+  return <ImageViewerStyles onremove={fadeOut} oncreate={(elem) => { elem.style.backgroundColor = 'rgba(0, 0, 0, 0.85)' }}>
     <div style={{width: '500px', maxWidth: '100%', textAlign: 'right'}}>
       <span style={{color: 'white', padding: '1em', transform: 'translateY(-1em)', display: 'inline-block', fontWeight: 'bold'}} onclick={window.flamous.imageViewer.hideImageViewer}>CLOSE</span>
     </div>
