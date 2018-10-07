@@ -109,15 +109,17 @@ function start (data) {
   spring({
     from: handleScale.get(),
     to: 1,
-    damping: 10,
-    mass: 0.5
+    damping: 15,
+    mass: 0.8,
+    stiffness: 120
   }).start(handleScale)
 
   spring({
     from: handleXY.get(),
     to: 0,
-    damping: 10,
-    mass: 0.5
+    damping: 15,
+    mass: 0.8,
+    stiffness: 120
   }).start(handleXY)
 
   // let touchDragSub
