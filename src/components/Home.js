@@ -92,9 +92,10 @@ const StyledPlay = style('span')({
 
 const TagLine = () => {
   return <StyledTagLine>
-    <h1 style={{fontSize: '3em', fontWeight: 'normal', maxWidth: '350px', lineHeight: 1.3}}>
+    <h1 style={{fontSize: '3em', fontWeight: 'normal', maxWidth: '350px', lineHeight: '1.3'}}>
       The best of Public Domain music.
     </h1>
+    <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.3', margin: '-1.5em 0 2em'}}>Listen to truly copyright free songs. Share, mix, download and cover.</p>
     <div>
       <StyledPlay onclick={window.flamous.playPause}>
         <img height='36' src={playImage} /> Play some
