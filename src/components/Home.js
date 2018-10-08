@@ -134,6 +134,39 @@ const Home = (props) => (context) => {
         }
 
       </Gallery>
+      <div style={{margin: '2em auto', maxWidth: '1000px', padding: '1em'}}>
+        <h2>
+          Submit your songs
+        </h2>
+        <p>
+          You can sumbmit your music to become available on Flamous Music
+        </p>
+        <span style={{backgroundColor: '#007AFF', borderRadius: '100px', display: 'inline-block'}}>
+          <a
+            style={{color: 'white', padding: '0.7em 1.2em', display: 'inline-block'}}
+            href='https://docs.google.com/forms/d/e/1FAIpQLSdelZNDeZAB-VjMzNs-H7f4X0aFyyaQ61xEJ_2lijic725KLQ/viewform'
+            target='_blank'
+            rel='noopener'>
+            Submit Songs
+          </a>
+        </span>
+      </div>
+      <div style={{margin: '2em auto', maxWidth: '1000px', padding: '1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
+        <h2>
+          Get E-Mail updates
+        </h2>
+        <link href='//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css' rel='stylesheet' type='text/css' />
+        <div id='mc_embed_signup'>
+          <form action='https://flamous.us19.list-manage.com/subscribe/post?u=2c3e676f85f7cce3cad163b48&amp;id=83387ae973' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' class='validate' target='_blank' novalidate>
+            <div id='mc_embed_signup_scroll'>
+              <label for='mce-EMAIL'>Get notified when new music arrives!</label>
+              <input type='email' value='' name='EMAIL' class='email' id='mce-EMAIL' placeholder='email address' required />
+              <div style='position: absolute; left: -5000px;' aria-hidden='true'><input type='text' name='b_2c3e676f85f7cce3cad163b48_83387ae973' tabindex='-1' value='' /></div>
+              <div class='clear'><input type='submit' value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button' /></div>
+            </div>
+          </form>
+        </div>
+      </div>
       {/* <Gallery
         heading='Featured Artists'>
         {artists.map((item, index) => {
@@ -142,7 +175,7 @@ const Home = (props) => (context) => {
           </Link>
         })}
       </Gallery> */}
-      <p style={{maxWidth: '500px', margin: '0 auto', padding: '0 2em', textAlign: 'center'}}>
+      {/* <p style={{maxWidth: '500px', margin: '0 auto', padding: '0 2em', textAlign: 'center'}}>
         <p>
         We see Public Domain content as the future of creative art. Music is no exception.<br /><br />
         Share, mix, download or cover music you discover on Flamous.
@@ -150,7 +183,7 @@ const Home = (props) => (context) => {
         <Link to='/about' style={{display: 'flex', justifyContent: 'center'}}>
           <span style={{display: 'inline-block'}}>About Flamous</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
         </Link>
-      </p>
+      </p> */}
     </Page>
   )
 }
