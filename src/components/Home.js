@@ -134,12 +134,12 @@ const Home = (props) => (context) => {
         }
 
       </Gallery>
-      <div style={{margin: '2em auto', maxWidth: '1000px', padding: '1em'}}>
+      <div style={{margin: '3em auto', maxWidth: '1000px', padding: '1em'}}>
         <h2>
           Submit your songs
         </h2>
-        <p>
-          You can sumbmit your music to become available on Flamous Music
+        <p style={{width: '32em'}}>
+          Public Domain enables creative opportunities for people who create amazing content and bring your music to a larger audience. Make your music heard.
         </p>
         <span style={{backgroundColor: '#007AFF', borderRadius: '100px', display: 'inline-block'}}>
           <a
@@ -151,18 +151,20 @@ const Home = (props) => (context) => {
           </a>
         </span>
       </div>
-      <div style={{margin: '2em auto', maxWidth: '1000px', padding: '1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
+      <div style={{margin: '3em auto', maxWidth: '1000px', padding: '3em 1em 1em 1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
         <h2>
           Get E-Mail updates
         </h2>
-        <link href='//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css' rel='stylesheet' type='text/css' />
+        {/* <link href='//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css' rel='stylesheet' type='text/css' /> */}
         <div id='mc_embed_signup'>
           <form action='https://flamous.us19.list-manage.com/subscribe/post?u=2c3e676f85f7cce3cad163b48&amp;id=83387ae973' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' class='validate' target='_blank' novalidate>
-            <div id='mc_embed_signup_scroll'>
-              <label for='mce-EMAIL'>Get notified when new music arrives!</label>
-              <input type='email' value='' name='EMAIL' class='email' id='mce-EMAIL' placeholder='email address' required />
-              <div style='position: absolute; left: -5000px;' aria-hidden='true'><input type='text' name='b_2c3e676f85f7cce3cad163b48_83387ae973' tabindex='-1' value='' /></div>
-              <div class='clear'><input type='submit' value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button' /></div>
+            <div style={{textAlign: 'left'}} id='mc_embed_signup_scroll'>
+              <p>Get notified when new music arrives!</p>
+              <label style={{display: 'none'}} for='mce-EMAIL'>E-Mail address</label>
+              <input style={{width: '350px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.14)', borderRadius: '10px'}} type='email' value='' name='EMAIL' class='email' id='mce-EMAIL' placeholder='email address' required />
+              <div style='position: absolute; left: -5000px;' aria-hidden='true'>
+                <input type='text' name='b_2c3e676f85f7cce3cad163b48_83387ae973' tabindex='-1' value='' /></div>
+              <input style={{backgroundColor: 'transparent', border: 'none', color: '#007AFF', padding: '0.7em 1em'}} type='submit' value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button' />
             </div>
           </form>
         </div>
