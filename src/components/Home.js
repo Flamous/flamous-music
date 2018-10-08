@@ -31,25 +31,29 @@ const ArtistStyle = style(Link)({
   padding: '1em',
   '> img': {
     borderRadius: '100%',
-    width: '10em',
-    height: '9.9em',
-    border: '1px solid rgba(0, 0, 0, 0.14)'
+    width: '7em',
+    height: '6.9em',
+    border: '1px solid rgba(0, 0, 0, 0.14)',
+    boxShadow: 'rgba(0, 0, 0, 0.14) 0px 2px 18px -5px'
   },
   ' .artist-line': {
-    fontSize: '1.2em',
-    padding: '0.1em 0.4em',
-    backgroundColor: 'rgba(251, 251, 251, 0.9)',
-    borderRadius: '10px',
-    transform: 'translateY(-1.2em)',
-    display: 'inline-block',
-    border: '1px solid rgba(0, 0, 0, 0.14)',
-    color: '#212121'
+    color: 'black',
+    fontWeight: 'bold'
+    // fontSize: '1.2em',
+    // padding: '0.1em 0.4em',
+    // backgroundColor: 'rgba(251, 251, 251, 0.9)',
+    // borderRadius: '10px',
+    // transform: 'translateY(-1.2em)',
+    // display: 'inline-block',
+    // border: '1px solid rgba(0, 0, 0, 0.14)',
+    // color: '#212121'
   },
   ' .secondary': {
-    color: '#212121',
-    transform: 'translateY(-1.2em)',
-    display: 'inline-block',
-    fontSize: '0.94em'
+    color: '#212121'
+    // color: '#212121',
+    // transform: 'translateY(-1.2em)',
+    // display: 'inline-block',
+    // fontSize: '0.94em'
   },
   '&:active': {
     backgroundColor: '#f0f0f0'
@@ -67,8 +71,8 @@ const StyledLogo = style('div')({
 
 const Logo = (props) => {
   return <StyledLogo>
-    <img style={{marginRight: '0.7em'}} src={flamousLogo} />
-    <span style={{fontSize: '1.7em', fontWeight: 'bold'}} >Flamous Music</span>
+    <img height='36' style={{marginRight: '0.7em'}} src={flamousLogo} />
+    <span style={{fontSize: '1.2em', fontWeight: 'bold'}} >Flamous Music</span>
   </StyledLogo>
 }
 
