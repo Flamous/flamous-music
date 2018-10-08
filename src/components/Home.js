@@ -3,10 +3,11 @@ import picostyle from 'picostyle'
 import artists from '../artists.js'
 import Page from './Page.js'
 import Gallery from './Gallery'
-import Header from './Header.js'
 import { Link } from '@hyperapp/router'
 import LazyImage from './LazyImage.js'
 import rightArrow from '../assets/blue_right.svg'
+import flamousLogo from '../assets/flamous_logo.svg'
+import playImage from '../assets/play.svg'
 
 const style = picostyle(h)
 
@@ -56,12 +57,63 @@ const ArtistStyle = style(Link)({
 })
 const Artist = ArtistStyle
 
+const StyledLogo = style('div')({
+  display: 'flex',
+  alignItems: 'center',
+  maxWidth: '1000px',
+  margin: '1.2em auto 1em',
+  padding: '0 1em'
+})
+
+const Logo = (props) => {
+  return <StyledLogo>
+    <img style={{marginRight: '0.7em'}} src={flamousLogo} />
+    <span style={{fontSize: '1.7em', fontWeight: 'bold'}} >Flamous Music</span>
+  </StyledLogo>
+}
+
+const StyledTagLine = style('div')({
+  maxWidth: '1000px',
+  margin: '5em auto 3em',
+  padding: '0 1em'
+})
+const StyledPlay = style('span')({
+  // display: 'inline-block',
+  padding: '0.5em 1em 0.5em 0.5em',
+  borderRadius: '100px',
+  border: '2px solid #007AFF',
+  display: 'inline-flex',
+  alignItems: 'center'
+})
+
+const TagLine = () => {
+  return <StyledTagLine>
+    <h1 style={{fontSize: '3em', fontWeight: 'normal', maxWidth: '350px', lineHeight: 1.3}}>
+      The best of Public Domain music.
+    </h1>
+    <div>
+      <StyledPlay onclick={window.flamous.playPause}>
+        <img height='36' src={playImage} /> Play some
+      </StyledPlay>
+    </div>
+
+  </StyledTagLine>
+}
+
+const Header = style('header')({
+  margin: '1em 0 3em'
+})
+
 const Home = (props) => (context) => {
   let {updateAvailable} = context
   return (
     <Page nonInteractive key={props.key}>
       {updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
-      <Header title='Flamous Music' />
+      {/* <Header title='Flamous Music' /> */}
+      <Header>
+        <Logo />
+        <TagLine />
+      </Header>
       <Gallery heading='Artists'>
         {
           artists.map((artist, index) => {
