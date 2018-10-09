@@ -36,6 +36,15 @@ const SongSubmit = () => (context) => {
       <p>
         More info about song submit
       </p>
+      <span style={{backgroundColor: '#007AFF', borderRadius: '100px', display: 'inline-block'}}>
+        <a
+          style={{color: 'white', padding: '0.7em 1.2em', display: 'inline-block'}}
+          href='https://docs.google.com/forms/d/e/1FAIpQLSdelZNDeZAB-VjMzNs-H7f4X0aFyyaQ61xEJ_2lijic725KLQ/viewform'
+          target='_blank'
+          rel='noopener'>
+              Submit Songs
+        </a>
+      </span>
     </Wrapper>
   </Page>
 }
