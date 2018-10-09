@@ -79,10 +79,11 @@ const Logo = (props) => {
 const StyledTagLine = style('div')({
   maxWidth: '1000px',
   margin: '5em auto 3em',
-  padding: '0 1em'
+  padding: '0 1em',
+  display: 'flex',
+  flexWrap: 'wrap'
 })
 const StyledPlay = style('span')({
-  // display: 'inline-block',
   padding: '0.5em 1em 0.5em 0.5em',
   borderRadius: '100px',
   border: '2px solid #007AFF',
@@ -92,11 +93,13 @@ const StyledPlay = style('span')({
 
 const TagLine = () => {
   return <StyledTagLine>
-    <h1 style={{fontSize: '3em', fontWeight: 'normal', maxWidth: '350px', lineHeight: '1.3'}}>
-      The best of Public Domain music.
-    </h1>
-    <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.3', margin: '-1.5em 0 2em'}}>Listen to truly copyright free songs. Share, mix, download and cover.</p>
     <div>
+      <h1 style={{fontSize: '3em', fontWeight: 'normal', maxWidth: '350px', lineHeight: '1.3'}}>
+        The best of Public Domain music.
+      </h1>
+      <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.3', margin: '-1.5em 0 2em'}}>Listen to truly copyright free songs. Share, mix, download and cover.</p>
+    </div>
+    <div style={{alignSelf: 'flex-end', marginBottom: '2.5em'}}>
       <StyledPlay onclick={window.flamous.playPause}>
         <img height='36' src={playImage} /> Play some
       </StyledPlay>
@@ -114,7 +117,6 @@ const Home = (props) => (context) => {
   return (
     <Page nonInteractive key={props.key}>
       {updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
-      {/* <Header title='Flamous Music' /> */}
       <Header>
         <Logo />
         <TagLine />
@@ -149,7 +151,6 @@ const Home = (props) => (context) => {
         <h2>
           Get E-Mail updates
         </h2>
-        {/* <link href='//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css' rel='stylesheet' type='text/css' /> */}
         <div id='mc_embed_signup'>
           <form action='https://flamous.us19.list-manage.com/subscribe/post?u=2c3e676f85f7cce3cad163b48&amp;id=83387ae973' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' class='validate' target='_blank' novalidate>
             <div style={{textAlign: 'left'}} id='mc_embed_signup_scroll'>
