@@ -17,33 +17,35 @@ Flamous Music is built with many great technologies, which we are very grateful 
 
 There are several things we incorporate that one might not expect from a typical web app. These little things are very important to us and we will showcase some of them here.
 
-**Swipe interactions**
+### Swipe interactions
 
 Flamous Music implements several advanced swipe gestures where users normally would not expect such on a mobile website, but are common sense on native platforms. Our goal is to close the gap between the native and web platform and especially leverage all of the web's best features.
 
-Page swipe back
+**Page swipe back:**
 
 ![](readme_assets/SwipeBack.gif)
 
-TrackBar back/forward
+
+**TrackBar back/forward:**
 
 ![](readme_assets/TrackBar.gif)
 
-StreamView swipe down
+
+**StreamView swipe down:**
 
 ![](readme_assets/StreamView.gif)
 
-**Navigation**
+### Navigation
 
-Routing
-
-Stacking
+**Routing && Stacking:**
 
 ![](readme_assets/Stacking.gif)
 
-Sticky (dynamic) header
+
+**Sticky (dynamic) header:**
 
 ![](readme_assets/DynamicHeader.gif)
+
 
 **Modern features**
 
