@@ -147,6 +147,7 @@ const Home = (props) => (context) => {
           <span style={{display: 'inline-block'}}>Submit Songs</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
         </Link>
       </div>
+
       <div style={{margin: '3em auto', maxWidth: '1000px', padding: '3em 1em 1em 1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
         <h2>
           Get E-Mail updates
@@ -165,6 +166,14 @@ const Home = (props) => (context) => {
             </div>
           </form>
         </div>
+      </div>
+
+      <div style={{margin: '3em auto -6.5em', maxWidth: '1000px', padding: '3em 1em 1em 1em'}}>
+        <p>
+          <Link to='/about' style={{display: 'flex'}}>
+            <span style={{display: 'inline-block'}}>About Flamous</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
+          </Link>
+        </p>
       </div>
       {/* <Gallery
         heading='Featured Artists'>
