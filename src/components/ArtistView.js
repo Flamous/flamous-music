@@ -163,7 +163,6 @@ let Album = (props) => (context) => {
         <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Singles</h3>
         <PlayAllButton />
       </div>
-      <Link to='/about'>Demo Link (About)</Link>
       <SongList songs={songs} />
     </div>
     : <div>
