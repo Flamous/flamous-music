@@ -113,7 +113,7 @@ const Header = style('header')({
 })
 
 const Home = (props) => (context) => {
-  let {updateAvailable} = context
+  let {updateAvailable, installPrompt} = context
   return (
     <Page nonInteractive key={props.key}>
       {updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
@@ -170,10 +170,14 @@ const Home = (props) => (context) => {
 
       <div style={{margin: '3em auto -6.5em', maxWidth: '1000px', padding: '3em 1em 1em 1em'}}>
         <p>
-          <Link to='/about' style={{display: 'flex'}}>
+          <Link to='/about' style={{display: 'inline-flex'}}>
             <span style={{display: 'inline-block'}}>About Flamous</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
           </Link>
         </p>
+        {console.log(installPrompt)}
+        {installPrompt && <p onclick={() => installPrompt.prompt()}>
+          Add to homescreen
+        </p>}
       </div>
       {/* <Gallery
         heading='Featured Artists'>

@@ -147,7 +147,8 @@ const flamous = app(
     },
     scrubBar: {
       visible: false
-    }
+    },
+    installPrompt: null
   },
   {
     location: location.actions,
@@ -268,6 +269,11 @@ const flamous = app(
           visible: true
         }
       }
+    },
+    setInstallPromt: (prop) => {
+      return {
+        installPromt: prop
+      }
     }
   },
   (state, actions) => (_, setContext) => {
@@ -333,6 +339,11 @@ window.Amplitude.audio().addEventListener('timeupdate', (event) => {
 })
 window.Amplitude.audio().addEventListener('durationchange', (event) => {
   window.flamous.playingContext.setDuration(event.target.duration)
+})
+window.addEventListener('beforeinstallprompt', function (event) {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
+  event.preventDefault()
+  flamous.setInstallPromt(event)
 })
 
 location.subscribe(flamous.location)
