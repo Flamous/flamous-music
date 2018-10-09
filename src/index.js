@@ -144,11 +144,15 @@ const flamous = app(
     },
     streamView: {
       isActive: false
+    },
+    scrubBar: {
+      visible: false
     }
   },
   {
     location: location.actions,
-    playPause: () => {
+    playPause: () => (state, actions) => {
+      if (!state.scrubBar.visible) actions.scrubBar.show()
       if (!Amplitude.audio().paused) {
         Amplitude.pause()
       } else {
@@ -257,18 +261,23 @@ const flamous = app(
           duration
         }
       }
+    },
+    scrubBar: {
+      show: () => {
+        return {
+          visible: true
+        }
+      }
     }
   },
   (state, actions) => (_, setContext) => {
-    let {imageViewer, pages} = state
+    let {imageViewer, pages, scrubBar} = state
     let context = Object.assign({}, state, {actions: actions})
+    delete context.scrubBar
 
     setContext(context)
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' />
-      <ScrubBar
-        key='scrub-bar'
-      />
 
       {
         pages.stack.map((item) => {
@@ -291,7 +300,9 @@ const flamous = app(
       <Route parent path='/song-submit' render={(props) => {
         return <Container key='SongSubmit' {...props} page={SongSubmit} name='SongSubmit' />
       }} />
-
+      {scrubBar.visible && <ScrubBar
+        key='scrub-bar'
+      />}
       {
         imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
       }

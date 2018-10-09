@@ -53,6 +53,7 @@ const PlayAllButton = (props) => {
     !window.Amplitude.getShuffle() && window.Amplitude.setShuffle()
     window.Amplitude.next()
     window.Amplitude.play()
+    window.flamous.scrubBar.show()
   }}>
     <img src={playImage} style={{paddingRight: '0.35em'}} />
     Shuffle All
@@ -107,7 +108,7 @@ const ListItem = (props) => {
   </StyledListItem>
 }
 
-const SongList = (props) => {
+const SongList = (props) => (context) => {
   return <SongListStyle>
     <ul>
       {
@@ -115,6 +116,7 @@ const SongList = (props) => {
           return <ListItem onclick={() => {
             window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
             window.Amplitude.playSongAtIndex(index)
+            context.actions.scrubBar.show()
           }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
         })
       }

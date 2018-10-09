@@ -115,7 +115,7 @@ const Header = nestable(
         ? <span class='back'>
           <Link style={{display: 'flex', alignItems: 'center'}} to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
           <span style={{textAlign: 'center', fontWeight: 'bold', opacity: '0', transition: 'opacity 100ms linear 60ms'}} class={`${state.isHeaderHidden ? 'show' : ''}`}>{props.title}</span>
-          {updateAvailable ? <props.updateButton /> : ''}
+          <span>{updateAvailable ? <props.updateButton /> : ''}</span>
         </span>
         : ''}
       <header oncreate={actions.initObserver}>
