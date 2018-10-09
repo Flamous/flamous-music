@@ -238,12 +238,14 @@ const Page = nestable(
 
       if (!isGoingBack) {
         window.clickLock = true
+        let location = window.flamous.getState().location
+        let back = location.previous !== location.pathname ? location.previous : '/'
 
         // BUG: onremove events are not fired! That's why we finish the animation here and not in the onremove handler
         handleX.subscribe((val) => {
           if (val.replace('%', '') >= 100) {
             handleX.stop()
-            window.flamous.pages.back()
+            back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back()
             window.clickLock = false
           }
         })

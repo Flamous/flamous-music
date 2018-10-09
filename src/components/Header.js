@@ -2,7 +2,6 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import { Link } from '@hyperapp/router'
 import leftArrow from '../public/blue_left.svg'
-// import style from '../style'
 import { nestable } from 'hyperapp-context'
 
 const style = picostyle(h)
@@ -14,16 +13,6 @@ const HeaderStyles = style('div')((props) => ({
   position: 'relative',
   display: 'contents',
   textAlign: props.alignment === 'center' ? 'center' : 'left',
-  // '@media (min-width: 1000px)': {
-  //   fontSize: '1.2rem'
-  // },
-  // ' .title': {
-  //   margin: '0px',
-  //   padding: '1.2em 0.4em 0.24em',
-  //   fontSize: '2.5em',
-  //   backgroundColor: '#fdfdfd',
-  //   borderBottom: '1px solid rgba(0, 0, 0, 0.04)'
-  // },
   ' .sub': {
     marginTop: '-2em',
     lineHeight: '2em'
@@ -97,7 +86,6 @@ const Header = nestable(
       } else {
         setHeaderHidden(false)
       }
-      console.log(changes[0].intersectionRatio)
     },
     initObserver: (elem) => ({threshold}, {observerChange}) => {
       let observer = null
@@ -121,10 +109,11 @@ const Header = nestable(
   },
   (state, actions) => (props, children) => (context) => {
     let {updateAvailable} = context
+    let back = context.location.previous !== context.location.pathname ? context.location.previous : '/'
     return <HeaderStyles>
       {props.back
         ? <span class='back'>
-          <Link style={{display: 'flex', alignItems: 'center'}} to={context.location.previous}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
+          <Link style={{display: 'flex', alignItems: 'center'}} to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
           <span style={{textAlign: 'center', fontWeight: 'bold', opacity: '0', transition: 'opacity 100ms linear 60ms'}} class={`${state.isHeaderHidden ? 'show' : ''}`}>{props.title}</span>
           {updateAvailable ? <props.updateButton /> : ''}
         </span>
