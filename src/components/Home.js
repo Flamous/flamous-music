@@ -141,15 +141,11 @@ const Home = (props) => (context) => {
         <p style={{maxWidth: '32em'}}>
           Public Domain enables creative opportunities for people who create amazing content and bring your music to a larger audience. Make your music heard.
         </p>
-        <span style={{backgroundColor: '#007AFF', borderRadius: '100px', display: 'inline-block'}}>
-          <a
-            style={{color: 'white', padding: '0.7em 1.2em', display: 'inline-block'}}
-            href='https://docs.google.com/forms/d/e/1FAIpQLSdelZNDeZAB-VjMzNs-H7f4X0aFyyaQ61xEJ_2lijic725KLQ/viewform'
-            target='_blank'
-            rel='noopener'>
-            Submit Songs
-          </a>
-        </span>
+        {/* <span style={{backgroundColor: '#007AFF', borderRadius: '100px', display: 'inline-block'}}> */}
+        <Link to='/song-submit' style={{display: 'flex'}}>
+          <span style={{display: 'inline-block'}}>Submit Songs</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
+        </Link>
+        {/* </span> */}
       </div>
       <div style={{margin: '3em auto', maxWidth: '1000px', padding: '3em 1em 1em 1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
         <h2>
