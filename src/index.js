@@ -11,13 +11,13 @@ import '../node_modules/native-web-app/native.css'
 import 'babel-polyfill'
 
 import { location, Route } from '@hyperapp/router'
-import PlaylistView from './components/PlaylistView.js'
 import ArtistView from './components/ArtistView.js'
 
 import ImageViewer from './components/ImageViewer.js'
 import StreamView from './components/StreamView.js'
 
 import { withContext } from 'hyperapp-context'
+import SongSubmit from './elements/SongSubmit.js'
 
 const app = withContext(_app)
 
@@ -287,6 +287,9 @@ const flamous = app(
       }} />
       <Route parent path='/stream-view' render={(props) => {
         return <Container key='StreamView' {...props} page={StreamView} name='StreamView' />
+      }} />
+      <Route parent path='/song-submit' render={(props) => {
+        return <Container key='SongSubmit' {...props} page={SongSubmit} name='SongSubmit' />
       }} />
 
       {
