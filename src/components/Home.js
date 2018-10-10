@@ -8,6 +8,10 @@ import LazyImage from './LazyImage.js'
 import rightArrow from '../assets/blue_right.svg'
 import flamousLogo from '../assets/flamous_logo.svg'
 import playImage from '../assets/play.svg'
+import christianImage from '../assets/Christian.jpg'
+import timonImage from '../assets/Timon.jpg'
+import twitterImage from '../assets/twitter.svg'
+import githubImage from '../assets/github.svg'
 
 const style = picostyle(h)
 
@@ -174,6 +178,35 @@ const Home = (props) => (context) => {
             </div>
           </form>
         </div>
+      </div>
+
+      <div style={{margin: '3em auto', maxWidth: '1000px', padding: '1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
+        <h2>
+          Developers
+        </h2>
+        <p style={{display: 'flex', alignItems: 'center'}}>
+          <img style={{width: '4em', borderRadius: '100%', marginRight: '1em'}} src={timonImage} />
+          <div>
+            <b>Timon Röhrbacher</b><br />
+            Salesman
+          </div>
+          <a style={{padding: '1em'}} target='_blank' rel='noopener' href={'https://twitter.com/TimonRooe'}>
+            <img style={{width: '2em'}} src={twitterImage} />
+          </a>
+        </p>
+        <p style={{display: 'flex', alignItems: 'center'}}>
+          <img style={{width: '4em', borderRadius: '100%', marginRight: '1em'}} src={christianImage} />
+          <div>
+            <b>Christian Kaindl</b><br />
+            Lead Developer
+          </div>
+          <a style={{padding: '1em'}} target='_blank' rel='noopener' href={'https://twitter.com/christiankaindl'}>
+            <img style={{width: '2em'}} src={twitterImage} />
+          </a>
+          <a style={{padding: '1em'}} target='_blank' rel='noopener' href={'https://github.com/christiankaindl'}>
+            <img style={{width: '1.5em'}} src={githubImage} />
+          </a>
+        </p>
       </div>
 
       <div style={{margin: '3em auto -6.5em', maxWidth: '1000px', padding: '3em 1em 1em 1em'}}>
