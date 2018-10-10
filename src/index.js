@@ -23,6 +23,13 @@ const app = withContext(_app)
 
 nativeWebApp()
 
+window.addEventListener('beforeinstallprompt', function (event) {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
+  console.log('Before install prompt')
+  event.preventDefault()
+  window.installPrompt = event
+})
+
 window.addEventListener('touchend', unlockiOSAudio)
 
 function unlockiOSAudio () { // On iOs, audio has to be unlocked first by a user action. Thanks to Simon_Weaver on StackOverflow: https://stackoverflow.com/questions/12517000/no-sound-on-ios-6-web-audio-api
@@ -71,12 +78,6 @@ if ('serviceWorker' in navigator) {
       })
   })
 }
-
-window.addEventListener('beforeinstallprompt', function (event) {
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
-  event.preventDefault()
-  window.installPrompt = event
-})
 
 window.Amplitude = Amplitude
 
