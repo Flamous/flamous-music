@@ -74,7 +74,7 @@ const Logo = (props) => {
   return <StyledLogo>
     <div style={{display: 'flex', alignItems: 'center'}}>
       <img height='36' style={{marginRight: '0.7em'}} src={flamousLogo} />
-      <span style={{fontSize: '1.2em', fontWeight: 'bold'}} >Flamous Music</span>
+      <span style={{fontSize: '1.2em', fontWeight: 'normal'}} >Flamous Music</span>
 
     </div>
     <Link to='/about' style={{display: 'inline-flex'}}>
@@ -85,13 +85,13 @@ const Logo = (props) => {
 
 const StyledTagLine = style('div')({
   maxWidth: '1000px',
-  margin: '5em auto 3em',
+  margin: '4em auto 3em',
   padding: '0 1em',
   display: 'flex',
   flexWrap: 'wrap'
 })
 const StyledPlay = style('span')({
-  padding: '0.5em 1em 0.5em 0.5em',
+  padding: '0.5em',
   borderRadius: '100px',
   border: '2px solid #007AFF',
   display: 'inline-flex',
@@ -101,15 +101,16 @@ const StyledPlay = style('span')({
 const TagLine = () => {
   return <StyledTagLine>
     <div>
-      <h1 style={{fontSize: '3em', fontWeight: 'normal', maxWidth: '350px', lineHeight: '1.3'}}>
+      <h1 style={{fontSize: '3em', fontWeight: 'bold', maxWidth: '350px', lineHeight: '1.3'}}>
         The best of Public Domain music.
       </h1>
-      <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.3', margin: '-1.5em 0 2em'}}>Listen to truly copyright free songs. Share, mix, download and cover.</p>
+      <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.35', margin: '-1.5em 0 2em'}}>Listen to truly copyright free songs. Share, mix, download and cover.</p>
     </div>
-    <div style={{alignSelf: 'flex-end', marginBottom: '2.5em'}}>
+    <div style={{alignSelf: 'flex-end', marginBottom: '2.5em', display: 'flex', alignItems: 'center'}}>
       <StyledPlay onclick={window.flamous.playPause}>
-        <img height='36' src={playImage} /> Play some
+        <img height='36' src={playImage} />
       </StyledPlay>
+      {/* &lt;- Play some music */}
     </div>
 
   </StyledTagLine>

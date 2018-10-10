@@ -273,6 +273,7 @@ const Page = nestable(
   },
   (state, actions) => (props, children) => {
     return <StyledPage
+      {...props}
       class='page'
       key={props.key}
       oncreate={!props.hasOwnProperty('nonInteractive') && actions.makeInteractive}
