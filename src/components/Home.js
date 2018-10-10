@@ -178,8 +178,8 @@ const Home = (props) => (context) => {
 
       <div style={{margin: '3em auto -6.5em', maxWidth: '1000px', padding: '3em 1em 1em 1em'}}>
         <p />
-        {console.log(installPrompt)}
-        {installPrompt && <p onclick={() => installPrompt.prompt()}>
+        {console.log(window.installPrompt)}
+        {window.installPrompt && <p onclick={() => window.installPrompt.prompt()}>
           Add to homescreen
         </p>}
       </div>

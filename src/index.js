@@ -72,6 +72,12 @@ if ('serviceWorker' in navigator) {
   })
 }
 
+window.addEventListener('beforeinstallprompt', function (event) {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
+  event.preventDefault()
+  window.installPrompt = event
+})
+
 window.Amplitude = Amplitude
 
 const style = picostyle(h)
@@ -339,11 +345,6 @@ window.Amplitude.audio().addEventListener('timeupdate', (event) => {
 })
 window.Amplitude.audio().addEventListener('durationchange', (event) => {
   window.flamous.playingContext.setDuration(event.target.duration)
-})
-window.addEventListener('beforeinstallprompt', function (event) {
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
-  event.preventDefault()
-  flamous.setInstallPromt(event)
 })
 
 location.subscribe(flamous.location)
