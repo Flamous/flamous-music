@@ -7,7 +7,7 @@ import { Link } from '@hyperapp/router'
 import LazyImage from './LazyImage.js'
 import rightArrow from '../assets/blue_right.svg'
 import flamousLogo from '../assets/flamous_logo.svg'
-import playImage from '../assets/play.svg'
+import playImage from '../assets/play_blue.svg'
 import christianImage from '../assets/Christian.jpg'
 import timonImage from '../assets/Timon.jpg'
 import twitterImage from '../assets/twitter.svg'
@@ -95,11 +95,14 @@ const StyledTagLine = style('div')({
   flexWrap: 'wrap'
 })
 const StyledPlay = style('span')({
-  padding: '0.5em',
+  padding: '0.5em 1.38em 0.5em 0.5em',
   borderRadius: '100px',
-  border: '2px solid #007AFF',
+  // border: '2px solid #007AFF',
   display: 'inline-flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  fontSize: '1.2em',
+  fontWeight: 'bold',
+  color: '#007aff'
 })
 
 const TagLine = () => {
@@ -110,11 +113,11 @@ const TagLine = () => {
       </h1>
       <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.35', margin: '-1.5em 0 2em'}}>Listen to truly copyright free songs. Share, mix, download and cover.</p>
     </div>
-    <div style={{alignSelf: 'flex-end', marginBottom: '2.5em', display: 'flex', alignItems: 'center'}}>
+    <div style={{alignSelf: 'flex-end', marginBottom: '2.5em', display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center'}}>
       <StyledPlay onclick={window.flamous.playPause}>
         <img height='36' src={playImage} />
+        Play
       </StyledPlay>
-      {/* &lt;- Play some music */}
     </div>
 
   </StyledTagLine>
