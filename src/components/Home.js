@@ -180,7 +180,7 @@ const Home = (props) => (context) => {
         </div>
       </div>
 
-      <div style={{margin: '3em auto', maxWidth: '1000px', padding: '1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
+      <div style={{margin: '3em auto -6em', maxWidth: '1000px', padding: '1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
         <h2>
           Developers
         </h2>
@@ -210,7 +210,11 @@ const Home = (props) => (context) => {
       </div>
 
       <div style={{margin: '3em auto -6.5em', maxWidth: '1000px', padding: '3em 1em 1em 1em'}}>
-        <p />
+        <p style={{textAlign: 'center', lineHeight: '1.34'}}>
+          <a href='mailto:hello@flamous.io'>hello@flamous.io</a><br />
+          <a href='https://twitter.com/FlamousMusic' rel='noopener' target='_blank'>twitter.com/FlamousMusic</a>
+        </p>
+
         {console.log(window.installPrompt)}
         {window.installPrompt && <p onclick={() => window.installPrompt.prompt()}>
           Add to homescreen
