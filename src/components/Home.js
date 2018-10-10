@@ -66,13 +66,20 @@ const StyledLogo = style('div')({
   alignItems: 'center',
   maxWidth: '1000px',
   margin: '1.2em auto 1em',
-  padding: '0 1em'
+  padding: '0 1em',
+  justifyContent: 'space-between'
 })
 
 const Logo = (props) => {
   return <StyledLogo>
-    <img height='36' style={{marginRight: '0.7em'}} src={flamousLogo} />
-    <span style={{fontSize: '1.2em', fontWeight: 'bold'}} >Flamous Music</span>
+    <div style={{display: 'flex', alignItems: 'center'}}>
+      <img height='36' style={{marginRight: '0.7em'}} src={flamousLogo} />
+      <span style={{fontSize: '1.2em', fontWeight: 'bold'}} >Flamous Music</span>
+
+    </div>
+    <Link to='/about' style={{display: 'inline-flex'}}>
+      <span style={{display: 'inline-block'}}>About</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
+    </Link>
   </StyledLogo>
 }
 
@@ -113,10 +120,10 @@ const Header = style('header')({
 })
 
 const Home = (props) => (context) => {
-  let {updateAvailable, installPrompt} = context
+  let {installPrompt} = context
   return (
     <Page nonInteractive key={props.key}>
-      {updateAvailable ? <Button to='/about' text='Update Available' /> : ''}
+      {/* {updateAvailable ? <Button to='/about' text='Update Available' /> : ''} */}
       <Header>
         <Logo />
         <TagLine />
@@ -169,11 +176,7 @@ const Home = (props) => (context) => {
       </div>
 
       <div style={{margin: '3em auto -6.5em', maxWidth: '1000px', padding: '3em 1em 1em 1em'}}>
-        <p>
-          <Link to='/about' style={{display: 'inline-flex'}}>
-            <span style={{display: 'inline-block'}}>About Flamous</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
-          </Link>
-        </p>
+        <p />
         {console.log(installPrompt)}
         {installPrompt && <p onclick={() => installPrompt.prompt()}>
           Add to homescreen
