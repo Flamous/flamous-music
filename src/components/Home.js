@@ -185,7 +185,10 @@ const Home = (props) => (context) => {
           Developers
         </h2>
         <p style={{display: 'flex', alignItems: 'center'}}>
-          <img style={{width: '4em', borderRadius: '100%', marginRight: '1em'}} src={timonImage} />
+          <img onclick={(event) => {
+            let bounds = event.target.getBoundingClientRect()
+            window.flamous.imageViewer.showImageViewer({image: timonImage, bounds: bounds})
+          }} style={{width: '4em', borderRadius: '100%', marginRight: '1em', pointerEvents: 'auto'}} src={timonImage} />
           <div>
             <b>Timon Röhrbacher</b><br />
             Salesman
@@ -195,7 +198,10 @@ const Home = (props) => (context) => {
           </a>
         </p>
         <p style={{display: 'flex', alignItems: 'center'}}>
-          <img style={{width: '4em', borderRadius: '100%', marginRight: '1em'}} src={christianImage} />
+          <img onclick={(event) => {
+            let bounds = event.target.getBoundingClientRect()
+            window.flamous.imageViewer.showImageViewer({image: christianImage, bounds: bounds})
+          }} style={{width: '4em', borderRadius: '100%', marginRight: '1em', pointerEvents: 'auto'}} src={christianImage} />
           <div>
             <b>Christian Kaindl</b><br />
             Lead Developer
