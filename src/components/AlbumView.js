@@ -18,7 +18,16 @@ const Album = (props) => {
       })
   }
   return <div>
-    <Header title={title} />
+    <Header title={title} back={{text: 'Back', to: '/'}}>
+      <HeaderBold style={{textAlign: 'center'}}>
+        <HeaderImage square onclick={(event) => {
+          let bounds = event.target.getBoundingClientRect()
+          window.flamous.imageViewer.showImageViewer({image: songs[0].cover_art_url, bounds: bounds})
+        }} src={songs[0].cover_art_url} />
+        <p style={{fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem', textTransform: 'uppercase'}}>ALBUM</p>
+        {title}
+      </HeaderBold>
+    </Header>
     <SongList albumId={albumId} songs={songs} />
   </div>
 }

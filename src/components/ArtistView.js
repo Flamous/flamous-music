@@ -137,7 +137,7 @@ let Artist = (props) => (context) => {
         <PlayAllButton />
       </div>
       {songs && <SongList songs={songs} />}
-      {albums && <AlbumList url={props.location.pathname} albums={albums} />}
+      {albums && <AlbumList albums={albums} />}
     </div>
     : <div>
       <h2>Artist not found</h2>

@@ -47,13 +47,13 @@ const HeaderStyles = style('div')((props) => ({
   }
 }))
 
-const HeaderImageStyle = style('img')({
-  borderRadius: '100%',
-  width: '10rem',
-  height: '9.9rem',
+const HeaderImageStyle = style('img')((props) => ({
+  borderRadius: props.square ? '0px' : '100%',
+  width: props.square ? '15rem' : '10rem',
+  height: props.square ? '15rem' : '9.9rem',
   border: '1px solid rgba(0, 0, 0, 0.14)',
   pointerEvents: 'auto'
-})
+}))
 
 const HeaderImage = (props) => {
   return <div>
