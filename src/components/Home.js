@@ -90,7 +90,7 @@ const Logo = (props) => {
 
 const StyledTagLine = style('div')({
   maxWidth: '1000px',
-  margin: '4em auto 3em',
+  margin: '3em auto 3em',
   padding: '0 1em',
   display: 'flex',
   flexWrap: 'wrap'
@@ -115,7 +115,7 @@ const TagLine = () => (context) => {
       </h1>
       <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.35', margin: '-1.5em 0 2em'}}>Listen to truly copyright free songs. Share, mix, download and cover.</p>
     </div>
-    <div style={{alignSelf: 'flex-end', marginBottom: '2.5em', display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center'}}>
+    <div style={{alignSelf: 'flex-end', marginBottom: '-0.5em', display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center'}}>
       <StyledPlay onclick={window.flamous.playPause}>
         <img height='36' src={!playingState ? playImage : pauseImage} />
         {!playingState ? 'Play' : 'Pause'}
