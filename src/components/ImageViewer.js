@@ -21,7 +21,7 @@ const ImageViewerStyles = style('div')({
 const Image = style('img')({
   borderRadius: '5px',
   opacity: '0.01',
-  transition: 'opacity 100ms linear',
+  // transition: 'border-radius 250ms',
   width: '500px',
   maxWidth: '100%'
 })
@@ -103,7 +103,7 @@ function start (data) {
   let handleXY = value({x: invertX, y: invertY}, ({x, y}) => handleStyler.set({x, y}))
 
   data.element.style.transformOrigin = 'center'
-  // data.element.style.borderRadius = '3px'
+  data.element.style.borderRadius = '5px'
   data.element.style.opacity = '1'
 
   // PLAY
