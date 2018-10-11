@@ -62,11 +62,25 @@ const PlayAllButton = (props) => {
 
 const StyledAlbumThumbnail = style(Link)({
   width: '45%',
-  padding: '1.5em'
+  padding: '1.5em',
+  transition: 'transform 500ms',
+  '&:hover': {
+    transform: 'scale(1.05)'
+  },
+  '& > img': {
+    width: '100%',
+    borderRadius: '3px',
+    borderRight: '2px solid #636363',
+    boxShadow: 'rgba(0, 0, 0, 0.3) 0px 4px 25px 1px',
+    transition: 'box-shadow 500ms'
+  },
+  '&:hover img': {
+    boxShadow: 'rgba(0, 0, 0, 0.3) 0px 6px 35px 0px'
+  }
 })
 const AlbumThumbnail = (props) => {
   return <StyledAlbumThumbnail to={`/albums/${props.id}`}>
-    <img style={{width: '100%', borderRadius: '3px', border: '1px solid rgba(0, 0, 0, 0.2)', boxShadow: 'rgba(0, 0, 0, 0.3) 0px 4px 25px 1px'}} src={props.image} />
+    <img src={props.image} />
     <p style={{textAlign: 'center'}}>
       {props.name}
     </p>
