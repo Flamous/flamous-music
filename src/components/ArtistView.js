@@ -123,11 +123,38 @@ const SongList = (props) => (context) => {
     </ul>
   </SongListStyle>
 }
+const StyledAlbumThumbnail = style(Link)({
+  width: '45%',
+  padding: '1.5em'
+})
+const AlbumThumbnail = (props) => {
+  return <StyledAlbumThumbnail to={`/albums/${props.id}`}>
+    <img style={{width: '100%', borderRadius: '3px', border: '1px solid rgba(0, 0, 0, 0.2)', boxShadow: 'rgba(0, 0, 0, 0.3) 0px 4px 25px 1px'}} src={props.image} />
+    <p style={{textAlign: 'center'}}>
+      {props.name}
+    </p>
+  </StyledAlbumThumbnail>
+}
 
-let Album = (props) => (context) => {
+const StyledAlbumList = style('div')({})
+const AlbumList = (props) => {
+  return <StyledAlbumList>
+    {console.log(props)}
+    <h3>Albums</h3>
+    <div style={{display: 'flex', flexWrap: 'wrap'}}>
+      {props.albums.map((album) => {
+        console.log(album)
+        return <AlbumThumbnail id={album.amplitudeName} image={album.songs[0].cover_art_url} name={album.name} amplitudeName={album.amplitudeName} />
+      })}
+    </div>
+  </StyledAlbumList>
+}
+
+let Artist = (props) => (context) => {
   let {playingState, playingContext: {id}} = context
   let artist
   let songs
+  let albums
 
   switch (props.match.params.artistId) {
     case 'wowa':
@@ -140,7 +167,16 @@ let Album = (props) => (context) => {
       break
     case 'kimiko_ishizaka':
       artist = artists[1]
-      songs = kimikoSongs
+      // songs = kimikoSongs
+      albums = [
+        {
+          amplitudeName: 'open_goldberg_variations',
+          name: 'J​.​S. Bach: "Open" Goldberg Variations, BWV 988 (Piano)',
+          songs: kimikoSongs.filter((song) => {
+            return song.album === 'J​.​S. Bach: "Open" Goldberg Variations, BWV 988 (Piano)'
+          })
+        }
+      ]
       // import('../songs/kimiko_ishizaka').then((res) => {
       //   songs = res.default
       // })
@@ -163,7 +199,8 @@ let Album = (props) => (context) => {
         <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Singles</h3>
         <PlayAllButton />
       </div>
-      <SongList songs={songs} />
+      {songs && <SongList songs={songs} />}
+      {albums && <AlbumList url={props.location.pathname} albums={albums} />}
     </div>
     : <div>
       <h2>Artist not found</h2>
@@ -173,5 +210,5 @@ let Album = (props) => (context) => {
 }
 
 export default (props) => <Page>
-  <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Album {...matchProps} /> }} />
+  <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Artist {...matchProps} /> }} />
 </Page>

@@ -3,7 +3,8 @@ import Amplitude from 'amplitudejs'
 import picostyle from 'picostyle'
 import ScrubBar from './components/ScrubBar.js'
 import Home from './components/Home.js'
-import songList from './songs/wowa.js'
+import songListWowa from './songs/wowa.js'
+import songListKimiko from './songs/kimiko_ishizaka.js'
 import placeholder from './public/song_placeholder.svg'
 import About from './elements/About'
 import nativeWebApp from 'native-web-app'
@@ -18,6 +19,7 @@ import StreamView from './components/StreamView.js'
 
 import { withContext } from 'hyperapp-context'
 import SongSubmit from './elements/SongSubmit.js'
+import AlbumView from './components/AlbumView.js'
 
 const app = withContext(_app)
 
@@ -93,7 +95,13 @@ const AppShell = style('div')({
 
 Amplitude.setDebug(true)
 Amplitude.init({
-  songs: songList,
+  songs: [
+    ...songListWowa,
+    ...songListKimiko
+  ],
+  playlists: {
+    'open_goldberg_variations': [12, 13, 14]
+  },
   default_album_art: placeholder,
   shuffle_on: 'false',
   callbacks: {
@@ -133,9 +141,9 @@ const flamous = app(
     location: location.state,
     playingState: false,
     playingContext: {
-      artist: songList[0].artist,
-      name: songList[0].name,
-      cover_art_url: songList[0].cover_art_url || Amplitude.getDefaultAlbumArt(),
+      artist: songListWowa[0].artist,
+      name: songListWowa[0].name,
+      cover_art_url: songListWowa[0].cover_art_url || Amplitude.getDefaultAlbumArt(),
       id: 0,
       duration: 0
     },
@@ -313,6 +321,9 @@ const flamous = app(
       <Route parent path='/song-submit' render={(props) => {
         return <Container key='SongSubmit' {...props} page={SongSubmit} name='SongSubmit' />
       }} />
+      <Route parent path='/albums' render={(props) => {
+        return <Container key='Albumview' {...props} page={AlbumView} name='AlbumView' />
+      }} />
       {scrubBar.visible && <ScrubBar
         key='scrub-bar'
       />}
@@ -326,10 +337,10 @@ const flamous = app(
 
 if ('mediaSession' in navigator) {
   navigator.mediaSession.metadata = new window.MediaMetadata({
-    title: songList[0].name,
-    artist: songList[0].artist,
+    title: songListWowa[0].name,
+    artist: songListWowa[0].artist,
     artwork: [{
-      src: songList[0].cover_art_url
+      src: songListWowa[0].cover_art_url
     }]
   })
 
