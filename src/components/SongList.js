@@ -53,13 +53,17 @@ const ListItem = (props) => {
 }
 
 const SongList = (props) => (context) => {
+  // let { albumId } = props.albumId
+  // console.log("PROPS", props)
   return <SongListStyle>
     <ul>
       {
         props.songs.map((song, index) => {
           return <ListItem onclick={() => {
             window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
-            window.Amplitude.playSongAtIndex(index)
+            console.log('ALBUM ID: ', props.albumId)
+            // if (prpos)
+            props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playSongAtIndex(index)
             context.actions.scrubBar.show()
           }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
         })
