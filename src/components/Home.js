@@ -8,6 +8,7 @@ import LazyImage from './LazyImage.js'
 import rightArrow from '../assets/blue_right.svg'
 import flamousLogo from '../assets/flamous_logo.svg'
 import playImage from '../assets/play_blue.svg'
+import pauseImage from '../assets/pause_blue.svg'
 import christianImage from '../assets/Christian.jpg'
 import timonImage from '../assets/Timon.jpg'
 import twitterImage from '../assets/twitter.svg'
@@ -105,7 +106,8 @@ const StyledPlay = style('span')({
   color: '#007aff'
 })
 
-const TagLine = () => {
+const TagLine = () => (context) => {
+  let {playingState} = context
   return <StyledTagLine>
     <div>
       <h1 style={{fontSize: '3em', fontWeight: 'bold', maxWidth: '350px', lineHeight: '1.3'}}>
@@ -115,8 +117,8 @@ const TagLine = () => {
     </div>
     <div style={{alignSelf: 'flex-end', marginBottom: '2.5em', display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center'}}>
       <StyledPlay onclick={window.flamous.playPause}>
-        <img height='36' src={playImage} />
-        Play
+        <img height='36' src={!playingState ? playImage : pauseImage} />
+        {!playingState ? 'Play' : 'Pause'}
       </StyledPlay>
     </div>
 
