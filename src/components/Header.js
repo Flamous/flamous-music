@@ -22,7 +22,7 @@ const HeaderStyles = style('div')((props) => ({
   // padding: '3em 1em 0.7em',
   position: 'relative',
   display: 'contents',
-  textAlign: props.alignment === 'center' ? 'center' : 'left',
+  textAlign: props.alignment === 'center' ? 'center' : 'left'
   // ' .sub': {
   //   marginTop: '-2em',
   //   lineHeight: '2em'
@@ -62,7 +62,14 @@ const StyledHeaderNav = style('div')({
   height: '4rem',
   position: 'sticky',
   top: '0px',
-  backgroundColor: 'rgb(253, 253, 253)',
+  backgroundColor: 'rgba(253, 253, 253, 0.95)',
+  '@supports (backdrop-filter: blur(30px))': {
+    '&': {
+      backgroundColor: 'rgba(253, 253, 253, 0.6)',
+      backdropFilter: 'blur(30px)',
+      WebkitBackdropFilter: 'blur(30px)'
+    }
+  },
   '& > *': {
     width: '33%',
     alignItems: 'center',
@@ -85,7 +92,7 @@ const StyledHeaderNav = style('div')({
 
 const HeaderNav = (props, children) => {
   console.log(children)
-  return <StyledHeaderNav {...props}>
+  return <StyledHeaderNav {...props} class='webkit-sticky'>
     <div>
       {children[0] && children[0]}
     </div>
@@ -120,7 +127,7 @@ const HeaderBoldStyle = style('h1')({
   // fontSize: '2.5em',
   // font-size: calc(16px + 2 * ((100vw - 360px) / 768px));
   fontSize: 'calc(2.65em + 12*(100vw - 400px)/(1250 - 400))',
-  backgroundColor: '#fdfdfd',
+  backgroundColor: 'rgba(253, 253, 253, 0.95)',
   borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
   boxShadow: '0 0 0 1px #fdfdfd'
 })
