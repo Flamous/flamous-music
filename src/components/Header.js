@@ -52,9 +52,9 @@ const HeaderStyles = style('div')((props) => ({
   //     WebkitBackdropFilter: 'blur(30px)'
   //   }
   // },
-  ' .show': {
-    opacity: '1 !important'
-  }
+  // ' .show': {
+  //   opacity: '1 !important'
+  // }
 }))
 
 const StyledHeaderNav = style('div')({
@@ -73,10 +73,12 @@ const StyledHeaderNav = style('div')({
   },
   '& > *:nth-child(2)': {
     justifyContent: 'center',
-    transition: 'opacity 120ms',
+    transition: 'opacity 120ms'
+  },
+  '& > *:nth-child(2) > *': {
     opacity: '0'
   },
-  '&.show': {
+  '& .show': {
     opacity: '1'
   }
 })
