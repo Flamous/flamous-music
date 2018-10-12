@@ -113,7 +113,7 @@ const Header = nestable(
     return <HeaderStyles>
       {props.back
         ? <span class='back'>
-          <Link style={{display: 'flex', alignItems: 'center'}} to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</Link>
+          <a style={{display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
           <span style={{textAlign: 'center', fontWeight: 'bold', opacity: '0', transition: 'opacity 100ms linear 60ms'}} class={`${state.isHeaderHidden ? 'show' : ''}`}>{props.title}</span>
           <span>{updateAvailable ? <props.updateButton /> : ''}</span>
         </span>
