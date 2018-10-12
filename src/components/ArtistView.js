@@ -5,6 +5,7 @@ import Header, { HeaderBold, HeaderImage } from './Header'
 import { Route, Link } from '@hyperapp/router'
 import LazyLoad from 'vanilla-lazyload'
 import SongList from './SongList'
+import { nestable } from 'hyperapp-context'
 // import profilePic from '../assets/wowa.jpg'
 import artists from '../artists'
 
@@ -131,6 +132,41 @@ let Artist = (props) => (context) => {
   return out
 }
 
-export default (props) => <Page>
-  <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Artist {...matchProps} /> }} />
-</Page>
+export default nestable({
+  stuff: {
+    name: null,
+    content: null
+  }
+},
+{
+  stuff: {
+    addContent: (prop) => (state) => {
+      console.log(state)
+      if (state.name) return
+      console.log('ALSO')
+
+      return {
+        content: prop.content,
+        name: prop.name
+      }
+    }
+  }
+},
+(state, actions) => (props, children) => {
+  return <Page>
+    {state.stuff.content && <state.stuff.content />}
+    <Route path={`${props.match.path}/:artistId`} render={(matchProps) => {
+      actions.stuff.addContent({content: () => { return <Artist {...matchProps} /> }, name: 'About'})
+    }}
+    // render={(matchProps) => { return <Artist {...matchProps} /> }}
+    />
+  </Page>
+})
+
+// export default (props) => <Page>
+//   <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Artist {...matchProps} /> }} />
+// </Page>
+
+// const Container = (props) => {
+
+// }
