@@ -1,6 +1,7 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import LazyImage from './LazyImage'
+import PlayAllButton from './Button'
 
 const style = picostyle(h)
 
@@ -54,6 +55,10 @@ const ListItem = (props) => {
 
 const SongList = (props) => (context) => {
   return <SongListStyle>
+    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Songs</h3>
+      <PlayAllButton title='Shuffle' />
+    </div>
     <ul>
       {
         props.songs.map((song, index) => {
