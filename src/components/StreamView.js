@@ -192,10 +192,11 @@ const StreamView = (props) => (context) => {
           <img style={{height: '100%'}} src={nextImage} />
         </OtherButton>
       </div>
-      <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '0.5em 3em'}}>
-        <OtherButton>
-          <a title='Download Song' style={{display: 'block', padding: '0.6em'}} href={window.Amplitude.audio().src} download={`${playingContext.name} - ${playingContext.artist} | Flamous Music.mp3`}>
-            <img style={{width: '100%'}} src={downloadImage} />
+      <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em 0.5em'}}>
+        <OtherButton style={{width: '100%'}}>
+          <a title='Download Song' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'black', padding: '0.6em'}} href={window.Amplitude.audio().src} download={`${playingContext.name} - ${playingContext.artist} | Flamous Music.mp3`}>
+            <img style={{height: '1.6em', marginRight: '0.5em'}} src={downloadImage} />
+            <span>Download</span>
           </a>
         </OtherButton>
       </div>
