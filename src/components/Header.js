@@ -6,46 +6,95 @@ import { nestable } from 'hyperapp-context'
 
 const style = picostyle(h)
 
+const StyledHeaderWrapper = style('div')({
+  minHeight: '10rem',
+  // display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
+  display: 'contents'
+})
+
+const HeaderWrapper = StyledHeaderWrapper
+
 const HeaderStyles = style('div')((props) => ({
-  maxWidth: '1100px',
-  margin: '0 auto',
-  padding: '3em 1em 0.7em',
+  // maxWidth: '1100px',
+  // margin: '0 auto',
+  // padding: '3em 1em 0.7em',
   position: 'relative',
   display: 'contents',
   textAlign: props.alignment === 'center' ? 'center' : 'left',
-  ' .sub': {
-    marginTop: '-2em',
-    lineHeight: '2em'
-  },
-  ' .back': {
-    fontSize: '1.05em',
-    position: 'sticky',
-    top: '-1px',
-    display: 'flex',
-    width: '100%',
-    transition: 'opacity 200ms  80ms linear',
-    backgroundColor: 'rgba(253, 253, 253, 0.95)',
-    zIndex: '100000',
-    margin: '-1.5em 0'
-  },
-  ' .back:active': {
-    opacity: '0.4'
-  },
-  ' .back > *': {
-    padding: '0.8em 0.6em 0.9em',
-    width: '33%'
-  },
-  '@supports (backdrop-filter: blur(30px))': {
-    ' .back': {
-      backgroundColor: 'rgba(253, 253, 253, 0.6)',
-      backdropFilter: 'blur(30px)',
-      WebkitBackdropFilter: 'blur(30px)'
-    }
-  },
+  // ' .sub': {
+  //   marginTop: '-2em',
+  //   lineHeight: '2em'
+  // },
+  // ' .back': {
+  //   fontSize: '1.05em',
+  //   position: 'sticky',
+  //   top: '-1px',
+  //   display: 'flex',
+  //   width: '100%',
+  //   transition: 'opacity 200ms  80ms linear',
+  //   backgroundColor: 'rgba(253, 253, 253, 0.95)',
+  //   zIndex: '100000',
+  //   margin: '-1.5em 0'
+  // },
+  // ' .back:active': {
+  //   opacity: '0.4'
+  // },
+  // ' .back > *': {
+  //   padding: '0.8em 0.6em 0.9em',
+  //   width: '33%'
+  // },
+  // '@supports (backdrop-filter: blur(30px))': {
+  //   ' .back': {
+  //     backgroundColor: 'rgba(253, 253, 253, 0.6)',
+  //     backdropFilter: 'blur(30px)',
+  //     WebkitBackdropFilter: 'blur(30px)'
+  //   }
+  // },
   ' .show': {
     opacity: '1 !important'
   }
 }))
+
+const StyledHeaderNav = style('div')({
+  display: 'flex',
+  height: '4rem',
+  position: 'sticky',
+  top: '0px',
+  backgroundColor: 'rgb(253, 253, 253)',
+  '& > *': {
+    width: '33%',
+    alignItems: 'center',
+    display: 'flex'
+  },
+  '& > *:last-child': {
+    justifyContent: 'flex-end'
+  },
+  '& > *:nth-child(2)': {
+    justifyContent: 'center',
+    transition: 'opacity 120ms',
+    opacity: '0'
+  },
+  '&.show': {
+    opacity: '1'
+  }
+})
+
+const HeaderNav = (props, children) => {
+  console.log(children)
+  return <StyledHeaderNav {...props}>
+    <div>
+      {children[0] && children[0]}
+    </div>
+    <div>
+      {children[1] && children[1]}
+    </div>
+    <div>
+      {children[1] && children[2]}
+    </div>
+  </StyledHeaderNav>
+}
 
 const HeaderImageStyle = style('img')((props) => ({
   borderRadius: props.square ? '0px' : '100%',
@@ -63,7 +112,9 @@ const HeaderImage = (props) => {
 
 const HeaderBoldStyle = style('h1')({
   margin: '0px',
-  padding: '1.35em 0.4em 0.24em',
+  height: 'auto',
+  minHeight: '5rem',
+  padding: '0em 0.24em 0.24em',
   // fontSize: '2.5em',
   // font-size: calc(16px + 2 * ((100vw - 360px) / 768px));
   fontSize: 'calc(2.65em + 12*(100vw - 400px)/(1250 - 400))',
@@ -108,22 +159,23 @@ const Header = nestable(
     }
   },
   (state, actions) => (props, children) => (context) => {
-    let {updateAvailable} = context
     let back = context.location.previous !== context.location.pathname ? context.location.previous : '/'
     return <HeaderStyles>
-      {props.back
-        ? <span class='back'>
-          <a style={{display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
-          <span style={{textAlign: 'center', fontWeight: 'bold', opacity: '0', transition: 'opacity 100ms linear 60ms'}} class={`${state.isHeaderHidden ? 'show' : ''}`}>{props.title}</span>
-          <span>{updateAvailable ? <props.updateButton /> : ''}</span>
-        </span>
-        : ''}
-      <header oncreate={actions.initObserver}>
-        {children.length === 0 ? <HeaderBold class='title'>{props.title}</HeaderBold> : children}
-      </header>
+      <HeaderWrapper>
+
+        <header style={{display: 'contents'}} oncreate={actions.initObserver}>
+          {props.back && <HeaderNav>
+            <a style={{padding: '1em', display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
+            <span style={{textAlign: 'center', fontWeight: 'bold'}} class={`${state.isHeaderHidden ? 'show' : ''}`}>{props.title}</span>
+            <span>{context.right && <props.right />}</span>
+          </HeaderNav>
+          }
+          {children.length === 0 ? <HeaderBold class='title'>{props.title}</HeaderBold> : children}
+        </header>
+      </HeaderWrapper>
     </HeaderStyles>
   })
 
 export default Header
 
-export { HeaderBold, HeaderImage }
+export { HeaderBold, HeaderImage, HeaderWrapper }
