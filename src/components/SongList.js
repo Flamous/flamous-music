@@ -57,7 +57,7 @@ const SongList = (props) => (context) => {
   return <SongListStyle>
     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
       <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Songs</h3>
-      <PlayAllButton title='Shuffle' />
+      {/* <PlayAllButton title='Shuffle' /> */}
     </div>
     <ul>
       {
