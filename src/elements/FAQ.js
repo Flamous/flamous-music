@@ -52,15 +52,10 @@ const SongSubmit = () => (context) => {
         </p>
       </Section>
 
-      <Section>
-        <Question>But hasn't SoundCloud also copyright free music?</Question>
-        <p >
-          No. A lot of people confuse Copyright with Creative Commons. With a Createive Commons license the original author still is the copyright owner, and allows you to use it under certain terms. Music in the Public Domain does not have a copyright owner.
-        </p>
-        <p>
-          So when you see "No Copyright" on Soundcloud or other services, it most likely is just a standard Creative Commons license and has some restrictions on it (like the requirement to give attribution to the artist). What they mean with "No Copyright" is most often "Royalty free", which mean only that you don't have to pay them money.
-        </p>
-      </Section>
+      <p style={{textAlign: 'center'}}>
+        Have more questions? Write us an email<br />
+        <a href='mailto:hello@flamous.io'>hello@flamous.io</a>
+      </p>
 
     </Wrapper>
   </Page>
