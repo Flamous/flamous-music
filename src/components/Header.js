@@ -103,6 +103,14 @@ const HeaderNav = (props, children) => {
   </StyledHeaderNav>
 }
 
+const StyledHeaderLine = style('div')({
+  position: 'sticky',
+  top: '3.5rem',
+  borderBottom: '1px solid rgba(0, 0, 0, 0.14)'
+})
+
+const HeaderLine = StyledHeaderLine
+
 const HeaderImageStyle = style('img')((props) => ({
   borderRadius: props.square ? '0px' : '100%',
   width: props.square ? '15rem' : '10rem',
@@ -126,7 +134,6 @@ const HeaderBoldStyle = style('h1')({
   // font-size: calc(16px + 2 * ((100vw - 360px) / 768px));
   fontSize: 'calc(2.65em + 12*(100vw - 400px)/(1250 - 400))',
   backgroundColor: 'rgba(253, 253, 253, 0.95)',
-  borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
   boxShadow: '0 0 0 1px #fdfdfd',
   display: 'flex',
   alignItems: 'center'
@@ -171,7 +178,6 @@ const Header = nestable(
     let back = context.location.previous !== context.location.pathname ? context.location.previous : '/'
     return <HeaderStyles>
       <HeaderWrapper>
-        {console.log('IS EHADER HIDDEN', state.isHeaderHidden)}
         <header style={{display: 'contents'}}>
           {props.back && <HeaderNav class={`${state.isHeaderHidden ? 'show' : ''}`}>
             <a style={{padding: '1em', display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
@@ -181,6 +187,7 @@ const Header = nestable(
           }
           {children.length === 0 ? <HeaderBold class='title' oncreate={actions.initObserver}>{props.title}</HeaderBold> : (props) => { children[0].attributes.oncreate = actions.initObserver; return children }}
         </header>
+        <HeaderLine />
       </HeaderWrapper>
     </HeaderStyles>
   },
@@ -188,4 +195,4 @@ const Header = nestable(
 
 export default Header
 
-export { HeaderBold, HeaderImage, HeaderWrapper }
+export { HeaderBold, HeaderImage, HeaderWrapper, HeaderLine }
