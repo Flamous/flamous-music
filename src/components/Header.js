@@ -64,9 +64,9 @@ const StyledHeaderNav = style('div')({
   top: '0px',
   backgroundColor: 'rgba(253, 253, 253, 0.95)',
   '@supports (backdrop-filter: blur(30px))': {
-      backgroundColor: 'rgba(253, 253, 253, 0.6)',
-      backdropFilter: 'blur(30px)',
-      WebkitBackdropFilter: 'blur(30px)'
+    backgroundColor: 'rgba(253, 253, 253, 0.6)',
+    backdropFilter: 'blur(30px)',
+    WebkitBackdropFilter: 'blur(30px)'
   },
   '& > *': {
     width: '33%',
@@ -77,20 +77,20 @@ const StyledHeaderNav = style('div')({
     justifyContent: 'flex-end'
   },
   '& > *:nth-child(2)': {
-    justifyContent: 'center',
-    transition: 'opacity 120ms'
+    justifyContent: 'center'
   },
   '& > *:nth-child(2) > *': {
+    transition: 'opacity 120ms',
     opacity: '0'
   },
-  '& .show': {
+  '&.show > * > *': {
     opacity: '1'
   }
 })
 
 const HeaderNav = (props, children) => {
   console.log(children)
-  return <StyledHeaderNav {...props} class='webkit-sticky'>
+  return <StyledHeaderNav {...props} class={props.class + ' webkit-sticky'}>
     <div>
       {children[0] && children[0]}
     </div>
@@ -169,19 +169,20 @@ const Header = nestable(
     let back = context.location.previous !== context.location.pathname ? context.location.previous : '/'
     return <HeaderStyles>
       <HeaderWrapper>
-
-        <header style={{display: 'contents'}} oncreate={actions.initObserver}>
-          {props.back && <HeaderNav>
+        {console.log('IS EHADER HIDDEN', state.isHeaderHidden)}
+        <header style={{display: 'contents'}}>
+          {props.back && <HeaderNav class={`${state.isHeaderHidden ? 'show' : ''}`}>
             <a style={{padding: '1em', display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
-            <span style={{textAlign: 'center', fontWeight: 'bold'}} class={`${state.isHeaderHidden ? 'show' : ''}`}>{props.title}</span>
+            <span style={{textAlign: 'center', fontWeight: 'bold'}}>{props.title}</span>
             <span>{context.right && <props.right />}</span>
           </HeaderNav>
           }
-          {children.length === 0 ? <HeaderBold class='title'>{props.title}</HeaderBold> : children}
+          {children.length === 0 ? <HeaderBold class='title' oncreate={actions.initObserver}>{props.title}</HeaderBold> : (props) => { children[0].attributes.oncreate = actions.initObserver; return children }}
         </header>
       </HeaderWrapper>
     </HeaderStyles>
-  })
+  },
+  'flamous-header')
 
 export default Header
 
