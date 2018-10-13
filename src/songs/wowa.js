@@ -1,5 +1,5 @@
 import images from '../public/128/wowa/*.jpg'
-import songs from '../public/songs/wowa/*.mp3'
+import songs from '../public/songs/wowa/*.aac'
 
 export default [{
   id: 9,
