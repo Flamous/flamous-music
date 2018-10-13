@@ -34,6 +34,8 @@ const Button = (props) => style('span')({
 const ArtistStyle = style(Link)({
   textAlign: 'center',
   padding: '1em',
+  width: '50%',
+  maxWidth: '200px',
   '> img': {
     borderRadius: '100%',
     width: '7em',
