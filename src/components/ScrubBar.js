@@ -190,7 +190,6 @@ const Wrapper = style('div')({
   boxSizing: 'border-box',
   justifyContent: 'space-between',
   border: '1px solid #f0f0f0',
-  borderRadius: '5px 5px 0px 0px',
   backgroundColor: '#fdfdfd',
   boxShadow: 'rgba(0, 0, 0, 0.16) 0px 0px 23px -7px',
   overflow: 'hidden'
@@ -212,7 +211,7 @@ const Progress = style('progress')({
 const ScrubBar = (props) => (context) => {
   let {playingState, playbackTime, playingContext} = context
   let {duration, name, artist, cover_art_url: image} = playingContext
-  return <Wrapper key={props.key}>
+  return <Wrapper class='trackbar' key={props.key}>
     <Bubble playingState={playingState} oncreate={makeInteractive} onclick={() => window.flamous.location.go('/stream-view')}>
       <Progress max={duration || '300'} value={playbackTime}>{playbackTime}/{duration}</Progress>
       <div style={{display: 'flex', height: '100%', flexGrow: '1'}}>

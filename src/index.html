@@ -53,8 +53,23 @@
         overflow: hidden;
       }
       progress[value]::-webkit-progress-value {
-        background-color: #007aff;
+        background-color: #555;
         border-radius: 100px;
+      }
+
+      .trackbar progress[value]::-moz-progress-bar {
+        background-color: #555;
+        border-radius: 0px;
+      }
+      .trackbar progress[value]::-webkit-progress-bar {
+        background-color: #f0f0f0;
+        /* border: 1px solid #e0e0e0; */
+        border-radius: 0px;
+        overflow: hidden;
+      }
+      .trackbar progress[value]::-webkit-progress-value {
+        background-color: #555;
+        border-radius: 0px;
       }
 
       .webkit-sticky {
