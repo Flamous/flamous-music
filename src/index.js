@@ -5,6 +5,7 @@ import ScrubBar from './components/ScrubBar.js'
 import Home from './components/Home.js'
 import songListWowa from './songs/wowa.js'
 import songListKimiko from './songs/kimiko_ishizaka.js'
+import songListBilly from './songs/billy_murray'
 import placeholder from './public/song_placeholder.svg'
 import About from './elements/About'
 import nativeWebApp from 'native-web-app'
@@ -98,12 +99,14 @@ Amplitude.setDebug(true)
 Amplitude.init({
   songs: [
     ...songListWowa,
-    ...songListKimiko
+    ...songListKimiko,
+    ...songListBilly
   ],
   playlists: {
     'wowa': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     'open_goldberg_variations': [12, 13, 14, 15, 16, 17],
-    'the_art_of_the_fugue': [18, 19, 20, 21, 22, 23]
+    'the_art_of_the_fugue': [18, 19, 20, 21, 22, 23],
+    'billy_murray': [24, 25]
   },
   default_album_art: placeholder,
   shuffle_on: 'false',

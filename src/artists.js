@@ -1,5 +1,6 @@
 import wowaImage from './assets/wowa.jpg'
 import kimikoImage from './assets/kimiko_ishizaka.jpg'
+import murrayImage from './assets/billy_murray.jpg'
 import artist_placeholder from './album_placeholder.svg'
 
 export default [
@@ -13,7 +14,12 @@ export default [
     name: 'Kimiko Ishizaka',
     artist: '',
     cover_art_url: kimikoImage,
-    songCount: 3
+    songCount: 12
+  },
+  {
+    name: 'Billy Murray',
+    cover_art_url: murrayImage,
+    songCount: 2
   }
   // {
   //   name: '',

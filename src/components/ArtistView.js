@@ -11,6 +11,7 @@ import artists from '../artists'
 
 import wowaSongs from '../songs/wowa'
 import kimikoSongs from '../songs/kimiko_ishizaka'
+import billySongs from '../songs/billy_murray'
 
 function updateLazyLoad (elem) {
   elem.lazyLoader.update()
@@ -97,7 +98,7 @@ let Artist = (props) => (context) => {
   let songs
   let albums
   let playlist
-
+  console.log(artists)
   switch (props.match.params.artistId) {
     case 'wowa':
       artist = artists[0]
@@ -130,6 +131,11 @@ let Artist = (props) => (context) => {
       // import('../songs/kimiko_ishizaka').then((res) => {
       //   songs = res.default
       // })
+      break
+    case 'billy_murray':
+      artist = artists[2]
+      songs = billySongs
+      playlist = 'billy_murray'
       break
   }
 
