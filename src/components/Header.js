@@ -136,7 +136,8 @@ const HeaderBoldStyle = style('h1')({
   backgroundColor: 'rgba(253, 253, 253, 0.95)',
   boxShadow: '0 0 0 1px #fdfdfd',
   display: 'flex',
-  alignItems: 'flex-end'
+  flexDirection: 'column',
+  justifyContent: 'flex-end'
 })
 const HeaderBold = HeaderBoldStyle
 
