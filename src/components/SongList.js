@@ -33,8 +33,10 @@ const Thumbnail = style(LazyImage)({
 
 const StyledListItem = style('li')({
   transition: 'background-color 100ms',
-  '&:hover': {
-    backgroundColor: '#fafafa'
+  '@media (pointer: fine)': {
+    '&:hover': {
+      backgroundColor: '#fafafa'
+    }
   },
   '&:active': {
     backgroundColor: '#f0f0f0',
