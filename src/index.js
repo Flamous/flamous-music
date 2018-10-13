@@ -314,19 +314,19 @@ const flamous = app(
       <Route parent path='/artist' render={(props) => {
         return new Container({page: () => <ArtistView {...props} />, name: 'ArtistView'})
       }} />
-      <Route parent path='/about' render={(props) => {
+      <Route path='/about' render={(props) => {
         return new Container({page: About, name: 'About'})
       }} />
-      <Route parent path='/stream-view' render={(props) => {
+      <Route path='/stream-view' render={(props) => {
         return <Container key='StreamView' {...props} page={StreamView} name='StreamView' />
       }} />
-      <Route parent path='/song-submit' render={(props) => {
+      <Route path='/song-submit' render={(props) => {
         return <Container key='SongSubmit' {...props} page={SongSubmit} name='SongSubmit' />
       }} />
       <Route parent path='/albums' render={(props) => {
         return <Container key='Albumview' {...props} page={AlbumView} name='AlbumView' />
       }} />
-      <Route parent path='/faq' render={(props) => {
+      <Route path='/faq' render={(props) => {
         return <Container key='FAQ' {...props} page={FAQ} name='FAQ' />
       }} />
 
