@@ -16,7 +16,15 @@ const Album = (props) => {
       songs = kimikoSongs.filter((song) => {
         return song.album === 'J​.​S. Bach: "Open" Goldberg Variations, BWV 988 (Piano)'
       })
+      break
+    case 'the_art_of_the_fugue':
+      title = 'The Art of the Fugue'
+      songs = kimikoSongs.filter((song) => {
+        return song.album === 'The Art of the Fugue'
+      })
+      break
   }
+  console.log('SONGS', songs)
   return <div>
     <Header title={title} back={{text: 'Back', to: '/'}}>
       <HeaderBold style={{textAlign: 'center'}}>

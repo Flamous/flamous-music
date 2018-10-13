@@ -100,7 +100,8 @@ Amplitude.init({
     ...songListKimiko
   ],
   playlists: {
-    'open_goldberg_variations': [12, 13, 14, 15, 16, 17]
+    'open_goldberg_variations': [12, 13, 14, 15, 16, 17],
+    'the_art_of_the_fugue': [18, 19, 20, 21, 22, 23]
   },
   default_album_art: placeholder,
   shuffle_on: 'false',

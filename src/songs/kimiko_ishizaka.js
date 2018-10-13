@@ -48,5 +48,53 @@ export default [{
   album: 'J​.​S. Bach: "Open" Goldberg Variations, BWV 988 (Piano)',
   url: songs[5],
   cover_art_url: images[0]
+},
+{
+  id: 6,
+  name: 'Contrapunctus 1',
+  artist: 'Kimiko Ishizaka',
+  album: 'The Art of the Fugue',
+  url: songs[6],
+  cover_art_url: images[1]
+},
+{
+  id: 7,
+  name: 'Contrapunctus 2',
+  artist: 'Kimiko Ishizaka',
+  album: 'The Art of the Fugue',
+  url: songs[7],
+  cover_art_url: images[1]
+},
+{
+  id: 8,
+  name: 'Contrapunctus 3',
+  artist: 'Kimiko Ishizaka',
+  album: 'The Art of the Fugue',
+  url: songs[8],
+  cover_art_url: images[1]
+},
+{
+  id: 9,
+  name: 'Contrapunctus 4',
+  artist: 'Kimiko Ishizaka',
+  album: 'The Art of the Fugue',
+  url: songs[9],
+  cover_art_url: images[1]
+},
+{
+  id: 10,
+  name: 'Contrapunctus 6 a 4 in Stylo Francese',
+  artist: 'Kimiko Ishizaka',
+  album: 'The Art of the Fugue',
+  url: songs[11],
+  cover_art_url: images[1]
+},
+{
+  id: 11,
+  name: 'Contrapunctus 4',
+  artist: 'Kimiko Ishizaka',
+  album: 'The Art of the Fugue',
+  url: songs[11],
+  cover_art_url: images[1]
 }
 ]

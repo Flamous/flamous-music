@@ -101,6 +101,13 @@ let Artist = (props) => (context) => {
           songs: kimikoSongs.filter((song) => {
             return song.album === 'J​.​S. Bach: "Open" Goldberg Variations, BWV 988 (Piano)'
           })
+        },
+        {
+          amplitudeName: 'the_art_of_the_fugue',
+          name: 'The Art of the Fugue',
+          songs: kimikoSongs.filter((song) => {
+            return song.album === 'The Art of the Fugue'
+          })
         }
       ]
       // import('../songs/kimiko_ishizaka').then((res) => {
