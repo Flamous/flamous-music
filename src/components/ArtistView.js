@@ -35,11 +35,7 @@ const style = picostyle(h)
 const StyledAlbumThumbnail = style(Link)({
   width: '45%',
   padding: '1.5em',
-  transition: 'transform 500ms',
   maxWidth: '320px',
-  '&:hover': {
-    transform: 'scale(1.05)'
-  },
   '& > img': {
     width: '100%',
     borderRadius: '3px',
@@ -47,8 +43,27 @@ const StyledAlbumThumbnail = style(Link)({
     boxShadow: 'rgba(0, 0, 0, 0.3) 0px 4px 25px 1px',
     transition: 'box-shadow 500ms'
   },
-  '&:hover img': {
-    boxShadow: 'rgba(0, 0, 0, 0.3) 0px 6px 35px 0px'
+  '@media (pointer: fine)': {
+    '&': {
+      transition: 'transform 500ms'
+    },
+    '&:hover': {
+      transform: 'scale(1.05)'
+    },
+    '&:hover img': {
+      boxShadow: 'rgba(0, 0, 0, 0.3) 0px 6px 35px 0px'
+    }
+  },
+  '@media (pointer: coarse)': {
+    '&': {
+      transition: 'transform 120ms'
+    },
+    '&:active': {
+      transform: 'scale(1.05)'
+    },
+    '&:active img': {
+      boxShadow: 'rgba(0, 0, 0, 0.3) 0px 6px 35px 0px'
+    }
   }
 })
 const AlbumThumbnail = (props) => {
