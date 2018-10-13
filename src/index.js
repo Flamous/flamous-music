@@ -100,7 +100,7 @@ Amplitude.init({
     ...songListKimiko
   ],
   playlists: {
-    'open_goldberg_variations': [12, 13, 14]
+    'open_goldberg_variations': [12, 13, 14, 15, 16, 17]
   },
   default_album_art: placeholder,
   shuffle_on: 'false',
