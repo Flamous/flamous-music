@@ -36,7 +36,7 @@ const Album = (props) => {
         {title}
       </HeaderBold>
     </Header>
-    <SongList albumId={albumId} songs={songs} />
+    <SongList type='album' albumId={albumId} songs={songs} />
   </div>
 }
 

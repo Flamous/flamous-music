@@ -7,6 +7,7 @@ const style = picostyle(h)
 
 const SongListStyle = style('div')({
   transition: 'opacity 70ms',
+  counterReset: 'numbers',
   ' ul': {
     listStyleType: 'none',
     padding: '0'
@@ -54,6 +55,28 @@ const ListItem = (props) => {
     </div>
   </StyledListItem>
 }
+const ListNumber = style('div')({
+  '&::before': {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    counterIncrement: 'numbers',
+    content: 'counter(numbers)',
+    height: '3.3em',
+    fontWeight: 'bold',
+    width: '3em',
+    marginRight: '0.8em'
+  }
+})
+const AlbumListItem = (props) => {
+  return <StyledListItem {...props} class='song-list-item'>
+    <ListNumber />
+    <div>
+      <p style={{fontWeight: 'bold'}}>{props.title}</p>
+      <p>{props.sub}</p>
+    </div>
+  </StyledListItem>
+}
 
 const SongList = (props) => (context) => {
   return <SongListStyle>
@@ -63,8 +86,17 @@ const SongList = (props) => (context) => {
     </div>
     <ul>
       {
-        props.songs.map((song, index) => {
+        props.type !== 'album' && props.songs.map((song, index) => {
           return <ListItem onclick={() => {
+            window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
+            props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playSongAtIndex(index)
+            context.actions.scrubBar.show()
+          }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
+        })
+      }
+      {
+        props.type === 'album' && props.songs.map((song, index) => {
+          return <AlbumListItem onclick={() => {
             window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
             props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playSongAtIndex(index)
             context.actions.scrubBar.show()
