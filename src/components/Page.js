@@ -124,7 +124,8 @@ const StyledPage = style('article')({
   overflowY: 'auto',
   color: '#212121',
   backgroundColor: 'white',
-  boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)'
+  boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
+  overscrollBehavior: 'contain'
 })
 
 const pointerX = (preventDefault = false, x = 0) => pointer({x: x, preventDefault: preventDefault}).pipe(val => val.x)
