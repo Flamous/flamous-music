@@ -158,7 +158,7 @@ const Home = (props) => (context) => {
           Submit your songs
         </h2>
         <p style={{maxWidth: '32em', lineHeight: '1.3'}}>
-          Public Domain enables creative opportunities for people who create amazing content and bring your music to a larger audience. Make your music heard.
+          Public Domain enables creative opportunities for people who create amazing content and brings your music to a larger audience. Make your music heard.
         </p>
         <Link to='/song-submit' style={{display: 'flex'}}>
           <span style={{display: 'inline-block'}}>Submit Songs</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
