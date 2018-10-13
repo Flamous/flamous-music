@@ -128,15 +128,15 @@ const HeaderImage = (props) => {
 const HeaderBoldStyle = style('h1')({
   margin: '0px',
   height: 'auto',
-  minHeight: '5rem',
-  padding: '0em 0.24em 0.24em',
+  minHeight: '4rem',
+  padding: '0em 0.45em 0.24em',
   // fontSize: '2.5em',
   // font-size: calc(16px + 2 * ((100vw - 360px) / 768px));
   fontSize: 'calc(2.65em + 12*(100vw - 400px)/(1250 - 400))',
   backgroundColor: 'rgba(253, 253, 253, 0.95)',
   boxShadow: '0 0 0 1px #fdfdfd',
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'flex-end'
 })
 const HeaderBold = HeaderBoldStyle
 
@@ -180,7 +180,7 @@ const Header = nestable(
       <HeaderWrapper>
         <header style={{display: 'contents'}}>
           {props.back && <HeaderNav class={`${state.isHeaderHidden ? 'show' : ''}`}>
-            <a style={{padding: '1em', display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
+            <a style={{padding: '1em 1em 1em 0.85em', display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
             <span style={{textAlign: 'center', fontWeight: 'bold'}}>{props.title}</span>
             <span>{context.right && <props.right />}</span>
           </HeaderNav>
