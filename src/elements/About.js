@@ -56,7 +56,7 @@ const About = () => (context) => {
         <span>
           {`${process.env.npm_package_version}${process.env.STAGE === 'prod' ? '' : '-dev'}`}
           <br />
-          {`${process.env.COMMIT_REF && (process.env.STAGE === 'prod') ? `build ${process.env.COMMIT_REF.substring(0, 6)}` : '(local build)'}`}
+          {`${process.env.COMMIT_REF ? `build ${process.env.COMMIT_REF.substring(0, 6)}` : '(local build)'}`}
           <br />
           {updateAvailable ? <UpdateBanner /> : <span>&#9989; Up-to-date</span>}
         </span>
