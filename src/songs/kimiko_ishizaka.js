@@ -83,7 +83,7 @@ export default [{
 },
 {
   id: 10,
-  name: 'Contrapunctus 6 a 4 in Stylo Francese',
+  name: 'Contrapunctus 5',
   artist: 'Kimiko Ishizaka',
   album: 'The Art of the Fugue',
   url: songs[11],
@@ -91,7 +91,7 @@ export default [{
 },
 {
   id: 11,
-  name: 'Contrapunctus 4',
+  name: 'Contrapunctus 6 a 4 in Stylo Francese',
   artist: 'Kimiko Ishizaka',
   album: 'The Art of the Fugue',
   url: songs[11],
