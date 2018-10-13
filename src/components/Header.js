@@ -127,7 +127,9 @@ const HeaderBoldStyle = style('h1')({
   fontSize: 'calc(2.65em + 12*(100vw - 400px)/(1250 - 400))',
   backgroundColor: 'rgba(253, 253, 253, 0.95)',
   borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-  boxShadow: '0 0 0 1px #fdfdfd'
+  boxShadow: '0 0 0 1px #fdfdfd',
+  display: 'flex',
+  alignItems: 'center'
 })
 const HeaderBold = HeaderBoldStyle
 
