@@ -1,4 +1,4 @@
-import images from '../public/128/wowa/*.jpg'
+import images from '../public/500/wowa/*.jpg'
 import songs from '../public/songs/wowa/*.aac'
 import mp3Fix from '../public/songs/wowa/*.mp3'
 
