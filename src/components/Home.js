@@ -220,7 +220,7 @@ const Home = (props) => (context) => {
         </p>
       </div>
 
-      <div style={{margin: '3em auto -6.5em', maxWidth: '1000px', padding: '3em 1em 1em 1em'}}>
+      <div style={{margin: '3em auto -3em', maxWidth: '1000px', padding: '3em 1em 1em 1em'}}>
         <p style={{textAlign: 'center', lineHeight: '1.34'}}>
           <a href='mailto:hello@flamous.io'>hello@flamous.io</a><br />
           <a href='https://twitter.com/FlamousMusic' rel='noopener' target='_blank'>twitter.com/FlamousMusic</a>
