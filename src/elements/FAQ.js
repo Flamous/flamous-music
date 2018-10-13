@@ -19,9 +19,8 @@ const Question = style('p')({
 
 const SongSubmit = () => (context) => {
   return <Page key='about'>
+    <Header title='FAQ' back={{text: 'Back', to: '/'}} />
     <Wrapper>
-      <Header title='FAQ' back={{text: 'Back', to: '/'}} />
-
       <Section>
         <Question>What is the Public Domain?</Question>
         <p >

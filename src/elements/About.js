@@ -3,6 +3,8 @@ import picostyle from 'picostyle'
 import Header from '../components/Header.js'
 import Page from '../components/Page'
 import UpdateBanner from '../components/UpdateBanner.js'
+import { Link } from '@hyperapp/router'
+import rightArrow from '../assets/blue_right.svg'
 
 const style = picostyle(h)
 
@@ -17,10 +19,7 @@ const Wrapper = style('div')({
   '> p': {
     margin: '1.3em 1.2em',
     fontSize: '1.1rem',
-    lineHeight: '1.3em',
-    '-moz-user-select': 'all',
-    '-webkit-user-select': 'all',
-    userSelect: 'all'
+    lineHeight: '1.3em'
   },
   '@media (min-width: 1250px)': {
     '> p': {
@@ -33,7 +32,7 @@ const About = () => (context) => {
   let {checkForUpdate, updateAvailable} = context
   return <Page key='about'>
     <Wrapper oncreate={checkForUpdate}>
-      <Header title='About' back={{text: 'Back', to: '/'}} updateButton={UpdateBanner} />
+      <Header title='About' back={{text: 'Back', to: '/'}} />
 
       <p class='first'>"Flamous Music is a player for awesome, free music."</p>
       <p>
@@ -41,6 +40,9 @@ const About = () => (context) => {
       </p>
       <p>
       Public Domain means that you don't need to worry about copyright stuff. Everything in the Public Domain is free of any copyright restrictions whatsoever - there's no copyrights at all.
+        <a onclick={(event) => { event.preventDefault(); window.flamous.location.go('faq') }} href='/song-submit' style={{display: 'flex'}}>
+          <span style={{display: 'inline-block'}}>Submit Songs</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
+        </a>
       </p>
       <p>
         We see Public Domain content as the future of creative art and think music should start moving towards this direction as other creative fields <a href='https://unsplash.com/' rel='noopener' target='_blank'>did already</a>. Share, mix, download or cover music you find on Flamous.
