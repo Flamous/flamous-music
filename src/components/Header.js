@@ -64,8 +64,8 @@ const StyledHeaderNav = style('div')({
   top: '0px',
   backgroundColor: 'rgba(253, 253, 253, 0.95)',
   '@supports (-webkit-backdrop-filter: blur(30px)) or (backdrop-filter: blur(30px))': {
-    backgroundColor: 'rgba(253, 253, 253, 0.6)',
-    backdropFilter: 'blur(30px)',
+    backgroundColor: 'rgba(253, 253, 253, 0.75)',
+    backdropFilter: 'blur(40px)',
     WebkitBackdropFilter: 'blur(30px)'
   },
   '& > *': {
