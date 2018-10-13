@@ -96,11 +96,13 @@ let Artist = (props) => (context) => {
   let artist
   let songs
   let albums
+  let playlist
 
   switch (props.match.params.artistId) {
     case 'wowa':
       artist = artists[0]
       songs = wowaSongs
+      playlist = 'wowa'
       // lel = import('../songs/wowa').then((res) => {
       //   song = res.default
       //   return renderArtist()
@@ -144,7 +146,7 @@ let Artist = (props) => (context) => {
         </HeaderBold>
       </Header>
 
-      {songs && <SongList songs={songs} />}
+      {songs && <SongList playlist={playlist} songs={songs} />}
       {albums && <AlbumList albums={albums} />}
     </div>
     : <div>
