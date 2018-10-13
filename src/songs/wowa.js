@@ -1,5 +1,6 @@
 import images from '../public/128/wowa/*.jpg'
 import songs from '../public/songs/wowa/*.aac'
+import mp3Fix from '../public/songs/wowa/*.mp3'
 
 export default [{
   id: 9,
@@ -58,7 +59,7 @@ export default [{
   name: 'Blue Sky',
   artist: 'Wowa & Chris Rede',
   album: 'Wowa CC0',
-  url: songs[2],
+  url: mp3Fix[2],
   cover_art_url: images[2]
   // audio: new Audio(),
   // length: null,
@@ -69,7 +70,7 @@ export default [{
   name: 'Piratos',
   artist: 'Wowa & Chris Rede',
   album: 'Wowa CC0',
-  url: songs[4],
+  url: mp3Fix[4],
   cover_art_url: images[4]
   // audio: new Audio(),
   // length: null,
