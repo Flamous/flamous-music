@@ -18,7 +18,7 @@ const Question = style('p')({
 })
 
 const SongSubmit = () => (context) => {
-  return <Page key='about'>
+  return <Page key='FAQ'>
     <Header title='FAQ' back={{text: 'Back', to: '/'}} />
     <Wrapper>
       <Section>
