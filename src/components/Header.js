@@ -59,7 +59,7 @@ const HeaderStyles = style('div')((props) => ({
 
 const StyledHeaderNav = style('div')({
   display: 'flex',
-  height: '4rem',
+  height: '3.5rem',
   position: 'sticky',
   top: '0px',
   backgroundColor: 'rgba(253, 253, 253, 0.95)',
