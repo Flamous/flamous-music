@@ -20,6 +20,7 @@ import StreamView from './components/StreamView.js'
 import { withContext } from 'hyperapp-context'
 import SongSubmit from './elements/SongSubmit.js'
 import AlbumView from './components/AlbumView.js'
+import FAQ from './elements/FAQ'
 
 const app = withContext(_app)
 
@@ -325,6 +326,10 @@ const flamous = app(
       <Route parent path='/albums' render={(props) => {
         return <Container key='Albumview' {...props} page={AlbumView} name='AlbumView' />
       }} />
+      <Route parent path='/faq' render={(props) => {
+        return <Container key='FAQ' {...props} page={FAQ} name='FAQ' />
+      }} />
+
       {scrubBar.visible && <ScrubBar
         key='scrub-bar'
       />}
