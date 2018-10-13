@@ -40,9 +40,9 @@ const About = () => (context) => {
       </p>
       <p>
       Public Domain means that you don't need to worry about copyright stuff. Everything in the Public Domain is free of any copyright restrictions whatsoever - there's no copyrights at all.
-        <a onclick={(event) => { event.preventDefault(); window.flamous.location.go('faq') }} href='/song-submit' style={{display: 'flex'}}>
+        {/* <Link to='faq' style={{display: 'flex'}}>
           <span style={{display: 'inline-block'}}>Submit Songs</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
-        </a>
+        </Link> */}
       </p>
       <p>
         We see Public Domain content as the future of creative art and think music should start moving towards this direction as other creative fields <a href='https://unsplash.com/' rel='noopener' target='_blank'>did already</a>. Share, mix, download or cover music you find on Flamous.
