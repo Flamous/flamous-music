@@ -175,7 +175,7 @@ const Home = (props) => (context) => {
               <p>Get notified when new music arrives!</p>
               <label style={{display: 'none'}} for='mce-EMAIL'>E-Mail address</label>
               <div style={{display: 'flex'}}>
-                <input style={{width: '100%', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.02)', borderRadius: '10px'}} type='email' value='' name='EMAIL' class='email' id='mce-EMAIL' placeholder='Email Address' required />
+                <input style={{width: '100%', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.02)', borderRadius: '10px', WebkitUserSelect: 'initial', userSelect: 'initial'}} type='email' value='' name='EMAIL' class='email' id='mce-EMAIL' placeholder='Email Address' required />
                 <input style={{backgroundColor: 'transparent', border: 'none', color: '#007AFF', padding: '0.7em 1em', marginRight: '-1em', fontWeight: 'bold'}} type='submit' value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button' />
               </div>
               <div style='position: absolute; left: -5000px;' aria-hidden='true'>
