@@ -38,12 +38,7 @@ const About = () => (context) => {
       <p>
       On Flamous you can listen to the best of Public Domain music, which is completely free to use.
       </p>
-      <p>
-      Public Domain means that you don't need to worry about copyright stuff. Everything in the Public Domain is free of any copyright restrictions whatsoever - there's no copyrights at all.
-        {/* <Link to='faq' style={{display: 'flex'}}>
-          <span style={{display: 'inline-block'}}>Submit Songs</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
-        </Link> */}
-      </p>
+
       <p>
         We see Public Domain content as the future of creative art and think music should start moving towards this direction as other creative fields <a href='https://unsplash.com/' rel='noopener' target='_blank'>did already</a>. Share, mix, download or cover music you find on Flamous.
       </p>
