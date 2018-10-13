@@ -61,11 +61,13 @@ const ListNumber = style('div')({
     alignItems: 'center',
     justifyContent: 'center',
     counterIncrement: 'numbers',
-    content: 'counter(numbers)',
+    content: 'counter(numbers)"."',
     height: '3.3em',
     fontWeight: 'bold',
-    width: '3em',
-    marginRight: '0.8em'
+    fontStyle: 'italic',
+    width: '3.3em',
+    marginRight: '0.8em',
+    border: '2px solid #eee'
   }
 })
 const AlbumListItem = (props) => {
