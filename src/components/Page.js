@@ -161,7 +161,7 @@ const Page = nestable(
         mass: 0.5
       }).start(handleX)
 
-      listen(element, 'mousedown touchstart')
+      listen(element, 'mousedown touchstart', { passive: true })
         .start(startSwipeBack)
 
       return {
@@ -197,7 +197,7 @@ const Page = nestable(
         }).start(handleX)
       })
 
-      let upListener = listen(document, 'mouseup touchend')
+      let upListener = listen(document, 'mouseup touchend', { passive: true })
         .start(endSwipeBack)
 
       return {
