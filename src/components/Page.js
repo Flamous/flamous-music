@@ -149,9 +149,6 @@ const Page = nestable(
     makeInteractive: (element) => (state, actions) => {
       console.info('Making interactive')
       let {startSwipeBack} = actions
-      // let handleStyler = !state.hasOwnProperty('nonInteractive') ? styler(element) : ''
-      // let handleX = !state.hasOwnProperty('nonInteractive') ? value('0%', handleStyler.set('x')) : ''
-      element.style.transform = 'translateX(100%)'
 
       let handleStyler = styler(element)
       let handleX = value(0, handleStyler.set('x'))
@@ -209,29 +206,27 @@ const Page = nestable(
       }
     },
     endSwipeBack: (e) => (state, actions) => {
-      let { isAxisLocked, currentPointer, upListener, handleX } = state
+      let { isAxisLocked, currentPointer, upListener } = state
       let { setAxisLock } = actions
-      let bodyWidth = document.body.clientWidth
 
-      if (!isAxisLocked) {
-        currentPointer.stop()
-        upListener.stop()
-        return
-      }
-      setAxisLock(false)
-      upListener.stop()
       currentPointer.stop()
+      upListener.stop()
 
-      let currentPos = handleX.get()
-      let velocity = handleX.getVelocity()
+      if (!isAxisLocked) return
+
+      setAxisLock(false)
+
+      let { handleX } = state
+      let bodyWidth = document.body.clientWidth
+      let currentPosition = handleX.get()
+      let currentVelocity = handleX.getVelocity()
       let snappy = snap([0, bodyWidth / 2])
-
       let getIsLeaving = (position) => {
         let snappedPosition = snappy(position)
 
         return snappedPosition || 0
       }
-      let isLeaving = getIsLeaving(currentPos + velocity)
+      let isLeaving = getIsLeaving(currentPosition + currentVelocity)
 
       if (isLeaving) {
         window.clickLock = true
@@ -248,17 +243,17 @@ const Page = nestable(
         })
 
         spring({
-          from: handleX.get(),
-          to: document.body.clientWidth,
-          velocity: handleX.getVelocity() * 3
+          from: currentPosition,
+          to: bodyWidth,
+          velocity: currentVelocity
         }).start(handleX)
       } else {
         spring({
-          from: handleX.get(),
+          from: currentPosition,
           to: 0,
           damping: 20,
           mass: 0.5,
-          velocity: handleX.getVelocity()
+          velocity: currentVelocity
         }).pipe(val => { return val >= 0 ? val : 0 }).start(handleX)
       }
     },
