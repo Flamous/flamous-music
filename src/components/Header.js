@@ -188,7 +188,7 @@ const Header = nestable(
           }
           {children.length === 0 ? <HeaderBold class='title' oncreate={actions.initObserver}>{props.title}</HeaderBold> : (props) => { children[0].attributes.oncreate = actions.initObserver; return children }}
         </header>
-        <HeaderLine />
+        <HeaderLine class='webkit-sticky' />
       </HeaderWrapper>
     </HeaderStyles>
   },
