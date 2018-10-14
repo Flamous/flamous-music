@@ -70,12 +70,6 @@ const Gallery = (props, children) => style('div')({
     </div>
     <FlexWrapper>
       {children}
-      {/* {props.data.map((item) => {
-        // console.log('isPlaying: ', props.playingState, ', playingId: ', props.playingId, ', itemId: ', item.id)
-        // class={(props.playingState && props.playingId === item.id) ? 'playing' : ''}
-
-        return <GalleryItem image={item.cover_art_url || placeholder} title={item.name} sub={item.artist} onclick={() => { if (props.onclick && item.artist) { props.onclick() } else { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) } }} />
-      })} */}
     </FlexWrapper>
   </Wrapper>
 )

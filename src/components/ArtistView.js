@@ -85,7 +85,6 @@ const AlbumList = (props) => {
     </div>
     <div style={{display: 'flex', flexWrap: 'wrap'}}>
       {props.albums.map((album) => {
-        console.log(album)
         return <AlbumThumbnail id={album.amplitudeName} image={album.songs[0].cover_art_url} name={album.name} amplitudeName={album.amplitudeName} />
       })}
     </div>
@@ -98,7 +97,7 @@ let Artist = (props) => (context) => {
   let songs
   let albums
   let playlist
-  console.log(artists)
+
   switch (props.match.params.artistId) {
     case 'wowa':
       artist = artists[0]
@@ -171,9 +170,8 @@ export default nestable({
 {
   stuff: {
     addContent: (prop) => (state) => {
-      console.log(state)
+
       if (state.name) return
-      console.log('ALSO')
 
       return {
         content: prop.content,

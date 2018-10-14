@@ -24,7 +24,7 @@ const Album = (props) => {
       })
       break
   }
-  console.log('SONGS', songs)
+
   return <div>
     <Header title={title} back={{text: 'Back', to: '/'}}>
       <HeaderBold style={{textAlign: 'center'}}>

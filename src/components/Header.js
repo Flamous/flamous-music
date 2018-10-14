@@ -89,7 +89,6 @@ const StyledHeaderNav = style('div')({
 })
 
 const HeaderNav = (props, children) => {
-  console.log(children)
   return <StyledHeaderNav {...props} class={props.class + ' webkit-sticky'}>
     <div>
       {children[0] && children[0]}

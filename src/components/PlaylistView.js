@@ -11,7 +11,7 @@ const PlaylistView = (props) => {
     <Header title='Wowa' sub='Free music by Wowa (www.wowa.me)' back={{text: 'Back', to: '/'}} />
     <Gallery heading='Songs' playAllButton>
       {songList.map((item) => {
-        return <GalleryItem key={item.id} class={(props.playingState && props.playingId === item.id) ? 'playing' : ''} image={item.cover_art_url || placeholder} title={item.name} sub={item.artist} onclick={() => { if (window.clickLock) return; console.log(item.id); window.Amplitude.playSongAtIndex(item.id) }} />
+        return <GalleryItem key={item.id} class={(props.playingState && props.playingId === item.id) ? 'playing' : ''} image={item.cover_art_url || placeholder} title={item.name} sub={item.artist} onclick={() => { if (window.clickLock) return; window.Amplitude.playSongAtIndex(item.id) }} />
       })}
     </Gallery>
   </Page>

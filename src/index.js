@@ -29,7 +29,6 @@ nativeWebApp()
 
 window.addEventListener('beforeinstallprompt', function (event) {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
-  console.log('Before install prompt')
   event.preventDefault()
   window.installPrompt = event
 })
@@ -375,7 +374,6 @@ const Container = (props, children) => (context) => {
   let {pages} = context
   let stack = pages.stack
 
-  console.log(stack)
   if ((stack.length >= 2 && stack[stack.length - 2].name === props.name)) {
     console.info('went back (in container): ', props.name)
     context.actions.pages.back(false)

@@ -228,7 +228,6 @@ const Home = (props) => (context) => {
           <a href='https://twitter.com/FlamousMusic' rel='noopener' target='_blank'>twitter.com/FlamousMusic</a>
         </p>
 
-        {console.log(window.installPrompt)}
         {window.installPrompt && <p onclick={() => window.installPrompt.prompt()}>
           Add to homescreen
         </p>}

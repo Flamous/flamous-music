@@ -159,7 +159,6 @@ const Page = nestable(
       oncreate={!props.hasOwnProperty('nonInteractive') && actions.makeInteractive}
     >
       <div style={{paddingBottom: '6.5em'}}>
-        {console.log(children)}
         {children}
       </div>
     </StyledPage>
