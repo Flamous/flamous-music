@@ -1,10 +1,9 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { styler, spring, value, listen, pointer, chain, everyFrame, schedule, calc, transform } from 'popmotion'
+import { styler, spring, value, listen, pointer, everyFrame, schedule, transform } from 'popmotion'
 import { nestable } from 'hyperapp-context'
 
-const { snap, smooth } = transform
-const { getProgressFromValue, getValueFromProgress } = calc
+const { snap } = transform
 
 const style = picostyle(h)
 
@@ -192,7 +191,7 @@ const Page = nestable(
         currentPointer = schedule(
           everyFrame(),
           pointerX(true, handleX.get())
-        ).pipe(smooth(25), (val) => {
+        ).pipe((val) => {
           return val > 0 ? val : 0
         }).start(handleX)
       })
