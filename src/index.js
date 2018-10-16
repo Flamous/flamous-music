@@ -1,7 +1,7 @@
 import { h, app as _app } from 'hyperapp'
 import Amplitude from 'amplitudejs'
 import picostyle from 'picostyle'
-import ScrubBar from './components/TrackBar.js'
+import TrackBar from './components/TrackBar.js'
 import Home from './components/Home.js'
 import songListWowa from './songs/wowa.js'
 import songListKimiko from './songs/kimiko_ishizaka.js'
@@ -305,17 +305,11 @@ const flamous = app(
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' />
 
-      {
-        pages.stack.map((item) => {
-          return item.page
-        })
-      }
-
       <Route path='/' render={(props) => {
         actions.pages.clear()
       }} />
       <Route parent path='/artist' render={(props) => {
-        return new Container({page: () => <ArtistView {...props} />, name: 'ArtistView'})
+        return <Container {...props} key='ArtistView' page={ArtistView} name='ArtistView' />
       }} />
       <Route path='/about' render={(props) => {
         return new Container({page: About, name: 'About'})
@@ -333,9 +327,16 @@ const flamous = app(
         return <Container key='FAQ' {...props} page={FAQ} name='FAQ' />
       }} />
 
-      {scrubBar.visible && <ScrubBar
+      {scrubBar.visible && <TrackBar
         key='scrub-bar'
       />}
+
+      {
+        pages.stack.map((item) => {
+          return item.page()
+        })
+      }
+
       {
         imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
       }
@@ -380,12 +381,13 @@ const Container = (props, children) => (context) => {
   } else if ((stack.length >= 1 && stack[stack.length - 1].name !== props.name)) {
     console.info('Added stuff (in Container): ', props.name)
     context.actions.pages.add({
-      page: props.page,
+      page: (_, children) => { console.log('PROPS', props); return <props.page {...props}>{children}</props.page> },
       name: props.name
     })
   } else if (stack.length === 0) {
+    console.log('inhere')
     context.actions.pages.add({
-      page: props.page,
+      page: (_, children) => { console.log('PROPS2', props); return <props.page {...props}>{children}</props.page> },
       name: props.name
     })
   } else {
