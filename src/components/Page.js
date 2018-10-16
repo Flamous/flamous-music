@@ -165,4 +165,4 @@ const Page = nestable(
   },
   'flamous-page')
 
-export default (props, children) => <Page {...props} onremove={(event) => { console.log('test') }}>{children}</Page>
+export default Page
