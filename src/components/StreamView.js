@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { spring, value, styler, listen, pointer, transform, action } from 'popmotion'
+import { spring, value, styler, listen, pointer, transform } from 'popmotion'
 import { nestable } from 'hyperapp-context'
 
 import playImage from '../assets/play.svg'
@@ -175,7 +175,7 @@ const PlayingView = nestable({
     let bodyHeight = document.body.clientHeight
 
     let handleStyler = styler(element)
-    let handleY = value(bodyHeight, handleStyler.set('x'))
+    let handleY = value(bodyHeight, handleStyler.set('y'))
 
     // Initial slide-in
     spring({
@@ -199,11 +199,10 @@ const PlayingView = nestable({
 
     currentPointer = oneDPointer(0)
       .start((y) => {
-        if (Math.abs(y) > AXIS_LOCK_THRESHOLD) {
-          currentPointer.stop()
-        }
+        if (Math.abs(y) <= AXIS_LOCK_THRESHOLD) return
 
-        currentPointer = oneDPointer(handleY)
+        currentPointer.stop()
+        currentPointer = oneDPointer(handleY.get())
           .start(handleY)
       })
 
@@ -263,12 +262,13 @@ const PlayingView = nestable({
     }
   }
 },
-(state, actions) => {
-  let {playingContext, playbackTime, playingState} = state
+(state, actions) => (props) => (context) => {
+  let {playingContext, playbackTime, playingState} = context
   let { makeInteractive } = actions
-  return <StreamViewStyles key='stream-view' oncreate={makeInteractive}>
+
+  return <StreamViewStyles oncreate={makeInteractive}>
     <Wrapper>
-      <div onclick={() => actions.pages.back()} style={{position: 'absolute', top: '0', height: '4em', width: '100%'}} />
+      <div onclick={() => context.actions.pages.back()} style={{position: 'absolute', top: '0', height: '4em', width: '100%'}} />
       <img style={{width: '70%'}} src={playingContext.cover_art_url} />
       <span style={{marginTop: '2em', fontWeight: 'bold', fontSize: '1.2em'}}>{playingContext.name}</span>
       <span>
@@ -287,7 +287,7 @@ const PlayingView = nestable({
         <OtherButton title='Previous Song' onclick={() => window.Amplitude.prev()}>
           <img style={{height: '100%'}} src={prevImage} />
         </OtherButton>
-        <PlayButton title={`${playingState ? 'Pause' : 'Play'}`} onclick={actions.playPause}>
+        <PlayButton title={`${playingState ? 'Pause' : 'Play'}`} onclick={context.actions.playPause}>
           { !playingState
             ? <img style={{height: '100%'}} src={playImage} />
             : <img style={{height: '100%'}} src={pauseImage} />
@@ -307,7 +307,7 @@ const PlayingView = nestable({
       </div>
     </Wrapper>
   </StreamViewStyles>
-})
+}, 'playing-view')
 
 // const StreamView = (props) => (context) => {
 //   let {playingContext, playbackTime, playingState, actions} = context

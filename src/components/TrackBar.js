@@ -4,6 +4,7 @@ import { styler, value, listen, pointer, spring, schedule, everyFrame, transform
 import playImage from '../assets/play.svg'
 import pauseImage from '../assets/pause.svg'
 import { nestable } from 'hyperapp-context'
+// import { Link } from '@hyperapp/router'
 
 const {nonlinearSpring, smooth} = transform
 
@@ -368,7 +369,7 @@ const TrackBar = nestable({
       </div>
     </Bubble>
   </Wrapper>
-})
+}, 'track-bar')
 
 // const ScrubBar = (props) => (context) => {
 //   let {playingState, playbackTime, playingContext} = context
