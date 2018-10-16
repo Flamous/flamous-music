@@ -1,7 +1,7 @@
 import { h, app as _app } from 'hyperapp'
 import Amplitude from 'amplitudejs'
 import picostyle from 'picostyle'
-import ScrubBar from './components/ScrubBar.js'
+import ScrubBar from './components/TrackBar.js'
 import Home from './components/Home.js'
 import songListWowa from './songs/wowa.js'
 import songListKimiko from './songs/kimiko_ishizaka.js'
