@@ -139,7 +139,9 @@ const BubbleStyles = style('div')((props) => ({
   height: '4.2em',
   cursor: 'default',
   justifyContent: 'space-between',
+  backgroundColor: '#fdfdfd',
   alignItems: 'center',
+  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 0px 23px -7px',
   '&:active': {
     backgroundColor: '#f0f0f0'
   },
@@ -191,11 +193,8 @@ const Wrapper = style('div')({
   position: 'absolute',
   bottom: '0px',
   boxSizing: 'border-box',
-  justifyContent: 'space-between',
-  border: '1px solid #f0f0f0',
-  backgroundColor: '#fdfdfd',
-  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 0px 23px -7px',
-  overflow: 'hidden'
+  justifyContent: 'space-between'
+  // overflow: 'hidden'
 })
 const Progress = style('progress')({
   WebkitAppearance: 'none',
