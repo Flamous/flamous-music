@@ -327,15 +327,14 @@ const flamous = app(
         return <Container key='FAQ' {...props} page={FAQ} name='FAQ' />
       }} />
 
-      {scrubBar.visible && <TrackBar
-        key='scrub-bar'
-      />}
-
       {
         pages.stack.map((item) => {
           return item.page()
         })
       }
+      {scrubBar.visible && <TrackBar
+        key='scrub-bar'
+      />}
 
       {
         imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
