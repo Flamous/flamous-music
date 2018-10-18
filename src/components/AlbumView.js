@@ -5,6 +5,7 @@ import Header, { HeaderBold, HeaderImage } from './Header'
 import { Route, Link } from '@hyperapp/router'
 import kimikoSongs from '../songs/kimiko_ishizaka'
 import SongList from './SongList'
+import { nestable } from 'hyperapp-context'
 
 const Album = (props) => {
   let title
@@ -40,8 +41,31 @@ const Album = (props) => {
   </div>
 }
 
-export default (props) => {
+export default nestable({
+  stuff: {
+    name: null,
+    content: null
+  }
+},
+{
+  stuff: {
+    addContent: (prop) => (state) => {
+      if (state.name) return
+
+      return {
+        content: prop.content,
+        name: prop.name
+      }
+    }
+  }
+},
+(state, actions) => (props, children) => {
   return <Page>
-    <Route path={`/albums/:albumId`} render={(matchProps) => { return <Album {...matchProps} /> }} />
+    {state.stuff.content && <state.stuff.content />}
+    <Route path={`/albums/:albumId`} render={(matchProps) => {
+      actions.stuff.addContent({content: () => { return <Album {...matchProps} /> }, name: 'Album'})
+    }}
+    // render={(matchProps) => { return <Artist {...matchProps} /> }}
+    />
   </Page>
-}
+})

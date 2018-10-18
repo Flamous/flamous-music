@@ -139,7 +139,7 @@ let Artist = (props) => (context) => {
   }
 
   let out = artist
-    ? <div key={props.match.params.artistId} oncreate={initLazyLoad} onremove={removeLazyLoad} onupdate={updateLazyLoad}>
+    ? <div key={props.match.params.artistId} oncreate={initLazyLoad} ondestroy={removeLazyLoad} onupdate={updateLazyLoad}>
       <Header title={artist.name} back={{text: 'Back', to: '/'}}>
         <HeaderBold style={{textAlign: 'center'}}>
           <HeaderImage onclick={(event) => {
@@ -170,7 +170,6 @@ export default nestable({
 {
   stuff: {
     addContent: (prop) => (state) => {
-
       if (state.name) return
 
       return {
