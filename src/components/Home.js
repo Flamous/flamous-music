@@ -33,12 +33,17 @@ const Button = (props) => style('span')({
 
 const ArtistStyle = style(Link)({
   textAlign: 'center',
-  width: '43%',
+  width: 'calc(50% - 2em)',
   border: '1px solid rgba(0, 0, 0, 0.14)',
   borderRadius: '16px',
   padding: '1px',
   margin: '0.7em 1em',
   boxShadow: '0px 5px 36px -5px rgba(0, 0, 0, 0.14)',
+  '@media (min-width: 800px)': {
+    '&': {
+      maxWidth: '200px'
+    }
+  },
   '> img': {
     borderRadius: '16px 16px 3px 3px',
     width: '100%',
@@ -65,7 +70,7 @@ const StyledLogo = style('div')({
   alignItems: 'center',
   maxWidth: '768px',
   margin: '0 auto',
-  padding: '1em',
+  padding: '0.675em 1em',
   justifyContent: 'space-between'
 })
 
@@ -92,8 +97,9 @@ const StyledTagLine = style('div')({
   flexWrap: 'wrap'
 })
 const StyledPlay = style('span')({
-  padding: '0.45em 1.38em 0.45em 0.8em',
-  borderRadius: '15px',
+  padding: '0.3em 1.38em 0.3em 0.8em',
+  borderRadius: '13px',
+  border: '1px solid rgb(0, 105, 221)',
   display: 'inline-flex',
   alignItems: 'center',
   fontSize: '1.2em',
@@ -253,5 +259,5 @@ const Home = (props) => (context) => {
 export default Home
 
 const Divider = () => {
-  return <div style={{height: '3em', backgroundColor: '#fafafa', borderTop: '1px solid rgba(0, 0, 0, 0.05)', borderBottom: '1px solid rgba(0, 0, 0, 0.05)', margin: '3.5em 0px'}} />
+  return <div style={{height: '3em', backgroundColor: '#fafafa', borderTop: '1px solid rgba(0, 0, 0, 0.1)', borderBottom: '1px solid rgba(0, 0, 0, 0.08)', margin: '3.5em 0px'}} />
 }
