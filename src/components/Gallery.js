@@ -75,7 +75,7 @@ const Gallery = (props, children) => style('div')({
 )
 
 const Wrapper = style('div')({
-  maxWidth: '1000px',
+  maxWidth: '768px',
   margin: '0 auto'
 })
 

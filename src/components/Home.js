@@ -7,8 +7,8 @@ import { Link } from '@hyperapp/router'
 import LazyImage from './LazyImage.js'
 import rightArrow from '../assets/blue_right.svg'
 import flamousLogo from '../assets/flamous_logo.svg'
-import playImage from '../assets/play_blue.svg'
-import pauseImage from '../assets/pause_blue.svg'
+import playImage from '../assets/play_white.svg'
+import pauseImage from '../assets/pause_white.svg'
 import christianImage from '../assets/Christian.jpg'
 import timonImage from '../assets/Timon.jpg'
 import twitterImage from '../assets/twitter.svg'
@@ -33,34 +33,26 @@ const Button = (props) => style('span')({
 
 const ArtistStyle = style(Link)({
   textAlign: 'center',
-  padding: '1em',
-  width: '50%',
-  maxWidth: '200px',
+  width: '43%',
+  border: '1px solid rgba(0, 0, 0, 0.14)',
+  borderRadius: '16px',
+  padding: '1px',
+  margin: '0.7em 1em',
+  boxShadow: '0px 5px 36px -5px rgba(0, 0, 0, 0.14)',
   '> img': {
-    borderRadius: '100%',
-    width: '7em',
-    height: '6.9em',
-    border: '1px solid rgba(0, 0, 0, 0.14)',
-    boxShadow: 'rgba(0, 0, 0, 0.14) 0px 2px 18px -5px'
+    borderRadius: '16px 16px 3px 3px',
+    width: '100%',
+    // height: '6.9em',
+    // border: '1px solid rgba(0, 0, 0, 0.14)',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.14)'
+    // boxShadow: 'rgba(0, 0, 0, 0.14) 0px 2px 18px -5px'
   },
   ' .artist-line': {
     color: 'black',
     fontWeight: 'bold'
-    // fontSize: '1.2em',
-    // padding: '0.1em 0.4em',
-    // backgroundColor: 'rgba(251, 251, 251, 0.9)',
-    // borderRadius: '10px',
-    // transform: 'translateY(-1.2em)',
-    // display: 'inline-block',
-    // border: '1px solid rgba(0, 0, 0, 0.14)',
-    // color: '#212121'
   },
   ' .secondary': {
     color: '#212121'
-    // color: '#212121',
-    // transform: 'translateY(-1.2em)',
-    // display: 'inline-block',
-    // fontSize: '0.94em'
   },
   '&:active': {
     backgroundColor: '#f0f0f0'
@@ -71,41 +63,43 @@ const Artist = ArtistStyle
 const StyledLogo = style('div')({
   display: 'flex',
   alignItems: 'center',
-  maxWidth: '1000px',
-  margin: '1.2em auto 1em',
-  padding: '0 1em',
+  maxWidth: '768px',
+  margin: '0 auto',
+  padding: '1em',
   justifyContent: 'space-between'
 })
 
 const Logo = (props) => {
-  return <StyledLogo>
-    <div style={{display: 'flex', alignItems: 'center'}}>
-      <img height='36' style={{marginRight: '0.7em'}} src={flamousLogo} />
-      <span style={{fontSize: '1.2em', fontWeight: 'normal'}} >Flamous Music</span>
+  return <div style={{borderBottom: '1px solid rgba(0, 0, 0, 0.1)', backgroundColor: '#fafafa'}}>
+    <StyledLogo>
+      <div style={{display: 'flex', alignItems: 'center'}}>
+        <img height='36' style={{marginRight: '0.7em'}} src={flamousLogo} />
+        <span style={{fontSize: '1.2em', fontWeight: 'normal'}} >Flamous Music</span>
 
-    </div>
-    <Link to='/about' style={{display: 'inline-flex'}}>
-      <span style={{display: 'inline-block'}}>About</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
-    </Link>
-  </StyledLogo>
+      </div>
+      <Link to='/about' style={{display: 'inline-flex'}}>
+        <span style={{display: 'inline-block'}}>About</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
+      </Link>
+    </StyledLogo>
+  </div>
 }
 
 const StyledTagLine = style('div')({
-  maxWidth: '1000px',
+  maxWidth: '768px',
   margin: '3em auto 3em',
   padding: '0 1em',
   display: 'flex',
   flexWrap: 'wrap'
 })
 const StyledPlay = style('span')({
-  padding: '0.5em 1.38em 0.5em 0.5em',
-  borderRadius: '100px',
-  // border: '2px solid #007AFF',
+  padding: '0.45em 1.38em 0.45em 0.8em',
+  borderRadius: '15px',
   display: 'inline-flex',
   alignItems: 'center',
   fontSize: '1.2em',
   fontWeight: 'bold',
-  color: '#007aff'
+  color: 'white',
+  backgroundColor: '#007aff'
 })
 
 const TagLine = () => (context) => {
@@ -113,14 +107,14 @@ const TagLine = () => (context) => {
   return <StyledTagLine>
     <div>
       <h1 style={{fontSize: '3em', fontWeight: 'bold', maxWidth: '350px', lineHeight: '1.3'}}>
-        The best of Public Domain music.
+        The best of<br />Public Domain<br /> music.
       </h1>
       <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.35', margin: '-1.5em 0 2em'}}>Listen to truly copyright free songs. Share, mix, download and cover.</p>
     </div>
-    <div style={{alignSelf: 'flex-end', marginBottom: '-0.5em', display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'center'}}>
+    <div style={{alignSelf: 'flex-end', marginBottom: '-0.5em', display: 'flex', alignItems: 'center', width: '100%'}}>
       <StyledPlay onclick={window.flamous.playPause}>
         <img height='36' src={!playingState ? playImage : pauseImage} />
-        {!playingState ? 'Play' : 'Pause'}
+        {!playingState ? 'Listen' : 'Pause'}
       </StyledPlay>
     </div>
 
@@ -128,7 +122,7 @@ const TagLine = () => (context) => {
 }
 
 const Header = style('header')({
-  margin: '1em 0 3em'
+  // margin: '1em 0 3em'
 })
 
 const Home = (props) => (context) => {
@@ -140,22 +134,25 @@ const Home = (props) => (context) => {
         <Logo />
         <TagLine />
       </Header>
-      <Gallery heading='Artists'>
+      <Gallery heading='Browse Artists'>
         {
           artists.map((artist, index) => {
             return <Artist to={`/artist/${artist.name.toLowerCase().replace(' ', '_')}`}>
               <LazyImage src={artist.cover_art_url} />
-              <div>
+              <div style={{padding: '0.8em 1em 1em'}}>
                 <span class='artist-line'>{artist.name}</span>
                 <br />
-                <span class='secondary'>Artist, {artist.songCount} songs</span>
+                <span class='secondary'>{artist.songCount} Songs</span>
               </div>
             </Artist>
           })
         }
 
       </Gallery>
-      <div style={{margin: '3em auto', maxWidth: '1000px', padding: '1em'}}>
+
+      <Divider />
+
+      <div style={{margin: '3em auto', maxWidth: '768px', padding: '1em'}}>
         <h2>
           Submit your songs
         </h2>
@@ -166,8 +163,8 @@ const Home = (props) => (context) => {
           <span style={{display: 'inline-block'}}>Submit Songs</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
         </Link>
       </div>
-
-      <div style={{margin: '3em auto', maxWidth: '1000px', padding: '3em 1em 1em 1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
+      <Divider />
+      <div style={{margin: '3em auto', maxWidth: '768px', padding: '3em 1em 1em 1em'}}>
         <h2>
           Get E-Mail updates
         </h2>
@@ -186,8 +183,8 @@ const Home = (props) => (context) => {
           </form>
         </div>
       </div>
-
-      <div style={{margin: '3em auto -6em', maxWidth: '1000px', padding: '1em', borderTop: '2px solid rgba(0, 0, 0, 0.14)'}}>
+      <Divider />
+      <div style={{margin: '3em auto -6em', maxWidth: '768px', padding: '1em'}}>
         <h2>
           Developers
         </h2>
@@ -222,7 +219,7 @@ const Home = (props) => (context) => {
         </p>
       </div>
 
-      <div style={{margin: '3em auto -3em', maxWidth: '1000px', padding: '3em 1em 1em 1em'}}>
+      <div style={{margin: '3em auto -3em', maxWidth: '768px', padding: '3em 1em 1em 1em'}}>
         <p style={{textAlign: 'center', lineHeight: '1.34'}}>
           <a href='mailto:hello@flamous.io'>hello@flamous.io</a><br />
           <a href='https://twitter.com/FlamousMusic' rel='noopener' target='_blank'>twitter.com/FlamousMusic</a>
@@ -254,3 +251,7 @@ const Home = (props) => (context) => {
 }
 
 export default Home
+
+const Divider = () => {
+  return <div style={{height: '3em', backgroundColor: '#fafafa', borderTop: '1px solid rgba(0, 0, 0, 0.05)', borderBottom: '1px solid rgba(0, 0, 0, 0.05)', margin: '3.5em 0px'}} />
+}
