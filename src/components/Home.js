@@ -158,6 +158,22 @@ const Home = (props) => (context) => {
 
       <Divider />
 
+      <div style={{margin: '3em auto', maxWidth: '40em', padding: '1em', height: '90vh', display: 'flex', alignItems: 'center'}}>
+        <h2 style={{width: '15em', marginRight: '1em'}}>
+          <span style={{fontWeight: 'normal'}}>Flamous Music is all about </span>getting music to as many places a possible.
+        </h2>
+        <div style={{maxWidth: '32em'}}>
+          <p style={{lineHeight: '1.3'}}>
+          Public Domain enables creative opportunities for people who create amazing content and brings your music to a larger audience. Make your music heard.
+          </p>
+          <Link to='/song-submit' style={{display: 'flex'}}>
+            <span style={{display: 'inline-block'}}>Check it out</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
+          </Link>
+        </div>
+      </div>
+
+      <Divider />
+
       <div style={{margin: '3em auto', maxWidth: '768px', padding: '1em'}}>
         <h2>
           Submit your songs
@@ -169,15 +185,14 @@ const Home = (props) => (context) => {
           <span style={{display: 'inline-block'}}>Submit Songs</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
         </Link>
       </div>
-      <Divider />
-      <div style={{margin: '3em auto', maxWidth: '768px', padding: '3em 1em 1em 1em'}}>
+      <div style={{margin: '3em auto', maxWidth: '768px', padding: '1em 1em 1em 1em'}}>
         <h2>
-          Get E-Mail updates
+          Our Newsletter
         </h2>
         <div id='mc_embed_signup'>
           <form action='https://flamous.us19.list-manage.com/subscribe/post?u=2c3e676f85f7cce3cad163b48&amp;id=83387ae973' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' class='validate' target='_blank' novalidate>
             <div style={{textAlign: 'left'}} id='mc_embed_signup_scroll'>
-              <p>Get notified when new music arrives!</p>
+              <p style={{maxWidth: '32em', lineHeight: '1.3'}}>Get notified when new musicians join Flamous. At most once per week and only the best free-to-use music.</p>
               <label style={{display: 'none'}} for='mce-EMAIL'>E-Mail address</label>
               <div style={{display: 'flex'}}>
                 <input style={{width: '100%', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.02)', borderRadius: '10px', WebkitUserSelect: 'initial', userSelect: 'initial'}} type='email' value='' name='EMAIL' class='email' id='mce-EMAIL' placeholder='Email Address' required />
