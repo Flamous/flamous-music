@@ -172,7 +172,7 @@ const PlayingView = nestable({
 {
   makeInteractive: (element) => (state, actions) => {
     let {handleTouchStart} = actions
-    let bodyHeight = document.body.clientHeight
+    let bodyHeight = window.innerHeight
 
     let handleStyler = styler(element)
     let handleY = value(bodyHeight, handleStyler.set('y'))
@@ -221,7 +221,7 @@ const PlayingView = nestable({
     upListener.stop()
 
     let { handleY } = state
-    let bodyHeight = document.body.clientHeight
+    let bodyHeight = window.innerHeight
     let currentPosition = handleY.get()
     let currentVelocity = handleY.getVelocity()
     let snappy = snap([0, bodyHeight / 2])

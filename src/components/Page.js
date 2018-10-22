@@ -45,7 +45,7 @@ const Page = nestable(
 
       // Initial slide-in
       spring({
-        from: window.screen.width,
+        from: window.innerWidth,
         to: 0,
         damping: 20,
         mass: 0.5
@@ -105,7 +105,7 @@ const Page = nestable(
       setAxisLock(false)
 
       let { handleX } = state
-      let bodyWidth = window.screen.width
+      let bodyWidth = window.innerWidth
       let currentPosition = handleX.get()
       let currentVelocity = handleX.getVelocity()
       let snappy = snap([0, bodyWidth / 2])
