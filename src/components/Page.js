@@ -149,6 +149,18 @@ const Page = nestable(
       return {
         isAxisLocked: boolean
       }
+    },
+    slideOut: (done) => (state, actions) => {
+      let { handleX } = state
+
+      handleX.subscribe({complete: () => done()})
+      spring({
+        from: handleX.get(),
+        to: window.innerWidth,
+        velocity: handleX.get(),
+        damping: 20,
+        mass: 0.5
+      }).start(handleX)
     }
   },
   (state, actions) => (props, children) => {
@@ -165,4 +177,4 @@ const Page = nestable(
   },
   'flamous-page')
 
-export default Page
+export default (props, children) => <Page {...props} onremove={(elem, done) => { elem.actions.slideOut(done) }}>{children}</Page>
