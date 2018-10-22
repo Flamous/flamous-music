@@ -304,6 +304,7 @@ const flamous = app(
     setContext(context)
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <Home key='home' />
+      {<TrackBar key='track-bar' hidden={!scrubBar.visible} />}
 
       <Route path='/' render={(props) => {
         actions.pages.clear()
@@ -332,9 +333,6 @@ const flamous = app(
           return item.page()
         })
       }
-      {scrubBar.visible && <TrackBar
-        key='scrub-bar'
-      />}
 
       {
         imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />

@@ -112,7 +112,8 @@ const TrackBar = nestable({
   stopPointer: null,
   axis: null,
   springCurve: nonlinearSpring(3, 0),
-  ACTIONABLE_THRESHOLD: 20
+  ACTIONABLE_THRESHOLD: 20,
+  isVisible: false
 },
 {
   makeInteractive: (element) => (state, actions) => {
@@ -123,21 +124,14 @@ const TrackBar = nestable({
 
     let handleStyler = styler(element)
     let handleX = value(0, handleStyler.set('x'))
-    let handleY = value(0, handleStyler.set('y'))
-
-    // Initial slide-in
-    spring({
-      from: '110%',
-      to: '0%',
-      damping: 20,
-      mass: 0.5
-    }).start(handleY)
+    let handleY = value('110%', handleStyler.set('y'))
 
     listen(element, 'mousedown touchstart', { passive: true })
       .start(startSwipeBack)
 
     return {
-      handleX: handleX
+      handleX: handleX,
+      handleY: handleY
     }
   },
   startSwipeBack: (e) => (state, actions) => {
@@ -219,14 +213,34 @@ const TrackBar = nestable({
       axis: obj.axis,
       direction: obj.direction
     }
+  },
+  slideIn: () => (state) => {
+    let { handleY } = state
+
+    // Initial slide-in
+    spring({
+      from: '110%',
+      to: '0%',
+      damping: 20,
+      mass: 0.5
+    }).start(handleY)
+
+    return {
+      isVisible: true
+    }
   }
 },
-(state, actions) => () => (context) => {
+(state, actions) => (props, children) => (context) => {
   let {playingState, playbackTime, playingContext} = context
-  let { makeInteractive } = actions
+  let { makeInteractive, slideIn } = actions
   let {duration, name, artist, cover_art_url: image} = playingContext
+  let { hidden } = props
+  let { isVisible } = state
+
+  !hidden && !isVisible && slideIn()
+
   return <Wrapper class='trackbar'>
-    <Bubble to={'/stream-view'} playingState={playingState} oncreate={makeInteractive}>
+    <Bubble to='/stream-view' playingState={playingState} oncreate={makeInteractive}>
       <Progress max={duration || '300'} value={playbackTime}>{playbackTime}/{duration}</Progress>
       <div style={{display: 'flex', height: '100%', flexGrow: '1'}}>
         <SongCover draggable='false' src={image} />
@@ -251,4 +265,5 @@ const TrackBar = nestable({
   </Wrapper>
 }, 'track-bar')
 
+// export default TrackBar({key: 'track-bar'})
 export default TrackBar
