@@ -16,86 +16,6 @@ const style = picostyle(h)
 
 const oneDPointer = (initY) => pointer({x: 0, y: initY, preventDefault: false}).pipe(({y}) => y > 0 ? y : 0)
 
-// function init (element) {
-//   const THRESHOLD = 10 // Pixel
-//   let handleStyler = styler(element)
-//   let handleY = value(0, handleStyler.set('y'))
-//   element.handleY = handleY
-
-//   // Initial slide-in
-//   spring({
-//     from: document.body.clientHeight,
-//     to: 0,
-//     damping: 20,
-//     mass: 0.5
-//   }).start(handleY)
-
-//   let sub
-//   listen(element, 'mousedown touchstart')
-//     .start((event) => {
-//       sub = oneDPointer(0)
-//         .start((y) => {
-//           if (y >= THRESHOLD) {
-//             sub.stop()
-//             sub = oneDPointer(handleY.get())
-//               .start(handleY)
-//           }
-//         })
-
-//       let upSub = listen(document, 'mouseup touchend')
-//         .start((event) => {
-//           sub && sub.stop()
-//           upSub.stop()
-
-//           let velocity = handleY.getVelocity()
-//           let pos = handleY.get()
-
-//           let isGoingBack = Boolean(!snap([
-//             0,
-//             document.body.clientHeight / 2
-//           ])(pos + velocity))
-
-//           if (isGoingBack) {
-//             let config = {
-//               from: pos,
-//               to: 0,
-//               velocity: velocity,
-//               mass: 0.5,
-//               damping: 20
-//             }
-
-//             spring(config)
-//               .start(handleY)
-//           } else {
-//             window.flamous.pages.back()
-//           }
-//         })
-//     })
-// }
-
-// function exit (element, done) {
-//   let handleY = element.handleY
-//   let velocity = handleY.getVelocity()
-//   let pos = handleY.get()
-//   let height = document.body.clientHeight
-
-//   handleY.subscribe((val) => {
-//     if (val >= height) {
-//       handleY.stop()
-//       done()
-//     }
-//   })
-
-//   let config = {
-//     from: pos,
-//     to: height,
-//     velocity: velocity,
-//     mass: 0.5
-//   }
-//   spring(config)
-//     .start(handleY)
-// }
-
 const StreamViewStyles = style('div')({
   height: '100%',
   width: '100%',
@@ -260,6 +180,18 @@ const PlayingView = nestable({
         velocity: currentVelocity
       }).pipe(val => { return val >= 0 ? val : 0 }).start(handleY)
     }
+  },
+  slideOut: (done) => (state, actions) => {
+    let { handleY } = state
+
+    handleY.subscribe({complete: () => done()})
+    spring({
+      from: handleY.get(),
+      to: window.innerHeight,
+      velocity: handleY.get(),
+      damping: 20,
+      mass: 0.5
+    }).start(handleY)
   }
 },
 (state, actions) => (props) => (context) => {
@@ -309,49 +241,4 @@ const PlayingView = nestable({
   </StreamViewStyles>
 }, 'playing-view')
 
-// const StreamView = (props) => (context) => {
-//   let {playingContext, playbackTime, playingState, actions} = context
-//   return <StreamViewStyles key='stream-view' oncreate={init} onremove={exit}>
-//     <Wrapper>
-//       <div onclick={() => context.actions.pages.back()} style={{position: 'absolute', top: '0', height: '4em', width: '100%'}} />
-//       <img style={{width: '70%'}} src={playingContext.cover_art_url} />
-//       <span style={{marginTop: '2em', fontWeight: 'bold', fontSize: '1.2em'}}>{playingContext.name}</span>
-//       <span>
-//         {playingContext.artist}
-//       </span>
-//       <div style={{display: 'flex', width: '90%', alignItems: 'center'}}>
-//         <div style={{width: '4em'}}>
-//           {formatTime(Math.round(playbackTime))}
-//         </div>
-//         <Progress max={playingContext.duration || '300'} value={playbackTime}>{playbackTime}/{playingContext.duration}</Progress>
-//         <div style={{width: '4em', textAlign: 'right'}}>
-//           {formatTime(Math.round(playingContext.duration))}
-//         </div>
-//       </div>
-//       <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '0.5em 3em'}}>
-//         <OtherButton title='Previous Song' onclick={() => window.Amplitude.prev()}>
-//           <img style={{height: '100%'}} src={prevImage} />
-//         </OtherButton>
-//         <PlayButton title={`${playingState ? 'Pause' : 'Play'}`} onclick={actions.playPause}>
-//           { !playingState
-//             ? <img style={{height: '100%'}} src={playImage} />
-//             : <img style={{height: '100%'}} src={pauseImage} />
-//           }
-//         </PlayButton>
-//         <OtherButton title='Next Song' onclick={() => window.Amplitude.next()}>
-//           <img style={{height: '100%'}} src={nextImage} />
-//         </OtherButton>
-//       </div>
-//       <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em 0.5em'}}>
-//         <OtherButton style={{width: '100%'}}>
-//           <a title='Download Song' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'black', padding: '0.6em'}} href={window.Amplitude.audio().src} download={`${playingContext.name} - ${playingContext.artist} | Flamous Music.mp3`}>
-//             <img style={{height: '1.6em', marginRight: '0.5em'}} src={downloadImage} />
-//             <span>Download</span>
-//           </a>
-//         </OtherButton>
-//       </div>
-//     </Wrapper>
-//   </StreamViewStyles>
-// }
-
-export default PlayingView
+export default (props, children) => { return <PlayingView {...props} onremove={(elem, done) => { elem.actions.slideOut(done) }} /> }
