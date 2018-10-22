@@ -144,7 +144,8 @@ const Header = nestable(
   {
     isHeaderHidden: false,
     observer: null,
-    threshold: 0
+    threshold: 0,
+    back: null
   },
   {
     observerChange: (changes) => ({threshold}, {setHeaderHidden}) => {
@@ -172,10 +173,20 @@ const Header = nestable(
       return {
         isHeaderHidden: isHidden
       }
+    },
+    setBackLocation: (backUrl) => {
+      return {
+        back: backUrl || '/'
+      }
     }
   },
   (state, actions) => (props, children) => (context) => {
-    let back = context.location.previous !== context.location.pathname ? context.location.previous : '/'
+    let { setBackLocation } = actions
+    let { back } = state
+    let { location } = context
+
+    !back && setBackLocation((props.back && props.back.to) || location.previous)
+
     return <HeaderStyles>
       <HeaderWrapper>
         <header style={{display: 'contents'}}>

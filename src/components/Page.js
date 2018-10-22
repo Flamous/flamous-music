@@ -28,7 +28,8 @@ const Page = nestable(
     isAxisLocked: false,
     makeInteractive: false,
     currentPointer: null,
-    upListener: null
+    upListener: null,
+    back: null
   },
   {
     init: (props) => {
@@ -94,7 +95,7 @@ const Page = nestable(
       }
     },
     endSwipeBack: (e) => (state, actions) => {
-      let { isAxisLocked, currentPointer, upListener } = state
+      let { isAxisLocked, currentPointer, upListener, back } = state
       let { setAxisLock } = actions
 
       currentPointer.stop()
@@ -118,8 +119,8 @@ const Page = nestable(
 
       if (isLeaving) {
         window.clickLock = true
-        let location = window.flamous.getState().location
-        let back = location.previous !== location.pathname ? location.previous : '/'
+        // let location = window.flamous.getState().location
+        // let back = location.previous !== location.pathname ? location.previous : '/'
 
         // BUG: onremove events are not fired! That's why we finish the animation here and not in the onremove handler
         handleX.subscribe((val) => {
@@ -161,9 +162,19 @@ const Page = nestable(
         damping: 20,
         mass: 0.5
       }).start(handleX)
+    },
+    setBackLocation: (backUrl) => {
+      return {
+        back: backUrl || '/'
+      }
     }
   },
-  (state, actions) => (props, children) => {
+  (state, actions) => (props, children) => (context) => {
+    let { setBackLocation } = actions
+    let { back } = state
+    let { location } = context
+
+    !back && setBackLocation((props.back && props.back.to) || location.previous)
     return <StyledPage
       {...props}
       class='page'

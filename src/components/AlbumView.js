@@ -27,7 +27,7 @@ const Album = (props) => {
   }
 
   return <div>
-    <Header title={title} back={{text: 'Back', to: '/'}}>
+    <Header title={title} back={{text: 'Back', to: props.location.previous}}>
       <HeaderBold style={{textAlign: 'center'}}>
         <HeaderImage square onclick={(event) => {
           let bounds = event.target.getBoundingClientRect()
@@ -64,8 +64,6 @@ export default nestable({
     {state.stuff.content && <state.stuff.content />}
     <Route path={`/albums/:albumId`} render={(matchProps) => {
       actions.stuff.addContent({content: () => { return <Album {...matchProps} /> }, name: 'Album'})
-    }}
-    // render={(matchProps) => { return <Artist {...matchProps} /> }}
-    />
+    }} />
   </Page>
 })
