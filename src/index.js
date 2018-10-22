@@ -87,7 +87,7 @@ window.Amplitude = Amplitude
 const style = picostyle(h)
 
 const AppShell = style('div')({
-  display: 'fixed',
+  display: 'contents',
   left: '0',
   width: '100%',
   height: '100%',
