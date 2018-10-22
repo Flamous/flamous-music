@@ -103,6 +103,7 @@ function start (data) {
   let handleXY = value({x: invertX, y: invertY}, ({x, y}) => handleStyler.set({x, y}))
 
   data.element.style.transformOrigin = 'center'
+  data.element.style.webkitTransformOrigin = 'center'
   data.element.style.borderRadius = '5px'
   data.element.style.opacity = '1'
 
