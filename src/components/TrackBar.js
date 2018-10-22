@@ -4,7 +4,7 @@ import { styler, value, listen, pointer, spring, schedule, everyFrame, transform
 import playImage from '../assets/play.svg'
 import pauseImage from '../assets/pause.svg'
 import { nestable } from 'hyperapp-context'
-// import { Link } from '@hyperapp/router'
+import { Link } from '@hyperapp/router'
 
 const {nonlinearSpring, smooth} = transform
 
@@ -132,7 +132,7 @@ const pointerX = (preventDefault = false, x = 0) => pointer({x: x, preventDefaul
 
 const style = picostyle(h)
 
-const BubbleStyles = style('div')((props) => ({
+const BubbleStyles = style(Link)((props) => ({
   width: '100%',
   padding: '0.4em',
   display: 'flex',
@@ -346,7 +346,7 @@ const TrackBar = nestable({
   let { makeInteractive } = actions
   let {duration, name, artist, cover_art_url: image} = playingContext
   return <Wrapper class='trackbar'>
-    <Bubble playingState={playingState} oncreate={makeInteractive} onclick={() => window.flamous.location.go('/stream-view')}>
+    <Bubble to={'/stream-view'} playingState={playingState} oncreate={makeInteractive}>
       <Progress max={duration || '300'} value={playbackTime}>{playbackTime}/{duration}</Progress>
       <div style={{display: 'flex', height: '100%', flexGrow: '1'}}>
         <SongCover draggable='false' src={image} />
