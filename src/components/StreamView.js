@@ -102,7 +102,8 @@ const PlayingView = nestable({
       from: bodyHeight,
       to: 0,
       damping: 20,
-      mass: 0.5
+      mass: 0.3,
+      stiffness: 120
     }).start(handleY)
 
     listen(element, 'mousedown touchstart', { passive: true })
