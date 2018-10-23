@@ -111,8 +111,8 @@ function start (data) {
   spring({
     from: handleScale.get(),
     to: 1,
-    damping: 15,
-    mass: 0.8,
+    damping: 20,
+    mass: 0.3,
     stiffness: 120
   }).start(handleScale)
 
@@ -120,7 +120,7 @@ function start (data) {
     from: handleXY.get(),
     to: 0,
     damping: 15,
-    mass: 0.8,
+    mass: 0.3,
     stiffness: 120
   }).start(handleXY)
 
