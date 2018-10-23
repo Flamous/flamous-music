@@ -119,6 +119,17 @@ const Button = style('span')({
   backgroundColor: '#007aff'
 })
 
+const WhiteButton = style('span')({
+  padding: '0.385em 0.7em',
+  borderRadius: '10px',
+  border: '1px solid rgba(0, 0, 0, 0.5)',
+  display: 'inline-flex',
+  alignItems: 'center',
+  fontSize: '1.1em',
+  color: '#212121',
+  backgroundColor: 'white'
+})
+
 const TagLine = () => (context) => {
   let {playingState} = context
   return <StyledTagLine>
@@ -179,10 +190,15 @@ const Home = (props) => (context) => {
         <p>
           Use it commercially, for a video or just for yourself. There are no fees and no credit to the artists required. Listen to what you like, download and use it.
         </p>
-        <Link to='/song-submit' style={{display: 'flex'}}>
+        <Link to='/song-submit'>
           <Button>
             <span>Browse Music</span>
           </Button>
+        </Link>
+        <Link to='/how-to' style={{marginLeft: '0.4em'}}>
+          <WhiteButton>
+            <span>I'm confused</span>
+          </WhiteButton>
         </Link>
       </div>
 
