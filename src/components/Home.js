@@ -266,7 +266,7 @@ const Home = (props) => (context) => {
           }} style={{width: '4em', borderRadius: '100%', marginRight: '1em', pointerEvents: 'auto'}} src={timonImage} />
           <div>
             <b>Timon Röhrbacher</b><br />
-            Salesman
+            Student
           </div>
           <a style={{padding: '1em'}} target='_blank' rel='noopener' href={'https://twitter.com/TimonRooe'}>
             <img style={{width: '2em'}} src={twitterImage} />
@@ -279,7 +279,7 @@ const Home = (props) => (context) => {
           }} style={{width: '4em', borderRadius: '100%', marginRight: '1em', pointerEvents: 'auto'}} src={christianImage} />
           <div>
             <b>Christian Kaindl</b><br />
-            Lead Developer
+            Web Developer
           </div>
           <a style={{padding: '1em'}} target='_blank' rel='noopener' href={'https://twitter.com/christiankaindl'}>
             <img style={{width: '2em'}} src={twitterImage} />
