@@ -49,7 +49,8 @@ const Page = nestable(
         from: window.innerWidth,
         to: 0,
         damping: 20,
-        mass: 0.5
+        mass: 0.3,
+        stiffness: 120
       }).start(handleX)
 
       listen(element, 'mousedown touchstart', { passive: true })
