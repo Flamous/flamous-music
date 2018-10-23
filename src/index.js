@@ -22,6 +22,7 @@ import { withContext } from 'hyperapp-context'
 import SongSubmit from './elements/SongSubmit.js'
 import AlbumView from './components/AlbumView.js'
 import FAQ from './elements/FAQ'
+import HowTo from './elements/HowTo'
 
 const app = withContext(_app)
 
@@ -323,6 +324,9 @@ const flamous = app(
       }} />
       <Route parent path='/albums' render={(props) => {
         return <Container key='Albumview' {...props} page={AlbumView} name='AlbumView' />
+      }} />
+      <Route parent path='/how-to' render={(props) => {
+        return <Container key='HowTo' {...props} page={HowTo} name='HowTo' />
       }} />
       <Route path='/faq' render={(props) => {
         return <Container key='FAQ' {...props} page={FAQ} name='FAQ' />
