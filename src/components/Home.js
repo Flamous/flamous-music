@@ -16,20 +16,20 @@ import githubImage from '../assets/github.svg'
 
 const style = picostyle(h)
 
-const Button = (props) => style('span')({
-  fontWeight: 'bold',
-  color: '#007AFF',
-  position: 'absolute',
-  right: '1.5em',
-  top: '1em'
-})(
-  {
+// const Button = (props) => style('span')({
+//   fontWeight: 'bold',
+//   color: '#007AFF',
+//   position: 'absolute',
+//   right: '1.5em',
+//   top: '1em'
+// })(
+//   {
 
-  },
-  <Link to={props.to}>
-    {[props.text, <img src={rightArrow} style={{height: '0.8em', marginLeft: '0.4em', marginTop: '0em'}} />]}
-  </Link>
-)
+//   },
+//   <Link to={props.to}>
+//     {[props.text, <img src={rightArrow} style={{height: '0.8em', marginLeft: '0.4em', marginTop: '0em'}} />]}
+//   </Link>
+// )
 
 const ArtistStyle = style(Link)({
   textAlign: 'center',
@@ -70,20 +70,20 @@ const StyledLogo = style('div')({
   alignItems: 'center',
   maxWidth: '768px',
   margin: '0 auto',
-  padding: '0.675em 1em',
+  // padding: '0.675em 1em',
   justifyContent: 'space-between'
 })
 
 const Logo = (props) => {
   return <div style={{borderBottom: '1px solid rgba(0, 0, 0, 0.1)', backgroundColor: '#fafafa'}}>
     <StyledLogo>
-      <div style={{display: 'flex', alignItems: 'center'}}>
+      <div style={{display: 'flex', alignItems: 'center', padding: '0.8em'}}>
         <img height='36' style={{marginRight: '0.7em'}} src={flamousLogo} />
         <span style={{fontSize: '1.2em', fontWeight: 'normal'}} >Flamous Music</span>
 
       </div>
-      <Link to='/about' style={{display: 'inline-flex'}}>
-        <span style={{display: 'inline-block'}}>About</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
+      <Link to='/about' style={{display: 'inline-flex', fontWeight: 'bold', padding: '0.9em'}}>
+        <span style={{display: 'inline-block'}}>About</span>
       </Link>
     </StyledLogo>
   </div>
@@ -91,13 +91,13 @@ const Logo = (props) => {
 
 const StyledTagLine = style('div')({
   maxWidth: '768px',
-  margin: '3em auto 3em',
+  margin: '2em auto 3em',
   padding: '0 1em',
   display: 'flex',
   flexWrap: 'wrap'
 })
 const StyledPlay = style('span')({
-  padding: '0.3em 1.38em 0.3em 0.8em',
+  padding: '0.2em 1.2em 0.2em 0.6em',
   borderRadius: '13px',
   border: '1px solid rgb(0, 105, 221)',
   display: 'inline-flex',
@@ -108,14 +108,25 @@ const StyledPlay = style('span')({
   backgroundColor: '#007aff'
 })
 
+const Button = style('span')({
+  padding: '0.385em 0.7em',
+  borderRadius: '10px',
+  border: '1px solid rgb(0, 105, 221)',
+  display: 'inline-flex',
+  alignItems: 'center',
+  fontSize: '1.1em',
+  color: 'white',
+  backgroundColor: '#007aff'
+})
+
 const TagLine = () => (context) => {
   let {playingState} = context
   return <StyledTagLine>
     <div>
-      <h1 style={{fontSize: '3em', fontWeight: 'bold', maxWidth: '350px', lineHeight: '1.3'}}>
-        The best of<br />Public Domain<br /> music.
+      <h1 style={{fontSize: '2.8em', fontWeight: 'bold', maxWidth: '350px', lineHeight: '1.3'}}>
+        Listen to<br />copyright free<br />music.
       </h1>
-      <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.35', margin: '-1.5em 0 2em'}}>Listen to truly copyright free songs. Share, mix, download and cover.</p>
+      <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.35', margin: '-1.5em 0 1em'}}>Music without limitations. Share, mix, download and cover.</p>
     </div>
     <div style={{alignSelf: 'flex-end', marginBottom: '-0.5em', display: 'flex', alignItems: 'center', width: '100%'}}>
       <StyledPlay onclick={window.flamous.playPause}>
@@ -158,40 +169,36 @@ const Home = (props) => (context) => {
 
       <Divider />
 
-      <div style={{margin: '3em auto', maxWidth: '40em', padding: '1em', height: '90vh', display: 'flex', alignItems: 'center'}}>
-        <h2 style={{width: '15em', marginRight: '1em'}}>
-          <span style={{fontWeight: 'normal'}}>Flamous Music is all about </span>getting music to as many places a possible.
+      <div style={{margin: '3em auto', maxWidth: '32em', padding: '1em'}}>
+        <h2>
+          Our music is<br />use-for-everything
         </h2>
-        <div style={{maxWidth: '32em'}}>
-          <p style={{lineHeight: '1.3'}}>
-          Public Domain enables creative opportunities for people who create amazing content and brings your music to a larger audience. Make your music heard.
-          </p>
-          <Link to='/song-submit' style={{display: 'flex'}}>
-            <span style={{display: 'inline-block'}}>Check it out</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
-          </Link>
-        </div>
+        <p style={{maxWidth: '32em', lineHeight: '1.3'}}>
+          Music on flamous.io is in the Public Domain through Creative Commons Zero.
+        </p>
+        <p>
+          Use it commercially, for a video or just for yourself. There are no fees and no credit to the artists required. Listen to what you like, download and use it.
+        </p>
+        <Link to='/song-submit' style={{display: 'flex'}}>
+          <Button>
+            <span>Browse Music</span>
+          </Button>
+        </Link>
       </div>
 
       <Divider />
 
-      <div style={{margin: '3em auto', maxWidth: '768px', padding: '1em'}}>
+      <div style={{margin: '3em auto', maxWidth: '32em', padding: '1em'}}>
         <h2>
-          Submit your songs
+          Lots more to come
         </h2>
         <p style={{maxWidth: '32em', lineHeight: '1.3'}}>
-          Public Domain enables creative opportunities for people who create amazing content and brings your music to a larger audience. Make your music heard.
+          We want to get people started on making music and will share more tracks and useful ressources to start music production very soon.
         </p>
-        <Link to='/song-submit' style={{display: 'flex'}}>
-          <span style={{display: 'inline-block'}}>Submit Songs</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
-        </Link>
-      </div>
-      <div style={{margin: '3em auto', maxWidth: '768px', padding: '1em 1em 1em 1em'}}>
-        <h2>
-          Our Newsletter
-        </h2>
         <div id='mc_embed_signup'>
           <form action='https://flamous.us19.list-manage.com/subscribe/post?u=2c3e676f85f7cce3cad163b48&amp;id=83387ae973' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' class='validate' target='_blank' novalidate>
             <div style={{textAlign: 'left'}} id='mc_embed_signup_scroll'>
+              <p><b>Our Newsletter</b></p>
               <p style={{maxWidth: '32em', lineHeight: '1.3'}}>Get notified when new musicians join Flamous. At most once per week and only the best free-to-use music.</p>
               <label style={{display: 'none'}} for='mce-EMAIL'>E-Mail address</label>
               <div style={{display: 'flex'}}>
@@ -204,6 +211,23 @@ const Home = (props) => (context) => {
           </form>
         </div>
       </div>
+
+      <Divider />
+
+      <div style={{margin: '3em auto', maxWidth: '32em', padding: '1em'}}>
+        <h2>
+          Submit your songs
+        </h2>
+        <p style={{maxWidth: '32em', lineHeight: '1.3'}}>
+          Public Domain enables creative opportunities for people who create amazing content and brings your music to a larger audience.
+        </p>
+        <Link to='/song-submit' style={{display: 'flex'}}>
+          <Button>
+            <span>Submit Songs</span>
+          </Button>
+        </Link>
+      </div>
+
       <Divider />
       <div style={{margin: '3em auto -6em', maxWidth: '768px', padding: '1em'}}>
         <h2>
