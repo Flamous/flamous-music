@@ -135,7 +135,10 @@ const Page = nestable(
         spring({
           from: currentPosition,
           to: bodyWidth,
-          velocity: currentVelocity
+          velocity: currentVelocity,
+          mass: 0.5,
+          damping: 13.5,
+          stiffness: 150
         }).start(handleX)
       } else {
         spring({
