@@ -211,21 +211,31 @@ const Home = (props) => (context) => {
         <p style={{maxWidth: '32em', lineHeight: '1.3'}}>
           We want to get people started on making music and will share more tracks and useful ressources to start music production very soon.
         </p>
+
         <div id='mc_embed_signup'>
           <form action='https://flamous.us19.list-manage.com/subscribe/post?u=2c3e676f85f7cce3cad163b48&amp;id=83387ae973' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' class='validate' target='_blank' novalidate>
-            <div style={{textAlign: 'left'}} id='mc_embed_signup_scroll'>
-              <p><b>Our Newsletter</b></p>
-              <p style={{maxWidth: '32em', lineHeight: '1.3'}}>Get notified when new musicians join Flamous. At most once per week and only the best free-to-use music.</p>
-              <label style={{display: 'none'}} for='mce-EMAIL'>E-Mail address</label>
-              <div style={{display: 'flex'}}>
-                <input style={{width: '100%', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.02)', borderRadius: '10px', WebkitUserSelect: 'initial', userSelect: 'initial'}} type='email' value='' name='EMAIL' class='email' id='mce-EMAIL' placeholder='Email Address' required />
-                <input style={{backgroundColor: 'transparent', border: 'none', color: '#007AFF', padding: '0.7em 1em', marginRight: '-1em', fontWeight: 'bold'}} type='submit' value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button' />
+            <div id='mc_embed_signup_scroll'>
+            <p style={{maxWidth: '32em', lineHeight: '1.3'}}><b>Our Newsletter</b><br />Get notified when new musicians join Flamous. At most once per week and only the best free-to-use music.</p>
+
+
+              <div class='mc-field-group'>
+                <label style={{display: 'none'}} for='mce-NAME'>Name </label>
+                <input type='text' placeholder='Name' value='' name='NAME' class='required' id='mce-NAME' style={{width: '100%', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.014)', borderRadius: '10px', margin: '0.45em 0', WebkitUserSelect: 'initial', userSelect: 'initial'}} />
               </div>
-              <div style='position: absolute; left: -5000px;' aria-hidden='true'>
-                <input type='text' name='b_2c3e676f85f7cce3cad163b48_83387ae973' tabindex='-1' value='' /></div>
+              <div class='mc-field-group'>
+                <label style={{display: 'none'}} for='mce-EMAIL'>Email Address </label>
+                <input type='email' placeholder='Email Address' value='' name='EMAIL' class='required email' id='mce-EMAIL' style={{width: '100%', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.02)', borderRadius: '10px', margin: '0.45em 0', WebkitUserSelect: 'initial', userSelect: 'initial'}} />
+              </div>
+              <div id='mce-responses' class='clear'>
+                <div class='response' id='mce-error-response' style='display:none' />
+                <div class='response' id='mce-success-response' style='display:none' />
+              </div>
+              <div style='position: absolute; left: -5000px;' aria-hidden='true'><input type='text' name='b_2c3e676f85f7cce3cad163b48_83387ae973' tabindex='-1' value='' /></div>
+              <div class='clear'><input type='submit' style={{backgroundColor: '#007AFF', border: 'none', borderRadius: '10px', color: 'white', padding: '0.6em 1em'}} value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button' /></div>
             </div>
           </form>
         </div>
+        <script onload={() => { import('../mailchimp-validation') }} type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js' />
       </div>
 
       <Divider />
