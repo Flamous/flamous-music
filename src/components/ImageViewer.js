@@ -9,7 +9,7 @@ const ImageViewerStyles = style('div')({
   height: '100%',
   width: '100%',
   backgroundColor: 'rgba(0, 0, 0, 0)',
-  transition: 'background-color 100ms linear, opacity 100ms linear',
+  transition: 'background-color 150ms 150ms linear, opacity 100ms linear',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -20,8 +20,6 @@ const ImageViewerStyles = style('div')({
 
 const Image = style('img')({
   borderRadius: '5px',
-  opacity: '0.01',
-  // transition: 'border-radius 250ms',
   width: '500px',
   maxWidth: '100%'
 })
@@ -105,7 +103,6 @@ function start (data) {
   data.element.style.transformOrigin = 'center'
   data.element.style.webkitTransformOrigin = 'center'
   data.element.style.borderRadius = '5px'
-  data.element.style.opacity = '1'
 
   // PLAY
   spring({
@@ -188,7 +185,7 @@ function fadeOut (element, done) {
 }
 
 const ImageViewer = (props) => {
-  return <ImageViewerStyles onremove={fadeOut} oncreate={(elem) => { elem.style.backgroundColor = 'rgba(0, 0, 0, 0.85)' }}>
+  return <ImageViewerStyles onremove={fadeOut} oncreate={(elem) => { elem.style.backgroundColor = 'rgba(0, 0, 0, 0.88)' }}>
     <div style={{width: '500px', maxWidth: '100%', textAlign: 'right'}}>
       <span title='Close' style={{color: 'white', padding: '0.6em', transform: 'translateY(-1em)', display: 'inline-block', fontWeight: 'bold'}} onclick={window.flamous.imageViewer.hideImageViewer}><img style={{height: '2.25em'}} src={closeImage} /></span>
     </div>
