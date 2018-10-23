@@ -20,22 +20,26 @@ const Question = style('p')({
 
 const SongSubmit = () => (context) => {
   return <Page key='SongSubmit'>
-    <Header title='Song Submit' back={{text: 'Back', to: '/'}} />
+    <Header title='Submit Songs' back={{text: 'Back', to: '/'}} />
     <Wrapper>
 
       <p>
-        Here you can submit your songs to Flamous Music.
+        We are always looking for artists who want share their music in a more open way.
       </p>
-
-      <span style={{backgroundColor: '#007AFF', borderRadius: '100px', display: 'inline-block'}}>
-        <a
-          style={{color: 'white', padding: '0.7em 1.2em', display: 'inline-block'}}
-          href='https://docs.google.com/forms/d/e/1FAIpQLSdelZNDeZAB-VjMzNs-H7f4X0aFyyaQ61xEJ_2lijic725KLQ/viewform'
-          target='_blank'
-          rel='noopener'>
+      <p>
+        Flamous Music is a young project and user login with song upload will be enabled very soon. In the meantime, if you want to make your songs available on Flmaous Music, click the button below. (This will open a new tab with a Google Form. When prompted, sign in with your Google account and then fill out the form.)
+      </p>
+      <p style={{textAlign: 'center'}}>
+        <span style={{backgroundColor: '#007AFF', borderRadius: '100px', display: 'inline-block'}}>
+          <a
+            style={{color: 'white', padding: '0.7em 1.2em', display: 'inline-block'}}
+            href='https://docs.google.com/forms/d/e/1FAIpQLSdelZNDeZAB-VjMzNs-H7f4X0aFyyaQ61xEJ_2lijic725KLQ/viewform'
+            target='_blank'
+            rel='noopener'>
               Submit Songs
-        </a>
-      </span>
+          </a>
+        </span>
+      </p>
 
       <h2 style={{margin: '3em 0 0'}}>FAQ</h2>
       <Section>
