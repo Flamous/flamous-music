@@ -284,9 +284,6 @@ const Home = (props) => (context) => {
           <a style={{padding: '1em'}} target='_blank' rel='noopener' href={'https://twitter.com/christiankaindl'}>
             <img style={{width: '2em'}} src={twitterImage} />
           </a>
-          <a style={{padding: '1em'}} target='_blank' rel='noopener' href={'https://github.com/christiankaindl'}>
-            <img style={{width: '1.5em'}} src={githubImage} />
-          </a>
         </p>
       </div>
 
