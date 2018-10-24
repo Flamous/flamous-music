@@ -34,8 +34,9 @@ const Wrapper = style('div')({
 const About = (props) => (context) => {
   let {checkForUpdate, updateAvailable} = context
   return <Page {...props} key='about'>
+    <Header title='How To' back={{text: 'Back', to: '/'}} />
     <Wrapper oncreate={checkForUpdate}>
-      <Header title='How To' back={{text: 'Back', to: '/'}} />
+
       <p>
         All songs on flamous.io are copyright free. That mean you are free to do with them what you want (personal use and even commercial use). All without having to pay fees or having to give credit. It's that simple.
       </p>

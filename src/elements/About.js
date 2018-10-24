@@ -28,11 +28,11 @@ const Wrapper = style('div')({
   }
 })
 
-const About = () => (context) => {
+const About = (props) => (context) => {
   let {checkForUpdate, updateAvailable} = context
-  return <Page key='about'>
+  return <Page {...props} key='about'>
+    <Header title='About' back={{text: 'Back', to: '/'}} />
     <Wrapper oncreate={checkForUpdate}>
-      <Header title='About' back={{text: 'Back', to: '/'}} />
 
       <p class='first'>"Flamous Music is a player for awesome, free music."</p>
       <p>
