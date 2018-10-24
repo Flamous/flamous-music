@@ -162,7 +162,7 @@ const Home = (props) => (context) => {
         <Logo />
         <TagLine />
       </Header>
-      <Gallery heading='Browse Artists'>
+      <Gallery id='artists' heading='Browse Artists'>
         {
           artists.map((artist, index) => {
             return <Artist to={`/artist/${artist.name.toLowerCase().replace(' ', '_')}`}>
@@ -175,6 +175,9 @@ const Home = (props) => (context) => {
             </Artist>
           })
         }
+        <p style={{textAlign: 'center', width: '100%'}}>
+          Click on an artist above and listen to some tunes.
+        </p>
 
       </Gallery>
 
@@ -190,11 +193,11 @@ const Home = (props) => (context) => {
         <p>
           Use it commercially, for a video or just for yourself. There are no fees and no credit to the artists required. Listen to what you like, download and use it.
         </p>
-        <Link to='/song-submit'>
+        <a href='/#artists'>
           <Button>
             <span>Browse Music</span>
           </Button>
-        </Link>
+        </a>
         <Link to='/how-to' style={{marginLeft: '0.4em'}}>
           <WhiteButton>
             <span>I'm confused</span>

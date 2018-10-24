@@ -58,6 +58,7 @@ const Gallery = (props, children) => style('div')({
   // borderTop: '1px solid #DDD'
 })(
   {
+    id: props.id,
     oncreate: initLazyLoad,
     // onupdate: updateLazyLoad,
     onremove: removeLazyLoad,
