@@ -38,7 +38,7 @@ const About = (props) => (context) => {
     <Wrapper oncreate={checkForUpdate}>
 
       <p>
-        All songs on flamous.io are copyright free. That mean you are free to do with them what you want (personal use and even commercial use). All without having to pay fees or having to give credit. It's that simple.
+        All songs on flamous.io are copyright free. That means you are free to do with them what you want (personal use and even commercial use). All without having to pay fees or having to give credit. It's that simple.
       </p>
 
       <ol>
@@ -68,7 +68,7 @@ const About = (props) => (context) => {
       </ol>
 
       <p>
-        Read ore about how songs are copyright free on Flamous in this article by the Stanford University: <a href='https://fairuse.stanford.edu/overview/public-domain/' target='_blank' rel='noopener'>Public Domain</a>
+        Read more about how songs are copyright free on Flamous in this article by the Stanford University: <a href='https://fairuse.stanford.edu/overview/public-domain/' target='_blank' rel='noopener'>Public Domain</a>
       </p>
     </Wrapper>
   </Page>

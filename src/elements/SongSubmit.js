@@ -24,7 +24,7 @@ const SongSubmit = () => (context) => {
     <Wrapper>
 
       <p>
-        We are always looking for artists who want share their music in a more open way.
+        We are always looking for artists who want to share their music in a more open way.
       </p>
       <p>
         Flamous Music is a young project and user login with song upload will be enabled very soon. In the meantime, if you want to make your songs available on Flmaous Music, click the button below. (This will open a new tab with a Google Form. When prompted, sign in with your Google account and then fill out the form.)
