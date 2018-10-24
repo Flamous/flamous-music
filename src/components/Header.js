@@ -69,6 +69,7 @@ const StyledHeaderNav = style('div')({
     WebkitBackdropFilter: 'blur(30px)'
   },
   '& .inner-wrapper': {
+    height: '100%',
     display: 'flex',
     maxWidth: '40rem',
     margin: '0 auto'

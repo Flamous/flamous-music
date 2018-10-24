@@ -223,11 +223,11 @@ const Home = (props) => (context) => {
 
               <div class='mc-field-group'>
                 <label style={{display: 'none'}} for='mce-NAME'>Name </label>
-                <input type='text' placeholder='Name' value='' name='NAME' class='required' id='mce-NAME' style={{width: '100%', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.014)', borderRadius: '10px', margin: '0.45em 0', WebkitUserSelect: 'initial', userSelect: 'initial'}} />
+                <input type='text' placeholder='Name' value='' name='NAME' class='required' id='mce-NAME' style={{width: 'calc(100% - 2em)', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.014)', borderRadius: '10px', margin: '0.45em 0', WebkitUserSelect: 'initial', userSelect: 'initial'}} />
               </div>
               <div class='mc-field-group'>
                 <label style={{display: 'none'}} for='mce-EMAIL'>Email Address </label>
-                <input type='email' placeholder='Email Address' value='' name='EMAIL' class='required email' id='mce-EMAIL' style={{width: '100%', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.02)', borderRadius: '10px', margin: '0.45em 0', WebkitUserSelect: 'initial', userSelect: 'initial'}} />
+                <input type='email' placeholder='Email Address' value='' name='EMAIL' class='required email' id='mce-EMAIL' style={{width: 'calc(100% - 2em)', maxWidth: '350px', minWidth: '0px', height: '1em', boxSizing: 'content-box', padding: '0.7em 1em', border: '1px solid rgba(0, 0, 0, 0.2)', backgroundColor: 'rgba(0, 0, 0, 0.02)', borderRadius: '10px', margin: '0.45em 0', WebkitUserSelect: 'initial', userSelect: 'initial'}} />
               </div>
               <div id='mce-responses' class='clear'>
                 <div class='response' id='mce-error-response' style='display:none' />
@@ -258,7 +258,7 @@ const Home = (props) => (context) => {
       </div>
 
       <Divider />
-      <div style={{margin: '3em auto -6em', maxWidth: '768px', padding: '1em'}}>
+      <div style={{margin: '3em auto -6em', maxWidth: '32em', padding: '1em'}}>
         <h2>
           Developers
         </h2>
@@ -290,13 +290,13 @@ const Home = (props) => (context) => {
         </p>
       </div>
 
-      <div style={{margin: '3em auto -3em', maxWidth: '768px', padding: '3em 1em 1em 1em'}}>
+      <div style={{margin: '3em auto -3em', maxWidth: '32em', padding: '3em 1em 1em 1em'}}>
         <p style={{textAlign: 'center', lineHeight: '1.34'}}>
           <a href='mailto:hello@flamous.io'>hello@flamous.io</a><br />
           <a href='https://twitter.com/FlamousMusic' rel='noopener' target='_blank'>twitter.com/FlamousMusic</a>
         </p>
 
-        {window.installPrompt && <p onclick={() => window.installPrompt.prompt()}>
+        {window.installPrompt && <p style={{textAlign: 'center'}} onclick={() => window.installPrompt.prompt()}>
           Add to homescreen
         </p>}
       </div>

@@ -10,7 +10,7 @@ const style = picostyle(h)
 
 const Wrapper = style('div')({
   margin: '0 auto',
-  maxWidth: '40em',
+  maxWidth: '40rem',
   padding: '0',
   '& h2': {
     marginBottom: '-0.6rem'
@@ -20,7 +20,7 @@ const Wrapper = style('div')({
     textAlign: 'center'
   },
   '> p': {
-    margin: '1.3em 1.2em',
+    margin: '1.3em 1em',
     fontSize: '1.1rem',
     lineHeight: '1.3em'
   },
