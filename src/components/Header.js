@@ -222,7 +222,7 @@ const Header = nestable(
         <header style={{display: 'contents'}}>
           {props.back && <HeaderNav class={`${state.isHeaderHidden ? 'show' : ''}`}>
             <a style={{padding: '1em 1em 1em 0.85em', display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
-            <span style={{textAlign: 'center', fontWeight: 'bold', position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center'}}><span class='flamous-logo' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><img height='32' style={{marginRight: '0.6em'}} src={flamousLogo} />Flamous</span><span class='dynamic-header'>{props.title}</span></span>
+            <span style={{textAlign: 'center', fontWeight: 'bold', position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center'}}><span class='flamous-logo' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><img height='28' style={{marginRight: '0.45em'}} src={flamousLogo} />Flamous</span><span class='dynamic-header'>{props.title}</span></span>
             <span>{context.right && <props.right />}</span>
           </HeaderNav>
           }
