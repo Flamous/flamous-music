@@ -36,7 +36,7 @@ const style = picostyle(h)
 const StyledAlbumThumbnail = style(Link)({
   width: '45%',
   padding: '1.5em',
-  maxWidth: '320px',
+  maxWidth: '230px',
   '& > img': {
     width: '100%',
     borderRadius: '3px',
@@ -76,17 +76,24 @@ const AlbumThumbnail = (props) => {
   </StyledAlbumThumbnail>
 }
 
-const StyledAlbumList = style('div')({})
+const StyledAlbumList = style('div')({
+  '& .album-list-wrapper': {
+    maxWidth: '40rem',
+    margin: '0 auto'
+  }
+})
 const AlbumList = (props) => {
   return <StyledAlbumList>
-    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-      <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Albums</h3>
-      {/* <PlayAllButton title='Shuffle' /> */}
-    </div>
-    <div style={{display: 'flex', flexWrap: 'wrap'}}>
-      {props.albums.map((album) => {
-        return <AlbumThumbnail id={album.amplitudeName} image={album.songs[0].cover_art_url} name={album.name} amplitudeName={album.amplitudeName} />
-      })}
+    <div class='album-list-wrapper'>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Albums</h3>
+        {/* <PlayAllButton title='Shuffle' /> */}
+      </div>
+      <div style={{display: 'flex', flexWrap: 'wrap'}}>
+        {props.albums.map((album) => {
+          return <AlbumThumbnail id={album.amplitudeName} image={album.songs[0].cover_art_url} name={album.name} amplitudeName={album.amplitudeName} />
+        })}
+      </div>
     </div>
   </StyledAlbumList>
 }
