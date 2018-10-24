@@ -59,7 +59,6 @@ const HeaderStyles = style('div')((props) => ({
 }))
 
 const StyledHeaderNav = style('div')({
-  display: 'flex',
   height: '3.5rem',
   position: 'sticky',
   top: '0px',
@@ -69,37 +68,42 @@ const StyledHeaderNav = style('div')({
     backdropFilter: 'blur(60px)',
     WebkitBackdropFilter: 'blur(30px)'
   },
-  '& > *': {
+  '& .inner-wrapper': {
+    display: 'flex',
+    maxWidth: '40rem',
+    margin: '0 auto'
+  },
+  '& .header-nav-item': {
     width: '33%',
     alignItems: 'center',
     display: 'flex',
     position: 'relative'
   },
-  '& > *:last-child': {
+  '& .header-nav-item:last-child': {
     justifyContent: 'flex-end'
   },
-  '& > *:nth-child(2)': {
+  '& .header-nav-item:nth-child(2)': {
     justifyContent: 'center'
   },
-  '& > *:nth-child(2) > * > *': {
+  '& .header-nav-item:nth-child(2) > * > *': {
     display: 'inline-block',
     position: 'absolute',
     left: '0',
     right: '0'
   },
-  '& > *:nth-child(2) > * > *.dynamic-header': {
+  '& .header-nav-item:nth-child(2) > * > *.dynamic-header': {
     transition: 'opacity 120ms',
     opacity: '0'
   },
-  '& > *:nth-child(2) > * > *.flamous-logo': {
+  '& .header-nav-item:nth-child(2) > * > *.flamous-logo': {
     transition: 'opacity 200ms 150ms',
     opacity: '1'
   },
-  '&.show > *:nth-child(2) > * > *.dynamic-header': {
+  '&.show .header-nav-item:nth-child(2) > * > *.dynamic-header': {
     transition: 'opacity 200ms 150ms',
     opacity: '1'
   },
-  '&.show > *:nth-child(2) > * > *.flamous-logo': {
+  '&.show .header-nav-item:nth-child(2) > * > *.flamous-logo': {
     transition: 'opacity 120ms',
     opacity: '0'
   }
@@ -107,14 +111,16 @@ const StyledHeaderNav = style('div')({
 
 const HeaderNav = (props, children) => {
   return <StyledHeaderNav {...props} class={props.class + ' webkit-sticky'}>
-    <div>
-      {children[0] && children[0]}
-    </div>
-    <div>
-      {children[1] && children[1]}
-    </div>
-    <div>
-      {children[1] && children[2]}
+    <div class='inner-wrapper'>
+      <div class='header-nav-item'>
+        {children[0] && children[0]}
+      </div>
+      <div class='header-nav-item'>
+        {children[1] && children[1]}
+      </div>
+      <div class='header-nav-item'>
+        {children[1] && children[2]}
+      </div>
     </div>
   </StyledHeaderNav>
 }
@@ -141,21 +147,27 @@ const HeaderImage = (props) => {
   </div>
 }
 
-const HeaderBoldStyle = style('h1')({
-  margin: '0px',
-  height: 'auto',
-  minHeight: '4rem',
-  padding: '0em 0.45em 0.24em',
-  // fontSize: '2.5em',
-  // font-size: calc(16px + 2 * ((100vw - 360px) / 768px));
-  fontSize: 'calc(2.65em + 12*(100vw - 400px)/(1250 - 400))',
-  backgroundColor: 'rgba(253, 253, 253, 0.95)',
-  boxShadow: '0 0 0 1px #fdfdfd',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-end'
+const HeaderBoldStyle = style('div')({
+  maxWidth: '40rem',
+  margin: '0 auto',
+  '& h1': {
+    margin: '0px',
+    height: 'auto',
+    minHeight: '4rem',
+    padding: '0em 0.45em 0.24em',
+    fontSize: 'calc(2.65em + 12*(100vw - 400px)/(1250 - 400))',
+    backgroundColor: 'rgba(253, 253, 253, 0.95)',
+    boxShadow: '0 0 0 1px #fdfdfd',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
+  }
 })
-const HeaderBold = HeaderBoldStyle
+const HeaderBold = (props, children) => {
+  return <HeaderBoldStyle {...props}>
+    <h1>{children}</h1>
+  </HeaderBoldStyle>
+}
 
 const Header = nestable(
   {
