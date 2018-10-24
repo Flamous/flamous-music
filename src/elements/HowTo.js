@@ -12,6 +12,9 @@ const Wrapper = style('div')({
   margin: '0 auto',
   maxWidth: '40em',
   padding: '0',
+  '& h2': {
+    marginBottom: '-0.6rem'
+  },
   '& p.first': {
     fontSize: '1.3em',
     textAlign: 'center'
@@ -34,20 +37,17 @@ const About = (props) => (context) => {
     <Wrapper oncreate={checkForUpdate}>
       <Header title='How To' back={{text: 'Back', to: '/'}} />
       <p>
-        All songs on flamous.io are copyright free. that mean you are free to do with them what you want (personal use and even commercial use). All without having to pay fees or having to give credit. It's that simple
+        All songs on flamous.io are copyright free. That mean you are free to do with them what you want (personal use and even commercial use). All without having to pay fees or having to give credit. It's that simple.
       </p>
 
       <ol>
         <li>
-          <p>
-            <b>Find music you like</b>
-          </p>
-          <p>Go to the Artists age and check out some songs there.</p>
+          <h2>Find music you like</h2>
+          <p>Click on an artist on the home page and check out some songs there.</p>
         </li>
+
         <li>
-          <p>
-            <b>Listen or use it</b>
-          </p>
+          <h2>Listen or use it</h2>
           <p>
             You can just listen to them here on flamous.io <b>OR</b>
           </p>
@@ -55,17 +55,20 @@ const About = (props) => (context) => {
             You can download the music to your computer, by clicking on the bottom bar (appears when you start playing something) and then click on "Download".
           </p>
         </li>
+
         <li>
-          <p>
-            <b>
+          <h2>
             Share songs you like (coming soon)
-            </b>
-          </p>
+          </h2>
           <p>
-            Get the song link and send them to your friends. (Till this is possible, you can send a link to the artist which the ong is from).
+            Get the song link and send them to your friends. (Till this is possible, you can send a link to the artist which the song is from).
           </p>
         </li>
       </ol>
+
+      <p>
+        Read ore about how songs are copyright free on Flamous in this article by the Stanford University: <a href='https://fairuse.stanford.edu/overview/public-domain/' target='_blank' rel='noopener'>Public Domain</a>
+      </p>
     </Wrapper>
   </Page>
 }
