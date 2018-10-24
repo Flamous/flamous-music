@@ -71,7 +71,8 @@ const ListNumber = style('div')({
     fontStyle: 'italic',
     width: '3.3em',
     marginRight: '0.8em',
-    border: '2px solid #eee'
+    border: '2px solid #eee',
+    borderRadius: '5px'
   }
 })
 const AlbumListItem = (props) => {
