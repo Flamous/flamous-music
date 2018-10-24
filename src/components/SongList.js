@@ -19,6 +19,10 @@ const SongListStyle = style('div')({
   },
   ' .song-list-item *:not(img)': {
     margin: '0'
+  },
+  '& .song-list-wrapper': {
+    maxWidth: '40rem',
+    margin: '0 auto'
   }
 })
 
@@ -82,30 +86,32 @@ const AlbumListItem = (props) => {
 
 const SongList = (props) => (context) => {
   return <SongListStyle>
-    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-      <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Songs</h3>
-      {/* <PlayAllButton title='Shuffle' /> */}
+    <div class='song-list-wrapper'>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Songs</h3>
+        {/* <PlayAllButton title='Shuffle' /> */}
+      </div>
+      <ul>
+        {
+          props.type !== 'album' && props.songs.map((song, index) => {
+            return <ListItem onclick={() => {
+              window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
+              props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playPlaylistSongAtIndex(index, props.playlist)
+              context.actions.scrubBar.show()
+            }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
+          })
+        }
+        {
+          props.type === 'album' && props.songs.map((song, index) => {
+            return <AlbumListItem onclick={() => {
+              window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
+              props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playSongAtIndex(index)
+              context.actions.scrubBar.show()
+            }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
+          })
+        }
+      </ul>
     </div>
-    <ul>
-      {
-        props.type !== 'album' && props.songs.map((song, index) => {
-          return <ListItem onclick={() => {
-            window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
-            props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playPlaylistSongAtIndex(index, props.playlist)
-            context.actions.scrubBar.show()
-          }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
-        })
-      }
-      {
-        props.type === 'album' && props.songs.map((song, index) => {
-          return <AlbumListItem onclick={() => {
-            window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
-            props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playSongAtIndex(index)
-            context.actions.scrubBar.show()
-          }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
-        })
-      }
-    </ul>
   </SongListStyle>
 }
 
