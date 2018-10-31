@@ -37,7 +37,7 @@ const Album = (props) => {
   }
 
   return <div>
-    <Header title={title} back={{text: 'Back', to: props.location.previous}}>
+    <Header title={title} defaultText='Album' back={{text: 'Back', to: props.location.previous}}>
       {/* <HeaderBold style={{textAlign: 'center'}}> */}
       <div style={{display: 'flex', margin: '1em'}}>
         <Img src={songs[0].cover_art_url} onclick={(event) => {

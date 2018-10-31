@@ -86,7 +86,7 @@ const StyledHeaderNav = style('div')({
   '& .header-nav-item:nth-child(2)': {
     justifyContent: 'center'
   },
-  '& .header-nav-item:nth-child(2) > * > *': {
+  '& .header-nav-item:nth-child(2) > * > *, & .header-nav-item:nth-child(2) > *.flamous-logo': {
     display: 'inline-block',
     position: 'absolute',
     left: '0',
@@ -96,7 +96,7 @@ const StyledHeaderNav = style('div')({
     transition: 'opacity 120ms',
     opacity: '0'
   },
-  '& .header-nav-item:nth-child(2) > * > *.flamous-logo': {
+  '& .header-nav-item:nth-child(2) > *.flamous-logo': {
     transition: 'opacity 200ms 150ms',
     opacity: '1'
   },
@@ -104,7 +104,7 @@ const StyledHeaderNav = style('div')({
     transition: 'opacity 200ms 150ms',
     opacity: '1'
   },
-  '&.show .header-nav-item:nth-child(2) > * > *.flamous-logo': {
+  '&.show .header-nav-item:nth-child(2) > *.flamous-logo': {
     transition: 'opacity 120ms',
     opacity: '0'
   }
@@ -117,6 +117,12 @@ const HeaderNav = (props, children) => {
         {children[0] && children[0]}
       </div>
       <div class='header-nav-item'>
+        {
+          props.defaultText
+            ? <span class='flamous-logo' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{props.defaultText}</span>
+            : <span class='flamous-logo' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><img height='28' style={{marginRight: '0.45em'}} src={flamousLogo} />Flamous</span>
+        }
+
         {children[1] && children[1]}
       </div>
       <div class='header-nav-item'>
@@ -220,9 +226,9 @@ const Header = nestable(
     return <HeaderStyles>
       <HeaderWrapper>
         <header style={{display: 'contents'}}>
-          {props.back && <HeaderNav class={`${state.isHeaderHidden ? 'show' : ''}`}>
+          {props.back && <HeaderNav defaultText={props.defaultText} class={`${state.isHeaderHidden ? 'show' : ''}`}>
             <a style={{padding: '1em 1em 1em 0.85em', display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
-            <span style={{textAlign: 'center', fontWeight: 'bold', position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center'}}><span class='flamous-logo' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><img height='28' style={{marginRight: '0.45em'}} src={flamousLogo} />Flamous</span><span class='dynamic-header'>{props.title}</span></span>
+            <span style={{textAlign: 'center', fontWeight: 'bold', position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center'}}><span class='dynamic-header'>{props.title}</span></span>
             <span>{context.right && <props.right />}</span>
           </HeaderNav>
           }
