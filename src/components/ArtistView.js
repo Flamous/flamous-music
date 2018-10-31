@@ -71,7 +71,7 @@ const StyledAlbumThumbnail = style(Link)({
 const AlbumThumbnail = (props) => {
   return <StyledAlbumThumbnail to={`/albums/${props.id}`}>
     <img src={props.image} />
-    <p style={{textAlign: 'center'}}>
+    <p style={{textAlign: 'center', color: 'black', fontSize: '0.9rem'}}>
       {props.name}
     </p>
   </StyledAlbumThumbnail>

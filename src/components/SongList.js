@@ -2,6 +2,7 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import LazyImage from './LazyImage'
 import PlayAllButton from './Button'
+import playImage from '../assets/play.svg'
 
 const style = picostyle(h)
 
@@ -36,11 +37,38 @@ const Thumbnail = style(LazyImage)({
   }
 })
 
+const StyledHoverPlayButton = style('div')({
+  position: 'absolute',
+  right: '1em',
+  height: '100%',
+  visibility: 'hidden',
+  display: 'flex',
+  alignItems: 'center',
+  cursor: 'pointer'
+})
+const HoverPlayButton = (props) => {
+  let {index, context} = props
+
+  return <StyledHoverPlayButton class='hover-play-button' onclick={() => {
+    window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
+    props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playPlaylistSongAtIndex(index, props.playlist)
+    context.actions.scrubBar.show()
+  }}>
+    <div style={{border: '1px solid black', borderRadius: '100%', padding: '0.25em'}}>
+      <img height='36' src={playImage} style={{display: 'block'}} />
+    </div>
+  </StyledHoverPlayButton>
+}
+
 const StyledListItem = style('li')({
   transition: 'background-color 100ms',
+  position: 'relative',
   '@media (pointer: fine)': {
     '&:hover': {
       backgroundColor: '#fafafa'
+    },
+    '&:hover .hover-play-button': {
+      visibility: 'visible'
     }
   },
   '&:active': {
@@ -57,6 +85,7 @@ const ListItem = (props) => {
       <p style={{fontWeight: 'bold'}}>{props.title}</p>
       <p>{props.sub}</p>
     </div>
+    <HoverPlayButton />
   </StyledListItem>
 }
 const ListNumber = style('div')({
@@ -99,7 +128,7 @@ const SongList = (props) => (context) => {
               window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
               props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playPlaylistSongAtIndex(index, props.playlist)
               context.actions.scrubBar.show()
-            }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
+            }} key={song.id} context={{context}} index={index} title={song.name} image={song.cover_art_url} sub={song.artist} />
           })
         }
         {
