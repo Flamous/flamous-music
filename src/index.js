@@ -310,7 +310,7 @@ const flamous = app(
       <Route path='/' render={(props) => {
         actions.pages.clear()
       }} />
-      <Route parent path='/artist' render={(props) => {
+      <Route parent path='/artists' render={(props) => {
         return <Container {...props} key='ArtistView' page={ArtistView} name='ArtistView' />
       }} />
       <Route path='/about' render={(props) => {

@@ -165,7 +165,7 @@ const Home = (props) => (context) => {
       <Gallery id='artists' heading='Browse Artists'>
         {
           artists.map((artist, index) => {
-            return <Artist to={`/artist/${artist.name.toLowerCase().replace(' ', '_')}`}>
+            return <Artist to={`/artists/${artist.name.toLowerCase().replace(' ', '_')}`}>
               <LazyImage src={artist.cover_art_url} />
               <div style={{padding: '0.8em 1em 1em'}}>
                 <span class='artist-line'>{artist.name}</span>
