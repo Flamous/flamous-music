@@ -39,8 +39,8 @@ const StyledAlbumThumbnail = style(Link)({
   maxWidth: '230px',
   '& > img': {
     width: '100%',
-    borderRadius: '3px',
-    borderRight: '2px solid #636363',
+    borderRadius: '2px 1px 1px 2px',
+    borderRight: '2px solid rgba(0, 0, 0, 0.3)',
     boxShadow: 'rgba(0, 0, 0, 0.3) 0px 4px 25px 1px',
     transition: 'box-shadow 500ms'
   },
