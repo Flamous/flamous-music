@@ -183,7 +183,7 @@ const Page = nestable(
       {...props}
       class='page'
       key={props.key}
-      oncreate={!props.hasOwnProperty('nonInteractive') && actions.makeInteractive}
+      oncreate={(element) => { element.parentNode.actions = actions; !props.hasOwnProperty('nonInteractive') && actions.makeInteractive(element) }}
     >
       <div style={{paddingBottom: '6.5em'}}>
         {children}
