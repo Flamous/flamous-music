@@ -6,6 +6,7 @@ import { Route, Link } from '@hyperapp/router'
 import LazyLoad from 'vanilla-lazyload'
 import SongList from './SongList'
 import { nestable } from 'hyperapp-context'
+import Divider from './Divider'
 // import profilePic from '../assets/wowa.jpg'
 import artists from '../artists'
 
@@ -86,7 +87,7 @@ const AlbumList = (props) => {
   return <StyledAlbumList>
     <div class='album-list-wrapper'>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Albums</h3>
+        <h3 style={{marginBottom: '0px', paddingLeft: '1.5em', fontWeight: 'bold'}}>Albums</h3>
         {/* <PlayAllButton title='Shuffle' /> */}
       </div>
       <div style={{display: 'flex', flexWrap: 'wrap'}}>
@@ -157,8 +158,10 @@ let Artist = (props) => (context) => {
           {artist.name}
         </HeaderBold>
       </Header>
+      <Divider />
 
       {songs && <SongList playlist={playlist} songs={songs} />}
+      { songs && albums && <Divider /> }
       {albums && <AlbumList albums={albums} />}
     </div>
     : <div>
