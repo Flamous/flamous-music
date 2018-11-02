@@ -86,7 +86,7 @@ const AlbumView = nestable({
 })
 
 export default (props) => {
-  return <Page >
+  return <Page key={props.key}>
     <AlbumView {...props} />
   </Page>
 }

@@ -201,7 +201,7 @@ const ArtistView = nestable({
 })
 
 export default (props) => {
-  return <Page>
+  return <Page key={props.key}>
     <ArtistView {...props} />
   </Page>
 }
