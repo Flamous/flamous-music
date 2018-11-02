@@ -187,14 +187,21 @@ const PlayingView = nestable({
   },
   slideOut: (done) => (state, actions) => {
     let { handleY } = state
+    let bodyHeight = window.innerHeight
 
-    handleY.subscribe({complete: () => done()})
+    handleY.subscribe((val) => {
+      if (val >= bodyHeight) {
+        handleY.stop()
+        done()
+        window.clickLock = false
+      }
+    })
     spring({
       from: handleY.get(),
       to: window.innerHeight,
-      velocity: handleY.get(),
+      mass: 1,
       damping: 20,
-      mass: 0.5
+      stiffness: 160
     }).start(handleY)
   }
 },
@@ -202,7 +209,7 @@ const PlayingView = nestable({
   let {playingContext, playbackTime, playingState} = context
   let { makeInteractive } = actions
 
-  return <StreamViewStyles oncreate={makeInteractive}>
+  return <StreamViewStyles oncreate={(element) => { element.parentNode.actions = actions; makeInteractive(element) }}>
     <Wrapper>
       <div onclick={() => context.actions.pages.back()} style={{position: 'absolute', top: '0', height: '4em', width: '100%'}} />
       <img style={{width: '70%'}} src={playingContext.cover_art_url} />
