@@ -158,8 +158,6 @@ const Page = nestable(
       let { handleX } = state
       let bodyWidth = window.innerWidth
 
-      handleX.subscribe({complete: () => done()})
-
       handleX.subscribe((val) => {
         if (val >= bodyWidth) {
           handleX.stop()
