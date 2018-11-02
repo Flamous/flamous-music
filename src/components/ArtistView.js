@@ -171,7 +171,7 @@ let Artist = (props) => (context) => {
   return out
 }
 
-export default nestable({
+const ArtistView = nestable({
   stuff: {
     name: null,
     content: null
@@ -190,15 +190,21 @@ export default nestable({
   }
 },
 (state, actions) => (props, children) => {
-  return <Page>
-    {state.stuff.content && <state.stuff.content />}
+  return <div>
+    { state.stuff.content && <state.stuff.content /> }
     <Route path={`${props.match.path}/:artistId`} render={(matchProps) => {
       actions.stuff.addContent({content: () => { return <Artist {...matchProps} /> }, name: 'About'})
     }}
     // render={(matchProps) => { return <Artist {...matchProps} /> }}
     />
-  </Page>
+  </div>
 })
+
+export default (props) => {
+  return <Page>
+    <ArtistView {...props} />
+  </Page>
+}
 
 // export default (props) => <Page>
 //   <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Artist {...matchProps} /> }} />
