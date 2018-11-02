@@ -120,25 +120,7 @@ const Page = nestable(
 
       if (isLeaving) {
         window.clickLock = true
-        // let location = window.flamous.getState().location
-        // let back = location.previous !== location.pathname ? location.previous : '/'
-
-        handleX.subscribe((val) => {
-          if (val >= bodyWidth) {
-            handleX.stop()
-            back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back()
-            window.clickLock = false
-          }
-        })
-
-        spring({
-          from: currentPosition,
-          to: bodyWidth,
-          velocity: currentVelocity,
-          mass: 0.5,
-          damping: 13.5,
-          stiffness: 150
-        }).start(handleX)
+        back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back()
       } else {
         spring({
           from: currentPosition,
