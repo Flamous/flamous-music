@@ -158,23 +158,7 @@ const PlayingView = nestable({
       let location = window.flamous.getState().location
       let back = location.previous !== location.pathname ? location.previous : '/'
 
-      // BUG: onremove events are not fired! That's why we finish the animation here and not in the onremove handler
-      handleY.subscribe((val) => {
-        if (val >= bodyHeight) {
-          handleY.stop()
-          back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back()
-          window.clickLock = false
-        }
-      })
-
-      spring({
-        from: currentPosition,
-        to: bodyHeight,
-        velocity: currentVelocity,
-        mass: 0.5,
-        damping: 13.5,
-        stiffness: 150
-      }).start(handleY)
+      back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back()
     } else {
       spring({
         from: currentPosition,
