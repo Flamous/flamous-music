@@ -123,7 +123,6 @@ const Page = nestable(
         // let location = window.flamous.getState().location
         // let back = location.previous !== location.pathname ? location.previous : '/'
 
-        // BUG: onremove events are not fired! That's why we finish the animation here and not in the onremove handler
         handleX.subscribe((val) => {
           if (val >= bodyWidth) {
             handleX.stop()
@@ -157,14 +156,24 @@ const Page = nestable(
     },
     slideOut: (done) => (state, actions) => {
       let { handleX } = state
+      let bodyWidth = window.innerWidth
 
       handleX.subscribe({complete: () => done()})
+
+      handleX.subscribe((val) => {
+        if (val >= bodyWidth) {
+          handleX.stop()
+          done()
+          window.clickLock = false
+        }
+      })
       spring({
         from: handleX.get(),
         to: window.innerWidth,
         velocity: handleX.get(),
+        mass: 1,
         damping: 20,
-        mass: 0.5
+        stiffness: 160
       }).start(handleX)
     },
     setBackLocation: (backUrl) => {
