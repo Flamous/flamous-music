@@ -58,7 +58,7 @@ const Album = (props) => {
   </div>
 }
 
-export default nestable({
+const AlbumView = nestable({
   stuff: {
     name: null,
     content: null
@@ -77,10 +77,16 @@ export default nestable({
   }
 },
 (state, actions) => (props, children) => {
-  return <Page>
+  return <div>
     {state.stuff.content && <state.stuff.content />}
     <Route path={`/albums/:albumId`} render={(matchProps) => {
       actions.stuff.addContent({content: () => { return <Album {...matchProps} /> }, name: 'Album'})
     }} />
-  </Page>
+  </div>
 })
+
+export default (props) => {
+  return <Page >
+    <AlbumView {...props} />
+  </Page>
+}
