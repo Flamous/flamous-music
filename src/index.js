@@ -23,6 +23,7 @@ import SongSubmit from './elements/SongSubmit.js'
 import AlbumView from './components/AlbumView.js'
 import FAQ from './elements/FAQ'
 import HowTo from './elements/HowTo'
+import PageRoute from './components/PageRoute'
 
 const app = withContext(_app)
 
@@ -317,27 +318,13 @@ const flamous = app(
       <Route path='/' render={(props) => {
         actions.pages.clear()
       }} />
-      <Route parent path='/artists' render={(props) => {
-        return <Container {...props} key='ArtistView' page={ArtistView} name='ArtistView' />
-      }} />
-      <Route path='/about' render={(props) => {
-        return new Container({page: About, name: 'About'})
-      }} />
-      <Route path='/stream-view' render={(props) => {
-        return <Container key='StreamView' {...props} page={StreamView} name='StreamView' />
-      }} />
-      <Route path='/song-submit' render={(props) => {
-        return <Container key='SongSubmit' {...props} page={SongSubmit} name='SongSubmit' />
-      }} />
-      <Route parent path='/albums' render={(props) => {
-        return <Container key='Albumview' {...props} page={AlbumView} name='AlbumView' />
-      }} />
-      <Route parent path='/how-to' render={(props) => {
-        return <Container key='HowTo' {...props} page={HowTo} name='HowTo' />
-      }} />
-      <Route path='/faq' render={(props) => {
-        return <Container key='FAQ' {...props} page={FAQ} name='FAQ' />
-      }} />
+      <PageRoute parent path='/artists' render={ArtistView} />
+      <PageRoute path='/about' render={About} />
+      <PageRoute path='/song-submit' render={SongSubmit} />
+      <PageRoute parent path='/albums' render={AlbumView} />
+      <PageRoute path='/how-to' render={HowTo} />
+      <PageRoute path='/faq' render={FAQ} />
+      <PageRoute path='/stream-view' render={StreamView} />
 
       {
         pages.stack.map((item) => {
@@ -378,27 +365,3 @@ window.Amplitude.audio().addEventListener('durationchange', (event) => {
 })
 
 location.subscribe(flamous.location)
-
-const Container = (props, children) => (context) => {
-  let {pages} = context
-  let stack = pages.stack
-
-  if ((stack.length >= 2 && stack[stack.length - 2].name === props.name)) {
-    console.info('went back (in container): ', props.name)
-    context.actions.pages.back(false)
-  } else if ((stack.length >= 1 && stack[stack.length - 1].name !== props.name)) {
-    console.info('Added stuff (in Container): ', props.name)
-    context.actions.pages.add({
-      page: (_, children) => { console.log('PROPS', props); return <props.page {...props}>{children}</props.page> },
-      name: props.name
-    })
-  } else if (stack.length === 0) {
-    console.log('inhere')
-    context.actions.pages.add({
-      page: (_, children) => { console.log('PROPS2', props); return <props.page {...props}>{children}</props.page> },
-      name: props.name
-    })
-  } else {
-    console.info('did nothing (in container)')
-  }
-}
