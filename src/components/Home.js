@@ -56,7 +56,7 @@ const StyledLogo = style('div')({
 })
 
 const Logo = (props) => {
-  return <div style={{borderBottom: '1px solid rgba(0, 0, 0, 0.1)', backgroundColor: '#fafafa'}}>
+  return <div style={{borderBottom: '1px solid rgba(0, 0, 0, 0.1)'}}>
     <StyledLogo>
       <div style={{display: 'flex', alignItems: 'center', padding: '0.8em'}}>
         <img height='36' style={{marginRight: '0.7em'}} src={flamousLogo} />
