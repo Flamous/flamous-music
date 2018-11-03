@@ -10,7 +10,7 @@ import { nestable } from 'hyperapp-context'
 const style = picostyle(h)
 
 const Img = style('img')({
-  width: '10rem',
+  height: '10rem',
   borderRadius: '2px 1px 1px 2px',
   borderRight: '2px solid rgba(0, 0, 0, 0.3)',
   boxShadow: 'rgba(0, 0, 0, 0.3) 0px 4px 25px 1px',
@@ -38,17 +38,20 @@ const Album = (props) => {
 
   return <div>
     <Header title={title} defaultText='Album' back={{text: 'Back', to: props.location.previous}}>
-      <div style={{display: 'flex', margin: '1em'}}>
-        <Img src={songs[0].cover_art_url} onclick={(event) => {
-          let bounds = event.target.getBoundingClientRect()
-          window.flamous.imageViewer.showImageViewer({image: songs[0].cover_art_url, bounds: bounds})
-        }} />
+      <div>
+        <div style={{display: 'flex', margin: '1em auto 2em', padding: '0 1em', maxWidth: '40rem'}}>
+          <Img src={songs[0].cover_art_url} onclick={(event) => {
+            let bounds = event.target.getBoundingClientRect()
+            window.flamous.imageViewer.showImageViewer({image: songs[0].cover_art_url, bounds: bounds})
+          }} />
 
-        <div style={{marginLeft: '2em'}}>
+          <div style={{marginLeft: '2em'}}>
 
-          <h1>{title}</h1>
-          <p style={{fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem'}}>by {songs[0].artist}</p>
+            <h1>{title}</h1>
+            <p style={{fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem'}}>by {songs[0].artist}</p>
+          </div>
         </div>
+
       </div>
     </Header>
     <SongList type='album' albumId={albumId} songs={songs} />
