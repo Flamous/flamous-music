@@ -14,7 +14,8 @@ const Img = style('img')({
   borderRadius: '2px 1px 1px 2px',
   borderRight: '2px solid rgba(0, 0, 0, 0.3)',
   boxShadow: 'rgba(0, 0, 0, 0.3) 0px 4px 25px 1px',
-  transition: 'box-shadow 500ms'
+  transition: 'box-shadow 500ms',
+  pointerEvents: 'initial'
 })
 
 const Album = (props) => {
