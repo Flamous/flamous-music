@@ -144,6 +144,7 @@ window.Amplitude.pause()
 
 const flamous = app(
   {
+    initialLoad: true,
     location: location.state,
     playingState: false,
     playingContext: {
@@ -295,6 +296,11 @@ const flamous = app(
       return {
         installPromt: prop
       }
+    },
+    setInitialLoad: (boolean) => {
+      return {
+        initialLoad: boolean
+      }
     }
   },
   (state, actions) => (_, setContext) => {
@@ -304,7 +310,8 @@ const flamous = app(
 
     setContext(context)
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
-      <Home key='home' />
+      <Route render={Home} />
+
       {<TrackBar key='track-bar' hidden={!scrubBar.visible} />}
 
       <Route path='/' render={(props) => {

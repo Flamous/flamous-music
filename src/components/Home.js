@@ -154,9 +154,11 @@ const Header = style('header')({
 })
 
 const Home = (props) => (context) => {
-  let {installPrompt} = context
+  let {installPrompt, initialLoad} = context
+
+  if (props.match.url === '/' && context.initialLoad) window.flamous.setInitialLoad(false)
   return (
-    <Page nonInteractive key={props.key}>
+    <Page nonInteractive key='home'>
       {/* {updateAvailable ? <Button to='/about' text='Update Available' /> : ''} */}
       <Header>
         <Logo />

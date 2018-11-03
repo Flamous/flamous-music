@@ -37,21 +37,25 @@ const Page = nestable(
         makeInteractive: true
       }
     },
-    makeInteractive: (element) => (state, actions) => {
+    makeInteractive: ({element, initialLoad}) => (state, actions) => {
       console.info('Making interactive')
       let {startSwipeBack} = actions
 
       let handleStyler = styler(element)
       let handleX = value(0, handleStyler.set('x'))
 
-      // Initial slide-in
-      spring({
-        from: window.innerWidth,
-        to: 0,
-        damping: 20,
-        mass: 0.3,
-        stiffness: 120
-      }).start(handleX)
+      if (!initialLoad) {
+        // Initial slide-in
+        spring({
+          from: window.innerWidth,
+          to: 0,
+          damping: 20,
+          mass: 0.3,
+          stiffness: 120
+        }).start(handleX)
+      } else {
+        window.flamous.setInitialLoad(false)
+      }
 
       listen(element, 'mousedown touchstart', { passive: true })
         .start(startSwipeBack)
@@ -165,14 +169,14 @@ const Page = nestable(
   (state, actions) => (props, children) => (context) => {
     let { setBackLocation } = actions
     let { back } = state
-    let { location } = context
+    let { location, initialLoad } = context
 
     !back && setBackLocation((props.back && props.back.to) || location.previous)
     return <StyledPage
       {...props}
       class='page'
       key={props.key}
-      oncreate={(element) => { element.parentNode.actions = actions; !props.hasOwnProperty('nonInteractive') && actions.makeInteractive(element) }}
+      oncreate={(element) => { element.parentNode.actions = actions; !props.hasOwnProperty('nonInteractive') && actions.makeInteractive({element, initialLoad: context.initialLoad}) }}
     >
       <div style={{paddingBottom: '6.5em'}}>
         {children}
