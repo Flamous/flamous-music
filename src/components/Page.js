@@ -169,7 +169,7 @@ const Page = nestable(
   (state, actions) => (props, children) => (context) => {
     let { setBackLocation } = actions
     let { back } = state
-    let { location, initialLoad } = context
+    let { location } = context
 
     !back && setBackLocation((props.back && props.back.to) || location.previous)
     return <StyledPage

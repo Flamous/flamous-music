@@ -38,7 +38,6 @@ const Album = (props) => {
 
   return <div>
     <Header title={title} defaultText='Album' back={{text: 'Back', to: props.location.previous}}>
-      {/* <HeaderBold style={{textAlign: 'center'}}> */}
       <div style={{display: 'flex', margin: '1em'}}>
         <Img src={songs[0].cover_art_url} onclick={(event) => {
           let bounds = event.target.getBoundingClientRect()
@@ -51,8 +50,6 @@ const Album = (props) => {
           <p style={{fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem'}}>by {songs[0].artist}</p>
         </div>
       </div>
-
-      {/* </HeaderBold> */}
     </Header>
     <SongList type='album' albumId={albumId} songs={songs} />
   </div>

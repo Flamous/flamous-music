@@ -7,7 +7,6 @@ import LazyLoad from 'vanilla-lazyload'
 import SongList from './SongList'
 import { nestable } from 'hyperapp-context'
 import Divider from './Divider'
-// import profilePic from '../assets/wowa.jpg'
 import artists from '../artists'
 
 import wowaSongs from '../songs/wowa'
@@ -111,14 +110,9 @@ let Artist = (props) => (context) => {
       artist = artists[0]
       songs = wowaSongs
       playlist = 'wowa'
-      // lel = import('../songs/wowa').then((res) => {
-      //   song = res.default
-      //   return renderArtist()
-      // })
       break
     case 'kimiko_ishizaka':
       artist = artists[1]
-      // songs = kimikoSongs
       albums = [
         {
           amplitudeName: 'open_goldberg_variations',
@@ -135,9 +129,7 @@ let Artist = (props) => (context) => {
           })
         }
       ]
-      // import('../songs/kimiko_ishizaka').then((res) => {
-      //   songs = res.default
-      // })
+
       break
     case 'billy_murray':
       artist = artists[2]
@@ -195,7 +187,6 @@ const ArtistView = nestable({
     <Route path={`${props.match.path}/:artistId`} render={(matchProps) => {
       actions.stuff.addContent({content: () => { return <Artist {...matchProps} /> }, name: 'About'})
     }}
-    // render={(matchProps) => { return <Artist {...matchProps} /> }}
     />
   </div>
 })
@@ -205,11 +196,3 @@ export default (props) => {
     <ArtistView {...props} />
   </Page>
 }
-
-// export default (props) => <Page>
-//   <Route path={`${props.match.path}/:artistId`} render={(matchProps) => { return <Artist {...matchProps} /> }} />
-// </Page>
-
-// const Container = (props) => {
-
-// }

@@ -16,21 +16,6 @@ import githubImage from '../assets/github.svg'
 
 const style = picostyle(h)
 
-// const Button = (props) => style('span')({
-//   fontWeight: 'bold',
-//   color: '#007AFF',
-//   position: 'absolute',
-//   right: '1.5em',
-//   top: '1em'
-// })(
-//   {
-
-//   },
-//   <Link to={props.to}>
-//     {[props.text, <img src={rightArrow} style={{height: '0.8em', marginLeft: '0.4em', marginTop: '0em'}} />]}
-//   </Link>
-// )
-
 const ArtistStyle = style(Link)({
   textAlign: 'center',
   width: 'calc(50% - 2em)',
@@ -47,10 +32,7 @@ const ArtistStyle = style(Link)({
   '> img': {
     borderRadius: '16px 16px 3px 3px',
     width: '100%',
-    // height: '6.9em',
-    // border: '1px solid rgba(0, 0, 0, 0.14)',
     borderBottom: '1px solid rgba(0, 0, 0, 0.14)'
-    // boxShadow: 'rgba(0, 0, 0, 0.14) 0px 2px 18px -5px'
   },
   ' .artist-line': {
     color: 'black',
@@ -70,7 +52,6 @@ const StyledLogo = style('div')({
   alignItems: 'center',
   maxWidth: '768px',
   margin: '0 auto',
-  // padding: '0.675em 1em',
   justifyContent: 'space-between'
 })
 
@@ -149,9 +130,7 @@ const TagLine = () => (context) => {
   </StyledTagLine>
 }
 
-const Header = style('header')({
-  // margin: '1em 0 3em'
-})
+const Header = style('header')({})
 
 const Home = (props) => (context) => {
   let {installPrompt, initialLoad} = context
@@ -159,7 +138,6 @@ const Home = (props) => (context) => {
   if (props.match.url === '/' && context.initialLoad) window.flamous.setInitialLoad(false)
   return (
     <Page nonInteractive key='home'>
-      {/* {updateAvailable ? <Button to='/about' text='Update Available' /> : ''} */}
       <Header>
         <Logo />
         <TagLine />
@@ -302,23 +280,6 @@ const Home = (props) => (context) => {
           Add to homescreen
         </p>}
       </div>
-      {/* <Gallery
-        heading='Featured Artists'>
-        {artists.map((item, index) => {
-          return <Link to={item.name ? '/artist/wowa' : '/'} style={{display: 'contents'}} onclick={(e) => { if (window.clickLock) { e.preventDefault() } }}>
-            <GalleryItem title={artists[index].name} sub='Artist' image={artists[index].cover_art_url} />
-          </Link>
-        })}
-      </Gallery> */}
-      {/* <p style={{maxWidth: '500px', margin: '0 auto', padding: '0 2em', textAlign: 'center'}}>
-        <p>
-        We see Public Domain content as the future of creative art. Music is no exception.<br /><br />
-        Share, mix, download or cover music you discover on Flamous.
-        </p>
-        <Link to='/about' style={{display: 'flex', justifyContent: 'center'}}>
-          <span style={{display: 'inline-block'}}>About Flamous</span><img src={rightArrow} style={{height: '1.2em', marginLeft: '0.2em'}} />
-        </Link>
-      </p> */}
     </Page>
   )
 }
