@@ -15,8 +15,6 @@
     "amplitudejs": "^3.3.1",
     "autoprefixer": "^9.3.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-polyfill": "^6.26.0",
-    "components": "^0.1.0",
     "hyperapp": "^1.2.9",
     "hyperapp-context": "^1.1.0",
     "modern-normalize": "^0.5.0",
@@ -25,16 +23,16 @@
     "picostyle": "^2.0.1",
     "popmotion": "^8.5.0",
     "postcss-js": "^2.0.0",
+    "standard": "^12.0.1",
     "uuid": "^3.3.2",
     "vanilla-lazyload": "^8.17.0",
     "workbox-cli": "^3.6.3"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.1.0",
     "aws-sdk": "^2.347.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
+    "babel-cli": "^6.26.0",
     "cli-real-favicon": "0.0.6",
-    "parcel-bundler": "^1.10.3",
-    "standard": "^11.0.1"
+    "parcel-bundler": "^1.10.3"
   }
 }
