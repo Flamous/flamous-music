@@ -5,7 +5,7 @@ const PageRoute = (props) => {
   const routeProps = {
     path: props.path,
     render: (matchProps) => {
-      return <Container page={props.render} name={matchProps.match.url} {...matchProps} {...props} />
+      return <Container page={props.render} name={matchProps.location.pathname} {...matchProps} {...props} />
     },
     parent: props.hasOwnProperty('parent')
   }

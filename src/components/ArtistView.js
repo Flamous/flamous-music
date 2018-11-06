@@ -8,6 +8,7 @@ import SongList from './SongList'
 import { nestable } from 'hyperapp-context'
 import Divider from './Divider'
 import artists from '../artists'
+import ListArtistView from './ListArtistView'
 
 import wowaSongs from '../songs/wowa'
 import kimikoSongs from '../songs/kimiko_ishizaka'
@@ -182,8 +183,14 @@ const ArtistView = nestable({
   }
 },
 (state, actions) => (props, children) => {
+  if (state.stuff.content) return state.stuff.content && <state.stuff.content />
+
+  if (props.match.isExact) {
+    actions.stuff.addContent({content: () => { return <ListArtistView /> }, name: 'ListArtistView'})
+    return null
+  }
+
   return <div>
-    { state.stuff.content && <state.stuff.content /> }
     <Route path={`${props.match.path}/:artistId`} render={(matchProps) => {
       actions.stuff.addContent({content: () => { return <Artist {...matchProps} /> }, name: 'About'})
     }}
@@ -192,7 +199,7 @@ const ArtistView = nestable({
 })
 
 export default (props) => {
-  return <Page key={props.key}>
+  return <Page key={props.location.pathname}>
     <ArtistView {...props} />
   </Page>
 }
