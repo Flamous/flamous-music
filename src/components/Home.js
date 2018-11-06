@@ -11,6 +11,7 @@ import christianImage from '../assets/Christian.jpg'
 import timonImage from '../assets/Timon.jpg'
 import twitterImage from '../assets/twitter.svg'
 import githubImage from '../assets/github.svg'
+import Button from './Button'
 
 const style = picostyle(h)
 
@@ -30,9 +31,6 @@ const Logo = (props) => {
         <span style={{fontSize: '1.2em', fontWeight: 'normal'}} >Flamous Music</span>
 
       </div>
-      {/* <Link to='/about' style={{display: 'inline-flex', fontWeight: 'bold', padding: '0.9em'}}>
-        <span style={{display: 'inline-block'}}>About</span>
-      </Link> */}
     </StyledLogo>
   </div>
 }
@@ -43,41 +41,6 @@ const StyledTagLine = style('div')({
   padding: '0 1em',
   display: 'flex',
   flexWrap: 'wrap'
-})
-const StyledActionButton = style(Link)({
-  padding: '0em 1em',
-  borderRadius: '10px',
-  border: '1px solid rgb(0, 105, 221)',
-  display: 'inline-flex',
-  alignItems: 'center',
-  minHeight: '2.2em',
-  fontSize: '1.2em',
-  fontWeight: 'bold',
-  color: 'white',
-  backgroundColor: '#007aff'
-})
-const ActionButton = StyledActionButton
-
-const Button = style('span')({
-  padding: '0.385em 0.7em',
-  borderRadius: '10px',
-  border: '1px solid rgb(0, 105, 221)',
-  display: 'inline-flex',
-  alignItems: 'center',
-  fontSize: '1.1em',
-  color: 'white',
-  backgroundColor: '#007aff'
-})
-
-const WhiteButton = style('span')({
-  padding: '0.385em 0.7em',
-  borderRadius: '10px',
-  border: '1px solid rgba(0, 0, 0, 0.5)',
-  display: 'inline-flex',
-  alignItems: 'center',
-  fontSize: '1.1em',
-  color: '#212121',
-  backgroundColor: 'white'
 })
 
 const TagLine = () => (context) => {
@@ -90,9 +53,11 @@ const TagLine = () => (context) => {
       <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.35', margin: '-1.5em 0 1em'}}>Music without limitations. Share, mix, download and cover.</p>
     </div>
     <div style={{alignSelf: 'flex-end', marginBottom: '-0.5em', display: 'flex', alignItems: 'center', width: '100%'}}>
-      <ActionButton to='/artists'>
-        <span>Browse artists</span>
-      </ActionButton>
+      <Link to='/artists'>
+        <Button big>
+          Browse artists
+        </Button>
+      </Link>
     </div>
 
   </StyledTagLine>
@@ -129,9 +94,9 @@ const Home = (props) => (context) => {
           </Button>
         </a>
         <Link to='/how-to' style={{marginLeft: '0.4em'}}>
-          <WhiteButton>
+          <Button white>
             <span>I'm confused</span>
-          </WhiteButton>
+          </Button>
         </Link>
       </Section>
 
@@ -164,7 +129,7 @@ const Home = (props) => (context) => {
                 <div class='response' id='mce-success-response' style='display:none' />
               </div>
               <div style='position: absolute; left: -5000px;' aria-hidden='true'><input type='text' name='b_2c3e676f85f7cce3cad163b48_83387ae973' tabindex='-1' value='' /></div>
-              <div class='clear'><input type='submit' style={{backgroundColor: '#007AFF', border: 'none', borderRadius: '10px', color: 'white', padding: '0.6em 1em'}} value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button' /></div>
+              <Button class='clear'><input type='submit' style={{backgroundColor: 'transparent', border: 'none', color: 'inherit'}} value='Subscribe' name='subscribe' id='mc-embedded-subscribe' class='button' /></Button>
             </div>
           </form>
         </div>
