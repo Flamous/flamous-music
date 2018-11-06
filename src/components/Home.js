@@ -44,17 +44,19 @@ const StyledTagLine = style('div')({
   display: 'flex',
   flexWrap: 'wrap'
 })
-const StyledPlay = style('span')({
-  padding: '0.2em 1.2em 0.2em 0.6em',
-  borderRadius: '13px',
+const StyledActionButton = style(Link)({
+  padding: '0em 1em',
+  borderRadius: '10px',
   border: '1px solid rgb(0, 105, 221)',
   display: 'inline-flex',
   alignItems: 'center',
+  minHeight: '2.2em',
   fontSize: '1.2em',
   fontWeight: 'bold',
   color: 'white',
   backgroundColor: '#007aff'
 })
+const ActionButton = StyledActionButton
 
 const Button = style('span')({
   padding: '0.385em 0.7em',
@@ -88,10 +90,9 @@ const TagLine = () => (context) => {
       <p style={{maxWidth: '350px', fontSize: '1.2em', lineHeight: '1.35', margin: '-1.5em 0 1em'}}>Music without limitations. Share, mix, download and cover.</p>
     </div>
     <div style={{alignSelf: 'flex-end', marginBottom: '-0.5em', display: 'flex', alignItems: 'center', width: '100%'}}>
-      <StyledPlay onclick={window.flamous.playPause}>
-        <img height='36' src={!playingState ? playImage : pauseImage} />
-        {!playingState ? 'Listen' : 'Pause'}
-      </StyledPlay>
+      <ActionButton to='/artists'>
+        <span>Browse artists</span>
+      </ActionButton>
     </div>
 
   </StyledTagLine>
