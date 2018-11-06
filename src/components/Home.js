@@ -30,9 +30,9 @@ const Logo = (props) => {
         <span style={{fontSize: '1.2em', fontWeight: 'normal'}} >Flamous Music</span>
 
       </div>
-      <Link to='/about' style={{display: 'inline-flex', fontWeight: 'bold', padding: '0.9em'}}>
+      {/* <Link to='/about' style={{display: 'inline-flex', fontWeight: 'bold', padding: '0.9em'}}>
         <span style={{display: 'inline-block'}}>About</span>
-      </Link>
+      </Link> */}
     </StyledLogo>
   </div>
 }
