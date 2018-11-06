@@ -40,13 +40,13 @@ const Artist = ArtistStyle
 
 const ListArtistView = (props) => {
   return <div>
-    <Header title='Artists' back={{text: 'Back', to: '/'}} />
+    <Header title='Artists' back={{ text: 'Back', to: '/' }} />
     <Gallery id='artists' heading='Browse Artists'>
       {
         artists.map((artist, index) => {
           return <Artist to={`/artists/${artist.name.toLowerCase().replace(' ', '_')}`}>
             <img src={artist.cover_art_url} />
-            <div style={{padding: '0.8em 1em 1em'}}>
+            <div style={{ padding: '0.8em 1em 1em' }}>
               <span class='artist-line'>{artist.name}</span>
               <br />
               <span class='secondary'>{artist.songCount} Songs</span>
@@ -54,7 +54,7 @@ const ListArtistView = (props) => {
           </Artist>
         })
       }
-      <p style={{textAlign: 'center', width: '100%'}}>
+      <p style={{ textAlign: 'center', width: '100%' }}>
           Click on an artist above and listen to some tunes.
       </p>
 

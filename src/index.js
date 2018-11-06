@@ -184,21 +184,21 @@ const flamous = app(
       }
     },
     pages: {
-      add: (comp) => ({stack}, {location}) => {
+      add: (comp) => ({ stack }, { location }) => {
         stack.push(comp)
 
         return {
           stack: stack
         }
       },
-      back: (setHistory = true) => ({stack}) => {
+      back: (setHistory = true) => ({ stack }) => {
         stack.pop()
         setHistory && window.history.back()
         return {
           stack: stack
         }
       },
-      clear: () => ({stack}) => {
+      clear: () => ({ stack }) => {
         console.info('Clearing Stack')
         if (stack.length === 0) return
         return {
@@ -218,13 +218,13 @@ const flamous = app(
         updateAvailable: true
       }
     },
-    checkForUpdate: () => async (state, {updateAvailable}) => {
+    checkForUpdate: () => async (state, { updateAvailable }) => {
       console.info('Checking for updates...')
 
       let registration = await navigator.serviceWorker.getRegistration()
       registration.update()
     },
-    update: () => async ({updateWorker, updateAvailable}) => {
+    update: () => async ({ updateWorker, updateAvailable }) => {
       console.info('Updating...')
       let registration = await navigator.serviceWorker.getRegistration()
       registration.waiting.postMessage('skipWaiting')
@@ -305,8 +305,8 @@ const flamous = app(
     }
   },
   (state, actions) => (_, setContext) => {
-    let {imageViewer, pages, scrubBar} = state
-    let context = Object.assign({}, state, {actions: actions})
+    let { imageViewer, pages, scrubBar } = state
+    let context = Object.assign({}, state, { actions: actions })
     delete context.scrubBar
 
     setContext(context)

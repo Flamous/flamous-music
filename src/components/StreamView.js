@@ -10,11 +10,11 @@ import nextImage from '../assets/next.svg'
 import downArrow from '../assets/down.svg'
 import downloadImage from '../assets/download.svg'
 
-let {snap} = transform
+let { snap } = transform
 
 const style = picostyle(h)
 
-const oneDPointer = (initY) => pointer({x: 0, y: initY, preventDefault: false}).pipe(({y}) => y > 0 ? y : 0)
+const oneDPointer = (initY) => pointer({ x: 0, y: initY, preventDefault: false }).pipe(({ y }) => y > 0 ? y : 0)
 
 const StreamViewStyles = style('div')({
   height: '100%',
@@ -91,7 +91,7 @@ const PlayingView = nestable({
 },
 {
   makeInteractive: (element) => (state, actions) => {
-    let {handleTouchStart} = actions
+    let { handleTouchStart } = actions
     let bodyHeight = window.innerHeight
 
     let handleStyler = styler(element)
@@ -190,44 +190,44 @@ const PlayingView = nestable({
   }
 },
 (state, actions) => (props) => (context) => {
-  let {playingContext, playbackTime, playingState} = context
+  let { playingContext, playbackTime, playingState } = context
   let { makeInteractive } = actions
 
   return <StreamViewStyles oncreate={(element) => { element.parentNode.actions = actions; makeInteractive(element) }}>
     <Wrapper>
-      <div onclick={() => context.actions.pages.back()} style={{position: 'absolute', top: '0', height: '4em', width: '100%'}} />
-      <img style={{width: '70%'}} src={playingContext.cover_art_url} />
-      <span style={{marginTop: '2em', fontWeight: 'bold', fontSize: '1.2em'}}>{playingContext.name}</span>
+      <div onclick={() => context.actions.pages.back()} style={{ position: 'absolute', top: '0', height: '4em', width: '100%' }} />
+      <img style={{ width: '70%' }} src={playingContext.cover_art_url} />
+      <span style={{ marginTop: '2em', fontWeight: 'bold', fontSize: '1.2em' }}>{playingContext.name}</span>
       <span>
         {playingContext.artist}
       </span>
-      <div style={{display: 'flex', width: '90%', alignItems: 'center'}}>
-        <div style={{width: '4em'}}>
+      <div style={{ display: 'flex', width: '90%', alignItems: 'center' }}>
+        <div style={{ width: '4em' }}>
           {formatTime(Math.round(playbackTime))}
         </div>
         <Progress max={playingContext.duration || '300'} value={playbackTime}>{playbackTime}/{playingContext.duration}</Progress>
-        <div style={{width: '4em', textAlign: 'right'}}>
+        <div style={{ width: '4em', textAlign: 'right' }}>
           {formatTime(Math.round(playingContext.duration))}
         </div>
       </div>
-      <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '0.5em 3em'}}>
+      <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '0.5em 3em' }}>
         <OtherButton title='Previous Song' onclick={() => window.Amplitude.prev()}>
-          <img style={{height: '100%'}} src={prevImage} />
+          <img style={{ height: '100%' }} src={prevImage} />
         </OtherButton>
         <PlayButton title={`${playingState ? 'Pause' : 'Play'}`} onclick={context.actions.playPause}>
           { !playingState
-            ? <img style={{height: '100%'}} src={playImage} />
-            : <img style={{height: '100%'}} src={pauseImage} />
+            ? <img style={{ height: '100%' }} src={playImage} />
+            : <img style={{ height: '100%' }} src={pauseImage} />
           }
         </PlayButton>
         <OtherButton title='Next Song' onclick={() => window.Amplitude.next()}>
-          <img style={{height: '100%'}} src={nextImage} />
+          <img style={{ height: '100%' }} src={nextImage} />
         </OtherButton>
       </div>
-      <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em 0.5em'}}>
-        <OtherButton style={{width: '100%'}}>
-          <a title='Download Song' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'black', padding: '0.6em'}} href={window.Amplitude.audio().src} download={`${playingContext.name} - ${playingContext.artist} | Flamous Music.mp3`}>
-            <img style={{height: '1.6em', marginRight: '0.5em'}} src={downloadImage} />
+      <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em 0.5em' }}>
+        <OtherButton style={{ width: '100%' }}>
+          <a title='Download Song' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'black', padding: '0.6em' }} href={window.Amplitude.audio().src} download={`${playingContext.name} - ${playingContext.artist} | Flamous Music.mp3`}>
+            <img style={{ height: '1.6em', marginRight: '0.5em' }} src={downloadImage} />
             <span>Download</span>
           </a>
         </OtherButton>

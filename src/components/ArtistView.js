@@ -71,7 +71,7 @@ const StyledAlbumThumbnail = style(Link)({
 const AlbumThumbnail = (props) => {
   return <StyledAlbumThumbnail to={`/albums/${props.id}`}>
     <img src={props.image} />
-    <p style={{textAlign: 'center', color: 'black', fontSize: '0.9rem'}}>
+    <p style={{ textAlign: 'center', color: 'black', fontSize: '0.9rem' }}>
       {props.name}
     </p>
   </StyledAlbumThumbnail>
@@ -86,11 +86,11 @@ const StyledAlbumList = style('div')({
 const AlbumList = (props) => {
   return <StyledAlbumList>
     <div class='album-list-wrapper'>
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <h3 style={{marginBottom: '0px', paddingLeft: '1.5em', fontWeight: 'bold'}}>Albums</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h3 style={{ marginBottom: '0px', paddingLeft: '1.5em', fontWeight: 'bold' }}>Albums</h3>
         {/* <PlayAllButton title='Shuffle' /> */}
       </div>
-      <div style={{display: 'flex', flexWrap: 'wrap'}}>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {props.albums.map((album) => {
           return <AlbumThumbnail id={album.amplitudeName} image={album.songs[0].cover_art_url} name={album.name} amplitudeName={album.amplitudeName} />
         })}
@@ -100,7 +100,6 @@ const AlbumList = (props) => {
 }
 
 let Artist = (props) => (context) => {
-  let {playingState, playingContext: {id}} = context
   let artist
   let songs
   let albums
@@ -141,13 +140,13 @@ let Artist = (props) => (context) => {
 
   let out = artist
     ? <div key={props.match.params.artistId} oncreate={initLazyLoad} ondestroy={removeLazyLoad} onupdate={updateLazyLoad}>
-      <Header title={artist.name} back={{text: 'Back', to: '/'}}>
-        <HeaderBold style={{textAlign: 'center'}}>
+      <Header title={artist.name} back={{ text: 'Back', to: '/' }}>
+        <HeaderBold style={{ textAlign: 'center' }}>
           <HeaderImage onclick={(event) => {
             let bounds = event.target.getBoundingClientRect()
-            window.flamous.imageViewer.showImageViewer({image: artist.cover_art_url, bounds: bounds})
+            window.flamous.imageViewer.showImageViewer({ image: artist.cover_art_url, bounds: bounds })
           }} src={artist.cover_art_url} />
-          <p style={{fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem', textTransform: 'uppercase'}}>Artist</p>
+          <p style={{ fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem', textTransform: 'uppercase' }}>Artist</p>
           {artist.name}
         </HeaderBold>
       </Header>
@@ -186,13 +185,13 @@ const ArtistView = nestable({
   if (state.stuff.content) return state.stuff.content && <state.stuff.content />
 
   if (props.match.isExact) {
-    actions.stuff.addContent({content: () => { return <ListArtistView /> }, name: 'ListArtistView'})
+    actions.stuff.addContent({ content: () => { return <ListArtistView /> }, name: 'ListArtistView' })
     return null
   }
 
   return <div>
     <Route path={`${props.match.path}/:artistId`} render={(matchProps) => {
-      actions.stuff.addContent({content: () => { return <Artist {...matchProps} /> }, name: 'About'})
+      actions.stuff.addContent({ content: () => { return <Artist {...matchProps} /> }, name: 'About' })
     }}
     />
   </div>

@@ -6,9 +6,9 @@ import pauseImage from '../assets/pause.svg'
 import { nestable } from 'hyperapp-context'
 import { Link } from '@hyperapp/router'
 
-const {nonlinearSpring, smooth} = transform
+const { nonlinearSpring, smooth } = transform
 
-const pointerX = (preventDefault = false, x = 0) => pointer({x: x, preventDefault: preventDefault}).pipe(val => val.x)
+const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => val.x)
 
 const style = picostyle(h)
 
@@ -118,7 +118,7 @@ const TrackBar = nestable({
 {
   makeInteractive: (element) => (state, actions) => {
     console.info('Making interactive')
-    let {startSwipeBack} = actions
+    let { startSwipeBack } = actions
 
     element.style.transform = 'translateY(110%)'
 
@@ -138,8 +138,8 @@ const TrackBar = nestable({
     let { endSwipeBack, setAxisAndDirection } = actions
     let { springCurve, axis, direction, currentPointer, AXIS_LOCK_THRESHOLD, handleX } = state
 
-    currentPointer = pointer({x: 0, y: 0})
-      .pipe(({x}) => x)
+    currentPointer = pointer({ x: 0, y: 0 })
+      .pipe(({ x }) => x)
       .start((x) => {
         if (Math.abs(x) > AXIS_LOCK_THRESHOLD) {
           axis = 'x'
@@ -231,9 +231,9 @@ const TrackBar = nestable({
   }
 },
 (state, actions) => (props, children) => (context) => {
-  let {playingState, playbackTime, playingContext} = context
+  let { playingState, playbackTime, playingContext } = context
   let { makeInteractive, slideIn } = actions
-  let {duration, name, artist, cover_art_url: image} = playingContext
+  let { duration, name, artist, cover_art_url: image } = playingContext
   let { hidden } = props
   let { isVisible } = state
 
@@ -242,7 +242,7 @@ const TrackBar = nestable({
   return <Wrapper class='trackbar'>
     <Bubble to='/stream-view' playingState={playingState} oncreate={makeInteractive}>
       <Progress max={duration || '300'} value={playbackTime}>{playbackTime}/{duration}</Progress>
-      <div style={{display: 'flex', height: '100%', flexGrow: '1'}}>
+      <div style={{ display: 'flex', height: '100%', flexGrow: '1' }}>
         <SongCover draggable='false' src={image} />
         <Info>
           <Song>
@@ -256,8 +256,8 @@ const TrackBar = nestable({
       <div>
         <PlayButton onclick={(e) => { e.preventDefault(); e.stopImmediatePropagation(); window.flamous.playPause() }}>
           { !playingState
-            ? <img style={{height: '100%'}} src={playImage} />
-            : <img style={{height: '100%'}} src={pauseImage} />
+            ? <img style={{ height: '100%' }} src={playImage} />
+            : <img style={{ height: '100%' }} src={pauseImage} />
           }
         </PlayButton>
       </div>

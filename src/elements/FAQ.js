@@ -19,7 +19,7 @@ const Question = style('p')({
 
 const SongSubmit = () => (context) => {
   return <Page key='FAQ'>
-    <Header title='FAQ' back={{text: 'Back', to: '/'}} />
+    <Header title='FAQ' back={{ text: 'Back', to: '/' }} />
     <Wrapper>
       <Section>
         <Question>What is the Public Domain?</Question>
@@ -51,7 +51,7 @@ const SongSubmit = () => (context) => {
         </p>
       </Section>
 
-      <p style={{textAlign: 'center'}}>
+      <p style={{ textAlign: 'center' }}>
         Have more questions? Write us an email<br />
         <a href='mailto:hello@flamous.io'>hello@flamous.io</a>
       </p>

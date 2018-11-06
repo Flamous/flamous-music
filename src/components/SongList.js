@@ -1,7 +1,7 @@
+/** @jsx h */
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import LazyImage from './LazyImage'
-import PlayAllButton from './Button'
 import playImage from '../assets/play.svg'
 
 const style = picostyle(h)
@@ -47,15 +47,15 @@ const StyledHoverPlayButton = style('div')({
   cursor: 'pointer'
 })
 const HoverPlayButton = (props) => {
-  let {index, context} = props
+  let { index, context } = props
 
   return <StyledHoverPlayButton class='hover-play-button' onclick={() => {
     window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
     props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playPlaylistSongAtIndex(index, props.playlist)
     context.actions.scrubBar.show()
   }}>
-    <div style={{border: '1px solid black', borderRadius: '100%', padding: '0.25em'}}>
-      <img height='36' src={playImage} style={{display: 'block'}} />
+    <div style={{ border: '1px solid black', borderRadius: '100%', padding: '0.25em' }}>
+      <img height='36' src={playImage} style={{ display: 'block' }} />
     </div>
   </StyledHoverPlayButton>
 }
@@ -82,7 +82,7 @@ const ListItem = (props) => {
   return <StyledListItem {...props} class='song-list-item'>
     <Thumbnail src={props.image} />
     <div>
-      <p style={{fontWeight: 'bold'}}>{props.title}</p>
+      <p style={{ fontWeight: 'bold' }}>{props.title}</p>
       <p>{props.sub}</p>
     </div>
     <HoverPlayButton />
@@ -108,7 +108,7 @@ const AlbumListItem = (props) => {
   return <StyledListItem {...props} class='song-list-item'>
     <ListNumber />
     <div>
-      <p style={{fontWeight: 'bold'}}>{props.title}</p>
+      <p style={{ fontWeight: 'bold' }}>{props.title}</p>
       <p>{props.sub}</p>
     </div>
   </StyledListItem>
@@ -117,8 +117,8 @@ const AlbumListItem = (props) => {
 const SongList = (props) => (context) => {
   return <SongListStyle>
     <div class='song-list-wrapper'>
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <h3 style={{paddingLeft: '1.5em', fontWeight: 'bold'}}>Songs</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h3 style={{ paddingLeft: '1.5em', fontWeight: 'bold' }}>Songs</h3>
         {/* <PlayAllButton title='Shuffle' /> */}
       </div>
       <ul>
@@ -128,7 +128,7 @@ const SongList = (props) => (context) => {
               window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
               props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playPlaylistSongAtIndex(index, props.playlist)
               context.actions.scrubBar.show()
-            }} key={song.id} context={{context}} index={index} title={song.name} image={song.cover_art_url} sub={song.artist} />
+            }} key={song.id} context={{ context }} index={index} title={song.name} image={song.cover_art_url} sub={song.artist} />
           })
         }
         {

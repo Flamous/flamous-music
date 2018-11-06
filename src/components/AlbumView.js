@@ -1,8 +1,8 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import Page from './Page'
-import Header, { HeaderBold, HeaderImage } from './Header'
-import { Route, Link } from '@hyperapp/router'
+import Header from './Header'
+import { Route } from '@hyperapp/router'
 import kimikoSongs from '../songs/kimiko_ishizaka'
 import SongList from './SongList'
 import { nestable } from 'hyperapp-context'
@@ -38,18 +38,18 @@ const Album = (props) => {
   }
 
   return <div>
-    <Header title={title} defaultText='Album' back={{text: 'Back', to: props.location.previous}}>
+    <Header title={title} defaultText='Album' back={{ text: 'Back', to: props.location.previous }}>
       <div>
-        <div style={{display: 'flex', margin: '1em auto 2em', padding: '0 1em', maxWidth: '40rem'}}>
+        <div style={{ display: 'flex', margin: '1em auto 2em', padding: '0 1em', maxWidth: '40rem' }}>
           <Img src={songs[0].cover_art_url} onclick={(event) => {
             let bounds = event.target.getBoundingClientRect()
-            window.flamous.imageViewer.showImageViewer({image: songs[0].cover_art_url, bounds: bounds})
+            window.flamous.imageViewer.showImageViewer({ image: songs[0].cover_art_url, bounds: bounds })
           }} />
 
-          <div style={{marginLeft: '2em'}}>
+          <div style={{ marginLeft: '2em' }}>
 
             <h1>{title}</h1>
-            <p style={{fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem'}}>by {songs[0].artist}</p>
+            <p style={{ fontSize: '1rem', fontWeight: 'normal', margin: '0.5rem 0 0 -0.2rem' }}>by {songs[0].artist}</p>
           </div>
         </div>
 
@@ -81,7 +81,7 @@ const AlbumView = nestable({
   return <div>
     {state.stuff.content && <state.stuff.content />}
     <Route path={`/albums/:albumId`} render={(matchProps) => {
-      actions.stuff.addContent({content: () => { return <Album {...matchProps} /> }, name: 'Album'})
+      actions.stuff.addContent({ content: () => { return <Album {...matchProps} /> }, name: 'Album' })
     }} />
   </div>
 })

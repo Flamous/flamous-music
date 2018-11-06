@@ -1,3 +1,4 @@
+/** @jsx h */
 import { h } from 'hyperapp'
 import { Route } from '@hyperapp/router'
 

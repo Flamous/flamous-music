@@ -18,7 +18,7 @@ const StyledPage = style('article')({
   overscrollBehavior: 'contain'
 })
 
-const pointerX = (preventDefault = false, x = 0) => pointer({x: x, preventDefault: preventDefault}).pipe(val => val.x)
+const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => val.x)
 
 const Page = nestable(
   {
@@ -37,9 +37,9 @@ const Page = nestable(
         makeInteractive: true
       }
     },
-    makeInteractive: ({element, initialLoad}) => (state, actions) => {
+    makeInteractive: ({ element, initialLoad }) => (state, actions) => {
       console.info('Making interactive')
-      let {startSwipeBack} = actions
+      let { startSwipeBack } = actions
 
       let handleStyler = styler(element)
       let handleX = value(0, handleStyler.set('x'))
@@ -69,7 +69,7 @@ const Page = nestable(
       let { isAxisLocked, AXIS_LOCK_THRESHOLD, handleX } = state
       let currentPointer
 
-      currentPointer = pointer({x: 0, y: 0, preventDefault: false}).start(({ x, y }) => {
+      currentPointer = pointer({ x: 0, y: 0, preventDefault: false }).start(({ x, y }) => {
         if (Math.abs(y) >= AXIS_LOCK_THRESHOLD && !isAxisLocked) {
           currentPointer.stop()
           upListener.stop()
@@ -176,9 +176,9 @@ const Page = nestable(
       {...props}
       class='page'
       key={props.key}
-      oncreate={(element) => { element.parentNode.actions = actions; !props.hasOwnProperty('nonInteractive') && actions.makeInteractive({element, initialLoad: context.initialLoad}) }}
+      oncreate={(element) => { element.parentNode.actions = actions; !props.hasOwnProperty('nonInteractive') && actions.makeInteractive({ element, initialLoad: context.initialLoad }) }}
     >
-      <div style={{paddingBottom: '6.5em'}}>
+      <div style={{ paddingBottom: '6.5em' }}>
         {children}
       </div>
     </StyledPage>

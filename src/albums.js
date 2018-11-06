@@ -1,5 +1,5 @@
 import image from './public/500/2.jpg'
-import album_placeholder from './album_placeholder.svg'
+import albumPlaceholder from './albumPlaceholder.svg'
 
 export default [
   {
@@ -10,21 +10,21 @@ export default [
   {
     name: '',
     artist: '',
-    cover_art_url: album_placeholder
+    cover_art_url: albumPlaceholder
   },
   {
     name: '',
     artist: '',
-    cover_art_url: album_placeholder
+    cover_art_url: albumPlaceholder
   },
   {
     name: '',
     artist: '',
-    cover_art_url: album_placeholder
+    cover_art_url: albumPlaceholder
   },
   {
     name: '',
     artist: '',
-    cover_art_url: album_placeholder
+    cover_art_url: albumPlaceholder
   }
 ]

@@ -1,7 +1,6 @@
 import wowaImage from './assets/wowa.jpg'
 import kimikoImage from './assets/kimiko_ishizaka.jpg'
 import murrayImage from './assets/billy_murray.jpg'
-import artist_placeholder from './album_placeholder.svg'
 
 export default [
   {
@@ -24,16 +23,16 @@ export default [
   // {
   //   name: '',
   //   artist: '',
-  //   cover_art_url: artist_placeholder
+  //   cover_art_url: artistPlaceholder
   // },
   // {
   //   name: '',
   //   artist: '',
-  //   cover_art_url: artist_placeholder
+  //   cover_art_url: artistPlaceholder
   // },
   // {
   //   name: '',
   //   artist: '',
-  //   cover_art_url: artist_placeholder
+  //   cover_art_url: artistPlaceholder
   // }
 ]

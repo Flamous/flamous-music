@@ -45,9 +45,9 @@ const PlayAllButton = (props) => style('span')({
     opacity: '0.4'
   }
 })(
-  {onclick: window.Amplitude.play},
+  { onclick: window.Amplitude.play },
   [
-    <img src={playImage} style={{paddingRight: '0.35em'}} />,
+    <img src={playImage} style={{ paddingRight: '0.35em' }} />,
     'Play All'
   ]
 )
@@ -65,7 +65,7 @@ const Gallery = (props, children) => style('div')({
     class: 'gallery'
   },
   <Wrapper key={props.key}>
-    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       {props.heading ? <Heading>{props.heading}</Heading> : ''}
       {props.hasOwnProperty('playAllButton') ? <PlayAllButton /> : ''}
     </div>

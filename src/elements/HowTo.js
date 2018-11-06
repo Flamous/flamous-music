@@ -2,9 +2,6 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import Header from '../components/Header.js'
 import Page from '../components/Page'
-import UpdateBanner from '../components/UpdateBanner.js'
-import { Link } from '@hyperapp/router'
-import rightArrow from '../assets/blue_right.svg'
 
 const style = picostyle(h)
 
@@ -32,9 +29,9 @@ const Wrapper = style('div')({
 })
 
 const About = (props) => (context) => {
-  let {checkForUpdate, updateAvailable} = context
+  let { checkForUpdate } = context
   return <Page {...props} key='about'>
-    <Header title='How To' back={{text: 'Back', to: '/'}} />
+    <Header title='How To' back={{ text: 'Back', to: '/' }} />
     <Wrapper oncreate={checkForUpdate}>
 
       <p>

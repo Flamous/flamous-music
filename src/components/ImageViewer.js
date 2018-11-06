@@ -1,9 +1,8 @@
+/** @jsx h */
 import { h } from 'hyperapp'
 import style from '../style'
-import { spring, styler, value, listen, multitouch, action, transform } from 'popmotion'
+import { spring, styler, value } from 'popmotion'
 import closeImage from '../assets/close_white.svg'
-
-const {applyOffset} = transform
 
 const ImageViewerStyles = style('div')({
   height: '100%',
@@ -24,66 +23,66 @@ const Image = style('img')({
   maxWidth: '100%'
 })
 
-const multitouchPointer = ({x, y}) => {
-  const applyXOffset = applyOffset(x || 0)
-  const applyYOffset = applyOffset(y || 0)
+// const multitouchPointer = ({x, y}) => {
+//   const applyXOffset = applyOffset(x || 0)
+//   const applyYOffset = applyOffset(y || 0)
 
-  return action(({update}) => {
-    let lastPoints = {}
-    let lastPoint = {}
-    let delta = {}
+//   return action(({update}) => {
+//     let lastPoints = {}
+//     let lastPoint = {}
+//     let delta = {}
 
-    console.log('init!')
+//     console.log('init!')
 
-    function pointsChange (touches) {
-      delta.x = 0
-      delta.y = 0
+//     function pointsChange (touches) {
+//       delta.x = 0
+//       delta.y = 0
 
-      let newPoints = JSON.parse(JSON.stringify(touches))
-      let newPoint = {}
-      // console.log(lastPoints)
-      if (Object.getOwnPropertyNames(lastPoints).length === 0) {
-        lastPoint = {x: x, y: y}
+//       let newPoints = JSON.parse(JSON.stringify(touches))
+//       let newPoint = {}
+//       // console.log(lastPoints)
+//       if (Object.getOwnPropertyNames(lastPoints).length === 0) {
+//         lastPoint = {x: x, y: y}
 
-        console.log('newPoins right before lastPoints init: ', newPoints)
-        lastPoints = JSON.parse(JSON.stringify(newPoints))
-        update(lastPoint)
-        return
-      }
+//         console.log('newPoins right before lastPoints init: ', newPoints)
+//         lastPoints = JSON.parse(JSON.stringify(newPoints))
+//         update(lastPoint)
+//         return
+//       }
 
-      console.log(lastPoints.length === newPoints.length)
-      // newPoints.length = Math.min(lastPoints.length, newPoints.length)
-      // Calculate deltas
-      newPoints.forEach((touch, index) => {
-        delta.x += touch.x - lastPoints[index].x
-        delta.y += touch.y - lastPoints[index].y
-      })
+//       console.log(lastPoints.length === newPoints.length)
+//       // newPoints.length = Math.min(lastPoints.length, newPoints.length)
+//       // Calculate deltas
+//       newPoints.forEach((touch, index) => {
+//         delta.x += touch.x - lastPoints[index].x
+//         delta.y += touch.y - lastPoints[index].y
+//       })
 
-      lastPoints = JSON.parse(JSON.stringify(newPoints))
-      console.log('lastPoints at the end: ', lastPoints)
-      newPoint.x = lastPoint.x + delta.x
-      newPoint.y = lastPoint.y + delta.y
+//       lastPoints = JSON.parse(JSON.stringify(newPoints))
+//       console.log('lastPoints at the end: ', lastPoints)
+//       newPoint.x = lastPoint.x + delta.x
+//       newPoint.y = lastPoint.y + delta.y
 
-      lastPoint = JSON.parse(JSON.stringify(newPoint))
+//       lastPoint = JSON.parse(JSON.stringify(newPoint))
 
-      update(newPoint)
-    }
-    let deltas
-    multitouch()
-      .pipe(({touches}) => { console.log('touches on init: ', touches); return touches }, (touches) => {
-        deltas = touches.map((touch) => {
-          let obj = {
-            x: applyXOffset(touch.x),
-            y: applyYOffset(touch.y)
-          }
-          return obj
-        })
+//       update(newPoint)
+//     }
+//     let deltas
+//     multitouch()
+//       .pipe(({touches}) => { console.log('touches on init: ', touches); return touches }, (touches) => {
+//         deltas = touches.map((touch) => {
+//           let obj = {
+//             x: applyXOffset(touch.x),
+//             y: applyYOffset(touch.y)
+//           }
+//           return obj
+//         })
 
-        return deltas
-      })
-      .start(pointsChange)
-  })
-}
+//         return deltas
+//       })
+//       .start(pointsChange)
+//   })
+// }
 
 function start (data) {
   // Using FLIP terminology: https://aerotwist.com/blog/flip-your-animations/
@@ -98,7 +97,7 @@ function start (data) {
   let handleStyler = styler(data.element)
   // INVERT
   let handleScale = value(scale, handleStyler.set('scale'))
-  let handleXY = value({x: invertX, y: invertY}, ({x, y}) => handleStyler.set({x, y}))
+  let handleXY = value({ x: invertX, y: invertY }, ({ x, y }) => handleStyler.set({ x, y }))
 
   data.element.style.transformOrigin = 'center'
   data.element.style.webkitTransformOrigin = 'center'
@@ -186,10 +185,10 @@ function fadeOut (element, done) {
 
 const ImageViewer = (props) => {
   return <ImageViewerStyles onremove={fadeOut} oncreate={(elem) => { elem.style.backgroundColor = 'rgba(0, 0, 0, 0.88)' }}>
-    <div style={{width: '500px', maxWidth: '100%', textAlign: 'right'}}>
-      <span title='Close' style={{color: 'white', padding: '0.6em', transform: 'translateY(-1em)', display: 'inline-block', fontWeight: 'bold'}} onclick={window.flamous.imageViewer.hideImageViewer}><img style={{height: '2.25em'}} src={closeImage} /></span>
+    <div style={{ width: '500px', maxWidth: '100%', textAlign: 'right' }}>
+      <span title='Close' style={{ color: 'white', padding: '0.6em', transform: 'translateY(-1em)', display: 'inline-block', fontWeight: 'bold' }} onclick={window.flamous.imageViewer.hideImageViewer}><img style={{ height: '2.25em' }} src={closeImage} /></span>
     </div>
-    <Image src={props.image} oncreate={(elem) => start({element: elem, bounds: props.bounds})} />
+    <Image src={props.image} oncreate={(elem) => start({ element: elem, bounds: props.bounds })} />
   </ImageViewerStyles>
 }
 

@@ -3,8 +3,6 @@ import picostyle from 'picostyle'
 import Header from '../components/Header.js'
 import Page from '../components/Page'
 import UpdateBanner from '../components/UpdateBanner.js'
-import { Link } from '@hyperapp/router'
-import rightArrow from '../assets/blue_right.svg'
 
 const style = picostyle(h)
 
@@ -29,9 +27,9 @@ const Wrapper = style('div')({
 })
 
 const About = (props) => (context) => {
-  let {checkForUpdate, updateAvailable} = context
+  let { checkForUpdate, updateAvailable } = context
   return <Page {...props} key='about'>
-    <Header title='About' back={{text: 'Back', to: '/'}} />
+    <Header title='About' back={{ text: 'Back', to: '/' }} />
     <Wrapper oncreate={checkForUpdate}>
 
       <p class='first'>"Flamous Music is a player for awesome, free music."</p>
@@ -45,9 +43,9 @@ const About = (props) => (context) => {
       <p>
       Read more about the power of Public Domain: <br /><a href='https://creativecommons.org/share-your-work/public-domain/cc0/' rel='noopener' target='_blank'>https://creativecommons.org/share-your-work/public-domain/cc0/</a>
       </p>
-      <p style={{borderTop: '1px solid #f0f0f0'}} />
-      <p style={{color: '#636363', display: 'flex'}}>
-        <span style={{minWidth: '7em', display: 'inline-block'}}>Version: </span>
+      <p style={{ borderTop: '1px solid #f0f0f0' }} />
+      <p style={{ color: '#636363', display: 'flex' }}>
+        <span style={{ minWidth: '7em', display: 'inline-block' }}>Version: </span>
         <span>
           {`${process.env.npm_package_version}${process.env.STAGE === 'prod' ? '' : '-dev'}`}
           <br />
@@ -56,20 +54,20 @@ const About = (props) => (context) => {
           {updateAvailable ? <UpdateBanner /> : <span>&#9989; Up-to-date</span>}
         </span>
       </p>
-      <p style={{color: '#636363', display: 'flex'}}>
-        <span style={{minWidth: '7em', display: 'inline-block'}}>Contact: </span>
+      <p style={{ color: '#636363', display: 'flex' }}>
+        <span style={{ minWidth: '7em', display: 'inline-block' }}>Contact: </span>
         <span>
           <a href='mailto:hello@flamous.io'>hello@flamous.io</a>
         </span>
       </p>
-      <p style={{color: '#636363', display: 'flex'}}>
-        <span style={{minWidth: '7em', display: 'inline-block'}}>Developers: </span>
+      <p style={{ color: '#636363', display: 'flex' }}>
+        <span style={{ minWidth: '7em', display: 'inline-block' }}>Developers: </span>
         <span>
           Timon Röhrbacher, Christian Kaindl
         </span>
       </p>
-      <p style={{color: '#636363', display: 'flex'}}>
-        <span style={{minWidth: '7em', display: 'inline-block'}}>License: </span>
+      <p style={{ color: '#636363', display: 'flex' }}>
+        <span style={{ minWidth: '7em', display: 'inline-block' }}>License: </span>
         <span>
           Flamous Music is an open source project, licensed under MIT. <a href='https://github.com/christiankaindl/flamous-music' rel='noopener' target='_blank'>View Code</a>
         </span>

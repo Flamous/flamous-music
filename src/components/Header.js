@@ -1,6 +1,5 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
-import { Link } from '@hyperapp/router'
 import leftArrow from '../public/blue_left.svg'
 import { nestable } from 'hyperapp-context'
 import flamousLogo from '../assets/flamous_logo.svg'
@@ -119,8 +118,8 @@ const HeaderNav = (props, children) => {
       <div class='header-nav-item'>
         {
           props.defaultText
-            ? <span class='flamous-logo' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{props.defaultText}</span>
-            : <span class='flamous-logo' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><img height='28' style={{marginRight: '0.45em'}} src={flamousLogo} />Flamous</span>
+            ? <span class='flamous-logo' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{props.defaultText}</span>
+            : <span class='flamous-logo' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img height='28' style={{ marginRight: '0.45em' }} src={flamousLogo} />Flamous</span>
         }
 
         {children[1] && children[1]}
@@ -184,14 +183,14 @@ const Header = nestable(
     back: null
   },
   {
-    observerChange: (changes) => ({threshold}, {setHeaderHidden}) => {
+    observerChange: (changes) => ({ threshold }, { setHeaderHidden }) => {
       if (changes[0].intersectionRatio <= threshold) {
         setHeaderHidden(true)
       } else {
         setHeaderHidden(false)
       }
     },
-    initObserver: (elem) => ({threshold}, {observerChange}) => {
+    initObserver: (elem) => ({ threshold }, { observerChange }) => {
       let observer = null
       if ('IntersectionObserver' in window) {
         observer = new window.IntersectionObserver(observerChange, {
@@ -225,10 +224,10 @@ const Header = nestable(
 
     return <HeaderStyles>
       <HeaderWrapper>
-        <header style={{display: 'contents'}}>
+        <header style={{ display: 'contents' }}>
           {props.back && <HeaderNav defaultText={props.defaultText} class={`${state.isHeaderHidden ? 'show' : ''}`}>
-            <a style={{padding: '1em 1em 1em 0.85em', display: 'flex', alignItems: 'center'}} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{height: '1.2em', marginRight: '0.2em'}} />, <span>{props.back.text}</span>]}</a>
-            <span style={{textAlign: 'center', fontWeight: 'bold', position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center'}}><span class='dynamic-header'>{props.title}</span></span>
+            <a style={{ padding: '1em 1em 1em 0.85em', display: 'flex', alignItems: 'center' }} href={back} onclick={(event) => { event.preventDefault(); back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back() }}to={back}>{[<img src={leftArrow} style={{ height: '1.2em', marginRight: '0.2em' }} />, <span>{props.back.text}</span>]}</a>
+            <span style={{ textAlign: 'center', fontWeight: 'bold', position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center' }}><span class='dynamic-header'>{props.title}</span></span>
             <span>{context.right && <props.right />}</span>
           </HeaderNav>
           }
