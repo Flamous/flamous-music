@@ -163,7 +163,7 @@ const Home = (props) => (context) => {
 
       <Divider />
 
-      <div style={{margin: '3em auto', maxWidth: '32em', padding: '1em'}}>
+      <Section>
         <h2>
           Our music is<br />use-for-everything
         </h2>
@@ -183,15 +183,15 @@ const Home = (props) => (context) => {
             <span>I'm confused</span>
           </WhiteButton>
         </Link>
-      </div>
+      </Section>
 
       <Divider />
 
-      <div style={{margin: '3em auto', maxWidth: '32em', padding: '1em'}}>
+      <Section>
         <h2>
           Lots more to come
         </h2>
-        <p style={{maxWidth: '32em', lineHeight: '1.3'}}>
+        <p>
           We want to get people started on making music and will share more tracks and useful ressources to start music production very soon.
         </p>
 
@@ -219,11 +219,11 @@ const Home = (props) => (context) => {
           </form>
         </div>
         <script onload={() => { import('../mailchimp-validation') }} type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js' />
-      </div>
+      </Section>
 
       <Divider />
 
-      <div style={{margin: '3em auto', maxWidth: '32em', padding: '1em'}}>
+      <Section>
         <h2>
           Submit your songs
         </h2>
@@ -235,10 +235,10 @@ const Home = (props) => (context) => {
             <span>Submit Songs</span>
           </Button>
         </Link>
-      </div>
+      </Section>
 
       <Divider />
-      <div style={{margin: '3em auto -6em', maxWidth: '32em', padding: '1em'}}>
+      <Section>
         <h2>
           Developers
         </h2>
@@ -268,9 +268,9 @@ const Home = (props) => (context) => {
             <img style={{width: '2em'}} src={twitterImage} />
           </a>
         </p>
-      </div>
+      </Section>
 
-      <div style={{margin: '3em auto -3em', maxWidth: '32em', padding: '3em 1em 1em 1em'}}>
+      <Section>
         <p style={{textAlign: 'center', lineHeight: '1.34'}}>
           <a href='mailto:hello@flamous.io'>hello@flamous.io</a><br />
           <a href='https://twitter.com/FlamousMusic' rel='noopener' target='_blank'>twitter.com/FlamousMusic</a>
@@ -279,7 +279,7 @@ const Home = (props) => (context) => {
         {window.installPrompt && <p style={{textAlign: 'center'}} onclick={() => window.installPrompt.prompt()}>
           Add to homescreen
         </p>}
-      </div>
+      </Section>
     </Page>
   )
 }
@@ -288,4 +288,18 @@ export default Home
 
 const Divider = () => {
   return <div style={{height: '3em', backgroundColor: '#fafafa', borderTop: '1px solid rgba(0, 0, 0, 0.1)', borderBottom: '1px solid rgba(0, 0, 0, 0.08)', margin: '3.5em 0px'}} />
+}
+
+const StyledSection = style('section')({
+  margin: '3em auto',
+  maxWidth: '32em',
+  padding: '1em',
+  maxWidth: '32em',
+  padding: '1em'
+})
+
+const Section = (props, children) => {
+  return <StyledSection {...props}>
+    {children}
+  </StyledSection>
 }
