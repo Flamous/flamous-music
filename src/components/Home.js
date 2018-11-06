@@ -122,8 +122,6 @@ const DevelopersSection = () => <Section>
   </p>
 </Section>
 
-const staticDevelopersSection = <DevelopersSection />
-
 const SubmitSection = () => <Section>
   <h2>
   Submit your songs
@@ -137,8 +135,6 @@ const SubmitSection = () => <Section>
     </Button>
   </Link>
 </Section>
-
-const staticSubmitSection = <SubmitSection />
 
 const NewsletterSection = () => <Section>
   <h2>
@@ -173,8 +169,6 @@ const NewsletterSection = () => <Section>
   <script onload={() => { import('../mailchimp-validation') }} type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js' />
 </Section>
 
-const staticNewsletterSection = <NewsletterSection />
-
 const ExplainSection = () => <Section>
   <h2>
   Our music is<br />use-for-everything
@@ -185,19 +179,17 @@ const ExplainSection = () => <Section>
   <p>
   Use it commercially, for a video or just for yourself. There are no fees and no credit to the artists required. Listen to what you like, download and use it.
   </p>
-  <a href='/#artists'>
+  <Link to='/artists'>
     <Button>
       <span>Browse Music</span>
     </Button>
-  </a>
+  </Link>
   <Link to='/how-to' style={{ marginLeft: '0.4em' }}>
     <Button white>
       <span>I'm confused</span>
     </Button>
   </Link>
 </Section>
-
-const staticExplainSection = <ExplainSection />
 
 const Home = (props) => (context) => {
   if (props.match.url === '/' && context.initialLoad) window.flamous.setInitialLoad(false)
@@ -209,13 +201,13 @@ const Home = (props) => (context) => {
       </Header>
 
       <Divider />
-      {staticExplainSection}
+      <ExplainSection />
       <Divider />
-      {staticNewsletterSection}
+      <NewsletterSection />
       <Divider />
-      {staticSubmitSection}
+      <SubmitSection />
       <Divider />
-      {staticDevelopersSection}
+      <DevelopersSection />
 
       {staticFooter}
     </Page>
