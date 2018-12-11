@@ -15,6 +15,7 @@
     "amplitudejs": "^3.3.1",
     "autoprefixer": "^9.4.2",
     "babel-plugin-transform-react-jsx": "^6.24.1",
+    "classcat": "^3.2.3",
     "hyperapp": "^1.2.9",
     "hyperapp-context": "^1.1.0",
     "modern-normalize": "^0.5.0",
