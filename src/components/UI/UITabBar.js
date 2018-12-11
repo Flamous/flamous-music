@@ -27,17 +27,17 @@ const UITabBar = (props, children) => (context) => {
     </Link>
 
     <SetActive viewName='home' class={cc([styles['item'], { [styles['active']]: activeView === 'home' }])}>
-      <img alt='Home Icon' src={homeSVG} />
+      <img class={styles['icon']} alt='Home Icon' src={homeSVG} />
       <span>Home</span>
     </SetActive>
 
     <SetActive viewName='music-kit' class={cc([styles['item'], { [styles['active']]: activeView === 'music-kit' }])}>
-      <img alt='Music Kit Icon' src={bookSVG} />
+      <img class={styles['icon']} alt='Music Kit Icon' src={bookSVG} />
       <span>Music Kit</span>
     </SetActive>
 
     <SetActive viewName='library' class={cc([styles['item'], { [styles['active']]: activeView === 'library' }])}>
-      <img alt='Library Icon' src={profileSVG} />
+      <img class={styles['icon']} alt='Library Icon' src={profileSVG} />
       <span>Library</span>
     </SetActive>
   </nav>

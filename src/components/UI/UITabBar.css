@@ -18,9 +18,11 @@
 }
 
 .item {
-  padding: 1rem 1.3rem;
+  width: 5.5rem;
+  padding: 0.45rem 0.15rem;
+  text-align: center;
   cursor: default;
-  margin: 4px 0.3em;
+  margin: 5px 3px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,6 +36,9 @@
 .item.active {
   background-color: #e3effc;
   border-color: #c2defc;
+}
+.item .icon {
+  height: 32px;
 }
 .item img {
   display: block;
