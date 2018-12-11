@@ -2,6 +2,7 @@
 import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import Page from './Page.js'
+// import UIPage from './UI/UIPage'
 import { Link } from '@hyperapp/router'
 import flamousLogo from '../assets/flamous_logo.svg'
 import christianImage from '../assets/Christian.jpg'
@@ -192,7 +193,7 @@ const ExplainSection = () => <Section>
 </Section>
 
 const Home = (props) => (context) => {
-  if (props.match.url === '/' && context.initialLoad) window.flamous.setInitialLoad(false)
+  // if (props.match.url === '/' && context.initialLoad) window.flamous.setInitialLoad(false)
   return (
     <Page nonInteractive key='home'>
       <Header>

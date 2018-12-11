@@ -4,26 +4,38 @@ import { Link } from '@hyperapp/router'
 import styles from './UITabBar.css'
 import placeholderImage from '~/assets/song_placeholder.svg'
 
-const UITabBar = (props, children) => {
+const UITabBar = (props, children) => (context) => {
+  let { actions: { views: { setActive } } } = context
+
+  const SetActive = (props, children) => {
+    let { viewName } = props
+
+    delete props.viewName
+
+    return <div onclick={() => setActive(viewName)} {...props}>
+      {children}
+    </div>
+  }
+
   return <nav class={styles['tab-bar']}>
-    <Link to='/stream-view' class={styles['item']}>
+    <Link to='/player' class={styles['item']}>
       <img alt='Cover Image' src={placeholderImage} />
     </Link>
 
-    <Link to='/' class={styles['item']}>
+    <SetActive viewName='home' class={styles['item']}>
       {/* <img alt='Cover Image' src={placeholderImage} /> */}
       <span>Home</span>
-    </Link>
+    </SetActive>
 
-    <Link to='/music-kit' class={styles['item']}>
+    <SetActive viewName='music-kit' class={styles['item']}>
       {/* <img alt='Cover Image' src={placeholderImage} /> */}
       <span>Music Kit</span>
-    </Link>
+    </SetActive>
 
-    <Link to='/library' class={styles['item']}>
+    <SetActive viewName='library' class={styles['item']}>
       {/* <img alt='Cover Image' src={placeholderImage} /> */}
       <span>Library</span>
-    </Link>
+    </SetActive>
   </nav>
 }
 

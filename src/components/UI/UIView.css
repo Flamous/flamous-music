@@ -1,0 +1,7 @@
+.ui-view {
+  display: none;
+}
+
+.ui-view.active {
+  display: block;
+}

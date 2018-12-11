@@ -12,7 +12,7 @@ import nativeWebApp from 'native-web-app'
 import '../node_modules/native-web-app/native.css'
 import 'babel-polyfill'
 
-import { location, Route } from '@hyperapp/router'
+import { location, Route, Link } from '@hyperapp/router'
 import ArtistView from './components/ArtistView.js'
 
 import ImageViewer from './components/ImageViewer.js'
@@ -24,6 +24,13 @@ import AlbumView from './components/AlbumView.js'
 import FAQ from './elements/FAQ'
 import HowTo from './elements/HowTo'
 import PageRoute from './components/PageRoute'
+import UIViewGroup from './components/UI/UIViewGroup'
+import UIView from './components/UI/UIView'
+import UIPage from './components/UI/UIPage'
+import TestPage from './components/TestPage'
+import UITabBar from './components/UI/UITabBar'
+import MusicKit from './components/MusicKit'
+import UIViewRoute from './components/UI/UIViewRoute'
 
 const app = withContext(_app)
 
@@ -171,7 +178,25 @@ const flamous = app(
     scrubBar: {
       visible: false
     },
-    installPrompt: null
+    installPrompt: null,
+    views: {
+      stacks: {
+        home: {
+          stack: [],
+          root: '/'
+        },
+        'music-kit': {
+          stack: [],
+          root: '/music-kit'
+        },
+        library: {
+          stack: [],
+          root: '/library'
+        }
+      },
+      registered: [],
+      activeView: 'home'
+    }
   },
   {
     location: location.actions,
@@ -302,6 +327,56 @@ const flamous = app(
       return {
         initialLoad: boolean
       }
+    },
+    views: {
+      setActive: (viewName) => (state) => {
+        let { stacks } = state
+        let stackInQuestion = stacks[viewName].stack
+
+        let goTo = stacks[viewName].root
+
+        if (stackInQuestion.length > 0) {
+          goTo = stackInQuestion[stacks[viewName].stack.length - 1].path // Last item
+        }
+
+        window.history.pushState({}, '', goTo)
+      },
+      add: (options) => (state) => {
+        let { viewName, path, Component, setActive = true } = options
+        let stacks = { ...state.stacks }
+        let { activeView } = state
+        let stackInQuestion = stacks[viewName].stack
+
+        if (stackInQuestion.length > 0 && path === stackInQuestion[stackInQuestion.length - 1].path) {
+          if (activeView !== viewName) {
+            return { activeView: viewName }
+          }
+          return
+        }
+
+        stackInQuestion.push({
+          viewName,
+          path,
+          Component
+        })
+
+        return {
+          stacks,
+          activeView: viewName
+        }
+      },
+      remove: () => (state) => {
+        let { stack } = state
+        let newStack = [...stack]
+
+        console.log(`Removing page from stack ${state.scopeId} | page: ${stack[stack.length - 1].path}`)
+
+        newStack.pop()
+
+        return {
+          stack: newStack
+        }
+      }
     }
   },
   (state, actions) => (_, setContext) => {
@@ -311,30 +386,82 @@ const flamous = app(
 
     setContext(context)
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
-      <Route render={Home} />
+      {/* <Route render={Home} /> */}
 
-      {<TrackBar key='track-bar' hidden={!scrubBar.visible} />}
+      {/* {<TrackBar key='track-bar' hidden={!scrubBar.visible} />} */}
+      {/* {<TrackBar oncreate={actions.scrubBar.show} key='track-bar' hidden={!scrubBar.visible} />} */}
+      <UITabBar />
 
-      <Route path='/' render={(props) => {
+      {/* <Route path='/' render={(props) => {
         actions.pages.clear()
-      }} />
-      <PageRoute parent path='/artists' render={ArtistView} />
+      }} /> */}
+      {/* <PageRoute parent path='/artists' render={ArtistView} />
       <PageRoute path='/about' render={About} />
       <PageRoute path='/song-submit' render={SongSubmit} />
       <PageRoute parent path='/albums' render={AlbumView} />
       <PageRoute path='/how-to' render={HowTo} />
       <PageRoute path='/faq' render={FAQ} />
-      <PageRoute path='/stream-view' render={StreamView} />
+      <PageRoute path='/stream-view' render={StreamView} /> */}
 
-      {
+      <UIViewRoute path='/' exact render={Home} viewName='home' />
+      <UIViewRoute path='/artists' render={ArtistView} viewName='home' />
+      <UIViewRoute path='/albums' render={AlbumView} viewName='home' />
+
+      <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
+
+      <UIViewRoute path='/library' render={TestPage} viewName='library' />
+
+      <UIView displayView='home' />
+      <UIView displayView='music-kit' />
+      <UIView displayView='library' />
+
+      {/* <PageRoute path='/player' render={StreamView} /> */}
+
+      {/* <UIViewGroup scope={['/', '/artists', '/albums']} root={Home}>
+        <UIView route='' exact />
+        <UIView route=':artistId' render={TestPage} />
+        <UIView route=':albumId' render={TestPage} />
+      </UIViewGroup>
+      <UIViewGroup scope={['/music-kit']} root={MusicKit}>
+        <UIView route='chapters/:id' render={TestPage} />
+      </UIViewGroup>
+      <UIViewGroup scope={['/library']} root={() => <h1>Library</h1>}>
+        <UIView route='artists/:id' render={TestPage} />
+      </UIViewGroup>
+      <UIViewGroup scope={['/player']} root={() => <h1>Player</h1>}>
+        <UIView route=':id' render={StreamView} />
+      </UIViewGroup> */}
+
+      {/* <UIViewGroup scope='/music' root={() => <h1>lel</h1>}>
+        <UIPageView route='artists/:id' >
+          <UIPage>
+            <h1>This is a test</h1>
+            <p>artists page</p>
+            <Link to='/music/artists/1234'>New page 1</Link>
+            <Link to='music/artists/54321'>New page 2</Link>
+            <Link to='music/test/1234'>New page 3</Link>
+          </UIPage>
+        </UIPageView>
+        <UIPageView route='test/:id' >
+          <UIPage>
+            <h1>This is a test</h1>
+            <p>test page</p>
+            <Link to='artists/1234'>New page 1</Link>
+            <Link to='artists/54321'>New page 2</Link>
+            <Link to='test/1234'>New page 3</Link>
+          </UIPage>
+        </UIPageView>
+      </UIViewGroup> */}
+
+      {/* {
         pages.stack.map((item) => {
           return item.page()
         })
-      }
+      } */}
 
-      {
+      {/* {
         imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
-      }
+      } */}
     </AppShell>
   },
   document.body
