@@ -18,12 +18,23 @@
 }
 
 .item {
-  padding: 1rem;
+  padding: 1rem 1.3rem;
+  cursor: default;
+  margin: 4px 0.3em;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-radius: 3%;
+  border: 1px solid transparent;
 }
-
+.item:hover {
+  background-color: #f0f0f0;
+  border-color: #e0e0e0;
+}
+.item.active {
+  background-color: #e3effc;
+  border-color: #c2defc;
+}
 .item img {
   display: block;
 }
