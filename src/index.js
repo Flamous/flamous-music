@@ -404,8 +404,9 @@ const flamous = app(
       <PageRoute path='/stream-view' render={StreamView} /> */}
 
       <UIViewRoute path='/' exact render={Home} viewName='home' />
-      <UIViewRoute path='/artists' render={ArtistView} viewName='home' />
-      <UIViewRoute path='/albums' render={AlbumView} viewName='home' />
+      <UIViewRoute path='/artists' parent render={ArtistView} viewName='home' />
+      {/* <UIViewRoute path='/artists/:id' render={ArtistView} viewName='home' /> */}
+      <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' />
 
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
 
