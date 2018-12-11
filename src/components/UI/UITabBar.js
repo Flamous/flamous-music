@@ -6,9 +6,10 @@ import placeholderImage from '~/assets/song_placeholder.svg'
 import homeSVG from '~/assets/home.svg'
 import profileSVG from '~/assets/profile.svg'
 import bookSVG from '~/assets/book.svg'
+import cc from 'classcat'
 
 const UITabBar = (props, children) => (context) => {
-  let { actions: { views: { setActive } } } = context
+  let { actions: { views: { setActive } }, views: { activeView } } = context
 
   const SetActive = (props, children) => {
     let { viewName } = props
@@ -25,17 +26,17 @@ const UITabBar = (props, children) => (context) => {
       <img alt='Cover Image' src={placeholderImage} />
     </Link>
 
-    <SetActive viewName='home' class={styles['item']}>
+    <SetActive viewName='home' class={cc([styles['item'], { [styles['active']]: activeView === 'home' }])}>
       <img alt='Home Icon' src={homeSVG} />
       <span>Home</span>
     </SetActive>
 
-    <SetActive viewName='music-kit' class={styles['item']}>
+    <SetActive viewName='music-kit' class={cc([styles['item'], { [styles['active']]: activeView === 'music-kit' }])}>
       <img alt='Music Kit Icon' src={bookSVG} />
       <span>Music Kit</span>
     </SetActive>
 
-    <SetActive viewName='library' class={styles['item']}>
+    <SetActive viewName='library' class={cc([styles['item'], { [styles['active']]: activeView === 'library' }])}>
       <img alt='Library Icon' src={profileSVG} />
       <span>Library</span>
     </SetActive>
