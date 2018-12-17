@@ -11,6 +11,7 @@
   "author": "Christian Kaindl",
   "license": "MIT",
   "dependencies": {
+    "@aws-amplify/auth": "^1.2.13",
     "@hyperapp/router": "^0.7.1",
     "autoprefixer": "^9.4.2",
     "babel-plugin-transform-react-jsx": "^6.24.1",
