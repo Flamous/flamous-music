@@ -91,14 +91,6 @@ const Progress = style('progress')({
   transform: 'translateY(-1px)'
 })
 
-function playPause () {
-  if (!window.Amplitude.audio().paused) {
-    window.Amplitude.pause()
-  } else {
-    window.Amplitude.play()
-  }
-}
-
 const TrackBar = nestable({
   handleStyler: null,
   handleX: null,
@@ -185,13 +177,10 @@ const TrackBar = nestable({
     if (Math.abs(handleX.get()) >= ACTIONABLE_THRESHOLD) {
       switch (direction) {
         case 'top':
-          playPause()
           break
         case 'left':
-          window.Amplitude.next()
           break
         case 'right':
-          window.Amplitude.prev()
           break
         default:
           console.info('Clicked ScrubBar')

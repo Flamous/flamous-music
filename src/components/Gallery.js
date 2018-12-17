@@ -45,7 +45,7 @@ const PlayAllButton = (props) => style('span')({
     opacity: '0.4'
   }
 })(
-  { onclick: window.Amplitude.play },
+  {},
   [
     <img src={playImage} style={{ paddingRight: '0.35em' }} />,
     'Play All'

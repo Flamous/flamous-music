@@ -211,7 +211,7 @@ const PlayingView = nestable({
         </div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '0.5em 3em' }}>
-        <OtherButton title='Previous Song' onclick={() => window.Amplitude.prev()}>
+        <OtherButton title='Previous Song'>
           <img style={{ height: '100%' }} src={prevImage} />
         </OtherButton>
         <PlayButton title={`${playingState ? 'Pause' : 'Play'}`} onclick={context.actions.playPause}>
@@ -220,13 +220,13 @@ const PlayingView = nestable({
             : <img style={{ height: '100%' }} src={pauseImage} />
           }
         </PlayButton>
-        <OtherButton title='Next Song' onclick={() => window.Amplitude.next()}>
+        <OtherButton title='Next Song'>
           <img style={{ height: '100%' }} src={nextImage} />
         </OtherButton>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', padding: '1em 3em 0.5em' }}>
         <OtherButton style={{ width: '100%' }}>
-          <a title='Download Song' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'black', padding: '0.6em' }} href={window.Amplitude.audio().src} download={`${playingContext.name} - ${playingContext.artist} | Flamous Music.mp3`}>
+          <a title='Download Song' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'black', padding: '0.6em' }} href={''} download={`${playingContext.name} - ${playingContext.artist} | Flamous Music.mp3`}>
             <img style={{ height: '1.6em', marginRight: '0.5em' }} src={downloadImage} />
             <span>Download</span>
           </a>

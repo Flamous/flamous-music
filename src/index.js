@@ -1,11 +1,8 @@
 import { h, app as _app } from 'hyperapp'
-import Amplitude from 'amplitudejs'
 import picostyle from 'picostyle'
 import TrackBar from './components/TrackBar.js'
 import Home from './components/Home.js'
-import songListWowa from './songs/wowa.js'
-import songListKimiko from './songs/kimiko_ishizaka.js'
-import songListBilly from './songs/billy_murray'
+
 import placeholder from './public/song_placeholder.svg'
 import About from './elements/About'
 import nativeWebApp from 'native-web-app'
@@ -91,8 +88,6 @@ if ('serviceWorker' in navigator) {
   })
 }
 
-window.Amplitude = Amplitude
-
 const style = picostyle(h)
 
 const AppShell = style('div')({
@@ -103,62 +98,15 @@ const AppShell = style('div')({
   top: '100%'
 })
 
-Amplitude.setDebug(true)
-Amplitude.init({
-  songs: [
-    ...songListWowa,
-    ...songListKimiko,
-    ...songListBilly
-  ],
-  playlists: {
-    'wowa': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    'open_goldberg_variations': [12, 13, 14, 15, 16, 17],
-    'the_art_of_the_fugue': [18, 19, 20, 21, 22, 23],
-    'billy_murray': [24, 25]
-  },
-  default_album_art: placeholder,
-  shuffle_on: 'false',
-  callbacks: {
-    song_change: () => {
-      let meta = JSON.parse(JSON.stringify(Amplitude.getActiveSongMetadata())) // Deep copy so we don't modify the original object
-      let image = new window.Image()
-
-      if (meta.cover_art_url) {
-        image.src = meta.cover_art_url
-
-        if (!image.complete) {
-          meta.cover_art_url = placeholder
-          image.onload = () => {
-            meta.cover_art_url = image.src
-            flamous.playingContext.updateMetaData(meta)
-          }
-        }
-      }
-
-      flamous.playingContext.updateMetaData(meta)
-    },
-    before_play: () => {
-      flamous.setPlayState(true)
-    },
-    before_pause: () => {
-      flamous.setPlayState(false)
-    }
-  }
-})
-
-window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
-window.Amplitude.playSongAtIndex(0)
-window.Amplitude.pause()
-
 const flamous = app(
   {
     initialLoad: true,
     location: location.state,
     playingState: false,
     playingContext: {
-      artist: songListWowa[0].artist,
-      name: songListWowa[0].name,
-      cover_art_url: songListWowa[0].cover_art_url || Amplitude.getDefaultAlbumArt(),
+      artist: null,
+      name: null,
+      cover_art_url: '',
       id: 0,
       duration: 0
     },
@@ -202,11 +150,6 @@ const flamous = app(
     location: location.actions,
     playPause: () => (state, actions) => {
       if (!state.scrubBar.visible) actions.scrubBar.show()
-      if (!Amplitude.audio().paused) {
-        Amplitude.pause()
-      } else {
-        Amplitude.play()
-      }
     },
     pages: {
       add: (comp) => ({ stack }, { location }) => {
@@ -301,7 +244,7 @@ const flamous = app(
         return {
           artist: metaData.artist,
           name: metaData.name,
-          cover_art_url: metaData.cover_art_url || Amplitude.getDefaultAlbumArt(),
+          cover_art_url: metaData.cover_art_url,
           id: metaData.id
         }
       },
@@ -470,26 +413,19 @@ const flamous = app(
 
 if ('mediaSession' in navigator) {
   navigator.mediaSession.metadata = new window.MediaMetadata({
-    title: songListWowa[0].name,
-    artist: songListWowa[0].artist,
+    title: '',
+    artist: '',
     artwork: [{
-      src: songListWowa[0].cover_art_url
+      src: ''
     }]
   })
 
-  navigator.mediaSession.setActionHandler('play', Amplitude.play)
-  navigator.mediaSession.setActionHandler('pause', Amplitude.pause)
-  navigator.mediaSession.setActionHandler('previoustrack', Amplitude.prev)
-  navigator.mediaSession.setActionHandler('nexttrack', Amplitude.next)
+  // navigator.mediaSession.setActionHandler('play', )
+  // navigator.mediaSession.setActionHandler('pause', )
+  // navigator.mediaSession.setActionHandler('previoustrack', )
+  // navigator.mediaSession.setActionHandler('nexttrack', )
 }
 
 window.flamous = flamous
-
-window.Amplitude.audio().addEventListener('timeupdate', (event) => {
-  window.flamous.setTime(event.target.currentTime)
-})
-window.Amplitude.audio().addEventListener('durationchange', (event) => {
-  window.flamous.playingContext.setDuration(event.target.duration)
-})
 
 location.subscribe(flamous.location)

@@ -3,7 +3,6 @@ import picostyle from 'picostyle'
 import Page from './Page'
 import Header from './Header'
 import { Route } from '@hyperapp/router'
-import kimikoSongs from '../songs/kimiko_ishizaka'
 import SongList from './SongList'
 import { nestable } from 'hyperapp-context'
 
@@ -22,20 +21,20 @@ const Album = (props) => {
   let title
   let songs
   let albumId = props.match.params.albumId
-  switch (albumId) {
-    case 'open_goldberg_variations':
-      title = 'Goldberg Variations'
-      songs = kimikoSongs.filter((song) => {
-        return song.album === 'J​.​S. Bach: "Open" Goldberg Variations, BWV 988 (Piano)'
-      })
-      break
-    case 'the_art_of_the_fugue':
-      title = 'The Art of the Fugue'
-      songs = kimikoSongs.filter((song) => {
-        return song.album === 'The Art of the Fugue'
-      })
-      break
-  }
+  // switch (albumId) {
+  //   case 'open_goldberg_variations':
+  //     title = 'Goldberg Variations'
+  //     songs = kimikoSongs.filter((song) => {
+  //       return song.album === 'J​​.S. Bach: "Open" Goldberg Variations, BWV 988 (Piano)'
+  //     })
+  //     break
+  //   case 'the_art_of_the_fugue':
+  //     title = 'The Art of the Fugue'
+  //     songs = kimikoSongs.filter((song) => {
+  //       return song.album === 'The Art of the Fugue'
+  //     })
+  //     break
+  // }
 
   return <div>
     <Header title={title} defaultText='Album' back={{ text: 'Back', to: props.location.previous }}>

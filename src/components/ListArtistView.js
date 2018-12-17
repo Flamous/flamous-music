@@ -2,7 +2,6 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import Gallery from './Gallery'
 import { Link } from '@hyperapp/router'
-import artists from '../artists.js'
 import Header from './Header'
 
 const style = picostyle(h)
@@ -43,16 +42,16 @@ const ListArtistView = (props) => {
     <Header title='Artists' back={{ text: 'Back', to: '/' }} />
     <Gallery id='artists' heading='Browse Artists'>
       {
-        artists.map((artist, index) => {
-          return <Artist to={`/artists/${artist.name.toLowerCase().replace(' ', '_')}`}>
-            <img src={artist.cover_art_url} />
-            <div style={{ padding: '0.8em 1em 1em' }}>
-              <span class='artist-line'>{artist.name}</span>
-              <br />
-              <span class='secondary'>{artist.songCount} Songs</span>
-            </div>
-          </Artist>
-        })
+        // artists.map((artist, index) => {
+        //   return <Artist to={`/artists/${artist.name.toLowerCase().replace(' ', '_')}`}>
+        //     <img src={artist.cover_art_url} />
+        //     <div style={{ padding: '0.8em 1em 1em' }}>
+        //       <span class='artist-line'>{artist.name}</span>
+        //       <br />
+        //       <span class='secondary'>{artist.songCount} Songs</span>
+        //     </div>
+        //   </Artist>
+        // })
       }
       <p style={{ textAlign: 'center', width: '100%' }}>
           Click on an artist above and listen to some tunes.

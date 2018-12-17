@@ -50,9 +50,7 @@ const HoverPlayButton = (props) => {
   let { index, context } = props
 
   return <StyledHoverPlayButton class='hover-play-button' onclick={() => {
-    window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
-    props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playPlaylistSongAtIndex(index, props.playlist)
-    context.actions.scrubBar.show()
+    
   }}>
     <div style={{ border: '1px solid black', borderRadius: '100%', padding: '0.25em' }}>
       <img height='36' src={playImage} style={{ display: 'block' }} />
@@ -125,18 +123,14 @@ const SongList = (props) => (context) => {
         {
           props.type !== 'album' && props.songs.map((song, index) => {
             return <ListItem onclick={() => {
-              window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
-              props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playPlaylistSongAtIndex(index, props.playlist)
-              context.actions.scrubBar.show()
+              
             }} key={song.id} context={{ context }} index={index} title={song.name} image={song.cover_art_url} sub={song.artist} />
           })
         }
         {
           props.type === 'album' && props.songs.map((song, index) => {
             return <AlbumListItem onclick={() => {
-              window.Amplitude.getShuffle() && window.Amplitude.setShuffle(false)
-              props.albumId ? window.Amplitude.playPlaylistSongAtIndex(index, props.albumId) : window.Amplitude.playSongAtIndex(index)
-              context.actions.scrubBar.show()
+              
             }} key={song.id} title={song.name} image={song.cover_art_url} sub={song.artist} />
           })
         }

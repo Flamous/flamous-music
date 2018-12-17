@@ -2,17 +2,13 @@ import { h } from 'hyperapp'
 import picostyle from 'picostyle'
 import Page from './Page'
 import Header, { HeaderBold, HeaderImage } from './Header'
-import { Route, Link } from '@hyperapp/router'
+import { Link } from '@hyperapp/router'
 import LazyLoad from 'vanilla-lazyload'
 import SongList from './SongList'
 import { nestable } from 'hyperapp-context'
 import Divider from './Divider'
-import artists from '../artists'
 import ListArtistView from './ListArtistView'
-
-import wowaSongs from '../songs/wowa'
-import kimikoSongs from '../songs/kimiko_ishizaka'
-import billySongs from '../songs/billy_murray'
+import UIViewRoute from './UI/UIViewRoute'
 
 function updateLazyLoad (elem) {
   elem.lazyLoader.update()
@@ -190,7 +186,7 @@ const ArtistView = nestable({
   }
 
   return <div>
-    <Route path={`${props.match.path}/:artistId`} render={(matchProps) => {
+    <UIViewRoute viewName='home' path={`${props.match.path}/:artistId`} render={(matchProps) => {
       actions.stuff.addContent({ content: () => { return <Artist {...matchProps} /> }, name: 'About' })
     }}
     />
