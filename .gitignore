@@ -3,6 +3,7 @@ node_modules
 jspm_packages
 
 .cache
+.env
 dist
 build
 
