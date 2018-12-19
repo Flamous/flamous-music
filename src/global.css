@@ -1,0 +1,23 @@
+button,
+a[type='button'] {
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 0.3em;
+  background-color: #007AFF;
+  color: white;
+  cursor: default;
+  transition: background-color 80ms, transform 50ms;
+  display: inline-block;
+}
+
+@media (pointer: fine) {
+  button:hover,
+a[type='button']:hover {
+  background-color: #2f92fc;
+}
+}
+
+button:active,
+a[type='button']:active {
+  transform: scale(0.9);
+}
