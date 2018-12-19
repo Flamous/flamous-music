@@ -2,14 +2,14 @@
 import { h } from 'hyperapp'
 import UIPage from '../UI/UIPage'
 import UILink from '../UI/UILink'
-import Header from '../Header'
+import UIHeader from '../UI/UIHeader'
 import Auth from '@aws-amplify/auth'
 
 const Library = (props) => (context, actions) => {
   let { auth, actions: { auth: { isAuthenticated } } } = context
 
   return <UIPage nonInteractive {...props}>
-    <Header title='Library' />
+    <UIHeader title='Library' />
 
     <div style={{ textAlign: 'center' }}>
       <p>
