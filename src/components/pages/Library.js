@@ -4,6 +4,7 @@ import UIPage from '../UI/UIPage'
 import UILink from '../UI/UILink'
 import UIHeader from '../UI/UIHeader'
 import Auth from '@aws-amplify/auth'
+import { button } from '~/global.css'
 
 const Library = (props) => (context, actions) => {
   let { auth, actions: { auth: { isAuthenticated } } } = context
@@ -16,7 +17,7 @@ const Library = (props) => (context, actions) => {
         {
           !auth.isAuthenticated
             ? <main>
-              <UILink type='button' to='/signup'>Create Account</UILink>
+              <UILink class={button} to='/signup'>Create Account</UILink>
               <p>
                 <UILink to='login'>Sign in instead</UILink>
               </p>

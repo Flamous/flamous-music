@@ -3,7 +3,7 @@ a {
 }
 
 button,
-a[type='button'] {
+a.button {
   border: none;
   padding: 0.5em 1em;
   border-radius: 0.3em;
@@ -22,13 +22,13 @@ a[type='button'] {
   }
 
   button:hover,
-  a[type='button']:hover {
+  a.button:hover {
     background-color: #2f92fc;
     text-decoration: none;
   }
 }
 
 button:active,
-a[type='button']:active {
+a.button:active {
   transform: scale(0.9);
 }
