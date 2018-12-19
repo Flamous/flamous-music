@@ -2,7 +2,6 @@ a {
   cursor: default;
 }
 
-
 button,
 a[type='button'] {
   border: none;
@@ -13,6 +12,8 @@ a[type='button'] {
   cursor: default;
   transition: background-color 80ms, transform 50ms;
   display: inline-block;
+  margin-top: 0.4em;
+  margin-bottom: 0.5em;
 }
 
 @media (pointer: fine) {
