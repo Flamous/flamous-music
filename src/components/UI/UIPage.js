@@ -51,7 +51,7 @@ const UIPage = nestable(
       {...props}
       class='page'
       key={props.key}
-      oncreate={(element) => { element.parentNode.actions = actions; !props.hasOwnProperty('nonInteractive') && animation.start({ element, initialLoad: context.initialLoad }) }}
+      oncreate={(element) => { element.parentNode.actions = actions; !props.hasOwnProperty('nonInteractive') ? animation.start({ element, initialLoad: context.initialLoad }) : window.flamous.setInitialLoad(false) }}
     >
       {children}
     </StyledPage>
