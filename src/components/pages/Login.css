@@ -1,0 +1,142 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+  z-index: 1100;
+  position: fixed;
+  overflow-y: auto;
+  color: #212121;
+  overscroll-behavior: contain;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+@supports (backdrop-filter: blur(10px)) {
+  .wrapper {
+    backdrop-filter: blur(30px);
+    background-color: rgba(255, 255, 255, 0.85);    
+  }
+}
+.wrapper {
+  
+}
+
+.header {
+  text-align: center;
+}
+.header img {
+  height: 1.5em;
+}
+.header hr {
+  width: 5em;
+  opacity: 0.2;
+  margin: 1em auto 2em;
+}
+.top-row {
+  margin-bottom: 2.3em;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+.top-row .back-button {
+  color: #007AFF;
+  font-weight: bold;
+  cursor: default;
+  user-select: none;
+}
+.top-row > * {
+  padding: 1rem;
+}
+
+.main {
+  padding: 1em;
+}
+.main section {
+  max-width: 24rem;
+  margin: 0 auto;
+}
+.main input[type='password'] {
+  font-size: 1.6rem;
+  letter-spacing: 5px;
+}
+.main input {
+  width: 100%;
+  max-width: unset;
+}
+/* .main button[type='submit'] {
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 0.3em;
+  background-color: #007AFF;
+  color: white;
+} */
+.input:placeholder-shown {
+  background-color: white;
+}
+.input:placeholder-shown:hover {
+  background-color: #fafafa;
+}
+.input {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  z-index: 2;
+  border-radius: 0.4rem;
+  height: 2.5rem;
+  max-height: 2.5rem;
+  padding: 0 0 0 1.3rem;
+  display: flex;
+  width: 100%;
+  margin: 1rem auto;
+  max-width: 24rem;
+  box-shadow: 0 3px 13px -3px rgba(0, 0, 0, 0.14);
+}
+.input:focus {
+  border-color: #007AFF;
+  box-shadow: inset 0px 1px 3px 0 rgba(0, 0, 0, 0.14), 0 0 3px 0 #007AFF;
+}
+
+.main input::placeholder {
+  font-size: 1rem;
+  letter-spacing: 0px;
+}
+/* .password-wrapper {
+  font-size: 2rem;
+  position: relative;
+  align-items: center;
+}
+.password-wrapper::before {
+  position: absolute;
+  display: block;
+  padding-left: 1.3rem;
+  content: '••••••••';
+  letter-spacing: 5px;
+  left: 0;
+  right: 0;
+  color: lightgrey;
+} */
+
+.dots {
+  transform: translateY(-100%);
+  position: relative;
+  height: 2.5rem;
+  letter-spacing: 5px;
+  font-size: 1.6rem;
+  color: lightgrey;
+  width: 100%;
+  margin: -1rem auto 0;
+  padding-left: 1.3rem;
+  max-width: 24rem;
+  display: block;
+  pointer-events: none;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+}
+
+.info {
+
+}
+.error {
+  color: red;
+}

@@ -147,4 +147,71 @@ const slideIn = {
   }
 }
 
-export { slideIn }
+const slideUp = {
+  state: {
+    handleStyler: null,
+    handleY: null,
+    started: false
+  },
+  actions: {
+    init: (props) => {
+      return {
+        started: true
+      }
+    },
+    start: (data) => () => {
+      let { element, initialLoad } = data
+
+      let handleStyler = styler(element)
+      let handleY = value('0', handleStyler.set('y'))
+      let bodyHeight = window.innerHeight
+
+      if (initialLoad) {
+        window.flamous.setInitialLoad(false)
+
+        return {
+          handleStyler,
+          handleY
+        }
+      }
+
+      spring({
+        from: bodyHeight,
+        to: 0,
+        damping: 20,
+        mass: 0.3,
+        stiffness: 120
+      }).start(handleY)
+
+      return {
+        handleStyler,
+        handleY
+      }
+    },
+    slideOut: (done) => (state) => {
+      let { handleY } = state
+
+      let bodyHeight = window.innerHeight
+
+      handleY.subscribe((val) => {
+        if (val >= bodyHeight) {
+          handleY.stop()
+          done()
+        }
+      })
+
+      spring({
+        from: handleY.get(),
+        to: window.innerHeight,
+        mass: 1,
+        damping: 20,
+        stiffness: 160
+      }).start(handleY)
+    }
+  }
+}
+
+export {
+  slideIn,
+  slideUp
+}

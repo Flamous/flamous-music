@@ -28,6 +28,18 @@ import TestPage from './components/TestPage'
 import UITabBar from './components/UI/UITabBar'
 import MusicKit from './components/MusicKit'
 import UIViewRoute from './components/UI/UIViewRoute'
+import Library from './components/pages/Library'
+import Auth from '@aws-amplify/auth'
+import Login from './components/pages/Login'
+import styles from './global.css'
+
+Auth.configure({
+  region: 'eu-central-1',
+  userPoolId: 'eu-central-1_KdCd2PTrR',
+  identityPoolId: 'eu-central-1:9e280996-fa9d-4498-a11e-a0f39e2ffd30',
+  userPoolWebClientId: '9qh23krli4gbgrsuveg0jc9bm'
+
+})
 
 const app = withContext(_app)
 
@@ -100,6 +112,10 @@ const AppShell = style('div')({
 
 const flamous = app(
   {
+    auth: {
+      isAuthenticated: false,
+      cognitoUser: null
+    },
     initialLoad: true,
     location: location.state,
     playingState: false,
@@ -144,9 +160,32 @@ const flamous = app(
       },
       registered: [],
       activeView: 'home'
+    },
+    login: {
+      errorMessage: '',
+      isLoggedIn: false,
+      hasSubmittedEmail: false,
+      hasSubmittedAuthCode: false,
+      email: '',
+      password: '',
+      authCode: ''
     }
   },
   {
+    auth: {
+      isAuthenticated (obj) {
+        console.log(obj)
+        return {
+          isAuthenticated: obj ? true : false,
+          cognitoUser: obj || null
+        }
+      }
+    },
+    login: {
+      update (data) {
+        return data
+      }
+    },
     location: location.actions,
     playPause: () => (state, actions) => {
       if (!state.scrubBar.visible) actions.scrubBar.show()
@@ -353,11 +392,14 @@ const flamous = app(
 
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
 
-      <UIViewRoute path='/library' render={TestPage} viewName='library' />
+      <UIViewRoute path='/library' render={Library} viewName='library' />
 
       <UIView displayView='home' />
       <UIView displayView='music-kit' />
       <UIView displayView='library' />
+
+      <Route path='/login' render={Login} />
+      <Route path='/signup' render={Login} />
 
       {/* <PageRoute path='/player' render={StreamView} /> */}
 
@@ -429,3 +471,12 @@ if ('mediaSession' in navigator) {
 window.flamous = flamous
 
 location.subscribe(flamous.location)
+
+Auth.currentAuthenticatedUser()
+  .then((result) => {
+    console.log(result)
+    flamous.auth.isAuthenticated(result)
+  })
+  .catch((error) => {
+    console.error(error)
+  })
