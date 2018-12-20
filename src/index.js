@@ -1,37 +1,25 @@
+import 'babel-polyfill'
 import { h, app as _app } from 'hyperapp'
 import picostyle from 'picostyle'
-import TrackBar from './components/TrackBar.js'
-import Home from './components/Home.js'
 
-import placeholder from './public/song_placeholder.svg'
-import About from './elements/About'
 import nativeWebApp from 'native-web-app'
 import '../node_modules/native-web-app/native.css'
-import 'babel-polyfill'
 
-import { location, Route, Link } from '@hyperapp/router'
+import { location, Route } from '@hyperapp/router'
+import { withContext } from 'hyperapp-context'
+
+import UIViewRoute from './components/UI/UIViewRoute'
+import UIView from './components/UI/UIView'
+import UITabBar from './components/UI/UITabBar'
+
+import AlbumView from './components/AlbumView.js'
 import ArtistView from './components/ArtistView.js'
 
-import ImageViewer from './components/ImageViewer.js'
-import StreamView from './components/StreamView.js'
-
-import { withContext } from 'hyperapp-context'
-import SongSubmit from './elements/SongSubmit.js'
-import AlbumView from './components/AlbumView.js'
-import FAQ from './elements/FAQ'
-import HowTo from './elements/HowTo'
-import PageRoute from './components/PageRoute'
-import UIViewGroup from './components/UI/UIViewGroup'
-import UIView from './components/UI/UIView'
-import UIPage from './components/UI/UIPage'
-import TestPage from './components/TestPage'
-import UITabBar from './components/UI/UITabBar'
-import MusicKit from './components/MusicKit'
-import UIViewRoute from './components/UI/UIViewRoute'
 import Library from './components/pages/Library'
 import Auth from '@aws-amplify/auth'
 import Login from './components/pages/Login'
-import styles from './global.css'
+import Home from './components/Home.js'
+import MusicKit from './components/MusicKit'
 
 Auth.configure({
   region: 'eu-central-1',
@@ -174,9 +162,8 @@ const flamous = app(
   {
     auth: {
       isAuthenticated (obj) {
-        console.log(obj)
         return {
-          isAuthenticated: obj ? true : false,
+          isAuthenticated: !!obj,
           cognitoUser: obj || null
         }
       }
@@ -324,7 +311,7 @@ const flamous = app(
         window.history.pushState({}, '', goTo)
       },
       add: (options) => (state) => {
-        let { viewName, path, Component, setActive = true } = options
+        let { viewName, path, Component } = options
         let stacks = { ...state.stacks }
         let { activeView } = state
         let stackInQuestion = stacks[viewName].stack
@@ -362,36 +349,17 @@ const flamous = app(
     }
   },
   (state, actions) => (_, setContext) => {
-    let { imageViewer, pages, scrubBar } = state
     let context = Object.assign({}, state, { actions: actions })
     delete context.scrubBar
 
     setContext(context)
     return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
-      {/* <Route render={Home} /> */}
-
-      {/* {<TrackBar key='track-bar' hidden={!scrubBar.visible} />} */}
-      {/* {<TrackBar oncreate={actions.scrubBar.show} key='track-bar' hidden={!scrubBar.visible} />} */}
       <UITabBar />
-
-      {/* <Route path='/' render={(props) => {
-        actions.pages.clear()
-      }} /> */}
-      {/* <PageRoute parent path='/artists' render={ArtistView} />
-      <PageRoute path='/about' render={About} />
-      <PageRoute path='/song-submit' render={SongSubmit} />
-      <PageRoute parent path='/albums' render={AlbumView} />
-      <PageRoute path='/how-to' render={HowTo} />
-      <PageRoute path='/faq' render={FAQ} />
-      <PageRoute path='/stream-view' render={StreamView} /> */}
 
       <UIViewRoute path='/' exact render={Home} viewName='home' />
       <UIViewRoute path='/artists' parent render={ArtistView} viewName='home' />
-      {/* <UIViewRoute path='/artists/:id' render={ArtistView} viewName='home' /> */}
       <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' />
-
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
-
       <UIViewRoute path='/library' render={Library} viewName='library' />
 
       <UIView displayView='home' />
@@ -400,73 +368,25 @@ const flamous = app(
 
       <Route path='/login' render={Login} />
       <Route path='/signup' render={Login} />
-
-      {/* <PageRoute path='/player' render={StreamView} /> */}
-
-      {/* <UIViewGroup scope={['/', '/artists', '/albums']} root={Home}>
-        <UIView route='' exact />
-        <UIView route=':artistId' render={TestPage} />
-        <UIView route=':albumId' render={TestPage} />
-      </UIViewGroup>
-      <UIViewGroup scope={['/music-kit']} root={MusicKit}>
-        <UIView route='chapters/:id' render={TestPage} />
-      </UIViewGroup>
-      <UIViewGroup scope={['/library']} root={() => <h1>Library</h1>}>
-        <UIView route='artists/:id' render={TestPage} />
-      </UIViewGroup>
-      <UIViewGroup scope={['/player']} root={() => <h1>Player</h1>}>
-        <UIView route=':id' render={StreamView} />
-      </UIViewGroup> */}
-
-      {/* <UIViewGroup scope='/music' root={() => <h1>lel</h1>}>
-        <UIPageView route='artists/:id' >
-          <UIPage>
-            <h1>This is a test</h1>
-            <p>artists page</p>
-            <Link to='/music/artists/1234'>New page 1</Link>
-            <Link to='music/artists/54321'>New page 2</Link>
-            <Link to='music/test/1234'>New page 3</Link>
-          </UIPage>
-        </UIPageView>
-        <UIPageView route='test/:id' >
-          <UIPage>
-            <h1>This is a test</h1>
-            <p>test page</p>
-            <Link to='artists/1234'>New page 1</Link>
-            <Link to='artists/54321'>New page 2</Link>
-            <Link to='test/1234'>New page 3</Link>
-          </UIPage>
-        </UIPageView>
-      </UIViewGroup> */}
-
-      {/* {
-        pages.stack.map((item) => {
-          return item.page()
-        })
-      } */}
-
-      {/* {
-        imageViewer.isActive && <ImageViewer image={imageViewer.image} bounds={imageViewer.bounds} />
-      } */}
     </AppShell>
   },
   document.body
 )
 
-if ('mediaSession' in navigator) {
-  navigator.mediaSession.metadata = new window.MediaMetadata({
-    title: '',
-    artist: '',
-    artwork: [{
-      src: ''
-    }]
-  })
+// if ('mediaSession' in navigator) {
+//   navigator.mediaSession.metadata = new window.MediaMetadata({
+//     title: '',
+//     artist: '',
+//     artwork: [{
+//       src: ''
+//     }]
+//   })
 
-  // navigator.mediaSession.setActionHandler('play', )
-  // navigator.mediaSession.setActionHandler('pause', )
-  // navigator.mediaSession.setActionHandler('previoustrack', )
-  // navigator.mediaSession.setActionHandler('nexttrack', )
-}
+// navigator.mediaSession.setActionHandler('play', )
+// navigator.mediaSession.setActionHandler('pause', )
+// navigator.mediaSession.setActionHandler('previoustrack', )
+// navigator.mediaSession.setActionHandler('nexttrack', )
+// }
 
 window.flamous = flamous
 
@@ -474,9 +394,8 @@ location.subscribe(flamous.location)
 
 Auth.currentAuthenticatedUser()
   .then((result) => {
-    console.log(result)
     flamous.auth.isAuthenticated(result)
   })
   .catch((error) => {
-    console.error(error)
+    console.info(error)
   })

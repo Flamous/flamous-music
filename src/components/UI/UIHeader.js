@@ -27,6 +27,7 @@ const HeaderNav = (props) => {
 
       <div class={styles['container']}>
         <span class={cc([styles['item'], { [styles['header-title-hidden']]: isHeaderTitleHidden }])}>
+          {/* eslint-disable-next-line */}
           <span>{(middle && middle) || <pre> </pre>}</span>
           <span class={styles['dynamic-title']}>{title}</span>
         </span>

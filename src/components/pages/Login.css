@@ -10,15 +10,11 @@
   background-color: white;
   background-color: rgba(255, 255, 255, 0.95);
 }
-
 @supports (backdrop-filter: blur(10px)) {
   .wrapper {
     backdrop-filter: blur(30px);
     background-color: rgba(255, 255, 255, 0.85);    
   }
-}
-.wrapper {
-  
 }
 
 .header {
@@ -63,13 +59,7 @@
   width: 100%;
   max-width: unset;
 }
-/* .main button[type='submit'] {
-  border: none;
-  padding: 0.5em 1em;
-  border-radius: 0.3em;
-  background-color: #007AFF;
-  color: white;
-} */
+
 .input:placeholder-shown {
   background-color: white;
 }
@@ -100,21 +90,6 @@
   font-size: 1rem;
   letter-spacing: 0px;
 }
-/* .password-wrapper {
-  font-size: 2rem;
-  position: relative;
-  align-items: center;
-}
-.password-wrapper::before {
-  position: absolute;
-  display: block;
-  padding-left: 1.3rem;
-  content: '••••••••';
-  letter-spacing: 5px;
-  left: 0;
-  right: 0;
-  color: lightgrey;
-} */
 
 .dots {
   transform: translateY(-100%);
@@ -134,9 +109,6 @@
   align-items: center;
 }
 
-.info {
-
-}
 .error {
   color: red;
 }
