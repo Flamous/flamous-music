@@ -64,6 +64,10 @@ const view = (state, actions) => (props, children) => (context) => {
         )
         let cognitoUser = await Auth.currentAuthenticatedUser()
         isAuthenticated(cognitoUser)
+        loginActions.update({
+          email: '',
+          password: ''
+        })
 
         window.history.replaceState(previousUrl, '', previousUrl)
       } catch (error) {
@@ -85,6 +89,10 @@ const view = (state, actions) => (props, children) => (context) => {
       )
       let cognitoUser = await Auth.currentAuthenticatedUser()
       isAuthenticated(cognitoUser)
+      loginActions.update({
+        email: '',
+        password: ''
+      })
 
       window.history.replaceState(previousUrl, '', previousUrl)
     } catch (error) {
