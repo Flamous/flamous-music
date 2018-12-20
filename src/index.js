@@ -69,20 +69,11 @@ const flamous = app(
       duration: 0
     },
     playbackTime: 0,
-    pages: {
-      stack: []
-    },
     updateAvailable: false,
     imageViewer: {
       isActive: false,
       bounds: null,
       image: null
-    },
-    streamView: {
-      isActive: false
-    },
-    scrubBar: {
-      visible: false
     },
     installPrompt: null,
     views: {
@@ -131,29 +122,6 @@ const flamous = app(
     playPause: () => (state, actions) => {
       if (!state.scrubBar.visible) actions.scrubBar.show()
     },
-    pages: {
-      add: (comp) => ({ stack }, { location }) => {
-        stack.push(comp)
-
-        return {
-          stack: stack
-        }
-      },
-      back: (setHistory = true) => ({ stack }) => {
-        stack.pop()
-        setHistory && window.history.back()
-        return {
-          stack: stack
-        }
-      },
-      clear: () => ({ stack }) => {
-        console.info('Clearing Stack')
-        if (stack.length === 0) return
-        return {
-          stack: []
-        }
-      }
-    },
     setPlayState: (isPlaying) => {
       return {
         playingState: isPlaying
@@ -192,23 +160,6 @@ const flamous = app(
         }
       }
     },
-    streamView: {
-      show: () => {
-        return {
-          isActive: true
-        }
-      },
-      hide: () => {
-        return {
-          isActive: false
-        }
-      }
-    },
-    setTime: (time) => {
-      return {
-        playbackTime: time
-      }
-    },
     playingContext: {
       updateMetaData: (metaData) => {
         if ('mediaSession' in navigator) {
@@ -231,13 +182,6 @@ const flamous = app(
       setDuration: (duration) => {
         return {
           duration
-        }
-      }
-    },
-    scrubBar: {
-      show: () => {
-        return {
-          visible: true
         }
       }
     },
