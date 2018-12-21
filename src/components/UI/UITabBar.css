@@ -18,27 +18,29 @@
 }
 
 .item {
+  font-size: 0.85rem;
   width: 5.5rem;
-  padding: 0.45rem 0.15rem;
+  padding: 0.45rem 0.15rem 0.2rem;
   text-align: center;
   cursor: default;
-  margin: 5px 3px;
+  margin: 0 3px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 3%;
-  border: 1px solid transparent;
+  border-radius: 7%;
 }
 .item:hover {
   background-color: #f0f0f0;
   border-color: #e0e0e0;
 }
 .item.active {
-  background-color: #e3effc;
-  border-color: #c2defc;
+  color: #007AFF;
 }
 .item .icon {
-  height: 28px;
+  height: 32px;
+}
+.item.active .icon {
+  transform: scale(1);
 }
 .item img {
   display: block;
