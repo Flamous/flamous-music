@@ -51,6 +51,9 @@
   max-width: 24rem;
   margin: 0 auto;
 }
+.main p {
+  text-align: center;
+}
 .main input[type='password'] {
   font-size: 1.6rem;
   letter-spacing: 5px;

@@ -125,12 +125,6 @@ const view = (state, actions) => (props, children) => (context) => {
             : 'Create Account'
         }
       </h1>
-      {
-        isLogin
-          ? <p>Share your music with the world.<br />Listen to songs you love everywhere — even when you're offline.</p>
-          : <p>The future of music will be open and inclusive.<br />Listen to, share and create your own.</p>
-      }
-
     </header>
 
     <main class={styles['main']}>
@@ -138,66 +132,72 @@ const view = (state, actions) => (props, children) => (context) => {
         {
 
           isLogin
-            ? <form onsubmit={handleLogin}>
-              {
-                !login.hasSubmittedEmail && <div>
-                  <input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
+            ? <div>
+              <p>Share your music with the world.<br />Listen to songs you love everywhere — even when you're offline.</p>
+              <form onsubmit={handleLogin}>
+                {
+                  !login.hasSubmittedEmail && <div>
+                    <input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
 
-                  <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
-                  <span class={styles['dots']}>••••••••</span>
+                    <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
+                    <span class={styles['dots']}>••••••••</span>
 
-                  <div style={{ textAlign: 'center' }}>
-                    <button type='submit'>Login</button>
-                    <br />
-                    <UILink replace to='/signup'>Or create an account</UILink>
+                    <div style={{ textAlign: 'center' }}>
+                      <button type='submit'>Login</button>
+                      <br />
+                      <UILink replace to='/signup'>Or create an account</UILink>
+                    </div>
+                    <p class={styles['info']}>
+                      {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
+                    </p>
+                    <p class={styles['error']}>
+                      {login.errorMessage && login.errorMessage}
+                    </p>
                   </div>
-                  <p class={styles['info']}>
-                    {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
-                  </p>
-                  <p class={styles['error']}>
-                    {login.errorMessage && login.errorMessage}
-                  </p>
-                </div>
-              }
-              {
-                login.hasSubmittedEmail && !login.hasSubmittedAuthCode && <div>
-                  <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
-                  <div style={{ textAlign: 'center' }}>
-                    <button type='submit'>Confirm</button>
+                }
+                {
+                  login.hasSubmittedEmail && !login.hasSubmittedAuthCode && <div>
+                    <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
+                    <div style={{ textAlign: 'center' }}>
+                      <button type='submit'>Confirm</button>
+                    </div>
                   </div>
-                </div>
-              }
-            </form>
-            : <form onsubmit={handleSubmit}>
-              {
-                !login.hasSubmittedEmail && <div>
-                  <input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
+                }
+              </form>
+            </div>
+            : <div>
+              <p>The future of music will be open and inclusive.<br />Listen to, share and create your own.</p>
+              <form onsubmit={handleSubmit}>
+                {
+                  !login.hasSubmittedEmail && <div>
+                    <input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
 
-                  <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
-                  <span class={styles['dots']}>••••••••</span>
+                    <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
+                    <span class={styles['dots']}>••••••••</span>
 
-                  <div style={{ textAlign: 'center' }}>
-                    <button type='submit'>Create Account</button>
-                    <br />
-                    <UILink replace to='/login'>Log In instead</UILink>
+                    <div style={{ textAlign: 'center' }}>
+                      <button type='submit'>Create Account</button>
+                      <br />
+                      <UILink replace to='/login'>Log In instead</UILink>
+                    </div>
+                    <p class={styles['info']}>
+                      {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
+                    </p>
+                    <p class={styles['error']}>
+                      {login.errorMessage && login.errorMessage}
+                    </p>
                   </div>
-                  <p class={styles['info']}>
-                    {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
-                  </p>
-                  <p class={styles['error']}>
-                    {login.errorMessage && login.errorMessage}
-                  </p>
-                </div>
-              }
-              {
-                login.hasSubmittedEmail && !login.hasSubmittedAuthCode && <div>
-                  <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
-                  <div style={{ textAlign: 'center' }}>
-                    <button type='submit'>Confirm</button>
+                }
+                {
+                  login.hasSubmittedEmail && !login.hasSubmittedAuthCode && <div>
+                    <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
+                    <div style={{ textAlign: 'center' }}>
+                      <button type='submit'>Confirm</button>
+                    </div>
                   </div>
-                </div>
-              }
-            </form>
+                }
+              </form>
+            </div>
         }
 
       </section>
