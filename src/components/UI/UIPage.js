@@ -1,21 +1,9 @@
+/** @jsx h */
 import { h } from 'hyperapp'
-import picostyle from 'picostyle'
 import { nestable } from 'hyperapp-context'
 import { slideIn } from '../functions/animation'
 import cc from 'classcat'
-
-const style = picostyle(h)
-
-const StyledPage = style('article')({
-  height: '100%',
-  width: '100%',
-  position: 'fixed',
-  overflowY: 'auto',
-  // color: '#212121',
-  // backgroundColor: 'white',
-  boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
-  overscrollBehavior: 'contain'
-})
+import styles from './UIPage.css'
 
 const state = {
   animation: slideIn.state,
@@ -48,14 +36,14 @@ const UIPage = nestable(
 
     !back && setBackLocation((props.back && props.back.to) || location.previous)
 
-    return <StyledPage
+    return <article
       {...props}
-      class={cc(['page', props.class])}
+      class={cc([styles['page'], props.class])}
       key={props.key}
       oncreate={(element) => { element.parentNode.actions = actions; !props.hasOwnProperty('nonInteractive') ? animation.start({ element, initialLoad: context.initialLoad }) : window.flamous.setInitialLoad(false) }}
     >
       {children}
-    </StyledPage>
+    </article>
   },
   'ui-page')
 
