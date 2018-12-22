@@ -22,11 +22,29 @@ import Home from './components/Home.js'
 import MusicKit from './components/MusicKit'
 import registerServiceWorker from './modules/serviceWorker'
 
+const isProductionContext = process.env.CONTEXT === 'production'
+
+const API_ENDPOINT = isProductionContext
+  ? process.env.API
+  : process.env.DEV_API
+
+const IDENTITY_POOL = isProductionContext
+  ? process.env.IDENTITY_POOL
+  : process.env.DEV_IDENTITY_POOL
+
+const USER_POOL = isProductionContext
+  ? process.env.USER_POOL
+  : process.env.DEV_USER_POOL
+
+const USER_POOL_CLIENT = isProductionContext
+  ? process.env.USER_POOL_CLIENT
+  : process.env.DEV_USER_POOL_CLIENT
+
 Auth.configure({
   region: 'eu-central-1',
-  userPoolId: 'eu-central-1_KdCd2PTrR',
-  identityPoolId: 'eu-central-1:9e280996-fa9d-4498-a11e-a0f39e2ffd30',
-  userPoolWebClientId: '9qh23krli4gbgrsuveg0jc9bm'
+  userPoolId: USER_POOL,
+  identityPoolId: IDENTITY_POOL,
+  userPoolWebClientId: USER_POOL_CLIENT
 
 })
 
