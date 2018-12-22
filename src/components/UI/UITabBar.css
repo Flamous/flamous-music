@@ -29,9 +29,13 @@
   border-radius: 7%;
   color: rgba(0, 0, 0, calc((255 - 100) / 255));
 }
-.item:hover {
+.item:active {
   background-color: #f0f0f0;
-  border-color: #e0e0e0;
+}
+@media (pointer: fine) {
+  .item:hover {
+    background-color: #f0f0f0;
+  }
 }
 .item.active {
   color: #007AFF;
