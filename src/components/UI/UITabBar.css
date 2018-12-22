@@ -27,6 +27,7 @@
   flex-direction: column;
   justify-content: center;
   border-radius: 7%;
+  color: rgba(0, 0, 0, calc((255 - 100) / 255));
 }
 .item:hover {
   background-color: #f0f0f0;
