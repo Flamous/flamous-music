@@ -21,6 +21,7 @@ import Login from './components/pages/Login'
 import Home from './components/Home.js'
 import MusicKit from './components/MusicKit'
 import registerServiceWorker from './modules/serviceWorker'
+import NewAlbum from './components/pages/NewAlbum'
 
 const isProductionContext = process.env.CONTEXT === 'production'
 
@@ -284,6 +285,8 @@ const flamous = app(
 
       <Route path='/login' render={Login} />
       <Route path='/signup' render={Login} />
+
+      <Route path='/create-album' render={NewAlbum} />      
     </AppShell>
   },
   document.body
