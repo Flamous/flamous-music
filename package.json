@@ -14,7 +14,6 @@
     "@aws-amplify/auth": "^1.2.13",
     "@hyperapp/router": "^0.7.1",
     "autoprefixer": "^9.4.2",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
     "classcat": "^3.2.3",
     "hyperapp": "^1.2.9",
     "hyperapp-context": "^1.1.0",
@@ -30,10 +29,11 @@
     "workbox-cli": "^3.6.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-react-jsx": "^7.2.0",
     "@babel/preset-env": "^7.1.0",
     "aws-sdk": "^2.347.0",
-    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
     "cli-real-favicon": "0.0.6",
     "eslint": "^5.8.0",
