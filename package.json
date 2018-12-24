@@ -37,9 +37,6 @@
     "standard": "^12.0.1"
   },
   "standard": {
-    "ignore": [
-      "/src/mailchimp-validation.js"
-    ],
     "parser": "babel-eslint"
   }
 }
