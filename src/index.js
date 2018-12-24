@@ -1,4 +1,3 @@
-import 'babel-polyfill'
 import { h, app as _app } from 'hyperapp'
 import picostyle from 'picostyle'
 
