@@ -320,3 +320,7 @@ Auth.currentAuthenticatedUser()
   .catch((error) => {
     console.info(error)
   })
+
+document.body.addEventListener('touchmove', (event) => {
+  event.preventDefault()
+})
