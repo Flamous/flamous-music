@@ -288,7 +288,7 @@ const flamous = app(
       <Route path='/login' render={Login} />
       <Route path='/signup' render={Login} />
 
-      <Route path='/create-album' render={NewAlbum} />      
+      <Route path='/create-album' render={NewAlbum} />
     </AppShell>
   },
   document.body
