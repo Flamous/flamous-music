@@ -67,6 +67,7 @@
   position: sticky;
   top: 3.5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
 .header,
