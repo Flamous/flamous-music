@@ -2,7 +2,7 @@ function registerServiceWorker () {
   if ('serviceWorker' in navigator) {
     // Use the window load event to keep the page load performant
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('../serviceWorker.js')
+      navigator.serviceWorker.register('/serviceWorker.js')
         .then(function (registration) { // Track updates to the Service Worker.
           if (!navigator.serviceWorker.controller) return
 
