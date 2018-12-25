@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@aws-amplify/auth": "^1.2.13",
+    "@babel/polyfill": "^7.2.5",
     "@hyperapp/router": "^0.7.1",
     "classcat": "^3.2.3",
     "hyperapp": "^1.2.9",
