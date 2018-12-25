@@ -3,7 +3,6 @@ import { h, app as _app } from 'hyperapp'
 import picostyle from 'picostyle'
 
 import nativeWebApp from 'native-web-app'
-import '../node_modules/native-web-app/native.css'
 
 import { location, Route } from '@hyperapp/router'
 import { withContext } from 'hyperapp-context'
@@ -320,9 +319,3 @@ Auth.currentAuthenticatedUser()
   .catch((error) => {
     console.info(error)
   })
-
-document.addEventListener('touchmove', (event) => {
-  event.preventDefault()
-}, {
-  passive: false
-})
