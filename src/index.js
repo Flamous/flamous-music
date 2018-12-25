@@ -321,6 +321,8 @@ Auth.currentAuthenticatedUser()
     console.info(error)
   })
 
-document.body.addEventListener('touchmove', (event) => {
+document.addEventListener('touchmove', (event) => {
   event.preventDefault()
+}, {
+  passive: false
 })
