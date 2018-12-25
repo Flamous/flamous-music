@@ -40,11 +40,11 @@ const UIPage = nestable(
       {...props}
       class={cc([styles['page'], props.class])}
       key={props.key}
-      oncreate={(element) => { element.parentNode.actions = actions; !props.hasOwnProperty('nonInteractive') ? animation.start({ element, initialLoad: context.initialLoad }) : window.flamous.setInitialLoad(false) }}
+      oncreate={(element) => { element.parentNode.actions = actions; animation.start({ element, initialLoad: context.initialLoad, nonInteractive: props.hasOwnProperty('nonInteractive') }) }}
     >
       {children}
     </article>
   },
   'ui-page')
 
-export default (props, children) => <UIPage key={props.path} {...props} onremove={(elem, done) => { elem.actions.animation.slideOut(done) }}>{children}</UIPage>
+export default (props, children) => <UIPage key={props.path} {...props} onremove={(element, done) => { element.actions.animation.slideOut({ done, element }) }}>{children}</UIPage>
