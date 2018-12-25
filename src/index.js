@@ -1,3 +1,4 @@
+import regeneratorRuntime from 'regenerator-runtime'
 import { h, app as _app } from 'hyperapp'
 import picostyle from 'picostyle'
 
@@ -21,6 +22,8 @@ import Home from './components/Home.js'
 import MusicKit from './components/MusicKit'
 import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
+
+window.regeneratorRuntime = regeneratorRuntime
 
 const isProductionContext = process.env.CONTEXT === 'production'
 
