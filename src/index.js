@@ -22,6 +22,8 @@ import MusicKit from './components/MusicKit'
 import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
 
+import('./normalize.css').then(() => {})
+
 window.regeneratorRuntime = regeneratorRuntime
 
 const isProductionContext = process.env.CONTEXT === 'production'
