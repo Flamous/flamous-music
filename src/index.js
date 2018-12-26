@@ -141,14 +141,6 @@ const flamous = app(
       }
     },
     location: location.actions,
-    playPause: () => (state, actions) => {
-      if (!state.scrubBar.visible) actions.scrubBar.show()
-    },
-    setPlayState: (isPlaying) => {
-      return {
-        playingState: isPlaying
-      }
-    },
     updateAvailable: () => (state) => {
       state.updateAvailable = true
       console.info('New update available')
@@ -168,20 +160,6 @@ const flamous = app(
       registration.waiting.postMessage('skipWaiting')
     },
     getState: () => state => state,
-    imageViewer: {
-      showImageViewer: (data) => {
-        return {
-          isActive: true,
-          image: data.image,
-          bounds: data.bounds
-        }
-      },
-      hideImageViewer: () => {
-        return {
-          isActive: false
-        }
-      }
-    },
     playingContext: {
       updateMetaData: (metaData) => {
         if ('mediaSession' in navigator) {
