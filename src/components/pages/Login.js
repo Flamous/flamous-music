@@ -167,9 +167,7 @@ const view = (state, actions) => (props, children) => (context) => {
                             <br />
                             <UILink replace to='/signup'>Or create an account</UILink>
                           </div>
-                          <p class={styles['info']}>
-                            {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
-                          </p>
+
                           <p class={styles['error']}>
                             {login.errorMessage && login.errorMessage}
                           </p></div>
@@ -180,10 +178,10 @@ const view = (state, actions) => (props, children) => (context) => {
               </form>
             </div>
             : <div>
-              <p>The future of music will be open and inclusive.<br />Listen to, share and create your own.</p>
               <form onsubmit={handleSubmit}>
                 {
                   !login.hasSubmittedEmail && <div>
+                    <p>Join the future of music.<br />Listen, share, create.</p>
                     {
                       login.isLoading
                         ? <div><UISpinner /></div>
@@ -197,9 +195,7 @@ const view = (state, actions) => (props, children) => (context) => {
                             <br />
                             <UILink replace to='/login'>Log In instead</UILink>
                           </div>
-                          <p class={styles['info']}>
-                            {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
-                          </p>
+
                           <p class={styles['error']}>
                             {login.errorMessage && login.errorMessage}
                           </p></div>
@@ -211,7 +207,11 @@ const view = (state, actions) => (props, children) => (context) => {
                     {
                       login.isLoading
                         ? <div><UISpinner /><p>Checking code...</p></div>
-                        : <div><input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
+                        : <div>
+                          <p class={styles['info']}>
+                            We sent a verification code to<br /><i>{login.email}</i>
+                          </p>
+                          <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Confirm</button>
                           </div></div>
