@@ -1,8 +1,9 @@
 import { styler, spring, value, listen, pointer, everyFrame, schedule, transform } from 'popmotion'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
-function preventBubbling (event) {
-  event.stopPropagation()
-}
+// function preventBubbling (event) {
+//   event.stopPropagation()
+// }
 
 const { snap } = transform
 
@@ -29,6 +30,8 @@ const slideIn = {
       console.info('Making interactive')
       // element.addEventListener('touchmove', preventBubbling, { passive: true }) // Safari doesn't support CSS's scroll-behaviour: contain and has a huge UX bug with the default. When scrolling to the top (or bottom) and waiting for the scroll-bounce to finish , if you then scroll again in the same direction, it completely freezed the scroll (because it scroll bubbles to the parent). But the parent is fixed and non-scrollable, Thus **nothing** happens at all! this should fix it.
       // element.addEventListener('touchstart', preventBubbling, { passive: true })
+
+      disableBodyScroll(element)
 
       if (nonInteractive) return
       else window.flamous.setInitialLoad(false)
@@ -138,6 +141,8 @@ const slideIn = {
       let { done, element } = options
       let { handleX } = state
       let bodyWidth = window.innerWidth
+
+      enableBodyScroll(element)
 
       // element.removeEventListener('touchmove', preventBubbling)
       // element.removeEventListener('touchstart', preventBubbling)
