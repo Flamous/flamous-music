@@ -123,7 +123,8 @@ const flamous = app(
       hasSubmittedAuthCode: false,
       email: '',
       password: '',
-      authCode: ''
+      authCode: '',
+      isLoading: false
     }
   },
   {

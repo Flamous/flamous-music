@@ -6,6 +6,7 @@ import styles from './Login.css'
 import Auth from '@aws-amplify/auth'
 import flamousLogo from '~/assets/flamous_logo_new_small.svg'
 import UILink from '../UI/UILink'
+import UISpinner from '../UI/UISpinner'
 
 const state = {
   animation: slideUp.state
@@ -32,6 +33,9 @@ const view = (state, actions) => (props, children) => (context) => {
     event.preventDefault()
 
     if (!login.hasSubmittedEmail) {
+      loginActions.update({
+        isLoading: true
+      })
       try {
         await Auth.signUp(
           login.email,
@@ -39,40 +43,47 @@ const view = (state, actions) => (props, children) => (context) => {
         )
 
         loginActions.update({
-          hasSubmittedEmail: true
+          hasSubmittedEmail: true,
+          isLoading: false
         })
       } catch (error) {
         loginActions.update({
-          errorMessage: error.message
+          errorMessage: error.message,
+          isLoading: false
         })
         console.error(error)
       }
     } else if (!login.hasSubmittedAuthCode) {
+      loginActions.update({
+        isLoading: true
+      })
       try {
         await Auth.confirmSignUp(
           login.email,
           login.authCode
         )
 
-        loginActions.update({
-          hasSubmittedAuthCode: true
-        })
-
         await Auth.signIn(
           login.email,
           login.password
         )
+        loginActions.update({
+          hasSubmittedAuthCode: true,
+          isLoading: false
+        })
         let cognitoUser = await Auth.currentAuthenticatedUser()
         isAuthenticated(cognitoUser)
         loginActions.update({
-          email: '',
-          password: ''
+          email: null,
+          password: null,
+          errorMessage: null
         })
 
         window.history.replaceState(previousUrl, '', previousUrl)
       } catch (error) {
         loginActions.update({
-          errorMessage: error.message
+          errorMessage: error.message,
+          isLoading: false
         })
         console.error(error)
       }
@@ -83,6 +94,9 @@ const view = (state, actions) => (props, children) => (context) => {
     event.preventDefault()
 
     try {
+      loginActions.update({
+        isLoading: true
+      })
       await Auth.signIn(
         login.email,
         login.password
@@ -90,14 +104,17 @@ const view = (state, actions) => (props, children) => (context) => {
       let cognitoUser = await Auth.currentAuthenticatedUser()
       isAuthenticated(cognitoUser)
       loginActions.update({
-        email: '',
-        password: ''
+        email: null,
+        password: null,
+        errorMessage: null,
+        isLoading: false
       })
 
       window.history.replaceState(previousUrl, '', previousUrl)
     } catch (error) {
       loginActions.update({
-        errorMessage: error.message
+        errorMessage: error.message,
+        isLoading: false
       })
       console.error(error)
     }
@@ -137,30 +154,27 @@ const view = (state, actions) => (props, children) => (context) => {
               <form onsubmit={handleLogin}>
                 {
                   !login.hasSubmittedEmail && <div>
-                    <input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
+                    {
+                      login.isLoading
+                        ? <div><UISpinner /><p>Logging in...</p></div>
+                        : <div><input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
 
-                    <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
-                    <span class={styles['dots']}>••••••••</span>
+                          <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
+                          <span class={styles['dots']}>••••••••</span>
 
-                    <div style={{ textAlign: 'center' }}>
-                      <button type='submit'>Login</button>
-                      <br />
-                      <UILink replace to='/signup'>Or create an account</UILink>
-                    </div>
-                    <p class={styles['info']}>
-                      {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
-                    </p>
-                    <p class={styles['error']}>
-                      {login.errorMessage && login.errorMessage}
-                    </p>
-                  </div>
-                }
-                {
-                  login.hasSubmittedEmail && !login.hasSubmittedAuthCode && <div>
-                    <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
-                    <div style={{ textAlign: 'center' }}>
-                      <button type='submit'>Confirm</button>
-                    </div>
+                          <div style={{ textAlign: 'center' }}>
+                            <button type='submit'>Login</button>
+                            <br />
+                            <UILink replace to='/signup'>Or create an account</UILink>
+                          </div>
+                          <p class={styles['info']}>
+                            {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
+                          </p>
+                          <p class={styles['error']}>
+                            {login.errorMessage && login.errorMessage}
+                          </p></div>
+                    }
+
                   </div>
                 }
               </form>
@@ -170,30 +184,38 @@ const view = (state, actions) => (props, children) => (context) => {
               <form onsubmit={handleSubmit}>
                 {
                   !login.hasSubmittedEmail && <div>
-                    <input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
+                    {
+                      login.isLoading
+                        ? <div><UISpinner /></div>
+                        : <div><input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
 
-                    <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
-                    <span class={styles['dots']}>••••••••</span>
+                          <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
+                          <span class={styles['dots']}>••••••••</span>
 
-                    <div style={{ textAlign: 'center' }}>
-                      <button type='submit'>Create Account</button>
-                      <br />
-                      <UILink replace to='/login'>Log In instead</UILink>
-                    </div>
-                    <p class={styles['info']}>
-                      {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
-                    </p>
-                    <p class={styles['error']}>
-                      {login.errorMessage && login.errorMessage}
-                    </p>
+                          <div style={{ textAlign: 'center' }}>
+                            <button type='submit'>Create Account</button>
+                            <br />
+                            <UILink replace to='/login'>Log In instead</UILink>
+                          </div>
+                          <p class={styles['info']}>
+                            {login.hasSubmittedEmail && 'We have sent you an E-Mail with your confirmation code'}
+                          </p>
+                          <p class={styles['error']}>
+                            {login.errorMessage && login.errorMessage}
+                          </p></div>
+                    }
                   </div>
                 }
                 {
                   login.hasSubmittedEmail && !login.hasSubmittedAuthCode && <div>
-                    <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
-                    <div style={{ textAlign: 'center' }}>
-                      <button type='submit'>Confirm</button>
-                    </div>
+                    {
+                      login.isLoading
+                        ? <div><UISpinner /><p>Checking code...</p></div>
+                        : <div><input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
+                          <div style={{ textAlign: 'center' }}>
+                            <button type='submit'>Confirm</button>
+                          </div></div>
+                    }
                   </div>
                 }
               </form>
