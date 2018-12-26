@@ -1,5 +1,5 @@
 .header-nav {
-  height: 3.5rem;
+  height: 3rem;
   position: sticky;
   top: 0px;
   background-color: rgba(253, 253, 253, 0.95);
@@ -65,7 +65,7 @@
   border: none;
   margin: 0;
   position: sticky;
-  top: 3.5rem;
+  top: 3rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
