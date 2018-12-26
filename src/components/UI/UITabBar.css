@@ -18,9 +18,9 @@
 }
 
 .item {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   width: 7rem;
-  padding: 0.45rem 0.15rem 0.2rem;
+  padding: 0.2rem 0.15rem 0.2rem;
   text-align: center;
   cursor: default;
   display: flex;
@@ -51,6 +51,8 @@
 }
 
 .item:first-child {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  /* display: block; */
+  /* height: 3em; */
+  /* padding-top: 0.5em;
+  padding-bottom: 0.5em; */
 }
