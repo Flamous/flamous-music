@@ -51,11 +51,11 @@
   top: 0;
 }
 .header-nav .header-title-hidden .dynamic-title {
-  transition: opacity 100ms 200ms;
+  transition: opacity 200ms 200ms;
   opacity: 1;
 }
 .header-nav .item *:first-child {
-  transition: opacity 100ms 200ms;
+  transition: opacity 200ms 200ms;
 }
 .header-nav .header-title-hidden *:first-child {
   transition: opacity 200ms 0ms;
