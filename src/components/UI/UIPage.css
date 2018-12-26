@@ -9,3 +9,7 @@
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
+
+.page > * {
+  -webkit-transform: translate3d(0,0,0); /* Prevent Safari scroll glitching */
+}

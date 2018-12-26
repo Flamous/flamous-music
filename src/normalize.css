@@ -30,7 +30,3 @@ pre {
   font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   font-size: 1em;
 }
-
-ui-page * {
-  -webkit-transform: translate3d(0,0,0); /* Prevent Safari scroll glitching */
-}
