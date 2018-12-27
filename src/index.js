@@ -21,6 +21,7 @@ import Home from './components/Home.js'
 import MusicKit from './components/MusicKit'
 import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
+import License from './components/pages/License'
 
 import('./normalize.css').then(() => {})
 
@@ -258,6 +259,7 @@ const flamous = app(
       <UIViewRoute path='/' exact render={Home} viewName='home' />
       <UIViewRoute path='/artists' parent render={ArtistView} viewName='home' />
       <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' />
+      <UIViewRoute path='/license' render={License} viewName='home' />
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
       <UIViewRoute path='/library' render={Library} viewName='library' />
 
