@@ -55,7 +55,7 @@
   text-align: center;
 }
 .main input[type='password'] {
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
   letter-spacing: 5px;
 }
 .main input {
@@ -63,6 +63,9 @@
   max-width: unset;
 }
 
+.input[type='password']:not(:placeholder-shown) {
+  font-size: 1.6rem;
+}
 .input:placeholder-shown {
   background-color: white;
 }
