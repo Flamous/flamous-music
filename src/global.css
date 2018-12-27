@@ -5,6 +5,7 @@ a {
 button,
 a.button {
   border: none;
+  border: 1px solid transparent;
   padding: 0.5em 1em;
   border-radius: 0.3em;
   background-color: #007AFF;
@@ -14,6 +15,15 @@ a.button {
   display: inline-block;
   margin-top: 0.4em;
   margin-bottom: 0.5em;
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+  white-space: nowrap;
+}
+
+button:global(.white),
+a.button:global(.white) {
+  background-color: white;
+  color: #007AFF;
 }
 
 @media (pointer: fine) {
@@ -25,6 +35,11 @@ a.button {
   a.button:hover {
     background-color: #2f92fc;
     text-decoration: none;
+  }
+  button:global(.white):hover,
+  a.button:global(.white):hover {
+    background-color: inherit;
+    border: 1px solid rgba(0, 0, 0, 0.2);
   }
 }
 
