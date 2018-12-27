@@ -1,0 +1,20 @@
+.header {
+  background-color: rgba(252, 252, 252, 0.95);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.header .inner {
+  max-width: 800px;
+  margin: 0 auto 2em;
+  padding: 4em 1rem 0;
+}
+
+.header nav {
+  margin-top: 3em;
+  display: flex;
+  justify-content: center;
+}
+
+.main {
+  padding: 1em;
+  padding-bottom: 4em;
+}
