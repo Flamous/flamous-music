@@ -210,7 +210,7 @@ const flamous = app(
 
         window.history.pushState({}, '', goTo)
       },
-      add: (options) => (state) => {
+      add: (options) => (state, views) => {
         let { viewName, path, Component } = options
         let stacks = { ...state.stacks }
         let { activeView } = state
@@ -221,6 +221,15 @@ const flamous = app(
             return { activeView: viewName }
           }
           return
+        }
+
+        if (stackInQuestion.length > 1 && path === stackInQuestion[stackInQuestion.length - 2].path) {
+          stackInQuestion.pop()
+
+          return {
+            stacks,
+            activeView: viewName
+          }
         }
 
         stackInQuestion.push({
