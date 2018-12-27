@@ -7,6 +7,7 @@ import Auth from '@aws-amplify/auth'
 import flamousLogo from '~/assets/flamous_logo_new_small.svg'
 import UILink from '../UI/UILink'
 import UISpinner from '../UI/UISpinner'
+import { button } from '~/global.css'
 
 const state = {
   animation: slideUp.state
@@ -165,7 +166,7 @@ const view = (state, actions) => (props, children) => (context) => {
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Login</button>
                             <br />
-                            <UILink replace to='/signup'>Or create an account</UILink>
+                            <UILink class={`${button} white`} replace to='/signup'>Or create an account</UILink>
                           </div>
 
                           <p class={styles['error']}>
@@ -193,7 +194,7 @@ const view = (state, actions) => (props, children) => (context) => {
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Create Account</button>
                             <br />
-                            <UILink replace to='/login'>Log In instead</UILink>
+                            <UILink class={`${button} white`} replace to='/login'>Log In instead</UILink>
                           </div>
 
                           <p class={styles['error']}>
