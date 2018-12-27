@@ -33,6 +33,7 @@ const UIPage = nestable(
     let { setBackLocation, animation } = actions
     let { back } = state
     let { location } = context
+    let { isActivePage } = props
 
     !back && setBackLocation((props.back && props.back.to) || location.previous)
 
@@ -40,7 +41,7 @@ const UIPage = nestable(
       {...props}
       class={cc([styles['page'], props.class])}
       key={props.key}
-      oncreate={(element) => { element.parentNode.actions = actions; animation.start({ element, initialLoad: context.initialLoad, nonInteractive: props.hasOwnProperty('nonInteractive') }) }}
+      oncreate={(element) => { element.parentNode.actions = actions; animation.start({ element, isActivePage, initialLoad: context.initialLoad, nonInteractive: props.hasOwnProperty('nonInteractive') }) }}
     >
       {children}
     </article>

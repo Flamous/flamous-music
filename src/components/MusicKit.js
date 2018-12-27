@@ -5,8 +5,8 @@ import UIPage from './UI/UIPage'
 import styles from './MusicKit.css'
 import UIHeader from './UI/UIHeader'
 
-const MusicKit = () => {
-  return <UIPage class={styles['music-kit']} nonInteractive>
+const MusicKit = (props) => {
+  return <UIPage {...props} class={styles['music-kit']} nonInteractive>
     <UIHeader title='Music Kit' />
 
     <main class={styles['main']}>

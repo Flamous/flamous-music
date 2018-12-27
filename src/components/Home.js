@@ -31,7 +31,7 @@ const Header = () => {
 
 const Home = (props) => (context) => {
   return (
-    <UIPage nonInteractive key='home'>
+    <UIPage {...props} nonInteractive key='home'>
       {/* <UIHeader title={<div style={{ marginTop: '3em' }}>Music for<br />Everyone</div>} nav={{ start: 'Logo', end: <UILink class={button} to='/signup'>Create Account</UILink> }} /> */}
       <Header />
       <main class={styles['main']}>
