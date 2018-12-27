@@ -22,7 +22,7 @@ a.button {
 
 button:global(.white),
 a.button:global(.white) {
-  background-color: white;
+  background-color: transparent;
   color: #007AFF;
 }
 
