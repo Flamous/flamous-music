@@ -30,3 +30,9 @@ pre {
   font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace;
   font-size: 1em;
 }
+
+hr {
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
