@@ -182,8 +182,8 @@ const slideUp = {
       let { element, initialLoad } = data
 
       let handleStyler = styler(element)
-      let handleY = value('0', handleStyler.set('y'))
       let bodyHeight = window.innerHeight
+      let handleY = value(bodyHeight, handleStyler.set('y'))
 
       if (initialLoad) {
         window.flamous.setInitialLoad(false)
