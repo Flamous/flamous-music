@@ -1,11 +1,10 @@
 /** @jsx h */
 import { h } from 'hyperapp'
 import UIPage from './UI/UIPage.js'
-import UIHeader from './UI/UIHeader.js'
 import { button } from '~/global.css'
 import UILink from './UI/UILink'
 import styles from './Home.css'
-import logo from '~/assets/flamous_logo_new.svg'
+import logo from '~/assets/flamous_logo_new_small.svg'
 
 const Header = () => {
   return <header class={styles['header']}>
@@ -17,15 +16,15 @@ const Header = () => {
       <p>
       Free (<UILink to='/license'>listen-like-you-can</UILink>) music. You can use them for commercial and noncommercial purposes.
       </p>
+      <nav>
+        <div>
+          <UILink class={button} to='/signup'>Create Account</UILink>
+        </div>
+        <div>
+          <UILink class={`${button} white`} to='/login'>or Sign In</UILink>
+        </div>
+      </nav>
     </div>
-    <nav>
-      <div>
-        <UILink class={`${button} white`} to='/login'>Sign In</UILink>
-      </div>
-      <div>
-        <UILink class={button} to='/signup'>Create Account</UILink>
-      </div>
-    </nav>
   </header>
 }
 
@@ -35,6 +34,24 @@ const Home = (props) => (context) => {
       {/* <UIHeader title={<div style={{ marginTop: '3em' }}>Music for<br />Everyone</div>} nav={{ start: 'Logo', end: <UILink class={button} to='/signup'>Create Account</UILink> }} /> */}
       <Header />
       <main class={styles['main']}>
+        <section>
+          <h2>
+            Featured
+          </h2>
+          <p>
+            Some stuff here
+          </p>
+        </section>
+        <hr />
+        <section>
+          <h2>
+            Some topic
+          </h2>
+          <p>
+            Some stuff here
+          </p>
+        </section>
+        <hr />
         <p>
 
           Consectetur pariatur et sit quia omnis consectetur aut. Qui pariatur at et tenetur eos et odit. Iusto nam vero iusto non ut rem. Vero eos nihil non tempore repellat aut laborum quo.
