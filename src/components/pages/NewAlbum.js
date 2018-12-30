@@ -5,6 +5,8 @@ import { slideUp } from '../functions/animation'
 import styles from './NewAlbum.css'
 import UILink from '../UI/UILink'
 import { button } from '~/global.css'
+import API, { graphqlOperation } from '@aws-amplify/api'
+import { createAlbum } from '~/graphql/mutations'
 
 const state = {
   animation: slideUp.state
@@ -15,20 +17,31 @@ const actions = {
 }
 
 const view = (state, actions) => (props, children) => (context) => {
-  // let { login, actions: { login: loginActions, auth: { isAuthenticated } } } = context
+  let { auth: { user }, new: { album }, actions: { new: newActions } } = context
   let { animation: { start: startAnimation } } = actions
   // let isLogin = props.match.path === '/login' // Is either /login or /signup
   let previousUrl = props.location.previous === '/create-album' ? '/' : props.location.previous
 
   function handleInput (event) {
-    // loginActions.update(
-    //   {
-    //     [event.target.id]: event.target.value
-    //   })
+    newActions.album.update(
+      {
+        [event.target.id]: event.target.value
+      })
   }
 
   async function handleSubmit (event) {
     event.preventDefault()
+
+    console.log('pressed submit')
+
+    try {
+      console.log(album.title)
+      await API.graphql(graphqlOperation(createAlbum, { artistId: user.artistId, title: album.title }))
+    } catch (error) {
+      console.error(error)
+    }
+
+    console.log(album)
   }
 
   function goBack () {
@@ -43,7 +56,7 @@ const view = (state, actions) => (props, children) => (context) => {
     <header class={styles['header']}>
       <div class={styles['top-row']}>
         <span onclick={goBack} class={styles['back-button']}>Done</span>
-        <button>Publish</button>
+        <button onclick={handleSubmit}>Save</button>
       </div>
 
       <h1>
@@ -53,13 +66,13 @@ const view = (state, actions) => (props, children) => (context) => {
 
     <main class={styles['main']}>
       <section>
-        ... some stuff here
+        <input id='title' oninput={handleInput} type='text' value={album.title} placeholder='Title' />
       </section>
     </main>
   </div>
 }
 
-const Login = nestable(
+const NewAlbum = nestable(
   {
     ...state
   },
@@ -70,4 +83,4 @@ const Login = nestable(
   'page-new-album'
 )
 
-export default (props) => { return <Login onremove={(elem, done) => { elem.actions.animation.slideOut(done) }} {...props} /> }
+export default (props) => { return <NewAlbum onremove={(elem, done) => { elem.actions.animation.slideOut(done) }} {...props} /> }

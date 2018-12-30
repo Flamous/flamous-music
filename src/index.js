@@ -134,6 +134,10 @@ const flamous = app(
       password: '',
       authCode: '',
       isLoading: false
+    },
+    new: {
+      album: {
+        title: null
     }
   },
   {
@@ -275,6 +279,13 @@ const flamous = app(
 
         return {
           stack: newStack
+        }
+      }
+    },
+    new: {
+      album: {
+        update (data) {
+          return data
         }
       }
     }
