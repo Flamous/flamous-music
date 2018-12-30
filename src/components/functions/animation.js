@@ -184,16 +184,19 @@ const slideUp = {
 
       let handleStyler = styler(element)
       let bodyHeight = window.innerHeight
-      let handleY = value(bodyHeight, handleStyler.set('y'))
+      let handleY
 
       if (initialLoad) {
         window.flamous.setInitialLoad(false)
+        handleY = value(0, handleStyler.set('y'))
 
         return {
           handleStyler,
           handleY
         }
       }
+
+      handleY = value(bodyHeight, handleStyler.set('y'))
 
       spring({
         from: bodyHeight,
