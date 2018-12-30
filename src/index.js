@@ -18,6 +18,7 @@ import Library from './components/pages/Library'
 import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
+import PubSub from '@aws-amplify/pubsub'
 import Login from './components/pages/Login'
 import Home from './components/Home.js'
 import MusicKit from './components/MusicKit'
@@ -25,6 +26,7 @@ import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
 import License from './components/pages/License'
 import { getUser, getArtistAlbums } from './graphql/queries'
+import { onCreatedAlbum } from './graphql/subscriptions'
 
 import('./normalize.css').then(() => {})
 
@@ -166,15 +168,25 @@ const flamous = app(
       },
       fetchUserInfo: () => (state, actions) => {
         API.graphql(graphqlOperation(getUser))
-          .then((response) => {
-            actions.setUserInfo(response.data.user)
+          .then((userResponse) => {
+            actions.setUserInfo(userResponse.data.user)
             actions.update({
               isLoadingAlbums: true
             })
 
-            API.graphql(graphqlOperation(getArtistAlbums, { artistId: response.data.user.artistId }))
+            API.graphql(graphqlOperation(getArtistAlbums, { artistId: userResponse.data.user.artistId }))
               .then((response) => {
-                console.log(response.data)
+                console.log(userResponse.data.user.artistId)
+                try {
+                  API.graphql(graphqlOperation(onCreatedAlbum, { artistId: userResponse.data.user.artistId }))
+                    .subscribe({
+                      next: (albumData) => { console.log('SUBSCRIPTIONS: ' + albumData) },
+                      error: (error) => { console.error(error) }
+                    })
+                } catch (error) {
+                  console.error(error)
+                }
+
                 actions.setUserAlbums(response.data.getArtistAlbums)
                 actions.update({
                   isLoadingAlbums: false
