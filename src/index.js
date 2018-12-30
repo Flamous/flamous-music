@@ -16,6 +16,7 @@ import ArtistView from './components/ArtistView.js'
 
 import Library from './components/pages/Library'
 import Auth from '@aws-amplify/auth'
+import API, { graphqlOperation } from '@aws-amplify/api'
 import Login from './components/pages/Login'
 import Home from './components/Home.js'
 import MusicKit from './components/MusicKit'
@@ -50,7 +51,12 @@ Auth.configure({
   userPoolId: USER_POOL,
   identityPoolId: IDENTITY_POOL,
   userPoolWebClientId: USER_POOL_CLIENT
+})
 
+API.configure({
+  aws_appsync_graphqlEndpoint: API_ENDPOINT,
+  aws_appsync_region: 'eu-central-1',
+  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS'
 })
 
 const app = withContext(_app)

@@ -11,6 +11,7 @@
   "author": "Christian Kaindl",
   "license": "MIT",
   "dependencies": {
+    "@aws-amplify/api": "^1.0.25",
     "@aws-amplify/auth": "^1.2.13",
     "@hyperapp/router": "^0.7.1",
     "body-scroll-lock": "^2.6.1",
