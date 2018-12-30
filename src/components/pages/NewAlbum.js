@@ -32,16 +32,11 @@ const view = (state, actions) => (props, children) => (context) => {
   async function handleSubmit (event) {
     event.preventDefault()
 
-    console.log('pressed submit')
-
     try {
-      console.log(album.title)
       await API.graphql(graphqlOperation(createAlbum, { artistId: user.artistId, title: album.title }))
     } catch (error) {
       console.error(error)
     }
-
-    console.log(album)
   }
 
   function goBack () {
