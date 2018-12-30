@@ -6,7 +6,8 @@ import UILink from './UI/UILink'
 import styles from './Home.css'
 import logo from '~/assets/flamous_logo_new_small.svg'
 
-const Header = () => {
+const Header = () => (state) => {
+  let { auth: { isAuthenticated: isSignedIn } } = state
   return <header class={styles['header']}>
     <div class={styles['inner']}>
       <img src={logo} />
@@ -16,14 +17,16 @@ const Header = () => {
       <p>
       Free (<UILink to='/license'>listen-like-you-can</UILink>) music. You can use them for commercial and noncommercial purposes.
       </p>
-      <nav>
-        <div>
-          <UILink class={button} to='/signup'>Create Account</UILink>
-        </div>
-        <div>
-          <UILink class={`${button} white`} to='/login'>or Sign In</UILink>
-        </div>
-      </nav>
+      {
+        !isSignedIn && <nav>
+          <div>
+            <UILink class={button} to='/signup'>Create Account</UILink>
+          </div>
+          <div>
+            <UILink class={`${button} white`} to='/login'>or Sign In</UILink>
+          </div>
+        </nav>
+      }
     </div>
   </header>
 }
