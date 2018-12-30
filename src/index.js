@@ -23,6 +23,7 @@ import MusicKit from './components/MusicKit'
 import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
 import License from './components/pages/License'
+import { getUser } from './graphql/queries'
 
 import('./normalize.css').then(() => {})
 
@@ -85,7 +86,8 @@ const flamous = app(
   {
     auth: {
       isAuthenticated: false,
-      cognitoUser: null
+      cognitoUser: null,
+      user: null
     },
     initialLoad: true,
     location: location.state,
@@ -141,6 +143,20 @@ const flamous = app(
           isAuthenticated: !!obj,
           cognitoUser: obj || null
         }
+      },
+      setUserInfo (user) {
+        return {
+          user
+        }
+      },
+      fetchUserInfo: () => (state, actions) => {
+        API.graphql(graphqlOperation(getUser))
+          .then((response) => {
+            actions.setUserInfo(response.data.user)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       }
     },
     login: {
@@ -313,6 +329,7 @@ location.subscribe(flamous.location)
 Auth.currentAuthenticatedUser()
   .then((result) => {
     flamous.auth.isAuthenticated(result)
+    flamous.auth.fetchUserInfo()
   })
   .catch((error) => {
     console.info(error)
