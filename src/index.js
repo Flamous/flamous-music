@@ -15,6 +15,7 @@ import AlbumView from './components/AlbumView.js'
 import ArtistView from './components/ArtistView.js'
 
 import Library from './components/pages/Library'
+import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import Login from './components/pages/Login'
@@ -47,17 +48,16 @@ const USER_POOL_CLIENT = isProductionContext
   ? process.env.USER_POOL_CLIENT
   : process.env.DEV_USER_POOL_CLIENT
 
-Auth.configure({
-  region: 'eu-central-1',
-  userPoolId: USER_POOL,
-  identityPoolId: IDENTITY_POOL,
-  userPoolWebClientId: USER_POOL_CLIENT
-})
-
-API.configure({
+Amplify.configure({
   aws_appsync_graphqlEndpoint: API_ENDPOINT,
   aws_appsync_region: 'eu-central-1',
-  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS'
+  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
+  Auth: {
+    region: 'eu-central-1',
+    userPoolId: USER_POOL,
+    identityPoolId: IDENTITY_POOL,
+    userPoolWebClientId: USER_POOL_CLIENT
+  }
 })
 
 const app = withContext(_app)
