@@ -13,6 +13,7 @@
   "dependencies": {
     "@aws-amplify/api": "^1.0.25",
     "@aws-amplify/auth": "^1.2.13",
+    "@aws-amplify/core": "^1.0.21",
     "@hyperapp/router": "^0.7.1",
     "body-scroll-lock": "^2.6.1",
     "classcat": "^3.2.3",
