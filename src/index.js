@@ -23,7 +23,7 @@ import MusicKit from './components/MusicKit'
 import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
 import License from './components/pages/License'
-import { getUser } from './graphql/queries'
+import { getUser, getArtistAlbums } from './graphql/queries'
 
 import('./normalize.css').then(() => {})
 
@@ -87,7 +87,9 @@ const flamous = app(
     auth: {
       isAuthenticated: false,
       cognitoUser: null,
-      user: null
+      user: null,
+      albums: null,
+      isLoadingAlbums: false
     },
     initialLoad: true,
     location: location.state,
@@ -138,10 +140,14 @@ const flamous = app(
     new: {
       album: {
         title: null
+      }
     }
   },
   {
     auth: {
+      update (data) {
+        return data
+      },
       isAuthenticated (obj) {
         return {
           isAuthenticated: !!obj,
@@ -153,10 +159,27 @@ const flamous = app(
           user
         }
       },
+      setUserAlbums (albums) {
+        return {
+          albums
+        }
+      },
       fetchUserInfo: () => (state, actions) => {
         API.graphql(graphqlOperation(getUser))
           .then((response) => {
             actions.setUserInfo(response.data.user)
+            actions.update({
+              isLoadingAlbums: true
+            })
+
+            API.graphql(graphqlOperation(getArtistAlbums, { artistId: response.data.user.artistId }))
+              .then((response) => {
+                console.log(response.data)
+                actions.setUserAlbums(response.data.getArtistAlbums)
+                actions.update({
+                  isLoadingAlbums: false
+                })
+              })
           })
           .catch((error) => {
             console.error(error)

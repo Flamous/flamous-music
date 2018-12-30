@@ -5,6 +5,7 @@ import UILink from '../UI/UILink'
 import UIHeader from '../UI/UIHeader'
 import Auth from '@aws-amplify/auth'
 import { button } from '~/global.css'
+import UISpinner from '../UI/UISpinner'
 
 const Library = (props) => (context, actions) => {
   let { auth, actions: { auth: { isAuthenticated } } } = context
@@ -30,6 +31,31 @@ const Library = (props) => (context, actions) => {
             </div>
         }
       </p>
+
+      <section>
+        <h3>Your Albums</h3>
+        {
+          auth.albums && <div>
+            {
+              auth.albums.map((album) => {
+                return <h4>{album.title}</h4>
+              })
+            }
+          </div>
+        }
+        {
+          !auth.albums && !auth.isLoadingAlbums && <div>
+            <p>
+            You have not created an album yet
+            </p>
+          </div>
+        }
+        {
+          auth.isLoadingAlbums && <UISpinner />
+        }
+
+      </section>
+
       <section>
         <p>
           <UILink to='create-album' class={button}>Create New Album</UILink>
