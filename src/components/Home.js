@@ -41,10 +41,10 @@ const Home = (props) => (context) => {
           <h2>
             Featured
           </h2>
-          <p>
-            Some stuff here
-          </p>
+          <img style={{ display: 'block', width: '100%', maxWidth: '500px' }} src={dummyPlaceholder} />
         </section>
+        <br />
+        <br />
         <hr />
         <section>
           <h2>
