@@ -141,7 +141,8 @@ const flamous = app(
     },
     new: {
       album: {
-        title: null
+        title: null,
+        isLoading: false
       }
     }
   },
@@ -162,6 +163,15 @@ const flamous = app(
         }
       },
       setUserAlbums (albums) {
+        return {
+          albums
+        }
+      },
+      addAlbum: (album) => (state) => {
+        let { albums } = state
+
+        albums.push(album)
+
         return {
           albums
         }

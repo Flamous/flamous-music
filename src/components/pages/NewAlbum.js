@@ -17,7 +17,7 @@ const actions = {
 }
 
 const view = (state, actions) => (props, children) => (context) => {
-  let { auth: { user }, new: { album }, actions: { new: newActions } } = context
+  let { auth: { user }, new: { album }, actions: { new: newActions, auth: { addAlbum } } } = context
   let { animation: { start: startAnimation } } = actions
   // let isLogin = props.match.path === '/login' // Is either /login or /signup
   let previousUrl = props.location.previous === '/create-album' ? '/' : props.location.previous
@@ -31,9 +31,17 @@ const view = (state, actions) => (props, children) => (context) => {
 
   async function handleSubmit (event) {
     event.preventDefault()
-
+    newActions.album.update({
+      isLoading: true
+    })
     try {
-      await API.graphql(graphqlOperation(createAlbum, { artistId: user.artistId, title: album.title }))
+      let request = await API.graphql(graphqlOperation(createAlbum, { artistId: user.artistId, title: album.title }))
+
+      addAlbum(request.data.createAlbum)
+      newActions.album.update({
+        isLoading: true
+      })
+      goBack()
     } catch (error) {
       console.error(error)
     }
