@@ -5,6 +5,8 @@ import { button } from '~/global.css'
 import UILink from './UI/UILink'
 import styles from './Home.css'
 import logo from '~/assets/flamous_logo_new_small.svg'
+import dummyPlaceholder from '~/assets/dummy_artists.jpg'
+import musicKitIcon from '~/assets/icons/kit_blue.svg'
 
 const Header = () => (state) => {
   let { auth: { isAuthenticated: isSignedIn } } = state
@@ -48,29 +50,12 @@ const Home = (props) => (context) => {
         <hr />
         <section>
           <h2>
-            Some topic
+            Don't know how to make music?
           </h2>
           <p>
-            Some stuff here
+            Check out the <UILink to='/music-kit'>Music Kit <img style={{ verticalAlign: 'bottom' }} src={musicKitIcon} /></UILink>
           </p>
         </section>
-        <hr />
-        <p>
-
-          Consectetur pariatur et sit quia omnis consectetur aut. Qui pariatur at et tenetur eos et odit. Iusto nam vero iusto non ut rem. Vero eos nihil non tempore repellat aut laborum quo.
-        </p>
-        <p>
-          Provident similique repellendus error sunt. Cumque commodi autem nesciunt rerum et. Repellendus quia quos vel officia iure.
-        </p>
-        <p>
-          Non repudiandae tempora ut et qui quia nemo. Odio labore sed nemo natus ipsam dolorum officiis quia. Voluptas nulla veritatis qui tenetur autem. Minus quia possimus et debitis.
-        </p>
-        <p>
-          Ullam est deleniti architecto quis sapiente. Magnam aperiam non ut alias vel maxime quisquam earum. Esse velit enim sed eum. Aut minus numquam distinctio quo dolorem sunt debitis ex.
-        </p>
-        <p>
-          Esse aut quam quas in in voluptas natus. Reprehenderit iusto aliquam voluptatibus. Officia debitis consectetur ea voluptatem.
-        </p>
       </main>
     </UIPage>
   )
