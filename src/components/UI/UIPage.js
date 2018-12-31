@@ -7,7 +7,8 @@ import styles from './UIPage.css'
 
 const state = {
   animation: slideIn.state,
-  back: null
+  back: null,
+  child: {}
 }
 
 const actions = {
@@ -22,6 +23,11 @@ const actions = {
     return {
       back: backUrl || '/'
     }
+  },
+  childPut (obj) {
+    return {
+      [obj.key]: obj.value
+    }
   }
 }
 
@@ -29,11 +35,19 @@ const UIPage = nestable(
   { ...state },
   { ...actions },
 
-  (state, actions) => (props, children) => (context) => {
-    let { setBackLocation, animation } = actions
+  (state, actions) => (props, children) => (context, setContext) => {
+    let { setBackLocation, animation, childPut } = actions
     let { back } = state
     let { location } = context
     let { isActivePage } = props
+
+    setContext({
+      ...context,
+      UIPage: {
+        put: childPut,
+        state: state
+      }
+    })
 
     !back && setBackLocation((props.back && props.back.to) || location.previous)
 
