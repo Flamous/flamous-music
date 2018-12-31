@@ -38,7 +38,9 @@ const Library = (props) => (context, actions) => {
           auth.albums && <div>
             {
               auth.albums.map((album) => {
-                return <h4>{album.title}</h4>
+                return <div>
+                  <UILink to={`/albums/${album.albumId}`}>{album.title}</UILink>
+                </div>
               })
             }
           </div>
