@@ -20,13 +20,13 @@ const Library = (props) => (context, actions) => {
             ? <main>
               <UILink class={button} to='/signup'>Create Account</UILink>
               <p>
-                <UILink to='login'>Sign in instead</UILink>
+                <UILink to='login'>or Sign In</UILink>
               </p>
             </main>
             : <div>
-              Signed in as<br />{auth.cognitoUser.attributes.email}
+              Logged in as<br />{auth.cognitoUser.attributes.email}
               <p>
-                <button onclick={() => Auth.signOut().then(() => { isAuthenticated(false) })}>Log out</button>
+                <button onclick={() => Auth.signOut().then(() => { isAuthenticated(false) })}>Logout</button>
               </p>
             </div>
         }

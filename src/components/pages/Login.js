@@ -139,7 +139,7 @@ const view = (state, actions) => (props, children) => (context) => {
       <h1>
         {
           isLogin
-            ? 'Login'
+            ? 'Sign In'
             : 'Create Account'
         }
       </h1>
@@ -151,7 +151,7 @@ const view = (state, actions) => (props, children) => (context) => {
 
           isLogin
             ? <div>
-              <p>Share your music with the world.<br />Listen to songs you love everywhere — even when you're offline.</p>
+              <p>Share your music with the world.</p>
               <form onsubmit={handleLogin}>
                 {
                   !login.hasSubmittedEmail && <div>
@@ -166,7 +166,7 @@ const view = (state, actions) => (props, children) => (context) => {
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Login</button>
                             <br />
-                            <UILink class={`${button} white`} replace to='/signup'>Or create an account</UILink>
+                            <UILink class={`${button} white`} replace to='/signup'>or Create Account</UILink>
                           </div>
 
                           <p class={styles['error']}>
@@ -182,7 +182,7 @@ const view = (state, actions) => (props, children) => (context) => {
               <form onsubmit={handleSubmit}>
                 {
                   !login.hasSubmittedEmail && <div>
-                    <p>Join the future of music.<br />Listen, share, create.</p>
+                    <p>Join the future of music.<br />Listen, create, share.</p>
                     {
                       login.isLoading
                         ? <div><UISpinner /></div>
@@ -194,7 +194,7 @@ const view = (state, actions) => (props, children) => (context) => {
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Create Account</button>
                             <br />
-                            <UILink class={`${button} white`} replace to='/login'>Log In instead</UILink>
+                            <UILink class={`${button} white`} replace to='/login'>or Log In</UILink>
                           </div>
 
                           <p class={styles['error']}>
