@@ -7,62 +7,34 @@ import Auth from '@aws-amplify/auth'
 import { button } from '~/global.css'
 import UISpinner from '../UI/UISpinner'
 import profilePlaceholder from '~/assets/profile.svg'
+import songPlaceholer from '~/assets/song_placeholder.svg'
 
 const Library = (props) => (context, actions) => {
   let { auth, actions: { auth: { isAuthenticated } } } = context
 
   return <UIPage nonInteractive {...props}>
     <UIHeader title={['Library', <UILink style={{ display: 'inline-flex', alignItems: 'center' }} to='/profile'><img width='48' src={profilePlaceholder} /></UILink>]} />
+    <main>
 
-    <div style={{ textAlign: 'center' }}>
-      <p>
+      <div style={{ textAlign: 'center' }}>
         {
-          !auth.isAuthenticated
-            ? <main>
-              <UILink class={button} to='/signup'>Create Account</UILink>
-              <p>
-                <UILink to='login'>Sign in instead</UILink>
-              </p>
-            </main>
-            : <div>
-              Signed in as<br />{auth.cognitoUser.attributes.email}
-              <p>
-                <button onclick={() => Auth.signOut().then(() => { isAuthenticated(false) })}>Log out</button>
-              </p>
-            </div>
-        }
-      </p>
-
-      <section>
-        <h3>Your Albums</h3>
-        {
-          auth.albums && <div>
-            {
-              auth.albums.map((album) => {
-                return <h4>{album.title}</h4>
-              })
-            }
-          </div>
-        }
-        {
-          !auth.albums && !auth.isLoadingAlbums && <div>
+          !auth.isAuthenticated && <main>
+            <UILink class={button} to='/signup'>Create Account</UILink>
             <p>
-            You have not created an album yet
+              <UILink to='login'>Sign in instead</UILink>
             </p>
-          </div>
+          </main>
         }
-        {
-          auth.isLoadingAlbums && <UISpinner />
-        }
-
-      </section>
-
-      <section>
-        <p>
-          <UILink to='create-album' class={button}>Create New Album</UILink>
-        </p>
-      </section>
-    </div>
+      </div>
+      {
+        auth.isAuthenticated && <section style={{ textAlign: 'center', marginTop: '3em' }}>
+          <img width='128' src={songPlaceholer} />
+          <p>
+          See songs you Saved here.
+          </p>
+        </section>
+      }
+    </main>
   </UIPage>
 }
 
