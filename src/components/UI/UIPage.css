@@ -10,6 +10,8 @@
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   -webkit-perspective: 0;
+  padding-bottom: 4em;
+  z-index: 1;
 }
 
 .page > * {
