@@ -87,6 +87,6 @@
   min-height: 4rem;
   padding: 0em 0.45em 0.24em;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: flex-end;
 }
