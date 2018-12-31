@@ -6,12 +6,13 @@ import UIHeader from '../UI/UIHeader'
 import Auth from '@aws-amplify/auth'
 import { button } from '~/global.css'
 import UISpinner from '../UI/UISpinner'
+import profilePlaceholder from '~/assets/profile.svg'
 
 const Library = (props) => (context, actions) => {
   let { auth, actions: { auth: { isAuthenticated } } } = context
 
   return <UIPage nonInteractive {...props}>
-    <UIHeader title='Library' />
+    <UIHeader title={['Library', <UILink style={{ display: 'inline-flex', alignItems: 'center' }} to='/profile'><img width='48' src={profilePlaceholder} /></UILink>]} />
 
     <div style={{ textAlign: 'center' }}>
       <p>
