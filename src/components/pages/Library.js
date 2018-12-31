@@ -13,7 +13,7 @@ const Library = (props) => (context, actions) => {
   let { auth, actions: { auth: { isAuthenticated } } } = context
 
   return <UIPage nonInteractive {...props}>
-    <UIHeader title={['Library', <UILink style={{ display: 'inline-flex', alignItems: 'center' }} to='/profile'><img width='48' src={profilePlaceholder} /></UILink>]} />
+    <UIHeader title={['Library', <UILink style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid rgba(0, 0, 0, 0.5)', borderRadius: '100%' }} to='/profile'><img width='48' src={profilePlaceholder} /></UILink>]} />
     <main>
 
       <div style={{ textAlign: 'center' }}>
