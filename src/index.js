@@ -25,6 +25,7 @@ import Home from './components/Home.js'
 import MusicKit from './components/MusicKit'
 import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
+import AlbumDetails from './components/pages/AlbumDetails'
 import License from './components/pages/License'
 import { getUser, getArtistAlbums } from './graphql/queries'
 import { onCreatedAlbum } from './graphql/subscriptions'
@@ -346,11 +347,12 @@ const flamous = app(
 
       <UIViewRoute path='/' exact render={Home} viewName='home' />
       <UIViewRoute path='/artists' parent render={ArtistView} viewName='home' />
-      <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' />
+      {/* <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' /> */}
       <UIViewRoute path='/license' render={License} viewName='home' />
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
       <UIViewRoute path='/library' render={Library} viewName='library' />
       <UIViewRoute path='/profile' render={Profile} viewName='library' />
+      <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='library' />
 
       <UIView displayView='home' />
       <UIView displayView='music-kit' />
