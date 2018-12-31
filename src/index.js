@@ -15,6 +15,7 @@ import AlbumView from './components/AlbumView.js'
 import ArtistView from './components/ArtistView.js'
 
 import Library from './components/pages/Library'
+import Profile from './components/pages/Profile'
 import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
@@ -349,6 +350,7 @@ const flamous = app(
       <UIViewRoute path='/license' render={License} viewName='home' />
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
       <UIViewRoute path='/library' render={Library} viewName='library' />
+      <UIViewRoute path='/profile' render={Profile} viewName='library' />
 
       <UIView displayView='home' />
       <UIView displayView='music-kit' />
