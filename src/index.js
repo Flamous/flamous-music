@@ -188,7 +188,6 @@ const flamous = app(
 
             API.graphql(graphqlOperation(getArtistAlbums, { artistId: userResponse.data.user.artistId }))
               .then((response) => {
-                console.log(userResponse.data.user.artistId)
                 try {
                   API.graphql(graphqlOperation(onCreatedAlbum, { artistId: userResponse.data.user.artistId }))
                     .subscribe({
