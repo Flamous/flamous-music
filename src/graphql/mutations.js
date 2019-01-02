@@ -6,4 +6,18 @@ const createAlbum = `mutation createAlbum($title: String!, $artistId: ID!) {
   }
 }`
 
-export { createAlbum }
+const deleteAlbum = `mutation deleteAlbum($albumId: ID!) {
+  deleteAlbum(albumId: $albumId) {
+    albumId
+  }
+}`
+
+const updateAlbum = `mutation updateAlbum($albumId: ID!, $description: String, $title: String) {
+  updateAlbum(albumId: $albumId, title: $title, description: $description) {
+    title
+    description
+    albumId
+  }
+}`
+
+export { createAlbum, deleteAlbum, updateAlbum }
