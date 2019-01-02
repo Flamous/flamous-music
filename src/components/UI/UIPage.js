@@ -26,7 +26,7 @@ const actions = {
   },
   childPut (obj) {
     return {
-      [obj.key]: obj.value
+      ...obj
     }
   }
 }
