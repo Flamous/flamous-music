@@ -96,7 +96,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
   })
 
   return <div>
-    <UIHeader title='Album' nav={{ end: <button style={{ backgroundColor: 'red' }} onclick={handleDelete}>Delete</button> }} />
+    <UIHeader title='Album' nav={{ end: <button style={{ backgroundColor: '#FF3B30' }} onclick={handleDelete}>Delete</button> }} />
 
     <main class={styles['main']}>
       {
