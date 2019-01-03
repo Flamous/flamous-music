@@ -31,6 +31,7 @@ import { getUser, getArtistAlbums } from './graphql/queries'
 import { onCreatedAlbum } from './graphql/subscriptions'
 
 import('./normalize.css').then(() => {})
+import('./global.css').then(() => {})
 
 window.regeneratorRuntime = regeneratorRuntime
 
