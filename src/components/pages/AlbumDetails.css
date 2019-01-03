@@ -1,0 +1,12 @@
+.main form {
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+.main label {
+  position: relative;
+  transform: translateY(0.5rem);
+  padding-left: 0.2rem;
+  font-weight: bold;
+  display: block;
+}

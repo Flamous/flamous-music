@@ -8,6 +8,7 @@ import { button } from '~/global.css'
 import UISpinner from '../UI/UISpinner'
 import { deleteAlbum, updateAlbum } from '~/graphql/mutations'
 import API, { graphqlOperation } from '@aws-amplify/api'
+import styles from './AlbumDetails.css'
 
 const AlbumDetails = (props) => (state, actions) => (context) => {
   let { auth, actions: { auth: authActions } } = state
@@ -95,17 +96,18 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
   })
 
   return <div>
-    <UIHeader title='Album' nav={{end: <button onclick={handleDelete}>Delete Album</button>}} />
+    <UIHeader title='Album' nav={{ end: <button style={{ backgroundColor: 'red' }} onclick={handleDelete}>Delete</button> }} />
 
-    <main>
-      {UIPage.state.albumId}
+    <main class={styles['main']}>
       {
         UIPage.state.isLoading && <UISpinner />
       }
       {
         !UIPage.state.isLoading && <form onsubmit={handleSave}>
-          <input id='album-title' oninput={handleChange} value={UIPage.state['album-title']} />
-          <input id='album-description' oninput={handleChange} value={UIPage.state['album-description']} />
+          <label for='album-title'>Title</label>
+          <input type='text' id='album-title' oninput={handleChange} value={UIPage.state['album-title']} />
+          <label for='album-description'>Description</label>
+          <input type='text' id='album-description' oninput={handleChange} value={UIPage.state['album-description']} />
           <button type='submit'>Save</button>
         </form>
       }
