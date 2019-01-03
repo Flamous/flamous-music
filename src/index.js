@@ -53,6 +53,10 @@ const USER_POOL_CLIENT = isProductionContext
   ? process.env.USER_POOL_CLIENT
   : process.env.DEV_USER_POOL_CLIENT
 
+const S3_BUCKET = isProductionContext
+  ? process.env.S3_BUCKET
+  : process.env.DEV_S3_BUCKET
+
 Amplify.configure({
   aws_appsync_graphqlEndpoint: API_ENDPOINT,
   aws_appsync_region: 'eu-central-1',
@@ -62,6 +66,10 @@ Amplify.configure({
     userPoolId: USER_POOL,
     identityPoolId: IDENTITY_POOL,
     userPoolWebClientId: USER_POOL_CLIENT
+  },
+  Storage: {
+    bucket: S3_BUCKET,
+    region: 'eu-central-1'
   }
 })
 
