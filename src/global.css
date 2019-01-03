@@ -2,8 +2,7 @@ a {
   cursor: default;
 }
 
-button,
-a.button {
+button, a.button {
   border: none;
   border: 1px solid transparent;
   padding: 0.5em 1em;
@@ -20,8 +19,7 @@ a.button {
   white-space: nowrap;
 }
 
-button:global(.white),
-a.button:global(.white) {
+button:global(.white), a.button:global(.white) {
   background-color: transparent;
   color: #007AFF;
 }
@@ -30,20 +28,37 @@ a.button:global(.white) {
   a:hover {
     text-decoration: underline;
   }
-
-  button:hover,
-  a.button:hover {
+  button:hover, a.button:hover {
     background-color: #2f92fc;
     text-decoration: none;
   }
-  button:global(.white):hover,
-  a.button:global(.white):hover {
+  button:global(.white):hover, a.button:global(.white):hover {
     background-color: inherit;
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
 }
 
-button:active,
-a.button:active {
+button:active, a.button:active {
   transform: scale(0.9);
+}
+
+input[type="text"] {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  z-index: 2;
+  border-radius: 0.4rem;
+  height: 2.5rem;
+  max-height: 2.5rem;
+  padding: 0 0 0 1.3rem;
+  display: flex;
+  width: 100%;
+  margin: 1rem auto;
+  max-width: 24rem;
+  box-shadow: 0 3px 13px -3px rgba(0, 0, 0, 0.14);
+}
+
+input:focus {
+  border-color: #007AFF;
+  box-shadow: inset 0px 1px 3px 0 rgba(0, 0, 0, 0.14), 0 0 3px 0 #007AFF;
 }
