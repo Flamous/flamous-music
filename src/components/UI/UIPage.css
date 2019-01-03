@@ -10,10 +10,13 @@
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   -webkit-perspective: 0;
-  padding-bottom: 4em;
   z-index: 1;
 }
-
+.page > div {
+  padding-bottom: 4em;
+  background-color: white;
+  min-height: 100%;
+}
 .page > * {
   -webkit-transform: translate3d(0,0,0); /* Prevent Safari scroll glitching */
 }
