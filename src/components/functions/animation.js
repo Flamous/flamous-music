@@ -115,7 +115,7 @@ const slideIn = {
 
       if (isLeaving) {
         window.clickLock = true
-        window.history.back()
+        window.flamous.views.back()
         // back === '/' ? window.flamous.location.go('/') : window.flamous.pages.back()
       } else {
         spring({
