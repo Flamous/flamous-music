@@ -88,6 +88,9 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
 
           authActions.setUserAlbums(newUserAlbums)
         })
+        .catch((error) => {
+          console.error(error)
+        })
     } catch (error) {
       console.error(error)
 
@@ -113,6 +116,9 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
 
           authActions.setUserAlbums(newUserAlbums)
           window.history.replaceState('', {}, '/profile')
+        })
+        .catch((error) => {
+          console.error(error)
         })
     } catch (error) {
       console.error(error)
