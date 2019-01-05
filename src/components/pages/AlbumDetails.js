@@ -7,6 +7,7 @@ import Storage from '@aws-amplify/storage'
 import { button } from '~/global.css'
 import UISpinner from '../UI/UISpinner'
 import { deleteAlbum, updateAlbum } from '~/graphql/mutations'
+import { getAlbum } from '~/graphql/queries'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import styles from './AlbumDetails.css'
 import placeholder from '~/assets/song_placeholder.svg'
@@ -128,13 +129,27 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       })
     }
   }
+  function fetchAlbum () {
+    API.graphql(graphqlOperation(getAlbum, { albumId }))
+      .then((response) => {
+        let albumData = response.data.album
+
+        UIPage.put({
+          'album-title': albumData.title,
+          'album-description': albumData.description
+        })
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
 
   !UIPage.state.albumId && UIPage.put({
     albumId,
     propsToUpdate: []
   })
 
-  return <div>
+  return <div oncreate={fetchAlbum}>
     <UIHeader title='Edit Album' nav={{ start: <UIBackButton />, end: <button style={{ backgroundColor: '#FF3B30' }} onclick={handleDelete}>Delete</button> }} />
 
     <main class={styles['main']}>
