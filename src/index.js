@@ -215,15 +215,14 @@ const flamous = app(
 
             API.graphql(graphqlOperation(getArtistAlbums, { artistId: userResponse.data.user.artistId }))
               .then((response) => {
-                try {
-                  API.graphql(graphqlOperation(onCreatedAlbum, { artistId: userResponse.data.user.artistId }))
-                    .subscribe({
-                      next: (albumData) => { console.log('SUBSCRIPTIONS: ' + albumData) },
-                      error: (error) => { console.error(error) }
-                    })
-                } catch (error) {
-                  console.error(error)
-                }
+                API.graphql(graphqlOperation(onCreatedAlbum, { artistId: userResponse.data.user.artistId }))
+                  .subscribe({
+                    next: (albumData) => { console.log('SUBSCRIPTIONS: ' + albumData) },
+                    error: (error) => { console.error(error) }
+                  })
+                  .catch((error) => {
+                    console.error(error)
+                  })
 
                 actions.setUserAlbums(response.data.getArtistAlbums)
                 actions.update({
