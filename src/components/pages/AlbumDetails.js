@@ -1,7 +1,6 @@
 /** @jsx h */
 import { h } from 'hyperapp'
 import UIPage from '../UI/UIPage'
-import UILink from '../UI/UILink'
 import UIHeader from '../UI/UIHeader'
 import Storage from '@aws-amplify/storage'
 import { button } from '~/global.css'
@@ -45,13 +44,14 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
 
   async function handleSave (event) {
     event.preventDefault()
-
     UIPage.put({
       isLoading: true
     })
 
     let valuesToUpdate = {}
     let file
+
+    valuesToUpdate.albumId = albumId
 
     UIPage.state.propsToUpdate.forEach((property) => {
       valuesToUpdate[property.split('-')[1]] = UIPage.state[property]
@@ -74,31 +74,28 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       }
     }
 
-    try {
-      API.graphql(graphqlOperation(updateAlbum, { albumId: UIPage.state.albumId, ...valuesToUpdate }))
-        .then((response) => {
-          UIPage.put({
-            isLoading: false
-          })
-
-          let updatedAlbum = response.data.updateAlbum
-
-          let newUserAlbums = auth.albums.map((album) => {
-            return album.albumId === albumId ? updatedAlbum : album
-          })
-
-          authActions.setUserAlbums(newUserAlbums)
+    API.graphql(graphqlOperation(updateAlbum, valuesToUpdate))
+      .then((response) => {
+        console.log(response)
+        UIPage.put({
+          isLoading: false
         })
-        .catch((error) => {
-          console.error(error)
-        })
-    } catch (error) {
-      console.error(error)
 
-      UIPage.put({
-        isLoading: false
+        let updatedAlbum = response.data.updateAlbum
+
+        let newUserAlbums = auth.albums.map((album) => {
+          return album.albumId === albumId ? updatedAlbum : album
+        })
+
+        authActions.setUserAlbums(newUserAlbums)
       })
-    }
+      .catch((error) => {
+        console.error(error)
+
+        UIPage.put({
+          isLoading: false
+        })
+      })
   }
 
   function handleDelete (event) {
@@ -108,27 +105,24 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       isLoading: true
     })
 
-    try {
-      API.graphql(graphqlOperation(deleteAlbum, { albumId }))
-        .then((response) => {
-          let newUserAlbums = auth.albums.filter((album) => {
-            return album.albumId !== albumId
-          })
-
-          authActions.setUserAlbums(newUserAlbums)
-          window.history.replaceState('', {}, '/profile')
+    API.graphql(graphqlOperation(deleteAlbum, { albumId }))
+      .then((response) => {
+        let newUserAlbums = auth.albums.filter((album) => {
+          return album.albumId !== albumId
         })
-        .catch((error) => {
-          console.error(error)
-        })
-    } catch (error) {
-      console.error(error)
 
-      UIPage.put({
-        isLoading: false
+        authActions.setUserAlbums(newUserAlbums)
+        window.history.replaceState('', {}, '/profile')
       })
-    }
+      .catch((error) => {
+        console.error(error)
+
+        UIPage.put({
+          isLoading: false
+        })
+      })
   }
+
   function fetchAlbum () {
     API.graphql(graphqlOperation(getAlbum, { albumId }))
       .then((response) => {
