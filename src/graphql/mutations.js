@@ -26,10 +26,16 @@ const createUser = `mutation createUser {
   }
 }`
 
+const updateUser = `mutation updateUser($artistId: ID) {
+  updateUser(artistId: $artistId) {
+    artistId
+  }
+}`
+
 const createArtist = `mutation createArtist($name: String) {
   createArtist(name: $name) {
     artistId
   }
 }`
 
-export { createAlbum, deleteAlbum, updateAlbum, createUser, createArtist }
+export { createAlbum, deleteAlbum, updateAlbum, createUser, updateUser, createArtist }
