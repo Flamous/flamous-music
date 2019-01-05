@@ -26,4 +26,10 @@ const createUser = `mutation createUser {
   }
 }`
 
-export { createAlbum, deleteAlbum, updateAlbum, createUser }
+const createArtist = `mutation createArtist($name: String) {
+  createArtist(name: $name) {
+    artistId
+  }
+}`
+
+export { createAlbum, deleteAlbum, updateAlbum, createUser, createArtist }
