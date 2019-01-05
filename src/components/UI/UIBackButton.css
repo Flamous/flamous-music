@@ -1,0 +1,15 @@
+.back-button {
+  font-weight: bold;
+  align-items: center;
+  display: flex;
+  padding: 1em 1em 1em 0.8em;
+}
+
+.back-button > img {
+  margin-right: 0.1em;
+  height: 24px;
+}
+
+.back-button > span {
+  vertical-align: -webkit-baseline-middle;
+}
