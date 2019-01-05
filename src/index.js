@@ -29,6 +29,7 @@ import AlbumDetails from './components/pages/AlbumDetails'
 import License from './components/pages/License'
 import { getUser, getArtistAlbums } from './graphql/queries'
 import { onCreatedAlbum } from './graphql/subscriptions'
+import { createUser, createArtist, updateUser } from './graphql/mutations'
 
 import('./normalize.css').then(() => {})
 import('./global.css').then(() => {})
@@ -98,6 +99,7 @@ const AppShell = style('div')({
 const flamous = app(
   {
     auth: {
+      tries: 0,
       isAuthenticated: false,
       cognitoUser: null,
       user: null,
@@ -208,6 +210,29 @@ const flamous = app(
       fetchUserInfo: () => (state, actions) => {
         API.graphql(graphqlOperation(getUser))
           .then((userResponse) => {
+            if (!userResponse.data.user) {
+              API.graphql(graphqlOperation(createUser))
+                .then((userData) => {
+                  actions.fetchUserInfo()
+                })
+
+              return
+            } else if (!userResponse.data.user.artistId) {
+              API.graphql(graphqlOperation(createArtist))
+                .then((result) => {
+                  let artistId = result.data.createArtist.artistId
+                  API.graphql(graphqlOperation(updateUser, { artistId }))
+                    .then((response) => {
+                      artistId && actions.fetchUserInfo()
+                    })
+                    .catch((error) => {
+                      console.error(error)
+                    })
+                })
+
+              return
+            }
+
             actions.setUserInfo(userResponse.data.user)
             actions.update({
               isLoadingAlbums: true
