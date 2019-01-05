@@ -125,15 +125,33 @@ const flamous = app(
     views: {
       stacks: {
         home: {
-          stack: [],
+          stack: [
+            {
+              viewName: 'home',
+              path: '/',
+              Component: Home
+            }
+          ],
           root: '/'
         },
         'music-kit': {
-          stack: [],
+          stack: [
+            {
+              viewName: 'music-kit',
+              path: '/music-kit',
+              Component: MusicKit
+            }
+          ],
           root: '/music-kit'
         },
         library: {
-          stack: [],
+          stack: [
+            {
+              viewName: 'library',
+              path: '/library',
+              Component: Library
+            }
+          ],
           root: '/library'
         }
       },
@@ -292,7 +310,7 @@ const flamous = app(
         window.history.pushState({}, '', goTo)
       },
       add: (options) => (state, views) => {
-        let { viewName, path, Component } = options
+        let { viewName, path, Component, silent } = options
         let stacks = { ...state.stacks }
         let { activeView } = state
         let stackInQuestion = stacks[viewName].stack
@@ -313,11 +331,19 @@ const flamous = app(
           }
         }
 
-        stackInQuestion.push({
-          viewName,
-          path,
-          Component
-        })
+        if (silent) {
+          stackInQuestion.unshift({
+            viewName,
+            path,
+            Component
+          })
+        } else {
+          stackInQuestion.push({
+            viewName,
+            path,
+            Component
+          })
+        }
 
         return {
           stacks,
