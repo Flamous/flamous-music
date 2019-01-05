@@ -324,6 +324,31 @@ const flamous = app(
           activeView: viewName
         }
       },
+      // The same logic as UIBackButton but as API
+      back: (options = {}) => (state) => {
+        let { to, replace, back } = options
+        let { activeView, stacks } = state
+
+        let parentViewStack = stacks[activeView].stack
+        let previousViewStackPath = parentViewStack.length > 1 && parentViewStack[parentViewStack.length - 2].path
+
+        let { location } = window.flamous.getState()
+        let isBrowserHistoryBack = location.previous === previousViewStackPath
+
+        to = to || (previousViewStackPath || `/${activeView}`)
+        replace = replace || !isBrowserHistoryBack
+        back = back || isBrowserHistoryBack
+
+        if (!replace && !back) {
+          window.history.pushState(location.pathname, '', to)
+          return
+        }
+        if (replace) {
+          window.history.replaceState(location.previous, '', to)
+          return
+        }
+        if (back) window.history.back()
+      },
       remove: () => (state) => {
         let { stack } = state
         let newStack = [...stack]
