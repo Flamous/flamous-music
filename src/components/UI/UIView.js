@@ -3,16 +3,17 @@ import { h } from 'hyperapp'
 import styles from './UIView.css'
 import cc from 'classcat'
 
-const UIView = (props) => (context, setContext) => {
+const UIView = (props) => (state) => {
   let { displayView } = props
-  let { views } = context
+  let { views } = state
   let active = views.activeView === displayView
+  let stack = views.stacks[displayView].stack
 
-  let length = views.stacks[displayView].stack.length
+  let length = stack.length
 
   return (
     <div class={cc([styles['ui-view'], { [styles['active']]: active }])}>
-      {views.stacks[displayView].stack
+      {stack
         .map((obj, index) => {
           let { Component, path } = obj
           let key = `${index} | ${path}`
