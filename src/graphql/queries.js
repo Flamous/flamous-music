@@ -13,4 +13,11 @@ const getArtistAlbums = `query getArtistAlbums ($artistId: ID!) {
   }
 }`
 
-export { getUser, getArtistAlbums }
+const getAlbum = `query getAlbum ($albumId: ID!) {
+  album(albumId: $albumId) {
+    title
+    description
+  }
+}`
+
+export { getUser, getArtistAlbums, getAlbum }
