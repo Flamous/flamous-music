@@ -2,9 +2,23 @@
 import { h } from 'hyperapp'
 
 const UILink = (props, children) => (state) => {
-  let { to, replace } = props
+  function handleClick (event) {
+    event.preventDefault()
 
-  return <a onclick={(event) => { event.preventDefault(); replace ? window.history.replaceState(state.location.previous, '', to) : window.history.pushState(state.location.pathname, '', to) }} {...props}>{children}</a>
+    if (!replace && !back) {
+      window.history.pushState(state.location.pathname, '', to)
+      return
+    }
+    if (replace) {
+      window.history.replaceState(state.location.previous, '', to)
+      return
+    }
+    if (back) window.history.back()
+  }
+
+  let { to, replace, back } = props
+
+  return <a onclick={handleClick} {...props}>{children}</a>
 }
 
 export default UILink
