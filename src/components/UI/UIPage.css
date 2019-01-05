@@ -11,6 +11,7 @@
   -webkit-overflow-scrolling: touch;
   -webkit-perspective: 0;
   z-index: 1;
+  scrollbar-width: thin;
 }
 .page > div {
   padding-bottom: 4em;
