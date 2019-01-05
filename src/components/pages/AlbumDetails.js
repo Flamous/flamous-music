@@ -10,6 +10,7 @@ import { deleteAlbum, updateAlbum } from '~/graphql/mutations'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import styles from './AlbumDetails.css'
 import placeholder from '~/assets/song_placeholder.svg'
+import UIBackButton from '../UI/UIBackButton'
 
 const AlbumDetails = (props) => (state, actions) => (context) => {
   let { auth, actions: { auth: authActions } } = state
@@ -128,7 +129,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
   })
 
   return <div>
-    <UIHeader title='Edit Album' nav={{ end: <button style={{ backgroundColor: '#FF3B30' }} onclick={handleDelete}>Delete</button> }} />
+    <UIHeader title='Edit Album' nav={{ start: <UIBackButton />, end: <button style={{ backgroundColor: '#FF3B30' }} onclick={handleDelete}>Delete</button> }} />
 
     <main class={styles['main']}>
       {

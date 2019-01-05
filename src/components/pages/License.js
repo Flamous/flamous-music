@@ -2,10 +2,11 @@
 import { h } from 'hyperapp'
 import UIHeader from '../UI/UIHeader'
 import UIPage from '../UI/UIPage'
+import UIBackButton from '../UI/UIBackButton'
 
 const License = (props) => {
   return <UIPage>
-    <UIHeader title='Flamous License' />
+    <UIHeader title='Flamous License' nav={{ start: <UIBackButton /> }} />
     <main style={{ maxWidth: '40rem', margin: '0 auto', padding: '2em 1em' }}>
       <p>
         All music published on flamous.io can be used for free. You can use them for commercial and noncommercial purposes. You do not need to ask permission from or provide credit to the musicians or Flamous Music, although it is appreciated when possible.

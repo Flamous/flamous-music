@@ -6,12 +6,16 @@ import UIHeader from '../UI/UIHeader'
 import Auth from '@aws-amplify/auth'
 import { button } from '~/global.css'
 import UISpinner from '../UI/UISpinner'
+import UIBackButton from '../UI/UIBackButton'
 
 const Library = (props) => (context, actions) => {
   let { auth, actions: { auth: { isAuthenticated } } } = context
 
   return <UIPage {...props}>
-    <UIHeader title='Profile' />
+    <UIHeader
+      title='Profile'
+      nav={{ start: <UIBackButton /> }}
+    />
 
     <div style={{ textAlign: 'center' }}>
       <p>
