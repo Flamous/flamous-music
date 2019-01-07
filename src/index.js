@@ -57,7 +57,6 @@ const flamous = app(
       bounds: null,
       image: null
     },
-    installPrompt: null,
     views: {
       stacks: {
         home: {
@@ -91,7 +90,6 @@ const flamous = app(
           root: '/library'
         }
       },
-      registered: [],
       activeView: 'home'
     },
     login: {
@@ -119,19 +117,6 @@ const flamous = app(
       }
     },
     location: location.actions,
-    updateAvailable: () => (state) => {
-      state.updateAvailable = true
-      console.info('New update available')
-      return {
-        updateAvailable: true
-      }
-    },
-    checkForUpdate: () => async (state, { updateAvailable }) => {
-      console.info('Checking for updates...')
-
-      let registration = await navigator.serviceWorker.getRegistration()
-      registration.update()
-    },
     update: () => async ({ updateWorker, updateAvailable }) => {
       console.info('Updating...')
       let registration = await navigator.serviceWorker.getRegistration()
@@ -253,7 +238,7 @@ const flamous = app(
     delete context.scrubBar
 
     setContext(context)
-    return <div style={{ display: 'contents' }} oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
+    return <div style={{ display: 'contents' }}>
       <UITabBar />
 
       <UIViewRoute path='/' exact render={Home} viewName='home' />
