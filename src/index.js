@@ -1,6 +1,5 @@
 import regeneratorRuntime from 'regenerator-runtime'
 import { h, app as _app } from 'hyperapp'
-import picostyle from 'picostyle'
 
 import nativeWebApp from 'native-web-app'
 
@@ -84,17 +83,7 @@ window.addEventListener('beforeinstallprompt', function (event) {
   window.installPrompt = event
 })
 
-registerServiceWorker()
-
-const style = picostyle(h)
-
-const AppShell = style('div')({
-  display: 'contents',
-  left: '0',
-  width: '100%',
-  height: '100%',
-  top: '100%'
-})
+const app = withContext(_app)
 
 const flamous = app(
   {
@@ -429,7 +418,7 @@ const flamous = app(
     delete context.scrubBar
 
     setContext(context)
-    return <AppShell oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
+    return <div style={{ display: 'contents' }} oncreate={() => { window.flamous.checkForUpdate(); window.setInterval(window.flamous.checkForUpdate, 7200000) }}>
       <UITabBar />
 
       <UIViewRoute path='/' exact render={Home} viewName='home' />
@@ -449,7 +438,7 @@ const flamous = app(
       <Route path='/signup' render={Login} />
 
       <Route path='/create-album' render={NewAlbum} />
-    </AppShell>
+    </div>
   },
   document.body
 )
