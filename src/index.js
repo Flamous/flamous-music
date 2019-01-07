@@ -51,15 +51,6 @@ const flamous = app(
     ...auth.state,
     initialLoad: true,
     location: location.state,
-    playingState: false,
-    playingContext: {
-      artist: null,
-      name: null,
-      cover_art_url: '',
-      id: 0,
-      duration: 0
-    },
-    playbackTime: 0,
     updateAvailable: false,
     imageViewer: {
       isActive: false,
@@ -147,31 +138,6 @@ const flamous = app(
       registration.waiting.postMessage('skipWaiting')
     },
     getState: () => state => state,
-    playingContext: {
-      updateMetaData: (metaData) => {
-        if ('mediaSession' in navigator) {
-          navigator.mediaSession.metadata = new window.MediaMetadata({
-            title: metaData.name,
-            artist: metaData.artist,
-            artwork: [{
-              src: metaData.cover_art_url
-            }]
-          })
-        }
-
-        return {
-          artist: metaData.artist,
-          name: metaData.name,
-          cover_art_url: metaData.cover_art_url,
-          id: metaData.id
-        }
-      },
-      setDuration: (duration) => {
-        return {
-          duration
-        }
-      }
-    },
     setInstallPromt: (prop) => {
       return {
         installPromt: prop
