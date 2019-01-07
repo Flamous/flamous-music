@@ -1,11 +1,11 @@
 
 ![](https://raw.githubusercontent.com/Flamous/flamous-music/master/src/android-chrome-192x192.png)
 
-# Flamous Music
+# Free (listen-like-you-can) music.
 
-Listen to public domain music. No restrictions whatsoever. Share, mix, download and cover songs you find on Flamous Music.
+Free music. Share, mix, download and cover songs you find on Flamous Music.
 
-The best of Public Domain music: [flamous.io](https://flamous.io/)
+[flamous.io](https://flamous.io/)
 
 ---
 
