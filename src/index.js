@@ -16,7 +16,6 @@ import ArtistView from './components/ArtistView.js'
 import Library from './components/pages/Library'
 import Profile from './components/pages/Profile'
 import Auth from '@aws-amplify/auth'
-import API, { graphqlOperation } from '@aws-amplify/api'
 import PubSub from '@aws-amplify/pubsub'
 import Login from './components/pages/Login'
 import Home from './components/Home.js'
@@ -25,9 +24,10 @@ import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
 import AlbumDetails from './components/pages/AlbumDetails'
 import License from './components/pages/License'
-import { getUser, getArtistAlbums } from './graphql/queries'
-import { onCreatedAlbum } from './graphql/subscriptions'
-import { createUser, createArtist, updateUser } from './graphql/mutations'
+
+// Modules
+import auth from './modules/auth'
+
 import './config'
 
 import('./normalize.css').then(() => {})
@@ -35,47 +35,8 @@ import('./global.css').then(() => {})
 
 window.regeneratorRuntime = regeneratorRuntime
 
-const isProductionContext = process.env.CONTEXT === 'production'
-
-const API_ENDPOINT = isProductionContext
-  ? process.env.API
-  : process.env.DEV_API
-
-const IDENTITY_POOL = isProductionContext
-  ? process.env.IDENTITY_POOL
-  : process.env.DEV_IDENTITY_POOL
-
-const USER_POOL = isProductionContext
-  ? process.env.USER_POOL
-  : process.env.DEV_USER_POOL
-
-const USER_POOL_CLIENT = isProductionContext
-  ? process.env.USER_POOL_CLIENT
-  : process.env.DEV_USER_POOL_CLIENT
-
-const S3_BUCKET = isProductionContext
-  ? process.env.S3_BUCKET
-  : process.env.DEV_S3_BUCKET
-
-Amplify.configure({
-  aws_appsync_graphqlEndpoint: API_ENDPOINT,
-  aws_appsync_region: 'eu-central-1',
-  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
-  Auth: {
-    region: 'eu-central-1',
-    userPoolId: USER_POOL,
-    identityPoolId: IDENTITY_POOL,
-    userPoolWebClientId: USER_POOL_CLIENT
-  },
-  Storage: {
-    bucket: S3_BUCKET,
-    region: 'eu-central-1'
-  }
-})
-
-const app = withContext(_app)
-
 nativeWebApp()
+registerServiceWorker()
 
 window.addEventListener('beforeinstallprompt', function (event) {
   // Prevent Chrome 67 and earlier from automatically showing the prompt
@@ -87,14 +48,7 @@ const app = withContext(_app)
 
 const flamous = app(
   {
-    auth: {
-      tries: 0,
-      isAuthenticated: false,
-      cognitoUser: null,
-      user: null,
-      albums: null,
-      isLoadingAlbums: false
-    },
+    ...auth.state,
     initialLoad: true,
     location: location.state,
     playingState: false,
@@ -167,92 +121,7 @@ const flamous = app(
     }
   },
   {
-    auth: {
-      update (data) {
-        return data
-      },
-      isAuthenticated (obj) {
-        return {
-          isAuthenticated: !!obj,
-          cognitoUser: obj || null
-        }
-      },
-      setUserInfo (user) {
-        return {
-          user
-        }
-      },
-      setUserAlbums (albums) {
-        return {
-          albums
-        }
-      },
-      addAlbum: (album) => (state) => {
-        let { albums } = state
-
-        albums.push(album)
-
-        return {
-          albums
-        }
-      },
-      fetchUserInfo: () => (state, actions) => {
-        API.graphql(graphqlOperation(getUser))
-          .then((userResponse) => {
-            if (!userResponse.data.user) {
-              API.graphql(graphqlOperation(createUser))
-                .then((userData) => {
-                  actions.fetchUserInfo()
-                })
-
-              return
-            } else if (!userResponse.data.user.artistId) {
-              API.graphql(graphqlOperation(createArtist))
-                .then((result) => {
-                  let artistId = result.data.createArtist.artistId
-                  API.graphql(graphqlOperation(updateUser, { artistId }))
-                    .then((response) => {
-                      artistId && actions.fetchUserInfo()
-                    })
-                    .catch((error) => {
-                      console.error(error)
-                    })
-                })
-
-              return
-            }
-
-            actions.setUserInfo(userResponse.data.user)
-            actions.update({
-              isLoadingAlbums: true
-            })
-
-            API.graphql(graphqlOperation(getArtistAlbums, { artistId: userResponse.data.user.artistId }))
-              .then((response) => {
-                // try {
-                //   API.graphql(graphqlOperation(onCreatedAlbum, { artistId: userResponse.data.user.artistId }))
-                //     .subscribe({
-                //       next: (albumData) => { console.log('SUBSCRIPTIONS: ' + albumData) },
-                //       error: (error) => { console.error(error) }
-                //     })
-                // } catch (error) {
-                //   console.error(error)
-                // }
-
-                actions.setUserAlbums(response.data.getArtistAlbums)
-                actions.update({
-                  isLoadingAlbums: false
-                })
-              })
-              .catch((error) => {
-                console.error(error)
-              })
-          })
-          .catch((error) => {
-            console.error(error)
-          })
-      }
-    },
+    ...auth.actions,
     login: {
       update (data) {
         return data
