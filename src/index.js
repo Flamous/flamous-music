@@ -16,7 +16,6 @@ import ArtistView from './components/ArtistView.js'
 
 import Library from './components/pages/Library'
 import Profile from './components/pages/Profile'
-import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import PubSub from '@aws-amplify/pubsub'
@@ -30,6 +29,7 @@ import License from './components/pages/License'
 import { getUser, getArtistAlbums } from './graphql/queries'
 import { onCreatedAlbum } from './graphql/subscriptions'
 import { createUser, createArtist, updateUser } from './graphql/mutations'
+import './config'
 
 import('./normalize.css').then(() => {})
 import('./global.css').then(() => {})
