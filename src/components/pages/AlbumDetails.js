@@ -61,7 +61,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       file = valuesToUpdate['cover']
 
       try {
-        await Storage.put(file.name, file, {
+        await Storage.put(`albums/${albumId}/cover`, file, {
           level: 'protected',
           contentType: file.type,
           progressCallback (progress) {
