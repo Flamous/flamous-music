@@ -19,53 +19,59 @@ const Library = (props) => (context, actions) => {
     <div style={{ textAlign: 'center' }}>
       <p>
         {
-          !auth.isAuthenticated
-            ? <main>
-              <UILink class='button' to='/signup'>Create Account</UILink>
-              <p>
-                <UILink class='button white' to='login'>or Sign In</UILink>
-              </p>
-            </main>
-            : <div>
-              Logged in as<br />{auth.cognitoUser.attributes.email}
-              <p>
-                <button onclick={logout}>Logout</button>
-              </p>
-            </div>
+          !auth.isAuthenticated && <main>
+            Share your music with the world. <br />Sign Up to upload music.
+            <br />
+            <br />
+            <UILink class='button' to='/signup'>Create Account</UILink>
+            <UILink class='button white' to='login'>or Sign In</UILink>
+          </main>
         }
       </p>
 
-      <section>
-        <h3>Your Albums</h3>
-        {
-          auth.albums && <div>
-            {
-              auth.albums.map((album) => {
-                return <div>
-                  <UILink to={`/albums/${album.albumId}`}>{album.title}</UILink>
-                </div>
-              })
-            }
-          </div>
-        }
-        {
-          !auth.albums && !auth.isLoadingAlbums && <div>
+      {
+        auth.isAuthenticated && <div>
+          <div>
+              Logged in as<br />{auth.cognitoUser.attributes.email}
             <p>
-            You have not created an album yet
+              <button onclick={logout}>Logout</button>
             </p>
           </div>
-        }
-        {
-          auth.isLoadingAlbums && <UISpinner />
-        }
 
-      </section>
+          <section>
+            <h3>Your Albums</h3>
+            {
+              auth.albums && <div>
+                {
+                  auth.albums.map((album) => {
+                    return <div>
+                      <UILink to={`/albums/${album.albumId}`}>{album.title}</UILink>
+                    </div>
+                  })
+                }
+              </div>
+            }
+            {
+              !auth.albums && !auth.isLoadingAlbums && <div>
+                <p>
+            You have not created an album yet
+                </p>
+              </div>
+            }
+            {
+              auth.isLoadingAlbums && <UISpinner />
+            }
 
-      <section>
-        <p>
-          <UILink to='create-album' class='button'>Create New Album</UILink>
-        </p>
-      </section>
+          </section>
+
+          <section>
+            <p>
+              <UILink to='create-album' class='button'>Create New Album</UILink>
+            </p>
+          </section>
+        </div>
+
+      }
     </div>
   </UIPage>
 }
