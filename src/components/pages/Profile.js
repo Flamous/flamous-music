@@ -21,9 +21,9 @@ const Library = (props) => (context, actions) => {
         {
           !auth.isAuthenticated
             ? <main>
-              <UILink class={button} to='/signup'>Create Account</UILink>
+              <UILink class='button' to='/signup'>Create Account</UILink>
               <p>
-                <UILink to='login'>or Sign In</UILink>
+                <UILink class='button white' to='login'>or Sign In</UILink>
               </p>
             </main>
             : <div>
