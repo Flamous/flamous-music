@@ -2,6 +2,7 @@
   align-items: center;
   display: flex;
   padding: 1em 1em 1em 0.8em;
+  transition: opacity 50ms !important;
 }
 
 .back-button > img {
@@ -12,4 +13,16 @@
 .back-button > span {
   position: relative;
   top: 1px;
+  text-decoration: none;
+}
+
+@media (pointer: fine) {
+  .back-button:hover {
+    opacity: 0.75;
+    text-decoration: none;
+  }
+}
+
+.back-button:active {
+  opacity: 0.5;
 }
