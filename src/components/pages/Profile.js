@@ -64,7 +64,7 @@ const Library = (props) => (context, actions) => {
 
       <section>
         <p>
-          <UILink to='create-album' class={button}>Create New Album</UILink>
+          <UILink to='create-album' class='button'>Create New Album</UILink>
         </p>
       </section>
     </div>
