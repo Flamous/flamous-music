@@ -1,7 +1,20 @@
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { getUser, getArtistAlbums } from '../graphql/queries'
-import { onCreatedAlbum } from '../graphql/subscriptions'
 import { createUser, createArtist, updateUser } from '../graphql/mutations'
+
+function gqlApi (options) {
+  let { operation, parameters = {}, callback, errorCallback } = options
+
+  API.graphql(graphqlOperation(operation, parameters))
+    .then((response) => {
+      callback(response)
+    })
+    .catch((error) => {
+      console.error(error)
+
+      typeof errorCallback === 'function' && errorCallback(error)
+    })
+}
 
 const state = {
   tries: 0,
@@ -9,7 +22,8 @@ const state = {
   cognitoUser: null,
   user: null,
   albums: null,
-  isLoadingAlbums: false
+  isLoadingAlbums: false,
+  isLoadingUser: false
 }
 
 const actions = {
@@ -22,82 +36,62 @@ const actions = {
       cognitoUser: obj || null
     }
   },
-  setUserInfo (user) {
-    return {
-      user
-    }
-  },
-  setUserAlbums (albums) {
-    return {
-      albums
-    }
-  },
-  addAlbum: (album) => (state) => {
-    let { albums } = state
-
-    albums.push(album)
-
-    return {
-      albums
-    }
-  },
   fetchUserInfo: () => (state, actions) => {
-    API.graphql(graphqlOperation(getUser))
-      .then((userResponse) => {
-        if (!userResponse.data.user) {
-          API.graphql(graphqlOperation(createUser))
-            .then((userData) => {
-              actions.fetchUserInfo()
-            })
+    gqlApi({
+      operation: getUser,
+      callback: handleFetch
+    })
 
-          return
-        } else if (!userResponse.data.user.artistId) {
-          API.graphql(graphqlOperation(createArtist))
-            .then((result) => {
-              let artistId = result.data.createArtist.artistId
-              API.graphql(graphqlOperation(updateUser, { artistId }))
-                .then((response) => {
-                  artistId && actions.fetchUserInfo()
-                })
-                .catch((error) => {
-                  console.error(error)
-                })
-            })
+    function handleFetch (response) {
+      let responseData = response.data[Object.keys(response.data)[0]]
 
-          return
-        }
-
-        actions.setUserInfo(userResponse.data.user)
+      if (state.tries > 3) {
+        console.error('Flamous: Too many fetch attempts', response)
         actions.update({
-          isLoadingAlbums: true
+          isLoadingAlbums: false
+        })
+        return
+      }
+
+      if (!responseData) {
+        actions.update({
+          tries: state.tries++
+        })
+        gqlApi({
+          operation: createUser,
+          callback: handleFetch
         })
 
-        API.graphql(graphqlOperation(getArtistAlbums, { artistId: userResponse.data.user.artistId }))
-          .then((response) => {
-            // try {
-            //   API.graphql(graphqlOperation(onCreatedAlbum, { artistId: userResponse.data.user.artistId }))
-            //     .subscribe({
-            //       next: (albumData) => { console.log('SUBSCRIPTIONS: ' + albumData) },
-            //       error: (error) => { console.error(error) }
-            //     })
-            // } catch (error) {
-            //   console.error(error)
-            // }
+        return
+      }
 
-            actions.setUserAlbums(response.data.getArtistAlbums)
-            actions.update({
-              isLoadingAlbums: false
-            })
-          })
-          .catch((error) => {
-            console.error(error)
-          })
+      actions.update({
+        ...responseData,
+        isLoadingAlbums: false
       })
-      .catch((error) => {
-        console.error(error)
-      })
+
+      actions.fetchUserAlbums()
+    }
+  },
+  fetchUserAlbums: () => (state, actions) => {
+    if (!state.artistId) return
+    if (state.albums) return
+
+    gqlApi({
+      operation: getArtistAlbums,
+      parameters: {
+        artistId: state.artistId
+      },
+      callback: (response) => {
+        let responseData = response.data[Object.keys(response.data)[0]]
+
+        actions.update({
+          albums: responseData,
+          isLoadingAlbums: false
+        })
+      }
+    })
   }
-
 }
 
 export default {
