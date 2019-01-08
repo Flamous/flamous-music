@@ -44,6 +44,11 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
 
   async function handleSave (event) {
     event.preventDefault()
+
+    if (Array.isEmpty(UIPage.state.propsToUpdate)) {
+      return
+    }
+
     UIPage.put({
       isLoading: true
     })
