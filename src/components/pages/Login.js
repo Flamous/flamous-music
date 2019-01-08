@@ -7,7 +7,6 @@ import Auth from '@aws-amplify/auth'
 import flamousLogo from '~/assets/flamous_logo_new_small.svg'
 import UILink from '../UI/UILink'
 import UISpinner from '../UI/UISpinner'
-import { button } from '~/global.css'
 
 const state = {
   animation: slideUp.state
@@ -18,7 +17,7 @@ const actions = {
 }
 
 const view = (state, actions) => (props, children) => (context) => {
-  let { login, actions: { login: loginActions, auth: { setAuthenticated }, auth } } = context
+  let { login, actions: { login: loginActions, auth } } = context
   let { animation: { start: startAnimation } } = actions
   let isLogin = props.match.path === '/login' // Is either /login or /signup
   let previousUrl = props.location.previous === '/login' || props.location.previous === '/signup' ? '/' : props.location.previous

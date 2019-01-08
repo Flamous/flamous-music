@@ -3,7 +3,6 @@ import { h } from 'hyperapp'
 import UIPage from '../UI/UIPage'
 import UILink from '../UI/UILink'
 import UIHeader from '../UI/UIHeader'
-import { button } from '~/global.css'
 import profilePlaceholder from '~/assets/profile.svg'
 import songPlaceholer from '~/assets/song_placeholder.svg'
 
