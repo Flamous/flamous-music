@@ -41,10 +41,28 @@ const actions = {
   update (data) {
     return data
   },
+  logout: () => (state, actions) => {
+    Auth.signOut()
+      .then((result) => {
+        console.log('here')
+        actions.setAuthenticated(false)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  },
   setAuthenticated (obj) {
+    if (!obj) {
+      return {
+        isAuthenticated: false,
+        cognitoUser: null,
+        albums: null,
+        user: null
+      }
+    }
     return {
-      isAuthenticated: !!obj,
-      cognitoUser: obj || null
+      isAuthenticated: true,
+      cognitoUser: obj
     }
   },
   fetchUserInfo: () => (state, actions) => {
