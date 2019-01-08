@@ -17,10 +17,9 @@ const Library = (props) => (context, actions) => {
       <div style={{ textAlign: 'center' }}>
         {
           !auth.isAuthenticated && <main>
-            <UILink class={button} to='/signup'>Create Account</UILink>
-            <p>
-              <UILink to='login'>or Sign In</UILink>
-            </p>
+            <br />
+            <UILink class='button' to='/signup'>Create Account</UILink>
+            <UILink class='button white' to='login'>or Sign In</UILink>
           </main>
         }
       </div>
