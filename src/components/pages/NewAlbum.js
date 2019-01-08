@@ -17,7 +17,7 @@ const actions = {
 }
 
 const view = (state, actions) => (props, children) => (context) => {
-  let { auth: { user }, new: { album }, actions: { new: newActions, auth: { addAlbum } } } = context
+  let { auth: { artistId, albums }, new: { album }, actions: { new: newActions, auth: authActions } } = context
   let { animation: { start: startAnimation } } = actions
   // let isLogin = props.match.path === '/login' // Is either /login or /signup
   let previousUrl = props.location.previous === '/create-album' ? '/' : props.location.previous
@@ -35,9 +35,12 @@ const view = (state, actions) => (props, children) => (context) => {
       isLoading: true
     })
     try {
-      let request = await API.graphql(graphqlOperation(createAlbum, { artistId: user.artistId, title: album.title }))
+      let request = await API.graphql(graphqlOperation(createAlbum, { artistId: artistId, title: album.title }))
 
-      addAlbum(request.data.createAlbum)
+      albums.push(request.data.createAlbum)
+      authActions.update({
+        albums
+      })
       newActions.album.update({
         isLoading: true
       })

@@ -87,7 +87,9 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
           return album.albumId === albumId ? updatedAlbum : album
         })
 
-        authActions.setUserAlbums(newUserAlbums)
+        authActions.update({
+          albums: newUserAlbums
+        })
       })
       .catch((error) => {
         console.error(error)
@@ -111,7 +113,9 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
           return album.albumId !== albumId
         })
 
-        authActions.setUserAlbums(newUserAlbums)
+        authActions.update({
+          albums: newUserAlbums
+        })
         window.history.replaceState('', {}, '/profile')
       })
       .catch((error) => {
