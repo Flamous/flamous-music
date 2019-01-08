@@ -42,7 +42,8 @@ const view = (state, actions) => (props, children) => (context) => {
         albums
       })
       newActions.album.update({
-        isLoading: true
+        isLoading: true,
+        title: null
       })
       window.history.replaceState('', {}, previousUrl)
     } catch (error) {
