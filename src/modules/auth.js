@@ -1,7 +1,7 @@
 import API, { graphqlOperation } from '@aws-amplify/api'
-import { getUser, getArtistAlbums } from './graphql/queries'
-import { onCreatedAlbum } from './graphql/subscriptions'
-import { createUser, createArtist, updateUser } from './graphql/mutations'
+import { getUser, getArtistAlbums } from '../graphql/queries'
+import { onCreatedAlbum } from '../graphql/subscriptions'
+import { createUser, createArtist, updateUser } from '../graphql/mutations'
 
 const state = {
   tries: 0,
@@ -101,6 +101,6 @@ const actions = {
 }
 
 export default {
-  ...state,
-  ...actions
+  state,
+  actions
 }
