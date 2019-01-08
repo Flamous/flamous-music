@@ -10,9 +10,6 @@ import UIViewRoute from './components/UI/UIViewRoute'
 import UIView from './components/UI/UIView'
 import UITabBar from './components/UI/UITabBar'
 
-import AlbumView from './components/AlbumView.js'
-import ArtistView from './components/ArtistView.js'
-
 import Library from './components/pages/Library'
 import Profile from './components/pages/Profile'
 import Auth from '@aws-amplify/auth'
@@ -242,7 +239,6 @@ const flamous = app(
       <UITabBar />
 
       <UIViewRoute path='/' exact render={Home} viewName='home' />
-      <UIViewRoute path='/artists' parent render={ArtistView} viewName='home' />
       {/* <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' /> */}
       <UIViewRoute path='/license' render={License} viewName='home' />
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
