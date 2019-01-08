@@ -3,6 +3,7 @@
   display: flex;
   padding: 1em 1em 1em 0.8em;
   transition: opacity 50ms !important;
+  user-select: none;
 }
 
 .back-button > img {

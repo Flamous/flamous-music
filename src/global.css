@@ -18,6 +18,7 @@ button, a.button {
   margin-left: 0.4em;
   margin-right: 0.4em;
   white-space: nowrap;
+  user-select: none;
 }
 
 button:global(.white), a.button:global(.white) {
