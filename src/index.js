@@ -13,7 +13,6 @@ import UITabBar from './components/UI/UITabBar'
 
 import Library from './components/pages/Library'
 import Profile from './components/pages/Profile'
-import Auth from '@aws-amplify/auth'
 import Login from './components/pages/Login'
 import Home from './components/Home.js'
 import MusicKit from './components/MusicKit'
