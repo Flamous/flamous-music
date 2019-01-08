@@ -14,7 +14,6 @@ import UITabBar from './components/UI/UITabBar'
 import Library from './components/pages/Library'
 import Profile from './components/pages/Profile'
 import Auth from '@aws-amplify/auth'
-import PubSub from '@aws-amplify/pubsub'
 import Login from './components/pages/Login'
 import Home from './components/Home.js'
 import MusicKit from './components/MusicKit'
@@ -83,17 +82,7 @@ const flamous = app(
       }
     },
     location: location.actions,
-    update: () => async ({ updateWorker, updateAvailable }) => {
-      console.info('Updating...')
-      let registration = await navigator.serviceWorker.getRegistration()
-      registration.waiting.postMessage('skipWaiting')
-    },
     getState: () => state => state,
-    setInstallPromt: (prop) => {
-      return {
-        installPromt: prop
-      }
-    },
     setInitialLoad: (boolean) => {
       return {
         initialLoad: boolean
