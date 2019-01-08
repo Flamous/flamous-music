@@ -131,7 +131,7 @@ location.subscribe(flamous.location)
 
 Auth.currentAuthenticatedUser()
   .then((result) => {
-    flamous.auth.isAuthenticated(result)
+    flamous.auth.setAuthenticated(result)
     flamous.auth.fetchUserInfo()
   })
   .catch((error) => {

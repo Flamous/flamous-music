@@ -9,7 +9,7 @@ import UISpinner from '../UI/UISpinner'
 import UIBackButton from '../UI/UIBackButton'
 
 const Library = (props) => (context, actions) => {
-  let { auth, actions: { auth: { isAuthenticated } } } = context
+  let { auth, actions: { auth: { setAuthenticated } } } = context
 
   return <UIPage {...props}>
     <UIHeader
@@ -30,7 +30,7 @@ const Library = (props) => (context, actions) => {
             : <div>
               Logged in as<br />{auth.cognitoUser.attributes.email}
               <p>
-                <button onclick={() => Auth.signOut().then(() => { isAuthenticated(false) })}>Logout</button>
+                <button onclick={() => Auth.signOut().then(() => { setAuthenticated(false) })}>Logout</button>
               </p>
             </div>
         }

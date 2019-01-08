@@ -16,7 +16,7 @@ const actions = {
   update (data) {
     return data
   },
-  isAuthenticated (obj) {
+  setAuthenticated (obj) {
     return {
       isAuthenticated: !!obj,
       cognitoUser: obj || null

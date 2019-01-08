@@ -10,7 +10,7 @@ import profilePlaceholder from '~/assets/profile.svg'
 import songPlaceholer from '~/assets/song_placeholder.svg'
 
 const Library = (props) => (context, actions) => {
-  let { auth, actions: { auth: { isAuthenticated } } } = context
+  let { auth } = context
 
   return <UIPage nonInteractive {...props}>
     <UIHeader title={['Library', <UILink style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid rgba(0, 0, 0, 0.5)', borderRadius: '100%' }} to='/profile'><img width='48' src={profilePlaceholder} /></UILink>]} />
