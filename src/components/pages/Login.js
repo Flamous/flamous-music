@@ -18,7 +18,7 @@ const actions = {
 }
 
 const view = (state, actions) => (props, children) => (context) => {
-  let { login, actions: { login: loginActions, auth: { setAuthenticated } } } = context
+  let { login, actions: { login: loginActions, auth: { setAuthenticated }, auth } } = context
   let { animation: { start: startAnimation } } = actions
   let isLogin = props.match.path === '/login' // Is either /login or /signup
   let previousUrl = props.location.previous === '/login' || props.location.previous === '/signup' ? '/' : props.location.previous
@@ -72,8 +72,8 @@ const view = (state, actions) => (props, children) => (context) => {
           hasSubmittedAuthCode: true,
           isLoading: false
         })
-        let cognitoUser = await Auth.currentAuthenticatedUser()
-        setAuthenticated(cognitoUser)
+
+        auth.init()
         loginActions.update({
           email: null,
           password: null,
@@ -102,8 +102,8 @@ const view = (state, actions) => (props, children) => (context) => {
         login.email,
         login.password
       )
-      let cognitoUser = await Auth.currentAuthenticatedUser()
-      setAuthenticated(cognitoUser)
+
+      auth.init()
       loginActions.update({
         email: null,
         password: null,
