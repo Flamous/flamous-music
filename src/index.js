@@ -74,6 +74,9 @@ const flamous = app(
     }
   },
   {
+    init: () => (state, actions) => {
+      actions.auth.init()
+    },
     auth: auth.actions,
     views: views.actions,
     login: {
@@ -126,6 +129,6 @@ const flamous = app(
 )
 
 window.flamous = flamous
+flamous.init()
 
 location.subscribe(flamous.location)
-
