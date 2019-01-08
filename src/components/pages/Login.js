@@ -121,10 +121,6 @@ const view = (state, actions) => (props, children) => (context) => {
     }
   }
 
-  function goBack () {
-    window.history.replaceState(previousUrl, '', previousUrl)
-  }
-
   return <div
     class={styles['wrapper']}
     key='login'
@@ -133,7 +129,7 @@ const view = (state, actions) => (props, children) => (context) => {
     <header class={styles['header']}>
       <div class={styles['top-row']}>
         <span><img src={flamousLogo} /></span>
-        <span class={styles['back-button']} onclick={goBack}>Cancel</span>
+        <UILink replace to={previousUrl} class='button white'>Close</UILink>
       </div>
 
       <h1>
@@ -166,7 +162,7 @@ const view = (state, actions) => (props, children) => (context) => {
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Login</button>
                             <br />
-                            <UILink class={`${button} white`} replace to='/signup'>or Create Account</UILink>
+                            <UILink class='button white' replace to='/signup'>or Create Account</UILink>
                           </div>
 
                           <p class={styles['error']}>
@@ -194,7 +190,7 @@ const view = (state, actions) => (props, children) => (context) => {
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Create Account</button>
                             <br />
-                            <UILink class={`${button} white`} replace to='/login'>or Log In</UILink>
+                            <UILink class='button white' replace to='/login'>or Log In</UILink>
                           </div>
 
                           <p class={styles['error']}>

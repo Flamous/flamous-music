@@ -31,15 +31,10 @@
 .top-row {
   margin-bottom: 2.3em;
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   justify-content: space-between;
 }
-.top-row .back-button {
-  color: #007AFF;
-  font-weight: bold;
-  cursor: default;
-  user-select: none;
-}
+
 .top-row > * {
   padding: 1rem;
 }
