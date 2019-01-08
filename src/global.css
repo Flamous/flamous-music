@@ -2,7 +2,7 @@ a {
   cursor: default;
 }
 
-button, a.button {
+button, a:global(.button) {
   border: none;
   border: 1px solid transparent;
   padding: 0.5em 1em;
@@ -21,7 +21,7 @@ button, a.button {
   user-select: none;
 }
 
-button:global(.white), a.button:global(.white) {
+button:global(.white), a:global(.button):global(.white) {
   background-color: transparent;
   color: #007AFF;
   box-shadow: none;
@@ -31,17 +31,17 @@ button:global(.white), a.button:global(.white) {
   a:hover {
     text-decoration: underline;
   }
-  button:hover, a.button:hover {
+  button:hover, a:global(.button):hover {
     background-color: #2f92fc;
     text-decoration: none;
   }
-  button:global(.white):hover, a.button:global(.white):hover {
+  button:global(.white):hover, a:global(.button):global(.white):hover {
     background-color: inherit;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   }
 }
 
-button:active, a.button:active {
+button:active, a:global(.button):active {
   transform: scale(0.95);
 }
 

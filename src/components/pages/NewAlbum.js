@@ -3,10 +3,10 @@ import { h } from 'hyperapp'
 import { nestable } from 'hyperapp-context'
 import { slideUp } from '../functions/animation'
 import styles from './NewAlbum.css'
-import UILink from '../UI/UILink'
 import { button } from '~/global.css'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { createAlbum } from '~/graphql/mutations'
+import UILink from '../UI/UILink';
 
 const state = {
   animation: slideUp.state
@@ -44,14 +44,10 @@ const view = (state, actions) => (props, children) => (context) => {
       newActions.album.update({
         isLoading: true
       })
-      goBack()
+      window.history.replaceState('', {}, previousUrl)
     } catch (error) {
       console.error(error)
     }
-  }
-
-  function goBack () {
-    window.history.replaceState(previousUrl, '', previousUrl)
   }
 
   return <div
@@ -61,18 +57,20 @@ const view = (state, actions) => (props, children) => (context) => {
   >
     <header class={styles['header']}>
       <div class={styles['top-row']}>
-        <span onclick={goBack} class={styles['back-button']}>Done</span>
-        <button onclick={handleSubmit}>Save</button>
+        <UILink replace to={previousUrl} class='button white'>Cancel</UILink>
+        <button for='new-album-form' type='submit'>Create</button>
       </div>
 
       <h1>
-        Create Album
+        New Album
       </h1>
     </header>
 
     <main class={styles['main']}>
       <section>
-        <input id='title' oninput={handleInput} type='text' value={album.title} placeholder='Title' />
+        <form onsubmit={handleSubmit} id='new-album-form'>
+          <input id='title' oninput={handleInput} type='text' value={album.title} placeholder='Title' />
+        </form>
       </section>
     </main>
   </div>
