@@ -1,7 +1,6 @@
 /** @jsx h */
 import { h } from 'hyperapp'
 import UIPage from './UI/UIPage.js'
-import { button } from '~/global.css'
 import UILink from './UI/UILink'
 import styles from './Home.css'
 import logo from '~/assets/flamous_logo_new_small.svg'
@@ -22,10 +21,10 @@ const Header = () => (state) => {
       {
         !isSignedIn && <nav>
           <div>
-            <UILink class={button} to='/signup'>Create Account</UILink>
+            <UILink class='button' to='/signup'>Create Account</UILink>
           </div>
           <div>
-            <UILink class={`${button} white`} to='/login'>or Sign In</UILink>
+            <UILink class='button white' to='/login'>or Sign In</UILink>
           </div>
         </nav>
       }
