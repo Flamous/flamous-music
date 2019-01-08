@@ -6,7 +6,7 @@ import styles from './NewAlbum.css'
 import { button } from '~/global.css'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { createAlbum } from '~/graphql/mutations'
-import UILink from '../UI/UILink';
+import UILink from '../UI/UILink'
 
 const state = {
   animation: slideUp.state
@@ -58,7 +58,7 @@ const view = (state, actions) => (props, children) => (context) => {
     <header class={styles['header']}>
       <div class={styles['top-row']}>
         <UILink replace to={previousUrl} class='button white'>Cancel</UILink>
-        <button for='new-album-form' type='submit'>Create</button>
+        <button onclick={handleSubmit} type='submit'>Create</button>
       </div>
 
       <h1>
