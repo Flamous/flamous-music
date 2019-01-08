@@ -1,3 +1,4 @@
+/** @jsx h */
 import regeneratorRuntime from 'regenerator-runtime'
 import { h, app as _app } from 'hyperapp'
 
@@ -134,21 +135,6 @@ const flamous = app(
   },
   document.body
 )
-
-// if ('mediaSession' in navigator) {
-//   navigator.mediaSession.metadata = new window.MediaMetadata({
-//     title: '',
-//     artist: '',
-//     artwork: [{
-//       src: ''
-//     }]
-//   })
-
-// navigator.mediaSession.setActionHandler('play', )
-// navigator.mediaSession.setActionHandler('pause', )
-// navigator.mediaSession.setActionHandler('previoustrack', )
-// navigator.mediaSession.setActionHandler('nexttrack', )
-// }
 
 window.flamous = flamous
 
