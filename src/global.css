@@ -6,11 +6,12 @@ button, a.button {
   border: none;
   border: 1px solid transparent;
   padding: 0.5em 1em;
-  border-radius: 0.3em;
+  border-radius: 0.38em;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.14);
   background-color: #007AFF;
   color: white;
   cursor: default;
-  transition: background-color 80ms, transform 50ms;
+  transition: background-color 80ms, transform 40ms;
   display: inline-block;
   margin-top: 0.4em;
   margin-bottom: 0.5em;
@@ -22,6 +23,7 @@ button, a.button {
 button:global(.white), a.button:global(.white) {
   background-color: transparent;
   color: #007AFF;
+  box-shadow: none;
 }
 
 @media (pointer: fine) {
@@ -34,15 +36,15 @@ button:global(.white), a.button:global(.white) {
   }
   button:global(.white):hover, a.button:global(.white):hover {
     background-color: inherit;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   }
 }
 
 button:active, a.button:active {
-  transform: scale(0.9);
+  transform: scale(0.95);
 }
 
-input[type="text"] {
+input[type="text"], input[type="email"], input[type="password"] {
   color: black;
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.1);
