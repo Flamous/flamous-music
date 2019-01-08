@@ -1,4 +1,5 @@
 import API, { graphqlOperation } from '@aws-amplify/api'
+import Auth from '@aws-amplify/auth'
 import { getUser, getArtistAlbums } from '../graphql/queries'
 import { createUser } from '../graphql/mutations'
 
@@ -27,6 +28,16 @@ const state = {
 }
 
 const actions = {
+  init: () => (state, actions) => {
+    Auth.currentAuthenticatedUser()
+      .then((result) => {
+        actions.setAuthenticated(result)
+        actions.fetchUserInfo()
+      })
+      .catch((error) => {
+        console.info(error)
+      })
+  },
   update (data) {
     return data
   },
