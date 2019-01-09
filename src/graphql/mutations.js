@@ -12,11 +12,13 @@ const deleteAlbum = `mutation deleteAlbum($albumId: ID!) {
   }
 }`
 
-const updateAlbum = `mutation updateAlbum($albumId: ID!, $description: String, $title: String) {
-  updateAlbum(albumId: $albumId, title: $title, description: $description) {
+const updateAlbum = `mutation updateAlbum($albumId: ID!, $description: String, $title: String, $hasCoverImage: Boolean, $coverImagePath: String) {
+  updateAlbum(albumId: $albumId, title: $title, description: $description, hasCoverImage: $hasCoverImage, coverImagePath: $coverImagePath) {
     title
     description
     albumId
+    hasCoverImage
+    coverImagePath
   }
 }`
 
