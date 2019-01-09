@@ -61,9 +61,12 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
 
     if (valuesToUpdate['cover']) {
       file = valuesToUpdate['cover']
+      valuesToUpdate.hasProfilePicture = true
+      let coverImagePath = `albums/${albumId}/cover`
+      valuesToUpdate.coverImagePath = coverImagePath
 
       try {
-        await Storage.put(`albums/${albumId}/cover`, file, {
+        await Storage.put(coverImagePath, file, {
           level: 'protected',
           contentType: file.type,
           progressCallback (progress) {
