@@ -1,7 +1,7 @@
 import API, { graphqlOperation } from '@aws-amplify/api'
 import Auth from '@aws-amplify/auth'
 import { getUser, getArtistAlbums } from '../graphql/queries'
-import { createUser } from '../graphql/mutations'
+import { createUserAndArtist } from '../graphql/mutations'
 
 function gqlApi (options) {
   let { operation, parameters = {}, callback, errorCallback } = options
@@ -87,7 +87,7 @@ const actions = {
           tries: state.tries++
         })
         gqlApi({
-          operation: createUser,
+          operation: createUserAndArtist,
           callback: handleFetch
         })
 
