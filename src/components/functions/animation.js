@@ -48,7 +48,7 @@ const slideIn = {
         window.flamous.setInitialLoad(false)
       }
 
-      listen(element, 'mousedown touchstart', { passive: true })
+      listen(element, 'touchstart', { passive: true })
         .start(startSwipeBack)
 
       return {
@@ -82,7 +82,7 @@ const slideIn = {
         }).start(handleX)
       })
 
-      let upListener = listen(document, 'mouseup touchend', { passive: true })
+      let upListener = listen(document, 'touchend', { passive: true })
         .start(endSwipeBack)
 
       return {
