@@ -10,6 +10,7 @@ const getArtistAlbums = `query getArtistAlbums ($artistId: ID!) {
     albumId
     createdAt
     artists
+    coverImagePath
   }
 }`
 
@@ -17,6 +18,7 @@ const getAlbum = `query getAlbum ($albumId: ID!) {
   album(albumId: $albumId) {
     title
     description
+    coverImagePath
   }
 }`
 
