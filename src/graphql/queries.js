@@ -7,6 +7,7 @@ const getUser = `query getUser {
 const getArtistAlbums = `query getArtistAlbums ($artistId: ID!) {
   getArtistAlbums (artistId: $artistId) {
     title
+    description
     albumId
     createdAt
     artists
