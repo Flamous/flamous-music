@@ -25,10 +25,6 @@ const UITabBar = (props, children) => (context) => {
   }
 
   return <nav class={styles['tab-bar']}>
-    <Link to='/player' class={styles['item']}>
-      <img alt='Cover Image' src={placeholderImage} />
-    </Link>
-
     <SetActive viewName='home' class={cc([styles['item'], { [styles['active']]: activeView === 'home' }])}>
       <img class={styles['icon']} alt='Home Icon' src={activeView === 'home' ? homeBlueSVG : homeSVG} />
       <span>Home</span>
@@ -43,6 +39,9 @@ const UITabBar = (props, children) => (context) => {
       <img class={styles['icon']} alt='Library Icon' src={activeView === 'library' ? libraryBlueSVG : librarySVG} />
       <span>Library</span>
     </SetActive>
+    <Link to='/player' class={styles['item']}>
+      <img alt='Cover Image' src={placeholderImage} />
+    </Link>
   </nav>
 }
 
