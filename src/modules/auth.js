@@ -2,9 +2,11 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import Auth from '@aws-amplify/auth'
 import { getUser, getArtistAlbums } from '../graphql/queries'
 import { createUserAndArtist } from '../graphql/mutations'
-import regeneratorRuntime from 'regenerator-runtime'
 
-window.regeneratorRuntime = regeneratorRuntime
+const isProductionContext = process.env.CONTEXT === 'production'
+const S3_BUCKET = isProductionContext
+  ? process.env.S3_BUCKET
+  : process.env.DEV_S3_BUCKET
 
 function gqlApi (options) {
   let { operation, parameters = {}, callback, errorCallback } = options
@@ -38,7 +40,8 @@ const actions = {
           .then((currentUserInfo) => {
             actions.setAuthenticated({
               cognitoUser: result,
-              user: currentUserInfo
+              user: currentUserInfo,
+              s3BasePath: `https://s3.eu-central-1.amazonaws.com/${S3_BUCKET}/protected/${currentUserInfo.id}`
             })
             actions.fetchUserInfo()
           })
