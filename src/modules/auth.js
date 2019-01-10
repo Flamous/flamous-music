@@ -2,6 +2,9 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import Auth from '@aws-amplify/auth'
 import { getUser, getArtistAlbums } from '../graphql/queries'
 import { createUserAndArtist } from '../graphql/mutations'
+import regeneratorRuntime from 'regenerator-runtime'
+
+window.regeneratorRuntime = regeneratorRuntime
 
 function gqlApi (options) {
   let { operation, parameters = {}, callback, errorCallback } = options
@@ -31,8 +34,14 @@ const actions = {
   init: () => (state, actions) => {
     Auth.currentAuthenticatedUser()
       .then((result) => {
-        actions.setAuthenticated(result)
-        actions.fetchUserInfo()
+        Auth.currentUserInfo()
+          .then((currentUserInfo) => {
+            actions.setAuthenticated({
+              cognitoUser: result,
+              user: currentUserInfo
+            })
+            actions.fetchUserInfo()
+          })
       })
       .catch((error) => {
         console.info(error)
@@ -44,7 +53,6 @@ const actions = {
   logout: () => (state, actions) => {
     Auth.signOut()
       .then((result) => {
-        console.log('here')
         actions.setAuthenticated(false)
       })
       .catch((error) => {
@@ -60,9 +68,10 @@ const actions = {
         user: null
       }
     }
+
     return {
       isAuthenticated: true,
-      cognitoUser: obj
+      ...obj
     }
   },
   fetchUserInfo: () => (state, actions) => {
