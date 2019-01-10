@@ -35,7 +35,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       reader.readAsDataURL(target.files[0])
       reader.onloadend = () => {
         UIPage.put({
-          imageUrl: reader.result
+          coverImageUrl: reader.result
         })
       }
     }
@@ -139,7 +139,8 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
 
         UIPage.put({
           'album-title': albumData.title,
-          'album-description': albumData.description
+          'album-description': albumData.description,
+          coverImageUrl: `${auth.s3BasePath}/albums/${albumId}/cover`
         })
       })
       .catch((error) => {
@@ -162,7 +163,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       {
         !UIPage.state.isLoading && <form onsubmit={handleSave}>
           <label for='album-cover'>Album Cover</label>
-          <label for='album-cover'><img width='128' src={UIPage.state.imageUrl || placeholder} /></label>
+          <label for='album-cover'><img width='128' src={UIPage.state.coverImageUrl || placeholder} /></label>
           <input oninput={handleChange} style={{ margin: '1rem auto' }} id='album-cover' type='file' />
           <label for='album-title'>Title</label>
           <input type='text' id='album-title' oninput={handleChange} value={UIPage.state['album-title']} />
