@@ -56,3 +56,17 @@
   /* padding-top: 0.5em;
   padding-bottom: 0.5em; */
 }
+
+@media (min-width: 800px) {
+  .item {
+    flex-direction: row;
+    align-items: center;
+    font-size: 1em;
+    padding: 0.3em 2em;
+    width: auto;
+  }
+  .item > span {
+    margin-left: 0.25em;
+    transform: translateY(1px);
+  }
+}
