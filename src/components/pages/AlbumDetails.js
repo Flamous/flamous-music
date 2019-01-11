@@ -162,9 +162,10 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
         let albumData = response.data.album
 
         UIPage.put({
+          coverImagePath: albumData.coverImagePath,
           'album-title': albumData.title,
           'album-description': albumData.description,
-          coverImageUrl: `${auth.s3BasePath}/albums/${albumId}/cover`
+          coverImageUrl: albumData.coverImagePath && auth.s3BasePath && `${auth.s3BasePath}/albums/${albumId}/cover`
         })
       })
       .catch((error) => {
@@ -176,6 +177,12 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
     albumId,
     propsToUpdate: []
   })
+
+  if (auth.s3BasePath && !UIPage.state.coverImageUrl) {
+    UIPage.put({
+      coverImageUrl: UIPage.state.coverImagePath ? `${auth.s3BasePath}/albums/${albumId}/cover` : placeholder
+    })
+  }
 
   return <div oncreate={fetchAlbum}>
     <UIHeader title='Edit Album' nav={{ start: <UIBackButton />, end: <button style={{ backgroundColor: '#FF3B30' }} onclick={handleDelete}>Delete</button> }} />
