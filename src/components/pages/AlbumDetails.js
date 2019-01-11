@@ -81,7 +81,6 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
 
     API.graphql(graphqlOperation(updateAlbum, valuesToUpdate))
       .then((response) => {
-        console.log(response)
         UIPage.put({
           isLoading: false
         })
@@ -164,7 +163,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
         !UIPage.state.isLoading && <form onsubmit={handleSave}>
           <label for='album-cover'>Album Cover</label>
           <label for='album-cover'><img width='128' src={UIPage.state.coverImageUrl || placeholder} /></label>
-          <input oninput={handleChange} style={{ margin: '1rem auto' }} id='album-cover' type='file' />
+          <input oninput={handleChange} style={{ margin: '1rem auto' }} id='album-cover' accept='image/*' type='file' />
           <label for='album-title'>Title</label>
           <input type='text' id='album-title' oninput={handleChange} value={UIPage.state['album-title']} />
           <label for='album-description'>Description</label>
