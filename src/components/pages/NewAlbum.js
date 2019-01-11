@@ -69,7 +69,7 @@ const view = (state, actions) => (props, children) => (context) => {
     <main class={styles['main']}>
       <section>
         <form onsubmit={handleSubmit} id='new-album-form'>
-          <input id='title' oninput={handleInput} type='text' value={album.title} placeholder='Title' />
+          <input id='title' maxlength='40' oninput={handleInput} type='text' value={album.title} placeholder='Title' />
         </form>
       </section>
     </main>

@@ -200,7 +200,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
           <label for='album-cover'><img width='128' src={UIPage.state.coverImageUrl || placeholder} /></label>
           <input oninput={handleChange} style={{ margin: '1rem auto' }} id='album-cover' accept='image/*' type='file' />
           <label for='album-title'>Title</label>
-          <input type='text' id='album-title' oninput={handleChange} value={UIPage.state['album-title']} />
+          <input type='text' maxlength='40' id='album-title' oninput={handleChange} value={UIPage.state['album-title']} />
           <label for='album-description'>Description</label>
           <input type='text' id='album-description' oninput={handleChange} value={UIPage.state['album-description']} />
           <button type='submit'>Save</button>
