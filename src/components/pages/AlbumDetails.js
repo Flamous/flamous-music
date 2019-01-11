@@ -11,10 +11,26 @@ import styles from './AlbumDetails.css'
 import placeholder from '~/assets/song_placeholder.svg'
 import UIBackButton from '../UI/UIBackButton'
 
+const MAX_FILE_SIZE = 10000000 // 10000000 Bytes == 10 MB
+
 const AlbumDetails = (props) => (state, actions) => (context) => {
   let { auth, actions: { auth: authActions } } = state
   let { UIPage } = context
   let albumId = props.match.params.albumId
+
+  function validateFile (fileInput) {
+    if (fileInput.size >= MAX_FILE_SIZE) {
+      UIPage.put({
+        fileError: 'The selected file is too large.'
+      })
+      return false
+    }
+
+    UIPage.put({
+      fileError: null
+    })
+    return true
+  }
 
   function handleChange (event) {
     let target = event.target
@@ -32,6 +48,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
     if (target.files) {
       let reader = new window.FileReader()
 
+      if (!validateFile(target.files[0])) return
       reader.readAsDataURL(target.files[0])
       reader.onloadend = () => {
         UIPage.put({
@@ -53,13 +70,11 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
     let valuesToUpdate = {}
     let file
 
-    valuesToUpdate.albumId = albumId
-
     UIPage.state.propsToUpdate.forEach((property) => {
       valuesToUpdate[property.split('-')[1]] = UIPage.state[property]
     })
 
-    if (valuesToUpdate['cover']) {
+    if (valuesToUpdate['cover'] && validateFile(valuesToUpdate['cover'])) {
       file = valuesToUpdate['cover']
       valuesToUpdate.hasProfilePicture = true
       let coverImagePath = `albums/${albumId}/cover`
@@ -77,7 +92,17 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       } catch (error) {
         console.error(error)
       }
+    } else {
+      delete valuesToUpdate.cover
     }
+
+    if (Object.keys(valuesToUpdate).length === 0) {
+      UIPage.put({
+        isLoading: false
+      })
+      return
+    }
+    valuesToUpdate.albumId = albumId
 
     API.graphql(graphqlOperation(updateAlbum, valuesToUpdate))
       .then((response) => {
@@ -162,6 +187,9 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       {
         !UIPage.state.isLoading && <form onsubmit={handleSave}>
           <label for='album-cover'>Album Cover</label>
+          {
+            UIPage.state.fileError && <p>{UIPage.state.fileError}</p>
+          }
           <label for='album-cover'><img width='128' src={UIPage.state.coverImageUrl || placeholder} /></label>
           <input oninput={handleChange} style={{ margin: '1rem auto' }} id='album-cover' accept='image/*' type='file' />
           <label for='album-title'>Title</label>
