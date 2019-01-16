@@ -4,6 +4,7 @@
   top: 0px;
   background-color: rgba(252, 252, 252, 0.95);
   z-index: 1000;
+  stroke: #007aff;
 }
 .header-nav .content {
   max-width: 40rem;
