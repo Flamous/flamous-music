@@ -20,6 +20,7 @@ import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
 import AlbumDetails from './components/pages/AlbumDetails'
 import License from './components/pages/License'
+import Settings from './components/pages/Settings'
 
 // Modules
 import auth from './modules/auth'
@@ -112,6 +113,7 @@ const flamous = app(
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
       <UIViewRoute path='/library' render={Library} viewName='library' />
       <UIViewRoute path='/profile' render={Profile} viewName='library' />
+      <UIViewRoute path='/settings' render={Settings} viewName='library' exact />
       <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='library' />
 
       <UIView displayView='home' />
