@@ -68,3 +68,7 @@ input:focus {
   border-color: #007AFF;
   box-shadow: inset 0px 1px 3px 0 rgba(0, 0, 0, 0.14), 0 0 3px 0 #007AFF;
 }
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
