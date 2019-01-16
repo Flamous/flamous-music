@@ -57,6 +57,7 @@ const Library = (props) => (context, actions) => {
                           <span class={styles['secondary-text']}>{Math.ceil(Math.random(10) * 10)} Songs • {Math.ceil(Math.random() * 2500).toLocaleString()} Listeners</span>
                         </div>
                       </div>
+                      <UIIcon width='32' icon='chevron-right' />
                     </UILink>
                     </li>
                   })

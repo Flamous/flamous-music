@@ -34,6 +34,10 @@
 }
 .album {
   display: flex;
+  align-items: center;
+}
+.album > svg {
+  margin-right: 1em;
 }
 
 .album h2 {
