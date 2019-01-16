@@ -42,7 +42,7 @@ const Library = (props) => (context, actions) => {
                   auth.albums.map((album) => {
                     return <UILink class={styles['album']} to={`/albums/${album.albumId}`}>
                       <div class={styles['image-wrapper']}>
-                        <img src={album.coverImagePath ? `${auth.s3BasePath}/albums/${album.albumId}/cover` : placeholderAlbum} />
+                        <img src={album.coverImagePath ? `${auth.s3BasePath}/albums/${album.albumId}/cover${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
                       </div>
                       <div class={styles['text-wrapper']}>
                         <div>

@@ -165,7 +165,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
           coverImagePath: albumData.coverImagePath,
           'album-title': albumData.title,
           'album-description': albumData.description,
-          coverImageUrl: albumData.coverImagePath && auth.s3BasePath && `${auth.s3BasePath}/albums/${albumId}/cover`
+          coverImageUrl: albumData.coverImagePath && auth.s3BasePath && `${auth.s3BasePath}/albums/${albumId}/cover${albumData.lastUpdated ? `?${albumData.lastUpdated}` : ''}`
         })
       })
       .catch((error) => {
