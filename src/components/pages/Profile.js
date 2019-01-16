@@ -16,7 +16,7 @@ const Library = (props) => (context, actions) => {
   return <UIPage {...props}>
     <UIHeader
       title='Profile'
-      nav={{ start: <UIBackButton /> }}
+      nav={{ start: <UIBackButton />, end: <UILink style={{ padding: '0.5em', display: 'inline-block' }} to='/settings'><UIIcon icon='settings' /></UILink> }}
     />
 
     <div>
