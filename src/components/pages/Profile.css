@@ -106,16 +106,3 @@
 .divider {
   padding: 1em 0;
 }
-
-.row {
-  padding: 0.5em 1em;
-  display: flex;
-  align-items: center;
-}
-
-section.account {
-  padding: 0;
-}
-.account .text {
-  flex-grow: 1;
-}

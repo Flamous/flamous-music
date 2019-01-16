@@ -10,7 +10,7 @@ import placeholderAlbum from '~/assets/song_placeholder.svg'
 import UIIcon from '../UI/UIIcon'
 
 const Library = (props) => (context, actions) => {
-  let { auth, actions: { auth: { logout } } } = context
+  let { auth } = context
   let isAlbums = auth.albums && Object.keys(auth.albums).length
 
   return <UIPage {...props}>
@@ -79,17 +79,6 @@ const Library = (props) => (context, actions) => {
             }
           </section>
           <Divider />
-
-          <section class={styles['account']}>
-            <div class={styles['row']}>
-              <div class={styles['text']}>
-            Logged in as<br /><b>{auth.cognitoUser.attributes.email}</b>
-              </div>
-              <div>
-                <button onclick={logout}>Logout</button>
-              </div>
-            </div>
-          </section>
         </main>
       }
     </div>
