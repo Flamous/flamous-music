@@ -3,6 +3,7 @@ a {
 }
 
 button, a:global(.button) {
+  appearance: none;
   border: none;
   border: 1px solid transparent;
   padding: 0.5em 1em;
@@ -46,6 +47,7 @@ button:active, a:global(.button):active {
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
+  appearance: none;
   color: black;
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.1);
