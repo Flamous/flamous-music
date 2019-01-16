@@ -7,6 +7,7 @@ import UISpinner from '../UI/UISpinner'
 import UIBackButton from '../UI/UIBackButton'
 import styles from './Profile.css'
 import placeholderAlbum from '~/assets/song_placeholder.svg'
+import UIIcon from '../UI/UIIcon'
 
 const Library = (props) => (context, actions) => {
   let { auth, actions: { auth: { logout } } } = context
@@ -34,30 +35,36 @@ const Library = (props) => (context, actions) => {
 
       {
         auth.isAuthenticated && <main class={styles['main']}>
+          <h3>Your Albums</h3>
           <section>
-            <h3>Your Albums</h3>
             {
-              isAlbums && <div class={styles['album-list']}>
+              isAlbums && <ul class={styles['album-list']}>
                 {
                   auth.albums.map((album) => {
-                    return <UILink class={styles['album']} to={`/albums/${album.albumId}`}>
+                    // let formattedLastUpdated
+                    // if (album.lastUpdated) {
+                    //   formattedLastUpdated = new Date(album.lastUpdated * 1000).toLocaleDateString(navigator.language, { year: '2-digit', month: 'short', day: 'numeric' })
+                    // }
+                    return <li><UILink class={styles['album']} to={`/albums/${album.albumId}`}>
                       <div class={styles['image-wrapper']}>
-                        <img src={album.coverImagePath ? `${auth.s3BasePath}/albums/${album.albumId}/cover${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
+                        <div class={styles['image-inner']}>
+                          <img src={album.coverImagePath ? `${auth.s3BasePath}/albums/${album.albumId}/cover${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
+                        </div>
                       </div>
                       <div class={styles['text-wrapper']}>
                         <div>
-                          <h2>{album.title}</h2>
-                          <p>{album.description || 'No description.'}</p>
-                        </div>
-                        <div class={styles['row-bottom']}>
-                          <button class='white'>Edit</button>
-                          <span>10 Songs</span>
+                          <span class={styles['primary-text']}>{album.title}</span><br />
+                          <span class={styles['secondary-text']}>{Math.ceil(Math.random(10) * 10)} Songs • {Math.ceil(Math.random() * 2500).toLocaleString()} Listeners</span>
                         </div>
                       </div>
                     </UILink>
+                    </li>
                   })
                 }
-              </div>
+                <li>
+                  <UILink to='create-album' class='button white'><UIIcon icon='plus' /> New Album</UILink>
+                </li>
+              </ul>
             }
             {
               !auth.albums && !auth.isLoadingAlbums && <div>
@@ -69,15 +76,12 @@ const Library = (props) => (context, actions) => {
             {
               (auth.isLoadingAlbums || auth.isLoadingUser) && <UISpinner />
             }
-            <div>
-              <br />
-              <UILink to='create-album' class='button'>Create New Album</UILink>
-            </div>
           </section>
+          <Divider />
 
-          <section style={{ borderTop: '1px solid rgba(0, 0, 0, 0.2)' }}>
-            <div style={{ display: 'flex' }}>
-              <div style={{ flexGrow: '1' }}>
+          <section class={styles['account']}>
+            <div class={styles['row']}>
+              <div class={styles['text']}>
             Logged in as<br /><b>{auth.cognitoUser.attributes.email}</b>
               </div>
               <div>
@@ -92,3 +96,5 @@ const Library = (props) => (context, actions) => {
 }
 
 export default Library
+
+const Divider = () => <div class={styles['divider']} />
