@@ -10,16 +10,22 @@ button, a:global(.button) {
   border-radius: 0.38em;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.14);
   background-color: #007AFF;
+  stroke: #007AFF;
   color: white;
   cursor: default;
   transition: background-color 80ms, transform 40ms;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-top: 0.4em;
   margin-bottom: 0.5em;
   margin-left: 0.4em;
   margin-right: 0.4em;
   white-space: nowrap;
   user-select: none;
+}
+
+button, a:global(.button) > svg {
+  margin-right: 0.4em;
 }
 
 button:global(.white), a:global(.button):global(.white) {
@@ -71,4 +77,11 @@ input:focus {
 
 :focus:not(:focus-visible) {
   outline: none;
+}
+
+svg {
+  fill: none;
+  stroke: inherit;
+  stroke-width: 2;
+  display: inline-block;
 }
