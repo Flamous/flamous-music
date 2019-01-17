@@ -8,8 +8,19 @@
 
 .main label {
   position: relative;
-  transform: translateY(0.5rem);
-  padding-left: 0.2rem;
   font-weight: bold;
-  display: block;
+}
+.input-container input[type='text'] {
+  margin: 0;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  margin: 1em 0;
+}
+.input-container > *:first-child{
+  margin-right: 0.5em;
+  text-align: right;
+  min-width: 6em;
 }

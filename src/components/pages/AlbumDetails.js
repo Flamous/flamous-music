@@ -10,6 +10,7 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import styles from './AlbumDetails.css'
 import placeholder from '~/assets/song_placeholder.svg'
 import UIBackButton from '../UI/UIBackButton'
+import UIIcon from '../UI/UIIcon'
 
 const MAX_FILE_SIZE = 10000000 // 10000000 Bytes == 10 MB
 
@@ -185,7 +186,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
   }
 
   return <div oncreate={fetchAlbum}>
-    <UIHeader title='Edit Album' nav={{ start: <UIBackButton />, end: <button style={{ backgroundColor: '#FF3B30' }} onclick={handleDelete}>Delete</button> }} />
+    <UIHeader title='Edit Album' nav={{ start: <UIBackButton />, end: <span style={{ stroke: '#FF3B30' }} onclick={handleDelete}><UIIcon icon='trash-2' /></span> }} />
 
     <main class={styles['main']}>
       {
@@ -193,16 +194,31 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       }
       {
         !UIPage.state.isLoading && <form onsubmit={handleSave}>
-          <label for='album-cover'>Album Cover</label>
+
           {
             UIPage.state.fileError && <p>{UIPage.state.fileError}</p>
           }
-          <label for='album-cover'><img width='128' src={UIPage.state.coverImageUrl || placeholder} /></label>
-          <input oninput={handleChange} style={{ margin: '1rem auto' }} id='album-cover' accept='image/*' type='file' />
-          <label for='album-title'>Title</label>
-          <input type='text' maxlength='40' id='album-title' oninput={handleChange} value={UIPage.state['album-title']} />
-          <label for='album-description'>Description</label>
-          <input type='text' id='album-description' oninput={handleChange} value={UIPage.state['album-description']} />
+
+          <div class={styles['input-container']}>
+            <span>
+              <label for='album-title'>Title</label>
+            </span>
+            <input type='text' maxlength='40' id='album-title' oninput={handleChange} value={UIPage.state['album-title']} />
+          </div>
+
+          <div class={styles['input-container']}>
+            <label for='album-description'>Description</label>
+            <input type='text' id='album-description' oninput={handleChange} value={UIPage.state['album-description']} />
+          </div>
+
+          <div class={styles['input-container']}>
+            <label for='album-cover'>Album Cover</label>
+            <div>
+              <input oninput={handleChange} style={{ margin: '1rem auto' }} id='album-cover' accept='image/*' type='file' />
+              <label for='album-cover'><img width='128' src={UIPage.state.coverImageUrl || placeholder} /></label>
+            </div>
+          </div>
+
           <button type='submit'>Save</button>
         </form>
       }
