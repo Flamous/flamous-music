@@ -1,0 +1,22 @@
+.headphones {
+  stroke: rgb(44, 39, 39);
+  transform: rotate(-12deg) translateX(10px) translateY(5px);
+}
+.heart {
+  fill: #f50809;
+  stroke: rgb(44, 39, 39);
+  transform: rotate(7deg);
+  stroke-width: 1.5;
+}
+
+.play {
+  stroke: rgb(44, 39, 39);
+  transform: rotate(7deg) translateX(-5px) translateY(5px);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.empty-text {
+  margin-top: 1.7em;
+  color: rgba(0, 0, 0, 0.7);
+}

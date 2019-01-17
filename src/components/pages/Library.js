@@ -4,7 +4,8 @@ import UIPage from '../UI/UIPage'
 import UILink from '../UI/UILink'
 import UIHeader from '../UI/UIHeader'
 import profilePlaceholder from '~/assets/profile.svg'
-import songPlaceholer from '~/assets/song_placeholder.svg'
+import UIIcon from '../UI/UIIcon'
+import styles from './Library.css'
 
 const Library = (props) => (context, actions) => {
   let { auth } = context
@@ -24,9 +25,12 @@ const Library = (props) => (context, actions) => {
       </div>
       {
         auth.isAuthenticated && <section style={{ textAlign: 'center', marginTop: '3em' }}>
-          <img width='128' src={songPlaceholer} />
-          <p>
-          See songs you Saved here.
+          <UIIcon class={styles['headphones']} height='48' width='48' icon='headphones' />
+          <UIIcon class={styles['heart']} height='80' width='80' icon='heart' />
+          <UIIcon class={styles['play']} height='48' width='48' icon='play-circle' />
+
+          <p class={styles['empty-text']}>
+            Listen to saved songs here<br />Works even when you're offline
           </p>
         </section>
       }
