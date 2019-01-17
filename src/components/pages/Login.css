@@ -6,14 +6,13 @@
   overflow-y: auto;
   color: #212121;
   overscroll-behavior: contain;
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 -2px 0 0 #f0f0f0;
   background-color: white;
-  background-color: rgba(255, 255, 255, 0.98);
 }
 @supports (backdrop-filter: blur(10px)) {
   .wrapper {
-    backdrop-filter: blur(30px);
-    background-color: rgba(255, 255, 255, 0.85);    
+    backdrop-filter: blur(50px);
+    background-color: rgba(255, 255, 255, 0.9);    
   }
 }
 
@@ -61,7 +60,7 @@
 .input[type='password']:not(:placeholder-shown) {
   font-size: 1.6rem;
 }
-.input:placeholder-shown {
+/* .input:placeholder-shown {
   background-color: white;
 }
 .input:placeholder-shown:hover {
@@ -85,7 +84,7 @@
 .input:focus {
   border-color: #007AFF;
   box-shadow: inset 0px 1px 3px 0 rgba(0, 0, 0, 0.14), 0 0 3px 0 #007AFF;
-}
+} */
 
 .main input::placeholder {
   font-size: 1rem;
