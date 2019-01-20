@@ -21,6 +21,7 @@ import NewAlbum from './components/pages/NewAlbum'
 import AlbumDetails from './components/pages/AlbumDetails'
 import License from './components/pages/License'
 import Settings from './components/pages/Settings'
+import ChangePassword from './components/pages/ChangePassword'
 
 // Modules
 import auth from './modules/auth'
@@ -114,6 +115,7 @@ const flamous = app(
       <UIViewRoute path='/library' render={Library} viewName='library' />
       <UIViewRoute path='/profile' render={Profile} viewName='library' />
       <UIViewRoute path='/settings' render={Settings} viewName='library' exact />
+      <UIViewRoute path='/settings/change-password' render={ChangePassword} viewName='library' exact />
       <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='library' />
 
       <UIView displayView='home' />
