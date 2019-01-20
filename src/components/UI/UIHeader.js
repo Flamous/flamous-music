@@ -88,7 +88,9 @@ const view = (state, actions) => (props, children) => (context) => {
         nav.end
       ]}
     </HeaderNav>
-    <HeaderTitle oncreate={initObserver}>{title}</HeaderTitle>
+    {
+      title && <HeaderTitle oncreate={initObserver}>{title}</HeaderTitle>
+    }
     <hr class={styles['header-line']} />
   </header>
 }
