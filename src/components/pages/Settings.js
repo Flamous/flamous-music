@@ -25,7 +25,7 @@ const Settings = () => (state) => {
             <button onclick={logout}>Logout</button>
           </div>
         </div>
-        <UILink class='row' to='/somewhere'>
+        <UILink class='row' to='/settings/change-password'>
           <span style={{ flexGrow: '1' }}>Change Password</span>
           <UIIcon width='32' icon='chevron-right' />
         </UILink>
