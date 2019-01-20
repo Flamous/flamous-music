@@ -27,6 +27,7 @@
 }
 .header-nav .item {
   position: relative;
+  white-space: nowrap;
 }
 .header-nav .container:nth-child(2) .item {
   text-align: center;
