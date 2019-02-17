@@ -62,9 +62,11 @@ const flamous = app(
       isLoggedIn: false,
       hasSubmittedEmail: false,
       hasSubmittedAuthCode: false,
+      hasSubmittedResetPasswordCode: false,
       email: '',
       password: '',
       authCode: '',
+      resetPasswordCode: '',
       isLoading: false
     },
     new: {
