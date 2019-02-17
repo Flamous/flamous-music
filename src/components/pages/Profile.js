@@ -11,12 +11,17 @@ import UIIcon from '../UI/UIIcon'
 
 const Library = (props) => (context, actions) => {
   let { auth } = context
-  let isAlbums = auth.albums && Object.keys(auth.albums).length
+  let isAlbums = auth.albums && Object.keys(auth.albums).length > 0
 
   return <UIPage {...props}>
     <UIHeader
       title='Profile'
-      nav={{ start: <UIBackButton />, end: <UILink style={{ padding: '0.5em', display: 'inline-block' }} to='/settings'><UIIcon icon='settings' /></UILink> }}
+      nav={{
+        start: <UIBackButton />,
+        middle: 'Profile',
+        end: <UILink style={{ padding: '0.5em', display: 'inline-block' }} to='/settings'>
+          <UIIcon icon='settings' />
+        </UILink> }}
     />
 
     <div>
@@ -37,43 +42,43 @@ const Library = (props) => (context, actions) => {
         auth.isAuthenticated && <main class={styles['main']}>
           <h3>Your Albums</h3>
           <section>
-            {
-              isAlbums && <ul class={styles['album-list']}>
-                {
-                  auth.albums.map((album) => {
-                    // let formattedLastUpdated
-                    // if (album.lastUpdated) {
-                    //   formattedLastUpdated = new Date(album.lastUpdated * 1000).toLocaleDateString(navigator.language, { year: '2-digit', month: 'short', day: 'numeric' })
-                    // }
-                    return <li><UILink class={styles['album']} to={`/albums/${album.albumId}`}>
-                      <div class={styles['image-wrapper']}>
-                        <div class={styles['image-inner']}>
-                          <img src={album.coverImagePath ? `${auth.s3BasePath}/albums/${album.albumId}/cover${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
-                        </div>
-                      </div>
-                      <div class={styles['text-wrapper']}>
-                        <div>
-                          <span class={styles['primary-text']}>{album.title}</span><br />
-                          <span class={styles['secondary-text']}>{Math.ceil(Math.random(10) * 10)} Songs • {Math.ceil(Math.random() * 2500).toLocaleString()} Listeners</span>
-                        </div>
-                      </div>
-                      <UIIcon width='32' icon='chevron-right' />
-                    </UILink>
-                    </li>
-                  })
-                }
-                <li>
-                  <UILink to='create-album' class='button white'><UIIcon icon='plus' /> New Album</UILink>
-                </li>
-              </ul>
-            }
-            {
-              !auth.albums && !auth.isLoadingAlbums && <div>
-                <p>
+
+            <ul class={styles['album-list']}>
+              {
+                !isAlbums && !auth.isLoadingAlbums && <div>
+                  <p style={{ textAlign: 'center' }}>
             You have not created an album yet
-                </p>
-              </div>
-            }
+                  </p>
+                </div>
+              }
+              {
+                isAlbums && auth.albums.map((album) => {
+                  // let formattedLastUpdated
+                  // if (album.lastUpdated) {
+                  //   formattedLastUpdated = new Date(album.lastUpdated * 1000).toLocaleDateString(navigator.language, { year: '2-digit', month: 'short', day: 'numeric' })
+                  // }
+                  return <li><UILink class={styles['album']} to={`/albums/${album.albumId}`}>
+                    <div class={styles['image-wrapper']}>
+                      <div class={styles['image-inner']}>
+                        <img src={album.coverImagePath ? `${auth.s3BasePath}/albums/${album.albumId}/cover${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
+                      </div>
+                    </div>
+                    <div class={styles['text-wrapper']}>
+                      <div>
+                        <span class={styles['primary-text']}>{album.title}</span><br />
+                        <span class={styles['secondary-text']}>{Math.ceil(Math.random(10) * 10)} Songs • {Math.ceil(Math.random() * 2500).toLocaleString()} Listeners</span>
+                      </div>
+                    </div>
+                    <UIIcon width='32' icon='chevron-right' />
+                  </UILink>
+                  </li>
+                })
+              }
+              <li>
+                <UILink to='create-album' class='button white'><UIIcon icon='plus' /> New Album</UILink>
+              </li>
+            </ul>
+
             {
               (auth.isLoadingAlbums || auth.isLoadingUser) && <UISpinner />
             }
