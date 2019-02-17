@@ -4,7 +4,7 @@ import UIPage from '../UI/UIPage'
 import UIHeader from '../UI/UIHeader'
 import Storage from '@aws-amplify/storage'
 import UISpinner from '../UI/UISpinner'
-import { deleteAlbum, updateAlbum } from '~/graphql/mutations'
+import { deleteAlbum, updateAlbum, createSong } from '~/graphql/mutations'
 import { getAlbum } from '~/graphql/queries'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import styles from './AlbumDetails.css'
@@ -163,6 +163,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
         let albumData = response.data.album
 
         UIPage.put({
+          songs: albumData.songs || [],
           coverImagePath: albumData.coverImagePath,
           'album-title': albumData.title,
           'album-description': albumData.description,
@@ -174,8 +175,22 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       })
   }
 
+  function addSong (event) {
+    API.graphql(graphqlOperation(createSong, { albumId }))
+      .then((res) => {
+        console.log(res)
+        UIPage.put({
+          songs: UIPage.state.songs.push(res)
+        })
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
   !UIPage.state.albumId && UIPage.put({
     albumId,
+    songs: [],
     propsToUpdate: []
   })
 
@@ -218,6 +233,14 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
               <label for='album-cover'><img width='128' src={UIPage.state.coverImageUrl || placeholder} /></label>
             </div>
           </div>
+
+          {
+            UIPage.state.songs && UIPage.state.songs.map((song) => {
+              return <p>{song.title}</p>
+            })
+          }
+          <button onclick={addSong} class='white'><UIIcon icon='plus' />Add Song</button>
+          <br />
 
           <button type='submit'>Save</button>
         </form>
