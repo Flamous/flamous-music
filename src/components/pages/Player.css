@@ -1,0 +1,15 @@
+.player {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 9.8);
+  z-index: 2000;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-image: url('../assets/down.svg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 3em;
+}
