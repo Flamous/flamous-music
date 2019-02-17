@@ -20,7 +20,8 @@ const view = (state, actions) => (props, children) => (context) => {
   let { login, actions: { login: loginActions, auth } } = context
   let { animation: { start: startAnimation } } = actions
   let isLogin = props.match.path === '/login' // Is either /login or /signup
-  let previousUrl = props.location.previous === '/login' || props.location.previous === '/signup' ? '/' : props.location.previous
+  let isResetPassword = props.match.path === '/reset-password'
+  let previousUrl = props.location.previous === '/login' || props.location.previous === '/signup' || props.location.previous === '/reset-password' ? '/' : props.location.previous
 
   function handleInput (event) {
     loginActions.update(
@@ -120,6 +121,10 @@ const view = (state, actions) => (props, children) => (context) => {
     }
   }
 
+  function handleResetPassword () {
+
+  }
+
   return <div
     class={styles['wrapper']}
     key='login'
@@ -136,6 +141,9 @@ const view = (state, actions) => (props, children) => (context) => {
           isLogin
             ? 'Sign In'
             : 'Create Account'
+        }
+        {
+          isResetPassword && 'Reset Password'
         }
       </h1>
     </header>
@@ -216,6 +224,53 @@ const view = (state, actions) => (props, children) => (context) => {
                 }
               </form>
             </div>
+        }
+        {
+          isResetPassword && <div>
+            <form onsubmit={handleResetPassword}>
+              {
+                !login.hasSubmittedEmail && <div>
+                  {
+                    login.isLoading
+                      ? <div><UISpinner /></div>
+                      : <div><input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
+
+                        {
+                          // !login.hasSubmittedResetPasswordCode && <div
+                        }
+                        <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
+
+                        <div style={{ textAlign: 'center' }}>
+                          <button type='submit'>Create Account</button>
+                          <br />
+                          <UILink class='button white' replace to='/login'>or Log In</UILink>
+                        </div>
+
+                        <p class={styles['error']}>
+                          {login.errorMessage && login.errorMessage}
+                        </p>
+                      </div>
+                  }
+                </div>
+              }
+              {
+                login.hasSubmittedEmail && !login.hasSubmittedAuthCode && <div>
+                  {
+                    login.isLoading
+                      ? <div><UISpinner /><p>Checking code...</p></div>
+                      : <div>
+                        <p class={styles['info']}>
+                        We sent a verification code to<br /><i>{login.email}</i>
+                        </p>
+                        <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
+                        <div style={{ textAlign: 'center' }}>
+                          <button type='submit'>Confirm</button>
+                        </div></div>
+                  }
+                </div>
+              }
+            </form>
+          </div>
         }
 
       </section>
