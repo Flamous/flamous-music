@@ -19,10 +19,7 @@ const Library = (props) => (context, actions) => {
       title='Profile'
       nav={{
         start: <UIBackButton />,
-        middle: 'Profile',
-        end: <UILink style={{ padding: '0.5em', display: 'inline-block' }} to='/settings'>
-          <UIIcon icon='settings' />
-        </UILink> }}
+        middle: 'Profile' }}
     />
 
     <div>
