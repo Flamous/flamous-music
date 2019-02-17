@@ -21,6 +21,14 @@
   padding: 2rem 1rem 0.5rem;
 }
 
+section.account {
+  padding: 1px;
+  stroke: rgba(0, 0, 0, 0.35);
+}
+.account .text {
+  flex-grow: 1;
+}
+
 .album-list {
   stroke: rgba(0, 0, 0, 0.35);
   list-style-type: none;

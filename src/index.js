@@ -114,7 +114,6 @@ const flamous = app(
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
       <UIViewRoute path='/library' render={Library} viewName='library' />
       <UIViewRoute path='/profile' render={Profile} viewName='library' />
-      <UIViewRoute path='/settings' render={Settings} viewName='library' exact />
       <UIViewRoute path='/settings/change-password' render={ChangePassword} viewName='library' exact />
       <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='library' />
 
