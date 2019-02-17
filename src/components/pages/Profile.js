@@ -98,6 +98,39 @@ const Library = (props) => (context, actions) => {
               <UIIcon width='32' icon='chevron-right' />
             </UILink>
           </section>
+
+          <h3>About</h3>
+          <section class={styles['account']}>
+            <UILink class='row' to='/flamous-license'>
+              <span style={{ flexGrow: '1' }}>Flamous License</span>
+              <UIIcon width='32' icon='chevron-right' />
+            </UILink>
+            <UILink class='row' to='/privacy-policy'>
+              <span style={{ flexGrow: '1' }}>Privacy Policy</span>
+              <UIIcon width='32' icon='chevron-right' />
+            </UILink>
+            <UILink class='row' to='/terms'>
+              <span style={{ flexGrow: '1' }}>Terms of Use</span>
+              <UIIcon width='32' icon='chevron-right' />
+            </UILink>
+            <hr />
+            <div class='row'>
+              <div class={styles['text']}>
+                Flamous Version
+              </div>
+              <div>
+                { process.env.npm_package_version }
+              </div>
+            </div>
+            <div class='row'>
+              <div class={styles['text']}>
+                Contact
+              </div>
+              <div>
+                <a href='mailto:hello@flamous.io'>hello@flamous.io</a>
+              </div>
+            </div>
+          </section>
         </main>
       }
     </div>
