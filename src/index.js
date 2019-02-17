@@ -110,7 +110,6 @@ const flamous = app(
 
       <UIViewRoute path='/' exact render={Home} viewName='home' />
       {/* <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' /> */}
-      <UIViewRoute path='/license' render={License} viewName='home' />
       <UIViewRoute path='/music-kit' render={MusicKit} viewName='music-kit' />
       <UIViewRoute path='/library' render={Library} viewName='library' />
       <UIViewRoute path='/profile' render={Profile} viewName='library' />
@@ -124,6 +123,7 @@ const flamous = app(
       <Route path='/login' render={Login} />
       <Route path='/signup' render={Login} />
 
+      <Route path='/flamous-license' render={License} />
       <Route path='/create-album' render={NewAlbum} />
     </div>
   },
