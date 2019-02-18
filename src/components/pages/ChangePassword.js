@@ -3,7 +3,6 @@ import { h } from 'hyperapp'
 import UIPage from '../UI/UIPage'
 import UIHeader from '../UI/UIHeader'
 import UIBackButton from '../UI/UIBackButton'
-import UILink from '../UI/UILink'
 import styles from './ChangePassword.css'
 import Auth from '@aws-amplify/auth'
 
@@ -39,7 +38,7 @@ const Page = (props) => (state, actions) => (context) => {
           <div class='row'>
             <div class={styles['input-container']}>
               <label for='album-description'>Current</label>
-              <input type='password' id='current-password' oninput={handleChange} value={state['current-password']} />
+              <input oncreate={elem => elem.focus()} type='password' id='current-password' oninput={handleChange} value={state['current-password']} />
             </div>
           </div>
           <div class='row'>
