@@ -91,7 +91,7 @@ svg {
 }
 
 :global(.row) {
-  padding: 0.5em 1em;
+  padding: 0.8em 1.1em;
   display: flex;
   transition: background-color 400ms;
   align-items: center;
