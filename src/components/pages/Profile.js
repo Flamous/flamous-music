@@ -4,22 +4,18 @@ import UIPage from '../UI/UIPage'
 import UILink from '../UI/UILink'
 import UIHeader from '../UI/UIHeader'
 import UISpinner from '../UI/UISpinner'
-import UIBackButton from '../UI/UIBackButton'
 import styles from './Profile.css'
 import placeholderAlbum from '~/assets/song_placeholder.svg'
 import UIIcon from '../UI/UIIcon'
 
-const Library = (props) => (context, actions) => {
-  let { auth, actions: { auth: { logout } } } = context
-  // let { auth, actions: { auth: { logout } } } = state
+const Library = (props) => (state, actions) => {
+  let { auth, actions: { auth: { logout } } } = state
   let isAlbums = auth.albums && Object.keys(auth.albums).length > 0
 
-  return <UIPage {...props}>
+  return <UIPage {...props} nonInteractive>
     <UIHeader
       title='Profile'
-      nav={{
-        start: <UIBackButton />,
-        middle: 'Profile' }}
+      nav={{ middle: 'Profile' }}
     />
 
     <div>
@@ -81,7 +77,6 @@ const Library = (props) => (context, actions) => {
               (auth.isLoadingAlbums || auth.isLoadingUser) && <UISpinner />
             }
           </section>
-          <Divider />
 
           <h3>Account</h3>
           <section class={styles['account']}>
@@ -138,5 +133,3 @@ const Library = (props) => (context, actions) => {
 }
 
 export default Library
-
-const Divider = () => <div class={styles['divider']} />
