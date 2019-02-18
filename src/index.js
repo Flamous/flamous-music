@@ -111,7 +111,7 @@ const flamous = app(
       <UIViewRoute path='/library' render={Library} viewName='library' />
       <UIViewRoute path='/profile' render={Profile} viewName='profile' />
       <UIViewRoute path='/settings/change-password' render={ChangePassword} viewName='profile' exact />
-      <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='library' />
+      <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='profile' />
 
       <UIView displayView='home' />
       <UIView displayView='profile' />
