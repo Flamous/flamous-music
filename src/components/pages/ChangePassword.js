@@ -37,14 +37,12 @@ const Page = (props) => (state, actions) => (context) => {
         <form onsubmit={handleSubmit}>
           <div class='row'>
             <div class={styles['input-container']}>
-              <label for='album-description'>Current</label>
-              <input oncreate={elem => elem.focus()} type='password' id='current-password' oninput={handleChange} value={state['current-password']} />
+              <label for='current-password'>Current</label>
             </div>
           </div>
           <div class='row'>
             <div class={styles['input-container']}>
-              <label for='album-description'>New</label>
-              <input type='password' id='new-password' oninput={handleChange} value={state['new-password']} />
+              <label for='new-password'>New</label>
             </div>
           </div>
           <div class='row'>
