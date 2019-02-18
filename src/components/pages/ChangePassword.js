@@ -32,21 +32,22 @@ const Page = (props) => (state, actions) => (context) => {
   return <div>
     <UIHeader nav={{ start: <UIBackButton />, middle: 'Change Password' }} />
     <main class={styles['main']}>
-      {/* <h3>Account</h3> */}
       <section class={styles['account']}>
         <form onsubmit={handleSubmit}>
           <div class='row'>
             <div class={styles['input-container']}>
               <label for='current-password'>Current</label>
+              <input placeholder='Type current password...' oncreate={elem => elem.focus()} type='password' id='current-password' oninput={handleChange} value={state['current-password']} />
             </div>
           </div>
           <div class='row'>
             <div class={styles['input-container']}>
               <label for='new-password'>New</label>
+              <input placeholder='Type new password...' type='password' id='new-password' oninput={handleChange} value={state['new-password']} />
             </div>
           </div>
           <div class='row'>
-            <button>Change Password</button>
+            <button class={styles['save']}>Save</button>
           </div>
         </form>
       </section>
