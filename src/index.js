@@ -15,12 +15,10 @@ import Library from './components/pages/Library'
 import Profile from './components/pages/Profile'
 import Login from './components/pages/Login'
 import Home from './components/Home.js'
-import MusicKit from './components/MusicKit'
 import registerServiceWorker from './modules/serviceWorker'
 import NewAlbum from './components/pages/NewAlbum'
 import AlbumDetails from './components/pages/AlbumDetails'
 import License from './components/pages/License'
-import Settings from './components/pages/Settings'
 import ChangePassword from './components/pages/ChangePassword'
 
 // Modules
@@ -112,7 +110,7 @@ const flamous = app(
       {/* <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' /> */}
       <UIViewRoute path='/library' render={Library} viewName='library' />
       <UIViewRoute path='/profile' render={Profile} viewName='profile' />
-      <UIViewRoute path='/settings/change-password' render={ChangePassword} viewName='library' exact />
+      <UIViewRoute path='/settings/change-password' render={ChangePassword} viewName='profile' exact />
       <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='library' />
 
       <UIView displayView='home' />
