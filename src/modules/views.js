@@ -1,5 +1,5 @@
 import Home from '../components/Home.js'
-import MusicKit from '../components/MusicKit'
+import Profile from '../components/pages/Profile'
 import Library from '../components/pages/Library'
 
 const state = {
@@ -14,15 +14,15 @@ const state = {
       ],
       root: '/'
     },
-    'music-kit': {
+    'profile': {
       stack: [
         {
-          viewName: 'music-kit',
-          path: '/music-kit',
-          Component: MusicKit
+          viewName: 'profile',
+          path: '/profile',
+          Component: Profile
         }
       ],
-      root: '/music-kit'
+      root: '/profile'
     },
     library: {
       stack: [

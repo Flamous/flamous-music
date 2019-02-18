@@ -8,7 +8,7 @@ import homeBlueSVG from '~/assets/icons/home_blue.svg'
 import librarySVG from '~/assets/icons/library.svg'
 import libraryBlueSVG from '~/assets/icons/library_blue.svg'
 import kitBlueSVG from '~/assets/icons/kit_blue.svg'
-import kitSVG from '~/assets/icons/kit.svg'
+import UIIcon from './UIIcon'
 import cc from 'classcat'
 
 const UITabBar = (props, children) => (context) => {
@@ -30,15 +30,17 @@ const UITabBar = (props, children) => (context) => {
       <span>Home</span>
     </SetActive>
 
-    <SetActive viewName='music-kit' class={cc([styles['item'], { [styles['active']]: activeView === 'music-kit' }])}>
-      <img class={styles['icon']} alt='Music Kit Icon' src={activeView === 'music-kit' ? kitBlueSVG : kitSVG} />
-      <span>Music Kit</span>
-    </SetActive>
-
     <SetActive viewName='library' class={cc([styles['item'], { [styles['active']]: activeView === 'library' }])}>
       <img class={styles['icon']} alt='Library Icon' src={activeView === 'library' ? libraryBlueSVG : librarySVG} />
       <span>Library</span>
     </SetActive>
+
+    <SetActive viewName='profile' class={cc([styles['item'], { [styles['active']]: activeView === 'profile' }])}>
+      {/* <img class={styles['icon']} alt='Profile Icon' src={activeView === 'profile' ? kitBlueSVG : kitSVG} /> */}
+      <UIIcon icon='user' />
+      <span>Profile</span>
+    </SetActive>
+
     <Link to='/player' class={styles['item']}>
       <img alt='Cover Image' src={placeholderImage} />
     </Link>
