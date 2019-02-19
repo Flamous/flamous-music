@@ -9,37 +9,77 @@ import placeholderAlbum from '~/assets/song_placeholder.svg'
 import placeholderUser from '~/assets/profile.svg'
 import UIIcon from '../UI/UIIcon'
 
-const Library = (props) => (state, actions) => {
+const Library = (props) => (state, actions) => (context) => {
   let { auth, actions: { auth: { logout } } } = state
+  let { page: { put, state: pageState } } = context
   let isAlbums = auth.albums && Object.keys(auth.albums).length > 0
 
+  function handleInput (event) {
+    console.log(event)
+  }
+
   let UserHeader = () => {
-    return <div class={styles['user-info']}>
-      <div class={styles['user-image']}>
+    let inEditMode = pageState.inEditMode
+    let DisplayName = inEditMode
+      ? <input type='text' oninput={handleInput} />
+      : <div class={styles['display-name']}>Display Name</div>
+
+    let UserImage = inEditMode
+      ? (<div class={styles['user-image']}>
+        <img src={placeholderUser} />
+        <button class='white'>Change <UIIcon height='20' width='20' icon='image' /></button>
+      </div>)
+      : <div class={styles['user-image']}>
         <img src={placeholderUser} />
       </div>
+
+    return <div class={styles['user-info']}>
+      { UserImage }
       <div>
-        <span class={styles['display-name']}>Display Name</span><br />
+        { DisplayName }
         <span class={styles['username']}>@username</span>
       </div>
     </div>
   }
 
-  return <UIPage {...props} nonInteractive>
-    <UIHeader
+  function toggleEditMode () {
+    let inEditMode = !pageState.inEditMode
+    put({
+      inEditMode
+    })
+  }
+
+  let Header = () => {
+    let nav
+
+    if (pageState.inEditMode) {
+      nav = {
+        start: <button onclick={toggleEditMode} class='white'>Cancel</button>,
+        middle: 'Edit Profile',
+        end: <button onclick={toggleEditMode}>Save Profile</button>
+      }
+    } else {
+      nav = {
+        middle: 'Profile',
+        end: <button onclick={toggleEditMode} class='white'>
+            Edit <UIIcon style={{ marginLeft: '5px' }} width='20' height='20' icon='edit-2' />
+        </button>
+      }
+    }
+
+    return <UIHeader
       noDynamicTitle
       title={UserHeader}
-      nav={{
-        middle: 'Profile',
-        end: <button class='white'>Edit <UIIcon style={{ marginLeft: '5px' }} width='20' height='20' icon='edit-2' /></button>
-      }}
+      nav={nav}
     />
+  }
 
-    <div>
+  let Content = () => {
+    return <div>
       {
         !auth.isAuthenticated && <main>
           <p style={{ textAlign: 'center' }}>
-            Share your music with the world. <br />Sign Up to upload music.
+          Share your music with the world. <br />Sign Up to upload music.
             <br />
             <br />
             <UILink class='button' to='/signup'>Create Account</UILink>
@@ -57,16 +97,16 @@ const Library = (props) => (state, actions) => {
               {
                 !isAlbums && !auth.isLoadingAlbums && <div>
                   <p style={{ textAlign: 'center' }}>
-            You have not created an album yet
+          You have not created an album yet
                   </p>
                 </div>
               }
               {
                 isAlbums && auth.albums.map((album) => {
-                  // let formattedLastUpdated
-                  // if (album.lastUpdated) {
-                  //   formattedLastUpdated = new Date(album.lastUpdated * 1000).toLocaleDateString(navigator.language, { year: '2-digit', month: 'short', day: 'numeric' })
-                  // }
+                // let formattedLastUpdated
+                // if (album.lastUpdated) {
+                //   formattedLastUpdated = new Date(album.lastUpdated * 1000).toLocaleDateString(navigator.language, { year: '2-digit', month: 'short', day: 'numeric' })
+                // }
                   return <li><UILink class={styles['album']} to={`/albums/${album.albumId}`}>
                     <div class={styles['image-wrapper']}>
                       <div class={styles['image-inner']}>
@@ -98,7 +138,7 @@ const Library = (props) => (state, actions) => {
           <section class={styles['account']}>
             <div class='row'>
               <div class={styles['text']}>
-            Logged in as<br /><b>{auth.cognitoUser.attributes.email}</b>
+          Logged in as<br /><b>{auth.cognitoUser.attributes.email}</b>
               </div>
               <div>
                 <button onclick={logout}>Logout</button>
@@ -127,7 +167,7 @@ const Library = (props) => (state, actions) => {
             <hr />
             <div class='row'>
               <div class={styles['text']}>
-                Flamous Version
+              Flamous Version
               </div>
               <div>
                 { process.env.npm_package_version }
@@ -135,7 +175,7 @@ const Library = (props) => (state, actions) => {
             </div>
             <div class='row'>
               <div class={styles['text']}>
-                Contact
+              Contact
               </div>
               <div>
                 <a href='mailto:hello@flamous.io'>hello@flamous.io</a>
@@ -145,7 +185,16 @@ const Library = (props) => (state, actions) => {
         </main>
       }
     </div>
-  </UIPage>
+  }
+
+  return <div>
+    <Header />
+    {
+      !pageState.inEditMode && <Content />
+    }
+  </div>
 }
 
-export default Library
+export default (props) => <UIPage {...props} nonInteractive>
+  <Library {...props} />
+</UIPage>
