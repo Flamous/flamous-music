@@ -13,7 +13,7 @@ const HeaderTitle = (props, children) => {
 }
 
 const HeaderNav = (props) => {
-  let { nav = {}, title, isHeaderTitleHidden } = props
+  let { nav = {}, title, isHeaderTitleHidden, noDynamicTitle } = props
   let { start, middle, end } = nav
 
   return <div class={styles['header-nav']}>
@@ -28,8 +28,15 @@ const HeaderNav = (props) => {
       <div class={styles['container']}>
         <span class={cc([styles['item'], { [styles['header-title-hidden']]: isHeaderTitleHidden }])}>
           {/* eslint-disable-next-line */}
-          <span>{(middle && middle) || <pre> </pre>}</span>
-          <span class={styles['dynamic-title']}>{title}</span>
+          {
+            noDynamicTitle && <span>{middle && middle}</span>
+          }
+          {
+            !noDynamicTitle && [
+              <span class={styles['middle']}>{(middle && middle) || <pre />}</span>,
+              <span class={styles['dynamic-title']}>{title}</span>
+            ]
+          }
         </span>
       </div>
 
@@ -79,9 +86,10 @@ const actions = {
 const view = (state, actions) => (props, children) => (context) => {
   let { title, nav = {} } = props
   let { initObserver } = actions
+  let noDynamicTitle = props.hasOwnProperty('noDynamicTitle')
 
   return <header>
-    <HeaderNav isHeaderTitleHidden={state.isHeaderHidden} title={title} nav={nav}>
+    <HeaderNav noDynamicTitle={noDynamicTitle} isHeaderTitleHidden={state.isHeaderHidden} title={title} nav={nav}>
       {[
         nav.start,
         nav.middle,

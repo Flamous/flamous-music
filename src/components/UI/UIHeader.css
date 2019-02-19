@@ -56,10 +56,10 @@
   transition: opacity 200ms 200ms;
   opacity: 1;
 }
-.header-nav .item *:first-child {
+.header-nav .item .middle {
   transition: opacity 200ms 200ms;
 }
-.header-nav .header-title-hidden *:first-child {
+.header-nav .header-title-hidden .middle {
   transition: opacity 200ms 0ms;
   opacity: 0;
 }
