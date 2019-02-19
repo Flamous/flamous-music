@@ -6,20 +6,36 @@ import UIHeader from '../UI/UIHeader'
 import UISpinner from '../UI/UISpinner'
 import styles from './Profile.css'
 import placeholderAlbum from '~/assets/song_placeholder.svg'
+import placeholderUser from '~/assets/profile.svg'
 import UIIcon from '../UI/UIIcon'
 
 const Library = (props) => (state, actions) => {
   let { auth, actions: { auth: { logout } } } = state
   let isAlbums = auth.albums && Object.keys(auth.albums).length > 0
 
+  let UserHeader = () => {
+    return <div class={styles['user-info']}>
+      <div class={styles['user-image']}>
+        <img src={placeholderUser} />
+      </div>
+      <div>
+        <span class={styles['display-name']}>Display Name</span><br />
+        <span class={styles['username']}>@username</span>
+      </div>
+    </div>
+  }
+
   return <UIPage {...props} nonInteractive>
     <UIHeader
-      title='Profile'
-      nav={{ middle: 'Profile' }}
+      noDynamicTitle
+      title={UserHeader}
+      nav={{
+        middle: 'Profile',
+        end: <button class='white'>Edit <UIIcon style={{ marginLeft: '5px' }} width='20' height='20' icon='edit-2' /></button>
+      }}
     />
 
     <div>
-
       {
         !auth.isAuthenticated && <main>
           <p style={{ textAlign: 'center' }}>

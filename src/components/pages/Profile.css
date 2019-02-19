@@ -110,3 +110,27 @@ section.account {
 .secondary-text {
   color: rgba(0, 0, 0, 0.65);
 }
+
+.user-info {
+  display: flex;
+  width: 100%;
+  margin: -0.7rem;
+  font-size: 1rem;
+  font-weight: normal;
+  align-items: center;
+}
+.user-info > * {
+  margin: 0.7rem;
+}
+.user-image {
+  flex-basis: 30%;
+  border-radius: 50%;
+}
+.user-image img {
+  width: 100%;
+  display: block;
+}
+.display-name {
+  font-weight: bold;
+  font-size: 1.2em;
+}
