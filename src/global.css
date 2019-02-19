@@ -97,13 +97,11 @@ svg {
   transition: background-color 400ms;
   align-items: center;
 }
-:global(.row):last-child {
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
+:global(.row):first-child {
+  border-radius: 0.5em 0.5em 0 0;
 }
 :global(.row):last-child {
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
+  border-radius: 0 0 0.5em 0.5em;
 }
 
 a:global(.row):hover {
