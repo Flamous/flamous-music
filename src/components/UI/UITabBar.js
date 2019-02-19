@@ -26,8 +26,9 @@ const UITabBar = (props, children) => (context) => {
 
   return <nav class={styles['tab-bar']}>
     <SetActive viewName='home' class={cc([styles['item'], { [styles['active']]: activeView === 'home' }])}>
-      <img class={styles['icon']} alt='Home Icon' src={activeView === 'home' ? homeBlueSVG : homeSVG} />
-      <span>Home</span>
+      {/* <img class={styles['icon']} alt='Home Icon' src={activeView === 'home' ? homeBlueSVG : homeSVG} /> */}
+      <UIIcon icon='music' />
+      <span>Explore</span>
     </SetActive>
 
     <SetActive viewName='library' class={cc([styles['item'], { [styles['active']]: activeView === 'library' }])}>
