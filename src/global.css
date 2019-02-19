@@ -19,13 +19,14 @@ button, a:global(.button) {
   margin-right: 0.4em;
   white-space: nowrap;
   user-select: none;
-  padding: 0.4em 1em;
-  border-radius: 7px;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
   box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.14);
+  align-items: center;
 }
 
-button, a:global(.button) > svg {
-  margin-right: 0.4em;
+button > svg, a:global(.button) > svg {
+  transform: translateY(-1px);
 }
 
 button:global(.white), a:global(.button):global(.white) {
