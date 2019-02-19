@@ -9,16 +9,39 @@ import UILink from '../UI/UILink'
 import UISpinner from '../UI/UISpinner'
 
 const state = {
-  animation: slideUp.state
+  animation: slideUp.state,
+  heroImage: null
 }
 
 const actions = {
-  animation: slideUp.actions
+  animation: slideUp.actions,
+  fetchHeroImage: () => (_, actions) => {
+    // let url = `https://api.unsplash.com/photos/random?query=musical instrument&featured&orientation=landscape`
+    let url = `https://api.unsplash.com/photos/random?collections=4322548&orientation=landscape`
+
+    let headers = new window.Headers()
+    headers.append('Authorization', `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`)
+
+    window.fetch(url, {
+      headers
+    })
+      .then(response => response.json())
+      .then(result => {
+        actions.setHeroImage(result.urls.regular)
+      })
+      .catch(console.warn)
+  },
+  setHeroImage (url) {
+    return {
+      heroImage: url
+}
+  }
 }
 
 const view = (state, actions) => (props, children) => (context) => {
   let { login, actions: { login: loginActions, auth } } = context
-  let { animation: { start: startAnimation } } = actions
+  let { animation: { start: startAnimation }, fetchHeroImage } = actions
+  let { heroImage } = state
   let isLogin = props.match.path === '/login' // Is either /login or /signup
   let previousUrl = props.location.previous === '/login' || props.location.previous === '/signup' ? '/' : props.location.previous
 
@@ -123,8 +146,11 @@ const view = (state, actions) => (props, children) => (context) => {
   return <div
     class={styles['wrapper']}
     key='login'
-    oncreate={(element) => { element.parentNode.actions = actions; startAnimation({ element, initialLoad: context.initialLoad }) }}
+    oncreate={(element) => { fetchHeroImage(); element.parentNode.actions = actions; startAnimation({ element, initialLoad: context.initialLoad }) }}
   >
+    <div class={styles['hero-image']}>
+      <img onload={event => { event.target.parentNode.classList.add('loaded') }} src={heroImage || ''} />
+    </div>
     <header class={styles['header']}>
       <div class={styles['top-row']}>
         <span><img src={flamousLogo} /></span>
