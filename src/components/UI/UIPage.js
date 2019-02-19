@@ -43,7 +43,7 @@ const UIPage = nestable(
 
     setContext({
       ...context,
-      UIPage: {
+      page: {
         put: childPut,
         state: state
       }

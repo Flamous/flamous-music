@@ -16,18 +16,18 @@ const MAX_FILE_SIZE = 10000000 // 10000000 Bytes == 10 MB
 
 const AlbumDetails = (props) => (state, actions) => (context) => {
   let { auth, actions: { auth: authActions } } = state
-  let { UIPage } = context
+  let { page } = context
   let albumId = props.match.params.albumId
 
   function validateFile (fileInput) {
     if (fileInput.size >= MAX_FILE_SIZE) {
-      UIPage.put({
+      page.put({
         fileError: 'The selected file is too large.'
       })
       return false
     }
 
-    UIPage.put({
+    page.put({
       fileError: null
     })
     return true
@@ -36,11 +36,11 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
   function handleChange (event) {
     let target = event.target
 
-    UIPage.put({
+    page.put({
       [event.target.id]: (target.files && target.files[0]) || target.value,
       propsToUpdate: [
         ...new Set([
-          ...UIPage.state.propsToUpdate,
+          ...page.state.propsToUpdate,
           event.target.id
         ])
       ]
@@ -52,7 +52,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       if (!validateFile(target.files[0])) return
       reader.readAsDataURL(target.files[0])
       reader.onloadend = () => {
-        UIPage.put({
+        page.put({
           coverImageUrl: reader.result
         })
       }
@@ -62,17 +62,17 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
   async function handleSave (event) {
     event.preventDefault()
 
-    if (UIPage.state.propsToUpdate.length === 0) return
+    if (page.state.propsToUpdate.length === 0) return
 
-    UIPage.put({
+    page.put({
       isLoading: true
     })
 
     let valuesToUpdate = {}
     let file
 
-    UIPage.state.propsToUpdate.forEach((property) => {
-      valuesToUpdate[property.split('-')[1]] = UIPage.state[property]
+    page.state.propsToUpdate.forEach((property) => {
+      valuesToUpdate[property.split('-')[1]] = page.state[property]
     })
 
     if (valuesToUpdate['cover'] && validateFile(valuesToUpdate['cover'])) {
@@ -98,7 +98,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
     }
 
     if (Object.keys(valuesToUpdate).length === 0) {
-      UIPage.put({
+      page.put({
         isLoading: false
       })
       return
@@ -107,7 +107,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
 
     API.graphql(graphqlOperation(updateAlbum, valuesToUpdate))
       .then((response) => {
-        UIPage.put({
+        page.put({
           isLoading: false
         })
 
@@ -124,7 +124,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       .catch((error) => {
         console.error(error)
 
-        UIPage.put({
+        page.put({
           isLoading: false
         })
       })
@@ -133,7 +133,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
   function handleDelete (event) {
     event.preventDefault()
 
-    UIPage.put({
+    page.put({
       isLoading: true
     })
 
@@ -151,7 +151,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       .catch((error) => {
         console.error(error)
 
-        UIPage.put({
+        page.put({
           isLoading: false
         })
       })
@@ -162,7 +162,7 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       .then((response) => {
         let albumData = response.data.album
 
-        UIPage.put({
+        page.put({
           coverImagePath: albumData.coverImagePath,
           'album-title': albumData.title,
           'album-description': albumData.description,
@@ -174,14 +174,14 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
       })
   }
 
-  !UIPage.state.albumId && UIPage.put({
+  !page.state.albumId && page.put({
     albumId,
     propsToUpdate: []
   })
 
-  if (auth.s3BasePath && !UIPage.state.coverImageUrl) {
-    UIPage.put({
-      coverImageUrl: UIPage.state.coverImagePath ? `${auth.s3BasePath}/albums/${albumId}/cover` : placeholder
+  if (auth.s3BasePath && !page.state.coverImageUrl) {
+    page.put({
+      coverImageUrl: page.state.coverImagePath ? `${auth.s3BasePath}/albums/${albumId}/cover` : placeholder
     })
   }
 
@@ -190,32 +190,32 @@ const AlbumDetails = (props) => (state, actions) => (context) => {
 
     <main class={styles['main']}>
       {
-        UIPage.state.isLoading && <UISpinner />
+        page.state.isLoading && <UISpinner />
       }
       {
-        !UIPage.state.isLoading && <form onsubmit={handleSave}>
+        !page.state.isLoading && <form onsubmit={handleSave}>
 
           {
-            UIPage.state.fileError && <p>{UIPage.state.fileError}</p>
+            page.state.fileError && <p>{page.state.fileError}</p>
           }
 
           <div class={styles['input-container']}>
             <span>
               <label for='album-title'>Title</label>
             </span>
-            <input type='text' maxlength='40' id='album-title' oninput={handleChange} value={UIPage.state['album-title']} />
+            <input type='text' maxlength='40' id='album-title' oninput={handleChange} value={page.state['album-title']} />
           </div>
 
           <div class={styles['input-container']}>
             <label for='album-description'>Description</label>
-            <input type='text' id='album-description' oninput={handleChange} value={UIPage.state['album-description']} />
+            <input type='text' id='album-description' oninput={handleChange} value={page.state['album-description']} />
           </div>
 
           <div class={styles['input-container']}>
             <label for='album-cover'>Album Cover</label>
             <div>
               <input oninput={handleChange} style={{ margin: '1rem auto' }} id='album-cover' accept='image/*' type='file' />
-              <label for='album-cover'><img width='128' src={UIPage.state.coverImageUrl || placeholder} /></label>
+              <label for='album-cover'><img width='128' src={page.state.coverImageUrl || placeholder} /></label>
             </div>
           </div>
 

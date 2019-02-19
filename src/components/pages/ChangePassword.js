@@ -27,7 +27,7 @@ const Page = (props) => (state, actions) => (context) => {
     })
   }
 
-  let { UIPage: { put, state = {} } } = context
+  let { page: { put, state = {} } } = context
 
   return <div>
     <UIHeader nav={{ start: <UIBackButton />, middle: 'Change Password' }} />
