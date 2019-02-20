@@ -8,14 +8,39 @@ import styles from './Profile.css'
 import placeholderAlbum from '~/assets/song_placeholder.svg'
 import placeholderUser from '~/assets/profile.svg'
 import UIIcon from '../UI/UIIcon'
+import Storage from '@aws-amplify/storage'
 
 const Library = (props) => (state, actions) => (context) => {
   let { auth, actions: { auth: { logout } } } = state
-  let { page: { put, state: pageState } } = context
+  let { page: { put, state: pageState }, auth: { artistId } } = context
   let isAlbums = auth.albums && Object.keys(auth.albums).length > 0
 
   function handleInput (event) {
     console.log(event)
+  }
+
+  async function saveProfile () {
+    await uploadProfileImage()
+  }
+
+  async function uploadProfileImage () {
+    let imagePath = `artists/${artistId}/profile-picture`
+    let file = pageState.profilePicture
+
+    return
+
+    try {
+      await Storage.put(imagePath, file, {
+        level: 'protected',
+        contentType: file.type,
+        progressCallback (progress) {
+          console.info(progress)
+          console.info(`Uploaded ${(progress.loaded / progress.total) * 100}%`)
+        }
+      })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   let UserHeader = () => {
@@ -27,7 +52,10 @@ const Library = (props) => (state, actions) => (context) => {
     let UserImage = inEditMode
       ? (<div class={styles['user-image']}>
         <img src={placeholderUser} />
-        <button class='white'>Change <UIIcon height='20' width='20' icon='image' /></button>
+        <label for='profile-picture'>
+          <button class='white'>Change <UIIcon height='20' width='20' icon='image' /></button>
+        </label>
+        <input id='profile-picture' oninput={event => { console.log(event.target.files); put({ profilePicture: event.target.files[0] }) }} accept='image/*' type='file' />
       </div>)
       : <div class={styles['user-image']}>
         <img src={placeholderUser} />
@@ -56,7 +84,7 @@ const Library = (props) => (state, actions) => (context) => {
       nav = {
         start: <button onclick={toggleEditMode} class='white'>Cancel</button>,
         middle: 'Edit Profile',
-        end: <button onclick={toggleEditMode}>Save Profile</button>
+        end: <button onclick={saveProfile}>Save</button>
       }
     } else {
       nav = {
