@@ -1,0 +1,97 @@
+.player {
+  height: 100%;
+  width: 100%;
+  z-index: 1100;
+  position: fixed;
+  overflow-y: auto;
+  color: #212121;
+  overscroll-behavior: contain;
+  box-shadow: 0 -2px 0 0 #f0f0f0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  text-align: center;
+}
+.header .close {
+  color: rgba(0, 0, 0, 0.3);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.header span {
+  font-style: italic;
+  font-weight: 300;
+}
+.header h1 {
+  margin: 0 0 0.1em;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 1em 1em 0;
+}
+.cover-image {
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0px 5px 0, rgba(0, 0, 0, 0.2) 0 5px 37px 0;
+  border-radius: 0.5em;
+  overflow: hidden;
+}
+.cover-image img {
+  width: 100%;
+  display: block;
+}
+.song-infos {
+  text-align: center;
+  margin-top: 2em;
+}
+.song-infos .title {
+  font-weight: bold;
+}
+.song-infos .artists {
+  color: rgba(0, 0, 0, 0.5);
+}
+.scrubber {
+  margin: 1em -0.3em;
+  display: flex;
+  align-items: center;
+}
+.scrubber .slider {
+  flex-grow: 1;
+  margin: 0 1em;
+  border-radius: 10px;
+  height: 10px;
+  background-color: #fafafa;
+  box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 2px 0;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.controls .play svg {
+  margin-left: 4px;
+}
+.controls svg {
+  fill: black;
+  stroke: black;
+  stroke-width: 1px;
+  /* stroke-linecap: round;
+  stroke-linejoin: round; */
+
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+.footer button {
+  color: rgba(0, 0, 0, 0.6) !important;
+  margin: 0;
+}
+.footer svg {
+  stroke-width: 1.5px;
+}
