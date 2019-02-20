@@ -179,9 +179,10 @@ const view = (state, actions) => (props, children) => (context) => {
                     {
                       login.isLoading
                         ? <div><UISpinner /><p>Logging in...</p></div>
-                        : <div><input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
+                        : <div>
+                          <input aria-label='Email' autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
 
-                          <input autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
+                          <input aria-label='Password' autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
                           {/* <span class={styles['dots']}>••••••••</span> */}
 
                           <div style={{ textAlign: 'center' }}>
@@ -218,7 +219,7 @@ const view = (state, actions) => (props, children) => (context) => {
                           <input required autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} placeholder='E.g. your-email@example.com' type='email' />
 
                           {/* <label for='name'>Password</label> */}
-                          <input required autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} placeholder='Password' type='password' />
+                          <input aria-label='Password' required autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} placeholder='Password' type='password' />
 
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Next</button>
