@@ -54,6 +54,10 @@
 .item img {
   display: block;
 }
+.item.player img {
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 0 7px 0;
+}
 
 .item:first-child {
   /* display: block; */

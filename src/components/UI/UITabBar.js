@@ -42,7 +42,7 @@ const UITabBar = (props, children) => (context) => {
       <span>Profile</span>
     </SetActive>
 
-    <Link to='/player' class={styles['item']}>
+    <Link to='/player' class={cc([styles['item'], styles['player']])}>
       <img alt='Cover Image' src={placeholderImage} />
     </Link>
   </nav>
