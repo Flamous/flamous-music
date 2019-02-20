@@ -23,7 +23,7 @@ const UILink = (props, children) => (state) => {
 
   let { to, replace, back } = props
 
-  return <a onclick={handleClick} {...props}>{children}</a>
+  return <a onclick={handleClick} href={props.to} {...props}>{children}</a>
 }
 
 export default UILink
