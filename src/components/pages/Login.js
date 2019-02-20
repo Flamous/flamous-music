@@ -221,7 +221,7 @@ const view = (state, actions) => (props, children) => (context) => {
                           <input required autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} placeholder='Password' type='password' />
 
                           <div style={{ textAlign: 'center' }}>
-                            <button type='submit'>Create Account</button>
+                            <button type='submit'>Next</button>
                             <br />
                             <UILink class='button white' replace to='/login'>or Log In</UILink>
                           </div>
@@ -249,11 +249,20 @@ const view = (state, actions) => (props, children) => (context) => {
                   </div>
                 }
               </form>
+
             </div>
         }
 
       </section>
     </main>
+    <footer>
+      <span>Privacy Policy</span>
+      &middot;
+      <span>Terms of Use</span>
+      &middot;
+      <span>Support: <a href='mailto:hello@flamous.io'>hello@flamous.io</a></span>
+
+    </footer>
   </div>
 }
 

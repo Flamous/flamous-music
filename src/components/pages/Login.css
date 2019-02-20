@@ -8,12 +8,21 @@
   overscroll-behavior: contain;
   box-shadow: 0 -2px 0 0 #f0f0f0;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-@supports (backdrop-filter: blur(10px)) {
-  .wrapper {
-    backdrop-filter: blur(50px);
-    background-color: rgba(255, 255, 255, 0.9);    
-  }
+
+.wrapper footer {
+  padding: 0 0.5em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+.wrapper footer > * {
+  padding: 0.5em;
+  display: inline-block;
 }
 
 .header {
