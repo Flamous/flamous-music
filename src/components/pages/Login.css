@@ -39,7 +39,7 @@
 }
 
 .main {
-  padding: 1em;
+  padding: 0 1em 1em;
 }
 .main section {
   max-width: 24rem;
@@ -47,6 +47,7 @@
 }
 .main p {
   text-align: center;
+  margin-bottom: 3em;
 }
 .main input[type='password'] {
   /* font-size: 1.6rem; */
@@ -55,6 +56,12 @@
 .main input {
   width: 100%;
   max-width: unset;
+}
+.main label {
+  margin-left: 7px;
+  margin-bottom: -0.55em;
+  font-weight: bold;
+  display: block;
 }
 
 .input[type='password']:not(:placeholder-shown) {

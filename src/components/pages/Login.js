@@ -34,7 +34,7 @@ const actions = {
   setHeroImage (url) {
     return {
       heroImage: url
-}
+    }
   }
 }
 
@@ -181,8 +181,8 @@ const view = (state, actions) => (props, children) => (context) => {
                         ? <div><UISpinner /><p>Logging in...</p></div>
                         : <div><input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
 
-                          <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
-                          <span class={styles['dots']}>••••••••</span>
+                          <input autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
+                          {/* <span class={styles['dots']}>••••••••</span> */}
 
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Login</button>
@@ -203,14 +203,22 @@ const view = (state, actions) => (props, children) => (context) => {
               <form onsubmit={handleSubmit}>
                 {
                   !login.hasSubmittedEmail && <div>
-                    <p>Join the future of music.<br />Listen, create, share.</p>
+                    <p>Join our community  of music lovers and musicians.</p>
                     {
                       login.isLoading
                         ? <div><UISpinner /></div>
-                        : <div><input autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
+                        : <div>
+                          <label for='name'>Display name</label>
+                          <input required autocomplete='username email' id='name' oninput={handleInput} value={login.name} class={styles['input']} type='text' placeholder='E.g. John Baginbu' />
 
-                          <input class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
-                          <span class={styles['dots']}>••••••••</span>
+                          {/* <label for='name'>Username</label>
+                          <input id='username' oninput={handleInput} value={login.username} class={styles['input']} type='text' /> */}
+
+                          <label for='name'>E-Mail</label>
+                          <input required autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} placeholder='E.g. your-email@example.com' type='email' />
+
+                          {/* <label for='name'>Password</label> */}
+                          <input required autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} placeholder='Password' type='password' />
 
                           <div style={{ textAlign: 'center' }}>
                             <button type='submit'>Create Account</button>
