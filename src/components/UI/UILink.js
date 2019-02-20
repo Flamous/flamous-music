@@ -3,8 +3,13 @@ import { h } from 'hyperapp'
 
 const UILink = (props, children) => (state) => {
   function handleClick (event) {
-    event.preventDefault()
+    if (
+      event.shiftKey ||
+      event.altKey ||
+      event.ctrlKey
+    ) return
 
+    event.preventDefault()
     if (!replace && !back) {
       window.history.pushState(state.location.pathname, '', to)
       return
