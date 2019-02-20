@@ -20,6 +20,7 @@ import NewAlbum from './components/pages/NewAlbum'
 import AlbumDetails from './components/pages/AlbumDetails'
 import License from './components/pages/License'
 import ChangePassword from './components/pages/ChangePassword'
+import Player from './components/pages/Player'
 
 // Modules
 import auth from './modules/auth'
@@ -119,6 +120,7 @@ const flamous = app(
 
       <Route path='/login' render={Login} />
       <Route path='/signup' render={Login} />
+      <Route path='/player' render={Player} />
 
       <Route path='/flamous-license' render={License} />
       <Route path='/create-album' render={NewAlbum} />
