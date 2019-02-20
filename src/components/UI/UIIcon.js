@@ -2,12 +2,31 @@
 import { h } from 'hyperapp'
 import iconSprite from '~/assets/icons/feather-sprite.svg'
 
+const Use = (props, children) => {
+  const href = props.href
+  const XLINK_NS = 'http://www.w3.org/1999/xlink'
+
+  const setLink = (element, oldProps) => {
+    if (href) {
+      element.setAttributeNS(XLINK_NS, 'href', href)
+    } else if (!oldProps || href !== oldProps.href) {
+      element.removeAttributeNS(XLINK_NS, 'href')
+    }
+  }
+
+  return (
+    <use {...props} oncreate={setLink} onupdate={setLink}>
+      {children}
+    </use>
+  )
+}
+
 const UIIcon = (props) => {
   let { icon } = props
 
   delete props.icon
   return <svg width='24' height='24' {...props}>
-    <use href={`${iconSprite}#${icon}`} />
+    <Use href={`${iconSprite}#${icon}`} />
   </svg>
 }
 
