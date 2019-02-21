@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'hyperapp'
 import UILink from './UILink'
-import leftArrow from '~/assets/blue_left.svg'
+import UIIcon from './UIIcon'
 import styles from './UIBackButton.css'
 
 export default (props, children) => (state) => {
@@ -14,6 +14,6 @@ export default (props, children) => (state) => {
   let isBrowserHistoryBack = location.previous === previousViewStackPath
 
   return <UILink class={styles['back-button']} back={isBrowserHistoryBack} replace={!isBrowserHistoryBack} to={backLocation}>
-    <img src={leftArrow} /><span>{text || 'Back'}</span>
+    <UIIcon style={{ marginRight: '-0.5em' }} width='36' height='36' icon='chevron-left' /><span>{text || 'Back'}</span>
   </UILink>
 }
