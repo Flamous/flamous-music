@@ -21,6 +21,7 @@ import AlbumDetails from './components/pages/AlbumDetails'
 import License from './components/pages/License'
 import ChangePassword from './components/pages/ChangePassword'
 import Player from './components/pages/Player'
+import AlbumEditor from './components/pages/AlbumEditor'
 
 // Modules
 import auth from './modules/auth'
@@ -68,6 +69,7 @@ const flamous = app(
     },
     new: {
       album: {
+        songs: [],
         title: null,
         isLoading: false
       }
@@ -124,6 +126,7 @@ const flamous = app(
 
       <Route path='/flamous-license' render={License} />
       <Route path='/create-album' render={NewAlbum} />
+      <Route path='/album-editor' render={AlbumEditor} />
     </div>
   },
   document.body
