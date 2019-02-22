@@ -22,6 +22,7 @@ const UILink = (props, children) => (state) => {
   }
 
   let { to, replace, back } = props
+  // TODO: Set href properly when 'back' prop is used
 
   return <a onclick={handleClick} href={props.to} {...props}>{children}</a>
 }
