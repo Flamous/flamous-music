@@ -1,6 +1,10 @@
 a {
   cursor: default;
 }
+body {
+  background-color: white;
+  color: black;
+}
 
 button, a:global(.button) {
   appearance: none;
