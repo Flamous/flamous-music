@@ -154,6 +154,8 @@ const Library = (props) => (state, actions) => (context) => {
               }
               <li>
                 <UILink to='create-album' class='button white'><UIIcon icon='plus' /> New Album</UILink>
+                <UILink to='album-editor' class='button white'><UIIcon icon='disc' /> Album Editor Demo</UILink>
+
               </li>
             </ul>
 
