@@ -15,7 +15,7 @@
 }
 .header-nav .container {
   display: flex;
-  flex-basis: 33%;
+  flex-basis: 33.333%;
   padding: 0 0.1em;
 }
 .header-nav .container:nth-child(2) {
