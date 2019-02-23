@@ -134,38 +134,40 @@ const view = (state, actions) => (props, children) => (context) => {
       <h3>Additional Info</h3>
       <section>
         <div class={cc(['row', styles['input-row']])}>
-          <div class={styles['switch-row']}>
+          <label for='release-as-single' class={styles['switch-row']}>
             <input id='release-as-single' type='checkbox' class={cc(['switch', styles['release-as-single']])} /> <label for='release-as-single'>Release as Single</label>
             <label for='release-as-single' class='switch'>
               <span class='knob' />
             </label>
-          </div>
-          <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>Release your album as a Single when you want to publish a single song, or multiple versions of the same song.<br /><br />For more info, have a look at our <a href='#'>Reference Guide</a></p>
+          </label>
+          <p style={{ color: 'rgba(0, 0, 0, 0.6)' }}>Release your album as a Single when you want to publish a single song, or multiple versions of the same song.<br /><br />For more info, have a look at our <a href='#'>Reference Guide</a></p>
         </div>
         <div class={cc(['row', styles['input-row']])}>
           <label for='story'>
             Story<br />
           </label>
-          <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>Albums with stories maximize their chance to be featured on our social media channels. Your Story is also displayed on the public album page.</p>
+          <p style={{ color: 'rgba(0, 0, 0, 0.6)' }}>Albums with stories maximize their chance to be featured on our social media channels. Your Story is also displayed on the public album page.</p>
           <textarea id='story' rows='4' oninput={handleInput} type='text' value={album.story} placeholder='What went into the album ...' />
         </div>
       </section>
 
       <h3 />
       <section>
-        <div class={cc(['row'])}>
+        <div class={cc(['row', styles['input-row']])}>
           <div>
             <label for='release-your-album'>Release your album</label>
-            <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>
+            <p style={{ color: 'rgba(0, 0, 0, 0.6)' }}>
               When you release your album, it is publicly visible and can be listened to.
               <br />
               <br />
               You can release your album now or choose a release date in the future.
             </p>
           </div>
+          <div style={{ alignSelf: 'flex-end' }}>
+            <button class='white' onclick={handleSubmit} type='submit'>Release Now</button>
+            <button onclick={handleSubmit} type='submit'>Set Release Date</button>
+          </div>
         </div>
-        <button class='white' onclick={handleSubmit} type='submit'>Release Now</button>
-        <button onclick={handleSubmit} type='submit'>Set Release Date</button>
       </section>
     </main>
   </div>

@@ -19,7 +19,6 @@
 
 .wrapper section:last-child {
   border-radius: 0.5rem 0.5rem 0 0;
-  padding-bottom: 2em;
 }
 .wrapper :global(.header) h1 {
   justify-content: center;
@@ -47,8 +46,9 @@
   background-color: white;
   max-width: 32rem;
   margin: 0 auto;
-  padding: 0.8em 1px;
+  padding: 0 1px;
   border-radius: 0.5rem;
+  overflow: hidden;
 }
 .main section:first-child {
   border-radius: 0 0 0.5rem 0.5rem;
@@ -78,7 +78,7 @@
   font-weight: bold;
 }
 .main textarea {
-  margin: 0 -0.2em -0.5em;
+  margin: 0 -0.2em;
   width: calc(100% + 0.4em);
 }
 
@@ -194,10 +194,19 @@ input.audio-input, input.cover-image, input.release-as-single {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: calc(100% + 2rem);
+  margin: -1rem -1rem -0.7rem;
+  padding: 1rem 1rem 0.7rem !important;
+  transition: background-color 100ms;
+}
+@media (pointer: fine) {
+  .switch-row:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
 }
 :global(.button).cover-image-upload {
   background-color: white !important;
+  color: rgba(0, 0, 0, 0.7) !important;
   position: absolute;
   top: 0;
   left: 0;
@@ -211,16 +220,13 @@ input.audio-input, input.cover-image, input.release-as-single {
   text-align: center;
 }
 .main :global(.row) {
-  padding-bottom: 2em;
-  padding-top: 2em;
+  padding: 1rem;
 }
 .row {
   align-items: flex-start !important;
 }
 
-/* input:global(.switch) {
 
-} */
 label:global(.switch) {
   height: 1.6rem;
   width: 2.75rem;
@@ -230,6 +236,8 @@ label:global(.switch) {
   box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
   padding: 0 !important;
   transition: background-color 300ms;
+  position: relative;
+  right: 0.3em;
 }
 label:global(.switch) :global(.knob) {
   display: inline-block;
@@ -237,14 +245,12 @@ label:global(.switch) :global(.knob) {
   width: calc(1.6rem + 1px);
   background-color: white;
   border-radius: 100px;
-  box-shadow: inset rgba(0, 0, 0, 0.2) 0 -0.5px 1px 0, rgba(0, 0, 0, 0.3) 0 2px 2px -2px;
+  box-shadow: inset rgba(0, 0, 0, 0.35) 0 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -2px 2px -2px, rgba(0, 0, 0, 0.35) 0 3px 3px -3px;
   transition: transform 200ms;
 }
 input:global(.switch):checked ~ label:global(.switch) {
   background-color: #4CD964;
-  box-shadow: inset rgba(0, 0, 0, 0.4) 0 0 2px 0;
 }
 input:global(.switch):checked ~ label:global(.switch) :global(.knob) {
-  box-shadow: inset rgba(0, 0, 0, 0.2) 0 -0.5px 1px 0, rgba(0, 0, 0, 0.4) 0 2px 2px -2px;
-  transform: translateX(calc(2.75rem - 1.6rem + 1px));
+  transform: translateX(calc(2.75rem - 1.6rem));
 }
