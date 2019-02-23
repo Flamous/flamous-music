@@ -6,6 +6,10 @@ body {
   color: black;
   font-size: 0.95rem;
 }
+img {
+  display: block;
+  width: 100%;
+}
 
 button, a:global(.button), label:global(.button) {
   appearance: none;
