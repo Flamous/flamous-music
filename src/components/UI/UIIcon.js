@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h } from 'hyperapp'
 import iconSprite from '~/assets/icons/feather-sprite.svg'
+import cc from 'classcat'
 
 const Use = (props, children) => {
   const href = props.href
@@ -25,7 +26,7 @@ const UIIcon = (props) => {
   let { icon } = props
 
   delete props.icon
-  return <svg width='24' height='24' {...props}>
+  return <svg width='24' height='24' {...props} class={cc(['icon', props.class])}>
     <Use href={`${iconSprite}#${icon}`} />
   </svg>
 }
