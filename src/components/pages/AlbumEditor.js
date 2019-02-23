@@ -8,6 +8,7 @@ import { createAlbum } from '~/graphql/mutations'
 import UILink from '../UI/UILink'
 import UIIcon from '../UI/UIIcon'
 import cc from 'classcat'
+import albumPlaceholder from '../../assets/song_placeholder.svg'
 
 const state = {
   animation: slideUp.state
@@ -88,8 +89,24 @@ const view = (state, actions) => (props, children) => (context) => {
           <input aria-label='Title' id='title' maxlength='40' oninput={handleInput} type='text' value={album.title} placeholder='Album Title ...' />
         </div>
         <div class={cc(['row', styles['input-row']])}>
-          <label for='title'>Cover Image</label>
-          <input id='title' maxlength='40' oninput={handleInput} type='file' accept='*/image' value={album.coverImage} />
+          <label for='cover-image'>Cover Image</label>
+          <div style={{ display: 'flex', width: '100%' }}>
+            <div class={styles['cover-image']}>
+              {/* <label for='cover-image'> */}
+              <img src={albumPlaceholder} />
+              {/* <label for='cover-image'> */}
+              <label for='cover-image' class={cc([styles['cover-image-upload'], 'button'])}>
+                <UIIcon icon='upload-cloud' />
+                <br />
+                Upload
+              </label>
+              {/* </label> */}
+            </div>
+            <div>
+              .
+            </div>
+          </div>
+          <input id='cover-image' maxlength='40' oninput={handleInput} class={styles['cover-image']} type='file' accept='*/image' value={album.coverImage} />
         </div>
 
         <div class={cc(['row', styles['row'], styles['input-row']])}>
@@ -102,16 +119,12 @@ const view = (state, actions) => (props, children) => (context) => {
                     <span class={styles['song-number']}>{index + 1}</span>
                     <UIIcon icon='more-horizontal' />
                   </div>
-                  <div>
+                  <div class={styles['song-data']}>
                     <input class={styles['song-title']} type='text' value={song.title} placeholder='Song title' />
-                    {/* <span contenteditable class={styles['song-title']}>
-                      {song.title || 'Song Title'}
-                    </span> */}
                     <div>
                       <span>Audio: </span>
                       <label for={`song-${song.id}`} class={cc([styles['audio-input'], 'button', 'white'])}>
-                        {/* <UIIcon icon='music' /> */}
-                        Upload
+                        Upload File
                       </label>
                       <input id={`song-${song.id}`} class={styles['audio-input']} type='file' accept='*/audio' />
                     </div>
@@ -119,6 +132,11 @@ const view = (state, actions) => (props, children) => (context) => {
                 </li>
               })
             }
+            <div class={styles['dragndrop']}>
+              <span>
+                &larr; Drag to re-order &rarr;
+              </span>
+            </div>
           </ol>
           <button onclick={addSong}><UIIcon icon='plus' />Add Song</button>
         </div>
