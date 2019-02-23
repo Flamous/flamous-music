@@ -79,19 +79,14 @@ const view = (state, actions) => (props, children) => (context) => {
 
     <main class={styles['main']}>
       <section class={styles['account']}>
-        {/* <div class={cc(['row', styles['input-row']])} /> */}
         <div class={cc(['row', styles['input-row']])}>
-          {/* <label for='cover-image'>Cover Image</label> */}
           <div style={{ display: 'flex', width: '100%' }}>
             <div class={styles['cover-image']}>
-              {/* <label for='cover-image'> */}
               <img src={albumPlaceholder} />
-              {/* <label for='cover-image'> */}
               <label for='cover-image' class={cc([styles['cover-image-upload'], 'button', 'white'])}>
                 <UIIcon icon='image' />
-                Upload
+                Upload<br />Image
               </label>
-              {/* </label> */}
             </div>
             <div class={styles['album-title']}>
               <label for='title'>Title</label>
@@ -139,19 +134,20 @@ const view = (state, actions) => (props, children) => (context) => {
       <h3>Additional Info</h3>
       <section>
         <div class={cc(['row', styles['input-row']])}>
-          <div>
-            <input id='release-as-single' type='checkbox' /> <label for='release-as-single'>Release as Single</label>
+          <div class={styles['switch-row']}>
+            <input id='release-as-single' type='checkbox' class={cc(['switch', styles['release-as-single']])} /> <label for='release-as-single'>Release as Single</label>
+            <label for='release-as-single' class='switch'>
+              <span class='knob' />
+            </label>
           </div>
           <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>Release your album as a Single when you want to publish a single song, or multiple versions of the same song.<br /><br />For more info, have a look at our <a href='#'>Reference Guide</a></p>
-          {/* <input id='title' maxlength='40' oninput={handleInput} type='text' value={album.coverImage} /> */}
-          {/* <span>[switch]</span> */}
         </div>
         <div class={cc(['row', styles['input-row']])}>
           <label for='story'>
             Story<br />
           </label>
           <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>Albums with stories maximize their chance to be featured on our social media channels. Your Story is also displayed on the public album page.</p>
-          <textarea id='story' height='5' oninput={handleInput} type='text' value={album.story} placeholder='What went into the album ...' />
+          <textarea id='story' rows='4' oninput={handleInput} type='text' value={album.story} placeholder='What went into the album ...' />
         </div>
       </section>
 

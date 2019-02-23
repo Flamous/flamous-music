@@ -74,7 +74,7 @@
 .main label:not(:global(.button)) {
   align-self: start;
   padding: 0.5em 0.2em 0.1em;
-  font-size: 1.2em;
+  font-size: 1rem;
   font-weight: bold;
 }
 .main textarea {
@@ -170,7 +170,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
 
-input.audio-input, input.cover-image {
+input.audio-input, input.cover-image, input.release-as-single {
   display: none;
 }
 
@@ -180,24 +180,35 @@ input.audio-input, input.cover-image {
   overflow: hidden;
   border-radius: 4px;
   position: relative;
+  box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0 !important;
 }
 .main label[for='story'],
 .main label[for='release-your-album'] {
   padding-left: 0;
 }
-
+.main label[for='release-as-single'] {
+  padding: 0;
+  align-self: unset;
+}
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
 :global(.button).cover-image-upload {
-  background-color: rgba(255, 255, 255, 0.8) !important;
+  background-color: white !important;
   position: absolute;
-  top: calc(50% - 2.5em);
-  left: calc(50% - 2.5em);
+  top: 0;
+  left: 0;
   margin: 0;
-  border-radius: 50px;
-  height: 5em;
-  width: 5em;
+  border-radius: 0;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   font-size: 0.85em;
+  text-align: center;
 }
 .main :global(.row) {
   padding-bottom: 2em;
@@ -205,4 +216,35 @@ input.audio-input, input.cover-image {
 }
 .row {
   align-items: flex-start !important;
+}
+
+/* input:global(.switch) {
+
+} */
+label:global(.switch) {
+  height: 1.6rem;
+  width: 2.75rem;
+  background-color: #f0f0f0;
+  display: inline-block;
+  border-radius: 100px;
+  box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
+  padding: 0 !important;
+  transition: background-color 300ms;
+}
+label:global(.switch) :global(.knob) {
+  display: inline-block;
+  height: 1.6rem;
+  width: calc(1.6rem + 1px);
+  background-color: white;
+  border-radius: 100px;
+  box-shadow: inset rgba(0, 0, 0, 0.2) 0 -0.5px 1px 0, rgba(0, 0, 0, 0.3) 0 2px 2px -2px;
+  transition: transform 200ms;
+}
+input:global(.switch):checked ~ label:global(.switch) {
+  background-color: #4CD964;
+  box-shadow: inset rgba(0, 0, 0, 0.4) 0 0 2px 0;
+}
+input:global(.switch):checked ~ label:global(.switch) :global(.knob) {
+  box-shadow: inset rgba(0, 0, 0, 0.2) 0 -0.5px 1px 0, rgba(0, 0, 0, 0.4) 0 2px 2px -2px;
+  transform: translateX(calc(2.75rem - 1.6rem + 1px));
 }
