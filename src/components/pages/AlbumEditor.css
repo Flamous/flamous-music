@@ -8,12 +8,11 @@
   overscroll-behavior: contain;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 2px 0;
   background-color: #fafafa;
-  background-color: rgba(249, 249, 249, 0.98);
 }
 @supports (backdrop-filter: blur(10px)) {
   .wrapper {
-    backdrop-filter: blur(30px);
-    background-color: rgba(255, 255, 255, 0.85);    
+    backdrop-filter: blur(50px);
+    background-color: rgba(249, 249, 249, 0.85);    
   }
 }
 
@@ -21,6 +20,7 @@
   margin-bottom: 2em;
 }
 .header {
+  display: contents;
   text-align: center;
 }
 .top-row {
@@ -28,6 +28,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background-color: #fafafa;
+  z-index: 100;
 }
 
 .main section {
@@ -75,15 +79,29 @@
 }
 .song-number {
   transform: translateY(-23%);
-  min-height: 2em;
-  min-width: 2em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
-  background-color: #f0f0f0;
   border-radius: 50px;
+  margin-top: 0.7em;
+  min-height: 2.15em;
+  min-width: 2.15em;
+}
+.song-list .aside {
   margin-right: 1em;
+  margin-left: -0.3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.song-title {
+  font-size: 1.2em;
+  background-color: white;
+}
+.song-title::placeholder {
+  font-style: italic;
+  font-weight: 300;
 }
 
 :global(.row).input-row:not(:last-child) {
@@ -93,4 +111,7 @@ input.audio-input {
   height: 0px;
   overflow: hidden;
   display: none;
+}
+.row {
+  align-items: flex-start !important;
 }
