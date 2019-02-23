@@ -17,10 +17,15 @@
   }
 }
 
-.wrapper>*:last-child {
-  margin-bottom: 2em;
+.wrapper section:last-child {
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding-bottom: 2em;
 }
-
+.wrapper :global(.header) h1 {
+  justify-content: center;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+}
 .header {
   display: contents;
   text-align: center;
@@ -45,6 +50,12 @@
   padding: 0.8em 1px;
   border-radius: 0.5rem;
 }
+.main section:first-child {
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding-top: 1em;
+  position: relative;
+  top: -2px;
+}
 
 .main h3 {
   margin: 0 auto;
@@ -68,11 +79,17 @@
 }
 .main textarea {
   margin: 0 -0.2em -0.5em;
+  width: calc(100% + 0.4em);
 }
 
 .input-row {
   flex-direction: column;
   align-items: start !important;
+}
+
+.album-title {
+  flex-grow: 1;
+  margin-left: 1em;
 }
 
 .song-list {
@@ -91,7 +108,7 @@
   width: 2.5em;
   border-radius: 100px;
   background-color: #fafafa;
-  box-shadow: inset rgba(0, 0, 0, 0.05) 0 0 2px 0;
+  box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 2px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,22 +174,20 @@ input.audio-input, input.cover-image {
   display: none;
 }
 
-/* .main label[for='cover-image'] {
-  padding: 0;
-} */
-
 .cover-image {
   flex-basis: 50%;
-  max-width: 155px;
+  max-width: 70px;
   overflow: hidden;
   border-radius: 4px;
   position: relative;
 }
-.main label[for='story'] {
+.main label[for='story'],
+.main label[for='release-your-album'] {
   padding-left: 0;
 }
 
 :global(.button).cover-image-upload {
+  background-color: rgba(255, 255, 255, 0.8) !important;
   position: absolute;
   top: calc(50% - 2.5em);
   left: calc(50% - 2.5em);
@@ -184,7 +199,10 @@ input.audio-input, input.cover-image {
   justify-content: center;
   font-size: 0.85em;
 }
-
+.main :global(.row) {
+  padding-bottom: 2em;
+  padding-top: 2em;
+}
 .row {
   align-items: flex-start !important;
 }

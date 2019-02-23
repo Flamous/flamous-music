@@ -7,6 +7,7 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import { createAlbum } from '~/graphql/mutations'
 import UILink from '../UI/UILink'
 import UIIcon from '../UI/UIIcon'
+import UIHeader from '../UI/UIHeader'
 import cc from 'classcat'
 import albumPlaceholder from '../../assets/song_placeholder.svg'
 
@@ -68,40 +69,33 @@ const view = (state, actions) => (props, children) => (context) => {
     key='new-album'
     oncreate={(element) => { element.parentNode.actions = actions; startAnimation({ element, initialLoad: context.initialLoad }) }}
   >
-    <header class={styles['header']}>
-      <div class={styles['top-row']}>
-        <UILink back class='button white'>Cancel</UILink>
-        <div>
-          <button class='white' style={{ fontWeight: 'bold' }}>Save &amp; Exit</button>
-        </div>
-      </div>
-
-      <h1>
-        Album Editor
-      </h1>
-    </header>
+    <UIHeader
+      title='Album Editor'
+      nav={{
+        start: <UILink back class='button white'>Cancel</UILink>,
+        end: <button class='white' style={{ fontWeight: 'bold' }}>Save &amp; Exit</button>
+      }}
+    />
 
     <main class={styles['main']}>
       <section class={styles['account']}>
+        {/* <div class={cc(['row', styles['input-row']])} /> */}
         <div class={cc(['row', styles['input-row']])}>
-          <label for='title'>Title</label>
-          <input aria-label='Title' id='title' maxlength='40' oninput={handleInput} type='text' value={album.title} placeholder='Album Title ...' />
-        </div>
-        <div class={cc(['row', styles['input-row']])}>
-          <label for='cover-image'>Cover Image</label>
+          {/* <label for='cover-image'>Cover Image</label> */}
           <div style={{ display: 'flex', width: '100%' }}>
             <div class={styles['cover-image']}>
               {/* <label for='cover-image'> */}
               <img src={albumPlaceholder} />
               {/* <label for='cover-image'> */}
-              <label for='cover-image' class={cc([styles['cover-image-upload'], 'button'])}>
-                <UIIcon icon='upload-cloud' />
+              <label for='cover-image' class={cc([styles['cover-image-upload'], 'button', 'white'])}>
+                <UIIcon icon='image' />
                 Upload
               </label>
               {/* </label> */}
             </div>
-            <div>
-              .
+            <div class={styles['album-title']}>
+              <label for='title'>Title</label>
+              <input aria-label='Title' id='title' maxlength='40' oninput={handleInput} type='text' value={album.title} placeholder='Album Title ...' />
             </div>
           </div>
           <input id='cover-image' maxlength='40' oninput={handleInput} class={styles['cover-image']} type='file' accept='*/image' value={album.coverImage} />
@@ -143,7 +137,7 @@ const view = (state, actions) => (props, children) => (context) => {
       </section>
 
       <h3>Additional Info</h3>
-      <section class={styles['account']}>
+      <section>
         <div class={cc(['row', styles['input-row']])}>
           <div>
             <input id='release-as-single' type='checkbox' /> <label for='release-as-single'>Release as Single</label>
@@ -156,21 +150,21 @@ const view = (state, actions) => (props, children) => (context) => {
           <label for='story'>
             Story<br />
           </label>
-          <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>Share you journey around the creation of the album.<br /><br />Albums with stories maximize their chance to be featured on our social media channels.</p>
-          <textarea id='story' oninput={handleInput} type='text' value={album.story} placeholder='What went into the album ...' />
+          <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>Albums with stories maximize their chance to be featured on our social media channels. Your Story is also displayed on the public album page.</p>
+          <textarea id='story' height='5' oninput={handleInput} type='text' value={album.story} placeholder='What went into the album ...' />
         </div>
       </section>
 
       <h3 />
-      <section class={styles['account']}>
+      <section>
         <div class={cc(['row'])}>
           <div>
-            <label>Release your album</label>
+            <label for='release-your-album'>Release your album</label>
             <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>
-          When you release your album, it is publicly visible and can be listened to.
+              When you release your album, it is publicly visible and can be listened to.
               <br />
               <br />
-            You can release your album now or choose a release date in the future.
+              You can release your album now or choose a release date in the future.
             </p>
           </div>
         </div>
