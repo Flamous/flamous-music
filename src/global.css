@@ -4,6 +4,7 @@ a {
 body {
   background-color: white;
   color: black;
+  font-size: 0.95rem;
 }
 
 button, a:global(.button), label:global(.button) {
@@ -20,7 +21,7 @@ button, a:global(.button), label:global(.button) {
   margin: 0.2em;
   white-space: nowrap;
   user-select: none;
-  padding: 0.5em 1em;
+  padding: 0.5em 0.9em;
   border-radius: 0.5em;
   box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.14);
   align-items: center;
@@ -93,7 +94,7 @@ svg {
 }
 
 :global(.row) {
-  padding: 0.8em 1.1em;
+  padding: 0.8em 1em;
   display: flex;
   transition: background-color 400ms;
   align-items: center;
