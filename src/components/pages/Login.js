@@ -85,23 +85,20 @@ const view = (state, actions) => (props, children) => (context) => {
           login.email,
           login.authCode
         )
-
         await Auth.signIn(
           login.email,
           login.password
         )
-        loginActions.update({
-          hasSubmittedAuthCode: true,
-          isLoading: false
-        })
 
-        auth.init()
         loginActions.update({
+          hasSubmittedEmail: false,
+          isLoading: false,
           email: null,
           password: null,
           errorMessage: null
         })
 
+        auth.init()
         window.history.replaceState(previousUrl, '', previousUrl)
       } catch (error) {
         loginActions.update({
@@ -135,6 +132,22 @@ const view = (state, actions) => (props, children) => (context) => {
 
       window.history.replaceState(previousUrl, '', previousUrl)
     } catch (error) {
+      if (error.code === 'UserNotConfirmedException') {
+        loginActions.update({
+          isLoading: true
+        })
+        console.info('User is not confirmed. Sending confirm code again.')
+
+        await Auth.resendSignUp(
+          login.email
+        )
+        loginActions.update({
+          isLoading: false,
+          hasSubmittedEmail: true
+        })
+        window.history.replaceState({}, '', '/signup')
+        return
+      }
       loginActions.update({
         errorMessage: error.message,
         isLoading: false
