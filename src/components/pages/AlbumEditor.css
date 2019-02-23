@@ -42,7 +42,7 @@
   background-color: white;
   max-width: 32rem;
   margin: 0 auto;
-  padding: 0.8em 1px 0;
+  padding: 0.8em 1px;
   border-radius: 0.5rem;
 }
 
@@ -60,10 +60,14 @@
   margin: 0 !important;
 }
 
-.main label {
+.main label:not(:global(.button)) {
   align-self: start;
-  padding: 0.5em 0.5em 0.2em;
+  padding: 0.5em 0.2em 0.1em;
+  font-size: 1.2em;
   font-weight: bold;
+}
+.main textarea {
+  margin: 0 -0.2em -0.5em;
 }
 
 .input-row {
@@ -76,14 +80,15 @@
   padding-left: 0;
   width: 100%;
   position: relative;
+  margin-top: 0;
 }
 
 .dragndrop {
   position: absolute;
-  right: -1em;
-  top: -1em;
-  height: calc(100% + 2em);
-  width: 2em;
+  right: -0.75em;
+  top: -0.75em;
+  height: calc(100% + 1.5em);
+  width: 2.5em;
   border-radius: 100px;
   background-color: #fafafa;
   box-shadow: inset rgba(0, 0, 0, 0.05) 0 0 2px 0;
@@ -95,7 +100,7 @@
 }
 
 .dragndrop span {
-  transform: rotate(90deg) translateY(-4px);
+  transform: rotate(90deg) translateY(-3px);
   white-space: nowrap;
 }
 
@@ -121,9 +126,14 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
+.song-data {
+  flex-grow: 1;
+  margin-right: 3em;
+}
+
 .song-list .aside {
   margin-right: 0.6em;
-  margin-left: -0.3em;
+  margin-left: 0.3em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,11 +149,6 @@
   font-weight: 300;
 }
 
-.song-data {
-  flex-grow: 1;
-  margin-right: 2em;
-}
-
 :global(.row).input-row:not(:last-child) {
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
@@ -152,9 +157,9 @@ input.audio-input, input.cover-image {
   display: none;
 }
 
-.main label[for='cover-image'] {
+/* .main label[for='cover-image'] {
   padding: 0;
-}
+} */
 
 .cover-image {
   flex-basis: 50%;
@@ -162,6 +167,9 @@ input.audio-input, input.cover-image {
   overflow: hidden;
   border-radius: 4px;
   position: relative;
+}
+.main label[for='story'] {
+  padding-left: 0;
 }
 
 :global(.button).cover-image-upload {

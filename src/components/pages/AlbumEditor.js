@@ -82,10 +82,9 @@ const view = (state, actions) => (props, children) => (context) => {
     </header>
 
     <main class={styles['main']}>
-      <h3>Details</h3>
       <section class={styles['account']}>
         <div class={cc(['row', styles['input-row']])}>
-          {/* <label for='title'>Title</label> */}
+          <label for='title'>Title</label>
           <input aria-label='Title' id='title' maxlength='40' oninput={handleInput} type='text' value={album.title} placeholder='Album Title ...' />
         </div>
         <div class={cc(['row', styles['input-row']])}>
@@ -97,7 +96,6 @@ const view = (state, actions) => (props, children) => (context) => {
               {/* <label for='cover-image'> */}
               <label for='cover-image' class={cc([styles['cover-image-upload'], 'button'])}>
                 <UIIcon icon='upload-cloud' />
-                <br />
                 Upload
               </label>
               {/* </label> */}
@@ -112,26 +110,28 @@ const view = (state, actions) => (props, children) => (context) => {
         <div class={cc(['row', styles['row'], styles['input-row']])}>
           <label>Songs</label>
           <ol class={styles['song-list']}>
-            {
-              album.songs && album.songs.length > 0 && album.songs.map((song, index) => {
-                return <li key={song.id}>
-                  <div class={styles['aside']}>
-                    <span class={styles['song-number']}>{index + 1}</span>
-                    <UIIcon icon='more-horizontal' />
-                  </div>
-                  <div class={styles['song-data']}>
-                    <input class={styles['song-title']} type='text' value={song.title} placeholder='Song title' />
-                    <div>
-                      <span>Audio: </span>
-                      <label for={`song-${song.id}`} class={cc([styles['audio-input'], 'button', 'white'])}>
-                        Upload File
-                      </label>
-                      <input id={`song-${song.id}`} class={styles['audio-input']} type='file' accept='*/audio' />
+            <div>
+              {
+                album.songs && album.songs.length > 0 && album.songs.map((song, index) => {
+                  return <li key={song.id}>
+                    <div class={styles['aside']}>
+                      <span class={styles['song-number']}>{index + 1}</span>
+                      <UIIcon icon='more-horizontal' />
                     </div>
-                  </div>
-                </li>
-              })
-            }
+                    <div class={styles['song-data']}>
+                      <input class={styles['song-title']} type='text' value={song.title} placeholder='Song title' />
+                      <div>
+                        <span>Audio: </span>
+                        <label for={`song-${song.id}`} class={cc([styles['audio-input'], 'button', 'white'])}>
+                        Upload File
+                        </label>
+                        <input id={`song-${song.id}`} class={styles['audio-input']} type='file' accept='*/audio' />
+                      </div>
+                    </div>
+                  </li>
+                })
+              }
+            </div>
             <div class={styles['dragndrop']}>
               <span>
                 &larr; Drag to re-order &rarr;
@@ -146,45 +146,33 @@ const view = (state, actions) => (props, children) => (context) => {
       <section class={styles['account']}>
         <div class={cc(['row', styles['input-row']])}>
           <div>
-            <input type='checkbox' /> <label for='title'>Release as Single</label>
+            <input id='release-as-single' type='checkbox' /> <label for='release-as-single'>Release as Single</label>
           </div>
-          <p>Release your album as a Single when you want to publish a single song, or multiple versions of the same song.<br />For more info, have a look at our <a href='#'>Geference Guide</a></p>
+          <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>Release your album as a Single when you want to publish a single song, or multiple versions of the same song.<br /><br />For more info, have a look at our <a href='#'>Reference Guide</a></p>
           {/* <input id='title' maxlength='40' oninput={handleInput} type='text' value={album.coverImage} /> */}
           {/* <span>[switch]</span> */}
         </div>
         <div class={cc(['row', styles['input-row']])}>
-          <label for='story'>Story</label>
-          <span>Albums with sotries are more likely to be featured and shared on social media. </span>
+          <label for='story'>
+            Story<br />
+          </label>
+          <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>Share you journey around the creation of the album.<br /><br />Albums with stories maximize their chance to be featured on our social media channels.</p>
           <textarea id='story' oninput={handleInput} type='text' value={album.story} placeholder='What went into the album ...' />
-        </div>
-        <div class={cc(['row', styles['input-row']])}>
-          <label for='title'>Involved Artists</label>
-          <input id='title' maxlength='40' oninput={handleInput} type='text' value={album.coverImage} />
-        </div>
-        <div class={cc(['row', styles['input-row']])}>
-          <label for='title'>Produced By</label>
-          <input id='title' maxlength='40' oninput={handleInput} type='text' value={album.coverImage} />
-        </div>
-        <div class={cc(['row', styles['input-row']])}>
-          <label for='title'>Written By</label>
-          <input id='title' maxlength='40' oninput={handleInput} type='text' value={album.coverImage} />
-        </div>
-        <div class={cc(['row', styles['input-row']])}>
-          <label for='title'>Performed By</label>
-          <input id='title' maxlength='40' oninput={handleInput} type='text' value={album.coverImage} />
         </div>
       </section>
 
-      <h3>Release</h3>
+      <h3 />
       <section class={styles['account']}>
         <div class={cc(['row'])}>
-
-          <p>
+          <div>
+            <label>Release your album</label>
+            <p style={{ color: 'rgba(0, 0, 0, 0.7)' }}>
           When you release your album, it is publicly visible and can be listened to.
-            <br />
-            <br />
+              <br />
+              <br />
             You can release your album now or choose a release date in the future.
-          </p>
+            </p>
+          </div>
         </div>
         <button class='white' onclick={handleSubmit} type='submit'>Release Now</button>
         <button onclick={handleSubmit} type='submit'>Set Release Date</button>
