@@ -87,6 +87,11 @@ input:active {
   background-color: #f2f0f1;
 }
 
+@media (pointer: coarse) {
+  :focus {
+    outline: none;
+  }
+}
 :focus:not(:focus-visible) {
   outline: none;
 }
