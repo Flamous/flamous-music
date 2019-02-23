@@ -3,27 +3,14 @@ import regeneratorRuntime from 'regenerator-runtime'
 import { h, app as _app } from 'hyperapp'
 
 import nativeWebApp from 'native-web-app'
-
-import { location, Route } from '@hyperapp/router'
+import { location } from '@hyperapp/router'
 import { withContext } from 'hyperapp-context'
 
-import UIViewRoute from './components/UI/UIViewRoute'
-import UIView from './components/UI/UIView'
 import UITabBar from './components/UI/UITabBar'
-
-import Library from './components/pages/Library'
-import Profile from './components/pages/Profile'
-import Login from './components/pages/Login'
-import Home from './components/Home.js'
-import registerServiceWorker from './modules/serviceWorker'
-import NewAlbum from './components/pages/NewAlbum'
-import AlbumDetails from './components/pages/AlbumDetails'
-import License from './components/pages/License'
-import ChangePassword from './components/pages/ChangePassword'
-import Player from './components/pages/Player'
-import AlbumEditor from './components/pages/AlbumEditor'
+import Routes from './components/Routes'
 
 // Modules
+import registerServiceWorker from './modules/serviceWorker'
 import auth from './modules/auth'
 import views from './modules/views'
 
@@ -109,24 +96,7 @@ const flamous = app(
     return <div style={{ display: 'contents' }}>
       <UITabBar />
 
-      <UIViewRoute path='/' exact render={Home} viewName='home' />
-      {/* <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' /> */}
-      <UIViewRoute path='/library' render={Library} viewName='library' />
-      <UIViewRoute path='/profile' render={Profile} viewName='profile' />
-      <UIViewRoute path='/settings/change-password' render={ChangePassword} viewName='profile' exact />
-      <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='profile' />
-
-      <UIView displayView='home' />
-      <UIView displayView='profile' />
-      <UIView displayView='library' />
-
-      <Route path='/login' render={Login} />
-      <Route path='/signup' render={Login} />
-      <Route path='/player' render={Player} />
-
-      <Route path='/flamous-license' render={License} />
-      <Route path='/create-album' render={NewAlbum} />
-      <Route path='/album-editor' render={AlbumEditor} />
+      <Routes />
     </div>
   },
   document.body
