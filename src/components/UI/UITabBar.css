@@ -53,17 +53,11 @@
 }
 .item img {
   display: block;
+  width: auto;
 }
 .item.player img {
   border-radius: 0.5em;
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 0 7px 0;
-}
-
-.item:first-child {
-  /* display: block; */
-  /* height: 3em; */
-  /* padding-top: 0.5em;
-  padding-bottom: 0.5em; */
 }
 
 @media (min-width: 800px) {
