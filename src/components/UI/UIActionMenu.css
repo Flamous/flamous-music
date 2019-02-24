@@ -4,7 +4,6 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: red;
   z-index: 2000;
   background-color: transparent;
 }
@@ -38,34 +37,40 @@
 .action-list {
   list-style-type: none;
   padding: 0;
-  box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
   margin: 0 1rem 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: inset rgba(0, 0, 0, 0.3) 0 0 2px 0;
 }
 .action-list li,
 .cancel {
-  background-color: white;
-  padding: 1rem;
+  padding: 1.2rem 1rem;
   color: #00a7ff;
   font-size: 1rem;
 }
 .action-list li {
-  background-color: rgba(255, 255, 255, 0.95);
   display: flex;
   align-items: center;
   position: relative;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+.action-list li:active {
+    background-color: rgba(0, 0, 0, 0.07);
 }
 
-.action-list li:last-child {
-  border-bottom: none;
+.action-list li:first-child {
+  border-top: none;
+  padding-top: calc(1.2rem + 2px);
 }
 @supports (backdrop-filter: blur(30px)) {
-  .tab-bar {
+  .action-list {
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(40px);
+  }
+  .action-list li:active {
+    background-color: rgba(0, 0, 0, 0.07);
   }
 }
 .action-list li :global(.icon) {
@@ -77,7 +82,12 @@
   font-weight: bold;
   text-align: center;
   margin: 0 1rem 1rem;
-  padding: 0.9rem;
-  border-radius: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.9rem;
   box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
+  background-color: white;
+  box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
+}
+.cancel:active {
+  background-color: #f0f0f0;
 }
