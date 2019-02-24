@@ -228,12 +228,12 @@ input.audio-input, input.cover-image, input.release-as-single {
 
 
 label:global(.switch) {
-  height: 1.6rem;
-  width: 2.75rem;
-  background-color: #f0f0f0;
+  height: 1.9rem;
+  width: 3.15rem;
+  background-color: #fafafa;
   display: inline-block;
   border-radius: 100px;
-  box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
+  box-shadow: inset rgba(0, 0, 0, 0.4) 0 0 2px 0;
   padding: 0 !important;
   transition: background-color 300ms;
   position: relative;
@@ -241,16 +241,27 @@ label:global(.switch) {
 }
 label:global(.switch) :global(.knob) {
   display: inline-block;
-  height: 1.6rem;
-  width: calc(1.6rem + 1px);
+  position: relative;
+  height: calc(1.9rem - 3px);
+  width: calc(1.9rem - 2px);
   background-color: white;
   border-radius: 100px;
-  box-shadow: inset rgba(0, 0, 0, 0.35) 0 0 1px 0, inset rgba(0, 0, 0, 0.2) 0 -2px 2px -2px, rgba(0, 0, 0, 0.35) 0 3px 3px -3px;
+  top: 1.5px;
+  transform: translateX(1.5px);
+  box-shadow:
+    inset rgba(0, 0, 0, 0.3) 0 0 1px 0,
+    inset rgba(0, 0, 0, 0.1) 0 -2px 2px -2px,
+    rgba(0, 0, 0, 0.25) 0 5px 4px -2px;
   transition: transform 200ms;
 }
 input:global(.switch):checked ~ label:global(.switch) {
   background-color: #4CD964;
+  box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
 }
 input:global(.switch):checked ~ label:global(.switch) :global(.knob) {
-  transform: translateX(calc(2.75rem - 1.6rem));
+  transform: translateX(calc(3.15rem - 1.9rem));
+  box-shadow:
+    inset rgba(0, 0, 0, 0.4) 0 0 1px 0,
+    inset rgba(0, 0, 0, 0.1) 0 -2px 2px -2px,
+    rgba(0, 0, 0, 0.4) 0 5px 4px -2px
 }
