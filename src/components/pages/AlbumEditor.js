@@ -20,15 +20,26 @@ const actions = {
 }
 
 const view = (state, actions) => (props, children) => (context) => {
-  let { auth: { artistId, albums }, new: { album }, actions: { new: newActions, auth: authActions } } = context
+  let { auth: { artistId, albums }, new: { album }, actions: { new: newActions, auth: authActions, actionMenu } } = context
   let { animation: { start: startAnimation } } = actions
   let previousUrl = props.location.previous === '/album-editor' ? '/' : props.location.previous
 
-  function handleInput (event) {
-    newActions.album.update(
-      {
-        [event.target.id]: event.target.value
+  function handleInput (event, index) {
+    let isSongInput = event.target.id.includes('song')
+
+    if (isSongInput) {
+      let songs = [...album.songs]
+
+      songs[index].title = event.target.value
+      newActions.album.update({
+        songs
       })
+      return
+    }
+
+    newActions.album.update({
+      [event.target.id]: event.target.value
+    })
   }
 
   async function handleSubmit (event) {
@@ -54,14 +65,29 @@ const view = (state, actions) => (props, children) => (context) => {
   }
 
   function addSong () {
-    album.songs.push({
+    let songs = [...album.songs]
+
+    songs.push({
       title: null,
       audio: null,
       id: Math.random()
     })
     newActions.album.update({
-      songs: album.songs
+      songs
     })
+  }
+
+  function removeSong (index) {
+    let songs = [...album.songs]
+
+    songs.splice(index, 1)
+    newActions.album.update({
+      songs
+    })
+  }
+
+  if (album.songs.length === 0) {
+    addSong()
   }
 
   return <div
@@ -105,16 +131,25 @@ const view = (state, actions) => (props, children) => (context) => {
                   return <li key={song.id}>
                     <div class={styles['aside']}>
                       <span class={styles['song-number']}>{index + 1}</span>
-                      <UIIcon icon='more-horizontal' />
+                      <UIIcon icon='more-horizontal' onclick={event => actionMenu.open({
+                        items: [
+                          { text: 'Delete Song',
+                            icon: 'trash-2',
+                            style: { color: 'rgb(255,59,48)' },
+                            action: ({ close }) => { removeSong(index); close() }
+                          }
+                        ],
+                        event
+                      })} />
                     </div>
                     <div class={styles['song-data']}>
-                      <input class={styles['song-title']} type='text' value={song.title} placeholder='Song title' />
+                      <input id={`song-${song.id}`} class={styles['song-title']} type='text' oninput={(event) => handleInput(event, index)} value={song.title} placeholder='Song title' />
                       <div>
                         <span>Audio: </span>
-                        <label for={`song-${song.id}`} class={cc([styles['audio-input'], 'button', 'white'])}>
+                        <label for={`audio-${song.id}`} class={cc([styles['audio-input'], 'button', 'white'])}>
                         Upload File
                         </label>
-                        <input id={`song-${song.id}`} class={styles['audio-input']} type='file' accept='*/audio' />
+                        <input id={`audio-${song.id}`} class={styles['audio-input']} type='file' accept='*/audio' />
                       </div>
                     </div>
                   </li>
