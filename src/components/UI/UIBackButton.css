@@ -4,11 +4,8 @@
   padding: 1em 1em 1em 0.8em;
   transition: opacity 50ms !important;
   user-select: none;
-}
-
-.back-button > img {
-  margin-right: 0.2em;
-  height: 20px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }
 
 .back-button > span {
