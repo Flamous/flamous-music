@@ -90,7 +90,7 @@ const Library = (props) => (state, actions) => (context) => {
       nav = {
         middle: 'Profile',
         end: <button onclick={toggleEditMode} class='white'>
-            Edit <UIIcon style={{ marginLeft: '5px' }} width='20' height='20' icon='edit-2' />
+            Edit
         </button>
       }
     }
@@ -171,12 +171,12 @@ const Library = (props) => (state, actions) => (context) => {
           Logged in as<br /><b>{auth.cognitoUser.attributes.email}</b>
               </div>
               <div>
-                <button onclick={logout}>Logout</button>
+                <button style={{ backgroundColor: 'rgb(255,59,48)' }} onclick={logout}>Logout</button>
               </div>
             </div>
             <UILink class='row' to='/settings/change-password'>
               <span style={{ flexGrow: '1' }}>Change Password</span>
-              <UIIcon width='32' icon='chevron-right' />
+              <UIIcon icon='chevron-right' />
             </UILink>
           </section>
 
@@ -184,15 +184,15 @@ const Library = (props) => (state, actions) => (context) => {
           <section class={styles['account']}>
             <UILink class='row' to='/flamous-license'>
               <span style={{ flexGrow: '1' }}>Flamous License</span>
-              <UIIcon width='32' icon='chevron-right' />
+              <UIIcon icon='chevron-right' />
             </UILink>
             <UILink class='row' to='/privacy-policy'>
               <span style={{ flexGrow: '1' }}>Privacy Policy</span>
-              <UIIcon width='32' icon='chevron-right' />
+              <UIIcon icon='chevron-right' />
             </UILink>
             <UILink class='row' to='/terms'>
               <span style={{ flexGrow: '1' }}>Terms of Use</span>
-              <UIIcon width='32' icon='chevron-right' />
+              <UIIcon icon='chevron-right' />
             </UILink>
             <hr />
             <div class='row'>
