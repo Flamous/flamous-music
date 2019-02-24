@@ -14,6 +14,6 @@ export default (props, children) => (state) => {
   let isBrowserHistoryBack = location.previous === previousViewStackPath
 
   return <UILink class={styles['back-button']} back={isBrowserHistoryBack} replace={!isBrowserHistoryBack} to={backLocation}>
-    <UIIcon style={{ marginRight: '-0.5em' }} width='36' height='36' icon='chevron-left' /><span>{text || 'Back'}</span>
+    <UIIcon style={{ marginRight: '-0.5em', marginLeft: '-0.5em' }} width='36' height='36' icon='chevron-left' /><span>{text || 'Back'}</span>
   </UILink>
 }
