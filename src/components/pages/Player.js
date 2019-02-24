@@ -82,7 +82,22 @@ const view = (state, actions) => () => (context) => {
           <UIIcon icon='share-2' />
         </button> */}
       <button class='white'>
-        <UIIcon height='30' width='30' icon='more-horizontal' />
+        <UIIcon height='30' width='30' icon='more-horizontal' onclick={(event) => context.actions.actionMenu.open({
+          items: [
+            { text: 'Share',
+              icon: 'share-2'
+            },
+            { text: 'Loop Song'
+            },
+            { text: 'Go to Artist',
+              icon: 'user'
+            },
+            { text: 'Download File',
+              icon: 'download'
+            }
+          ],
+          event
+        })} />
       </button>
     </footer>
   </div>
