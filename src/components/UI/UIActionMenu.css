@@ -37,7 +37,7 @@
 .action-list {
   list-style-type: none;
   padding: 0;
-  margin: 0 1rem 0.5rem;
+  margin: 0 0.6rem 0.5rem;
   border-radius: 1rem;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.95);
@@ -67,7 +67,7 @@
 @supports (backdrop-filter: blur(30px)) {
   .action-list {
     background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(20px);
   }
   .action-list li:active {
     background-color: rgba(0, 0, 0, 0.07);
@@ -81,7 +81,7 @@
 .cancel {
   font-weight: bold;
   text-align: center;
-  margin: 0 1rem 1rem;
+  margin: 0 0.6rem 0.6rem;
   padding: 1rem;
   border-radius: 0.9rem;
   box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
