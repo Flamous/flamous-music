@@ -104,15 +104,19 @@ svg {
 }
 
 :global(.row) {
-  padding: 0.8em 1em;
+  padding: 0.8rem 1rem;
   display: flex;
   transition: background-color 400ms;
   align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 :global(.row):first-child {
+  padding-top: calc(0.8rem + 3px);
   border-radius: 0.5em 0.5em 0 0;
 }
 :global(.row):last-child {
+  border: none;
+  padding-bottom: calc(0.8rem + 1px);
   border-radius: 0 0 0.5em 0.5em;
 }
 
