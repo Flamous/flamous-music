@@ -1,7 +1,6 @@
 .main {
   background-color: #f6f5f4;
   height: 92vh;
-  margin-bottom: 6rem;
 }
 
 .main section {
@@ -11,6 +10,9 @@
   margin: 0 auto;
   padding: 0.8em 1px 0;
   border-radius: 0.5rem;
+}
+.main section:last-child {
+  margin-bottom: 6rem;
 }
 .main h3 {
   margin: 0 auto;
