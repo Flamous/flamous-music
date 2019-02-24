@@ -7,12 +7,14 @@ import { location } from '@hyperapp/router'
 import { withContext } from 'hyperapp-context'
 
 import UITabBar from './components/UI/UITabBar'
+import UIActionMenu from './components/UI/UIActionMenu'
 import Routes from './components/Routes'
 
 // Modules
 import registerServiceWorker from './modules/serviceWorker'
 import auth from './modules/auth'
 import views from './modules/views'
+import actionMenu from './modules/actionMenu'
 
 import './config'
 
@@ -36,6 +38,7 @@ const flamous = app(
   {
     auth: auth.state,
     views: views.state,
+    actionMenu: actionMenu.state,
     initialLoad: true,
     location: location.state,
     updateAvailable: false,
@@ -56,7 +59,7 @@ const flamous = app(
     },
     new: {
       album: {
-        songs: [{}, {}],
+        songs: [],
         title: null,
         isLoading: false
       }
@@ -68,6 +71,7 @@ const flamous = app(
     },
     auth: auth.actions,
     views: views.actions,
+    actionMenu: actionMenu.actions,
     login: {
       update (data) {
         return data
@@ -97,6 +101,9 @@ const flamous = app(
       <UITabBar />
 
       <Routes />
+      {
+        state.actionMenu.isOpen && <UIActionMenu {...state.actionMenu} />
+      }
     </div>
   },
   document.body
