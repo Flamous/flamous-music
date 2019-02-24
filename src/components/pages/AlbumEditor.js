@@ -89,8 +89,8 @@ const view = (state, actions) => (props, children) => (context) => {
               </label>
             </div>
             <div class={styles['album-title']}>
-              <label for='title'>Title</label>
-              <input aria-label='Title' id='title' maxlength='40' oninput={handleInput} type='text' value={album.title} placeholder='Album Title ...' />
+              {/* <label for='title'>Title</label> */}
+              <input aria-label='Album Title' id='title' maxlength='50' oninput={handleInput} type='text' value={album.title} placeholder='Your album title...' />
             </div>
           </div>
           <input id='cover-image' maxlength='40' oninput={handleInput} class={styles['cover-image']} type='file' accept='*/image' value={album.coverImage} />

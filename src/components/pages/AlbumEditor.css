@@ -60,11 +60,12 @@
 .main h3 {
   margin: 0 auto;
   max-width: 32rem;
-  font-size: 0.9em;
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.6);
   letter-spacing: 1px;
   text-transform: uppercase;
   font-weight: normal;
-  padding: 2rem 1rem 0.5rem;
+  padding: 2rem 1rem 0.6rem;
 }
 
 .main input {
@@ -72,10 +73,8 @@
 }
 
 .main label:not(:global(.button)) {
-  align-self: start;
-  padding: 0.5em 0.2em 0.1em;
+  align-self: unset;
   font-size: 1rem;
-  font-weight: bold;
 }
 .main textarea {
   margin: 0 -0.2em;
@@ -90,6 +89,19 @@
 .album-title {
   flex-grow: 1;
   margin-left: 1em;
+}
+.album-title input:global(#title) {
+  height: 100%;
+  max-height: unset;
+  background-color: unset;
+  font-size: 1.2rem;
+  padding: 0;
+}
+.album-title input::placeholder,
+.song-title::placeholder  {
+  font-style: italic;
+  font-weight: normal;
+  font-family: serif;
 }
 
 .song-list {
@@ -161,13 +173,8 @@
   background-color: white;
 }
 
-.song-title::placeholder {
-  font-style: italic;
-  font-weight: 300;
-}
-
 :global(.row).input-row:not(:last-child) {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 input.audio-input, input.cover-image, input.release-as-single {
@@ -182,17 +189,14 @@ input.audio-input, input.cover-image, input.release-as-single {
   position: relative;
   box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0 !important;
 }
-.main label[for='story'],
-.main label[for='release-your-album'] {
-  padding-left: 0;
+.cover-image img {
+  visibility: hidden;
 }
-.main label[for='release-as-single'] {
-  padding: 0;
-  align-self: unset;
-}
+
 .switch-row {
   display: flex;
   align-items: center;
+  position: relative;
   justify-content: space-between;
   width: calc(100% + 2rem);
   margin: -1rem -1rem -0.7rem;
@@ -211,12 +215,13 @@ input.audio-input, input.cover-image, input.release-as-single {
   top: 0;
   left: 0;
   margin: 0;
-  border-radius: 0;
+  border-radius: 7px;
   height: 100%;
   width: 100%;
   flex-direction: column;
   justify-content: center;
   font-size: 0.85em;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 .main :global(.row) {
@@ -225,7 +230,6 @@ input.audio-input, input.cover-image, input.release-as-single {
 .row {
   align-items: flex-start !important;
 }
-
 
 label:global(.switch) {
   height: 1.9rem;
@@ -236,8 +240,8 @@ label:global(.switch) {
   box-shadow: inset rgba(0, 0, 0, 0.4) 0 0 2px 0;
   padding: 0 !important;
   transition: background-color 300ms;
-  position: relative;
-  right: 0.3em;
+  position: absolute;
+  right: 1.3rem;
 }
 label:global(.switch) :global(.knob) {
   display: inline-block;
@@ -252,7 +256,7 @@ label:global(.switch) :global(.knob) {
     inset rgba(0, 0, 0, 0.3) 0 0 1px 0,
     inset rgba(0, 0, 0, 0.1) 0 -2px 2px -2px,
     rgba(0, 0, 0, 0.25) 0 5px 4px -2px;
-  transition: transform 200ms;
+  transition: transform 400ms cubic-bezier(0.175, 0.885, 0.32, 1.2);
 }
 input:global(.switch):checked ~ label:global(.switch) {
   background-color: #4CD964;
@@ -263,5 +267,5 @@ input:global(.switch):checked ~ label:global(.switch) :global(.knob) {
   box-shadow:
     inset rgba(0, 0, 0, 0.4) 0 0 1px 0,
     inset rgba(0, 0, 0, 0.1) 0 -2px 2px -2px,
-    rgba(0, 0, 0, 0.4) 0 5px 4px -2px
+    rgba(0, 0, 0, 0.32) 0 5px 4px -2px
 }
