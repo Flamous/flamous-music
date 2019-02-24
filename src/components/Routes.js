@@ -17,7 +17,7 @@ import Player from './pages/Player'
 import AlbumEditor from './pages/AlbumEditor'
 
 let Routes = () => {
-  return <span>
+  return <span key='routes'>
     <UIViewRoute path='/' exact render={Home} viewName='home' />
     {/* <UIViewRoute path='/albums' parent render={AlbumView} viewName='home' /> */}
     <UIViewRoute path='/library' render={Library} viewName='library' />
