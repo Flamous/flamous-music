@@ -38,15 +38,15 @@
   list-style-type: none;
   padding: 0;
   margin: 0 0.6rem 0.5rem;
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   overflow: hidden;
+  color: rgba(0, 0, 0, 0.7);
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: inset rgba(0, 0, 0, 0.3) 0 0 2px 0;
 }
 .action-list li,
 .cancel {
-  padding: 1.2rem 1rem;
-  color: #00a7ff;
+  padding: 1.2rem;
   font-size: 1rem;
 }
 .action-list li {
@@ -75,15 +75,16 @@
 }
 .action-list li :global(.icon) {
   position: absolute;
-  right: 1rem;
+  right: 1.2rem;
 }
 
 .cancel {
+  color: #00a7ff;
   font-weight: bold;
   text-align: center;
   margin: 0 0.6rem 0.6rem;
   padding: 1rem;
-  border-radius: 0.9rem;
+  border-radius: 0.75rem;
   box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
   background-color: white;
   box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
