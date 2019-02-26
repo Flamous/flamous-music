@@ -64,7 +64,7 @@ let songData = [
 
 const Home = (props) => (context) => {
   return (
-    <UIPage {...props} nonInteractive key='home'>
+    <UIPage {...props} class={styles['home']} nonInteractive key='home'>
       <UIHeader
         nav={{
           end: <button class='white'>Sign Up</button>
@@ -83,6 +83,19 @@ const Home = (props) => (context) => {
           <SongList songs={songData} />
         </section>
 
+        <section>
+          <h2>
+            Artists
+          </h2>
+          <SongList songs={songData} />
+        </section>
+
+        <section>
+          <h2>
+            Random Albums
+          </h2>
+          <SongList songs={songData} />
+        </section>
       </main>
       <footer>
         <span>Privacy Policy</span>
