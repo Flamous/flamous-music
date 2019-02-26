@@ -21,7 +21,10 @@ let view = (state, actions) => (props, children) => (context) => {
   return <div
     oncreate={(elem) => { elem.parentNode.actions = actions; window.requestAnimationFrame(() => window.requestAnimationFrame(() => elem.parentNode.classList.toggle('open'))) }}
   >
-    <div class={styles['background']} />
+    <div
+      class={styles['background']}
+      onclick={close}
+    />
     <div class={styles['container']} oncreate={(element) => startAnimation({ element, initialLoad: context.initialLoad })}>
       <ul class={styles['action-list']}>
         {
