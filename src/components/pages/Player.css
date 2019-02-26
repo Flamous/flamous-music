@@ -17,9 +17,10 @@
   text-align: center;
 }
 .header .close {
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.2);
   stroke-linecap: round;
   stroke-linejoin: round;
+  display: block;
 }
 .header span {
   font-style: italic;
