@@ -19,7 +19,7 @@ button, a:global(.button), label:global(.button) {
   stroke: #007AFF;
   color: white;
   cursor: default;
-  transition: background-color 80ms, transform 40ms;
+  transition: background-color 80ms;
   display: inline-flex;
   align-items: center;
   margin: 0.2em;
@@ -56,7 +56,7 @@ button:global(.white), a:global(.button):global(.white), label:global(.button):g
 }
 
 button:active, a:global(.button):active, label:global(.button):active {
-  transform: scale(0.95);
+  opacity: 0.6;
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
