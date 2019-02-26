@@ -36,24 +36,29 @@ const Header = () => (state) => {
 
 let songData = [
   {
-    title: 'Song in the wild',
-    artist: 'Christian',
-    album: 'lululu'
+    title: 'They Say',
+    artist: 'Wowa & Pipo',
+    album: 'Single'
   },
   {
-    title: 'Song in the wild',
-    artist: 'Christian',
-    album: 'lululu'
+    title: 'Contrapunctus 2',
+    artist: 'Kimiko Ishizaka',
+    album: 'The Art of the Fuge'
   },
   {
-    title: 'Song in the wild',
-    artist: 'Christian',
-    album: 'lululu'
+    title: 'Varianto 3 a 1 Clav. Canone all Unisuono',
+    artist: 'Kimiko Ishizaka',
+    album: 'Goldberg Variations'
   },
   {
-    title: 'Song in the wild',
-    artist: 'Christian',
-    album: 'lululu'
+    title: "I'll Do It All Over Again",
+    artist: 'Billy Murray',
+    album: 'Single'
+  },
+  {
+    title: 'Easy [iPhone Production]',
+    artist: 'Wowa',
+    album: 'Single'
   }
 ]
 
