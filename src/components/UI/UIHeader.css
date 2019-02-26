@@ -2,6 +2,7 @@
   height: 3rem;
   position: sticky;
   top: 0px;
+  font-size: 1rem;
   background-color: rgba(252, 252, 252, 0.95);
   z-index: 1000;
   stroke: #007aff;
