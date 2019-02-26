@@ -204,12 +204,12 @@ const slideUp = {
       }
     },
     slideOut: (done) => (state) => {
-      let { handleY } = state
+      let { handleY, handleStyler } = state
 
-      let bodyHeight = window.innerHeight
+      let targetHeight = handleStyler.get('height')
 
       handleY.subscribe((val) => {
-        if (val >= bodyHeight) {
+        if (val >= targetHeight) {
           handleY.stop()
           done()
         }
@@ -217,7 +217,7 @@ const slideUp = {
 
       spring({
         from: handleY.get(),
-        to: window.innerHeight,
+        to: targetHeight,
         mass: 1,
         damping: 20,
         stiffness: 160
