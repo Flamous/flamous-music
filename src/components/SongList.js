@@ -44,6 +44,9 @@ let view = (props, children) => (state) => (context) => {
                   },
                   { text: 'Download Audio File',
                     icon: 'download'
+                  },
+                  { text: 'Report Content',
+                    icon: 'slash'
                   }
                 ]
               })
