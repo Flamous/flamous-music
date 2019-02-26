@@ -37,7 +37,7 @@
 
 @supports (backdrop-filter: blur(30px)) {
   .header-nav {
-    background-color: rgba(253, 253, 253, 0.85);
+    background-color: rgba(252, 252, 252, 0.85);
     backdrop-filter: blur(60px);
   }
 }
@@ -78,7 +78,7 @@
 }
 
 .header-title {
-  background-color: rgba(253, 253, 253, 0.95);
+  background-color: rgba(252, 252, 252, 0.95);
   box-shadow: 0 0 0 1px #fdfdfd;
   position: relative;
   z-index: 100;
