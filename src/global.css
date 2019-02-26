@@ -108,7 +108,7 @@ svg {
   display: flex;
   transition: background-color 400ms;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.02);
 }
 :global(.row):first-child {
   padding-top: calc(0.8rem + 3px);
