@@ -84,6 +84,13 @@ const Home = (props) => (context) => {
         </section>
 
       </main>
+      <footer>
+        <span>Privacy Policy</span>
+        &middot;
+        <span>Terms of Use</span>
+        &middot;
+        <span>Support: <a href='mailto:hello@flamous.io'>hello@flamous.io</a></span>
+      </footer>
     </UIPage>
   )
 }

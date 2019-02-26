@@ -14,17 +14,15 @@
   display: flex;
 }
 
-.header h1 {
-  margin-top: 1em;
-  margin-bottom: 0.3em;
-  font-size: 3em;
+.home footer {
+  padding: 0 0.5em;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
 }
-.header img {
-  height: 2em;
+.home footer > * {
+  padding: 0.5em;
+  display: inline-block;
 }
 
-.main {
-  padding: 1em;
-  padding-bottom: 4em;
-  background-color: white;
-}
