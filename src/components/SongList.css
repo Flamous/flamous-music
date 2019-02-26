@@ -23,17 +23,41 @@
 .song-body button {
   color: black !important; 
 }
+.song-title,
+.song-infos {
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+.song-text {
+  flex-grow: 1;
+  width: 3em;
+  overflow: hidden;
+  position: relative;
+}
+.song-text::after {
+  position: absolute;
+  content: '';
+  display: block;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.25rem;
+  background-image: linear-gradient(to left, white, transparent);
+}
 
 .song-title {
   color: rgba(0, 0, 0, 0.9);
-  font-size: 1.2rem;
 }
 .song-infos {
+  font-size: 0.875em;
   color: rgba(0, 0, 0, 0.65);
 }
 .cover-image {
   border-radius: 0.5rem;
   overflow: hidden;
+  width: 2.75rem;
+  flex-shrink: 0;
   align-self: center;
 }
 

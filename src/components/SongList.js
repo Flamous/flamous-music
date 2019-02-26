@@ -14,7 +14,7 @@ let view = (props, children) => (state) => (context) => {
       <li>
         <UILink class={styles['song-item']} to='/'>
           <div class={styles['song-body']}>
-            <div>
+            <div class={styles['song-text']}>
               <span class={styles['song-title']}>
                 {song.title}
               </span>
