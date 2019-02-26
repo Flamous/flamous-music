@@ -19,11 +19,11 @@
   transition: opacity 200ms linear;
 }
 .action-menu:global(.open) .background {
-  opacity: 0.35;
+  opacity: 0.3;
 }
 .container {
   transform: translateY(100%);
-  transition: transform 300ms;
+  /* transition: transform 300ms; */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -32,7 +32,7 @@
   bottom: 0;
 }
 .action-menu:global(.open) .container {
-  transform: translateY(0%);
+  /* transform: translateY(0%); */
 }
 .action-list {
   list-style-type: none;
@@ -42,7 +42,7 @@
   overflow: hidden;
   color: rgba(0, 0, 0, 0.7);
   background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: inset rgba(0, 0, 0, 0.3) 0 0 2px 0;
+  box-shadow:inset rgba(0, 0, 0, 0.3) 0 0 2px 0, rgba(0, 0, 0, 0.1) 0 5px 26px 0;
 }
 .action-list li,
 .cancel {
@@ -54,7 +54,8 @@
   align-items: center;
   position: relative;
   justify-content: space-between;
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  font-weight: 500;
+  border-top: 8px solid rgba(0, 0, 0, 0.02);
 }
 .action-list li:active {
     background-color: rgba(0, 0, 0, 0.07);
@@ -75,7 +76,7 @@
 }
 .action-list li :global(.icon) {
   position: absolute;
-  right: 1.2rem;
+  right: 1.3rem;
 }
 
 .cancel {
@@ -85,9 +86,8 @@
   margin: 0 0.6rem 0.6rem;
   padding: 1rem;
   border-radius: 0.75rem;
-  box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
   background-color: white;
-  box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0;
+  box-shadow: inset rgba(0, 0, 0, 0.3) 0 0 2px 0, rgba(0, 0, 0, 0.1) 0 5px 26px 0;
 }
 .cancel:active {
   background-color: #f0f0f0;

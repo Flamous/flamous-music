@@ -2,29 +2,33 @@
 import { h } from 'hyperapp'
 import UIIcon from './UIIcon'
 import styles from './UIActionMenu.css'
+import { slideUp } from '../functions/animation'
+import { nestable } from 'hyperapp-context'
 
-let UIActionMenu = (props, children) => (state) => (context) => {
+let state = {
+  animation: slideUp.state
+}
+
+let actions = {
+  animation: slideUp.actions
+}
+
+let view = (state, actions) => (props, children) => (context) => {
   let { items } = props
   let { close } = context.actions.actionMenu
+  let { start: startAnimation } = actions.animation
 
   return <div
-    key='action-menu'
-    class={styles['action-menu']}
-    oncreate={elem => { window.requestAnimationFrame(() => window.requestAnimationFrame(() => elem.classList.toggle('open'))) }}
-    onremove={(elem, done) => { elem.classList.toggle('open'); window.setTimeout(done, 500) }}
+    oncreate={(elem) => { elem.parentNode.actions = actions; window.requestAnimationFrame(() => window.requestAnimationFrame(() => elem.parentNode.classList.toggle('open'))) }}
   >
     <div class={styles['background']} />
-    <div class={styles['container']}>
+    <div class={styles['container']} oncreate={(element) => startAnimation({ element, initialLoad: context.initialLoad })}>
       <ul class={styles['action-list']}>
         {
           items && items.map((item) => {
             let { action, text, icon } = item
 
-            delete item.action
-            delete item.text
-            delete item.icon
-
-            return <li {...item} onclick={() => action({ close })}>
+            return <li class={item.class || ''} style={item.style} onclick={() => action({ close })}>
               <div>
                 {text}
               </div>
@@ -42,4 +46,20 @@ let UIActionMenu = (props, children) => (state) => (context) => {
   </div>
 }
 
-export default UIActionMenu
+const UIActionMenu = nestable(
+  {
+    ...state
+  },
+  {
+    ...actions
+  },
+  view,
+  'action-menu'
+)
+export default (props) => (
+  <UIActionMenu
+    onremove={(elem, done) => { elem.classList.toggle('open'); elem.actions.animation.slideOut(done) }}
+    {...props}
+    key='action-menu'
+    class={styles['action-menu']}
+  />)
