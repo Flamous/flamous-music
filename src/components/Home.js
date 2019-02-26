@@ -6,6 +6,7 @@ import styles from './Home.css'
 import logo from '~/assets/flamous_logo_new_small.svg'
 import dummyPlaceholder from '~/assets/dummy_artists.jpg'
 import musicKitIcon from '~/assets/icons/kit_blue.svg'
+import UIHeader from './UI/UIHeader.js'
 
 const Header = () => (state) => {
   let { auth: { isAuthenticated: isSignedIn } } = state
@@ -35,8 +36,16 @@ const Header = () => (state) => {
 const Home = (props) => (context) => {
   return (
     <UIPage {...props} nonInteractive key='home'>
-      {/* <UIHeader title={<div style={{ marginTop: '3em' }}>Music for<br />Everyone</div>} nav={{ start: 'Logo', end: <UILink class={button} to='/signup'>Create Account</UILink> }} /> */}
-      <Header />
+      <UIHeader
+        nav={{
+          end: <button class='white'>Sign Up</button>
+        }}
+        title={<div style={{ textAlign: 'center', width: '100%', margin: '2em 0' }}>
+          <img style={{ maxWidth: '128px', margin: '0 auto' }} src={logo} />
+          <span>Free Music</span>
+
+        </div>}
+      />
       <main class={styles['main']}>
         <section>
           <h2>
