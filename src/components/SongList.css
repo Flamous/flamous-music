@@ -1,0 +1,39 @@
+.song-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem -1rem;
+}
+
+.song-item {
+  display: flex;
+  color: black;
+  font-size: 1rem;
+  padding: 0.25rem 1rem;
+  border-top: 2px solid rgba(0, 0, 0, 0.02);
+}
+.song-list li:first-child .song-item {
+  border-top: none;
+}
+.song-body {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+}
+.song-body button {
+  color: black !important; 
+}
+
+.song-title {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 1.2rem;
+}
+.song-infos {
+  color: rgba(0, 0, 0, 0.65);
+}
+.cover-image {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  align-self: center;
+}
+
