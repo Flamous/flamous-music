@@ -7,6 +7,7 @@ import logo from '~/assets/flamous_logo_new_small.svg'
 import dummyPlaceholder from '~/assets/dummy_artists.jpg'
 import musicKitIcon from '~/assets/icons/kit_blue.svg'
 import UIHeader from './UI/UIHeader.js'
+import SongList from './SongList'
 
 const Header = () => (state) => {
   let { auth: { isAuthenticated: isSignedIn } } = state
@@ -33,6 +34,29 @@ const Header = () => (state) => {
   </header>
 }
 
+let songData = [
+  {
+    title: 'Song in the wild',
+    artist: 'Christian',
+    album: 'lululu'
+  },
+  {
+    title: 'Song in the wild',
+    artist: 'Christian',
+    album: 'lululu'
+  },
+  {
+    title: 'Song in the wild',
+    artist: 'Christian',
+    album: 'lululu'
+  },
+  {
+    title: 'Song in the wild',
+    artist: 'Christian',
+    album: 'lululu'
+  }
+]
+
 const Home = (props) => (context) => {
   return (
     <UIPage {...props} nonInteractive key='home'>
@@ -49,21 +73,11 @@ const Home = (props) => (context) => {
       <main class={styles['main']}>
         <section>
           <h2>
-            Featured
+            Featured Songs
           </h2>
-          <img style={{ display: 'block', width: '100%', maxWidth: '500px' }} src={dummyPlaceholder} />
+          <SongList songs={songData} />
         </section>
-        <br />
-        <br />
-        <hr />
-        <section>
-          <h2>
-            Don't know how to make music?
-          </h2>
-          <p>
-            Check out the <UILink to='/music-kit'>Music Kit <img style={{ verticalAlign: 'bottom' }} src={musicKitIcon} /></UILink>
-          </p>
-        </section>
+
       </main>
     </UIPage>
   )
