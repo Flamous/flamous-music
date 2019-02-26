@@ -87,12 +87,13 @@ const view = (state, actions) => () => (context) => {
             { text: 'Share',
               icon: 'share-2'
             },
-            { text: 'Loop Song'
+            { text: 'Loop Song',
+              icon: 'repeat'
             },
             { text: 'Go to Artist',
               icon: 'user'
             },
-            { text: 'Download File',
+            { text: 'Download Audio File',
               icon: 'download'
             }
           ],
