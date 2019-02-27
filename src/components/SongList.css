@@ -11,6 +11,9 @@
   padding: 0.325rem 1rem 0.325rem 1.2rem;
   border-top: 2px solid rgba(0, 0, 0, 0.02);
 }
+.song-item:active {
+  opacity: 0.6;
+}
 .song-list li:first-child .song-item {
   border-top: none;
 }
