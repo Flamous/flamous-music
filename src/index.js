@@ -18,6 +18,7 @@ import actionMenu from './modules/actionMenu'
 
 import './config'
 
+import('./long-press-event.js').then((what) => {})
 import('./normalize.css').then(() => {})
 import('./global.css').then(() => {})
 
