@@ -22,7 +22,6 @@ button, a:global(.button), label:global(.button) {
   transition: background-color 80ms;
   display: inline-flex;
   align-items: center;
-  margin: 0.2em;
   white-space: nowrap;
   user-select: none;
   padding: 0.6em 0.9em;
