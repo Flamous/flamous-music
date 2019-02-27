@@ -9,6 +9,7 @@ import logo from '~/assets/flamous_logo_new_small.svg'
 import UIHeader from './UI/UIHeader.js'
 import SongList from './SongList'
 import AlbumList from './AlbumList'
+import ArtistList from './ArtistList'
 
 // const Header = () => (state) => {
 //   let { auth: { isAuthenticated: isSignedIn } } = state
@@ -91,6 +92,33 @@ let albumData = [
   }
 ]
 
+let artistData = [
+  {
+    name: '18:20',
+    monthlyListeners: 736
+  },
+  {
+    name: 'Kimiko Ishizaka',
+    monthlyListeners: 4385
+  },
+  {
+    name: 'Wowa',
+    monthlyListeners: 3837
+  },
+  {
+    name: 'Billy Murray',
+    monthlyListeners: 34
+  },
+  {
+    name: 'Mozart',
+    monthlyListeners: 3453
+  },
+  {
+    name: 'J. S. Bach',
+    monthlyListeners: 5425
+  }
+]
+
 const Home = (props) => (context) => {
   return (
     <UIPage {...props} class={styles['home']} nonInteractive key='home'>
@@ -116,7 +144,7 @@ const Home = (props) => (context) => {
           <h2>
             Artists
           </h2>
-          <SongList songs={songData} />
+          <ArtistList artists={artistData} />
         </section>
 
         <section>
