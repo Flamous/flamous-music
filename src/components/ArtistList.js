@@ -9,10 +9,45 @@ let view = (props, children) => (state) => (context) => {
   let { artists = [] } = props
   let { actionMenu } = context.actions
 
+  function openActionMenu (event) {
+    actionMenu.open({
+      event,
+      items: [
+        { text: 'Add to Queue',
+          icon: 'corner-down-left'
+        },
+        { text: 'Save to Library',
+          icon: 'heart'
+        },
+        { text: 'Go to Album',
+          icon: 'disc'
+        },
+        { text: 'Go to Artist',
+          icon: 'user'
+        },
+        { text: 'Share',
+          icon: 'share-2'
+        },
+        { text: 'Download Audio File',
+          icon: 'download'
+        },
+        { text: 'Report Content',
+          icon: 'slash'
+        }
+      ]
+    })
+  }
+
   return <ul class={styles['artist-list']}>
     { artists.length > 0 && artists.map(artist => (
       <li>
-        <UILink class={styles['artist-item']} to='/'>
+        <UILink
+          class={styles['artist-item']}
+          to='/'
+          oncreate={elem => {
+            elem.addEventListener('long-press', openActionMenu)
+          }}
+        >
           <div class={styles['artist-body']}>
             <div class={styles['artist-text']}>
               <span class={styles['artist-name']}>
@@ -23,34 +58,7 @@ let view = (props, children) => (state) => (context) => {
                 {artist.monthlyListeners} listeners
               </span>
             </div>
-            <button class='white' onclick={event => {
-              actionMenu.open({
-                event,
-                items: [
-                  { text: 'Add to Queue',
-                    icon: 'corner-down-left'
-                  },
-                  { text: 'Save to Library',
-                    icon: 'heart'
-                  },
-                  { text: 'Go to Album',
-                    icon: 'disc'
-                  },
-                  { text: 'Go to Artist',
-                    icon: 'user'
-                  },
-                  { text: 'Share',
-                    icon: 'share-2'
-                  },
-                  { text: 'Download Audio File',
-                    icon: 'download'
-                  },
-                  { text: 'Report Content',
-                    icon: 'slash'
-                  }
-                ]
-              })
-            }}>
+            <button class='white' onclick={openActionMenu}>
               <UIIcon icon='more-horizontal' />
             </button>
           </div>
