@@ -1,0 +1,38 @@
+.album-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem -0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.9375rem;
+}
+
+.album-list li {
+  flex-basis: 40%;
+  flex-grow: 1;
+  max-width: 50%;
+}
+
+.album-item {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0.75rem 0.25rem;
+  color: black;
+}
+.album-item:active {
+  opacity: 0.6;
+}
+.album-item button {
+  display: none;
+}
+.album-body {
+  text-align: center;
+}
+.album-title {
+  display: inline-block;
+  margin-top: 0.375rem;
+}
+.album-infos {
+  font-size: 0.875em;
+  color: rgba(0, 0, 0, 0.65);
+}
