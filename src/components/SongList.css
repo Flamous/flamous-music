@@ -56,7 +56,7 @@
 .cover-image {
   border-radius: 0.5rem;
   overflow: hidden;
-  width: 2.75rem;
+  width: 3rem;
   flex-shrink: 0;
   align-self: center;
 }
