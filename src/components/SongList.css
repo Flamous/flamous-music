@@ -45,8 +45,8 @@
   right: 0;
   top: 0;
   bottom: 0;
-  width: 1.25rem;
-  background-image: linear-gradient(to left, white, transparent);
+  width: 1.75rem;
+  background-image: linear-gradient(to left, white, rgba(255, 255, 255, 0));
 }
 
 .song-title {
