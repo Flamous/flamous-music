@@ -6,15 +6,17 @@
   width: 100%;
   display: flex;
   z-index: 1090;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: white;
+  box-shadow:
+    inset rgba(0, 0, 0, 0.2) 0 0 2px 0,
+    rgba(0, 0, 0, 0.02) 0 0 30px 0;
   justify-content: center;
   user-select: none;
 }
 @supports (backdrop-filter: blur(30px)) {
   .tab-bar {
-    background-color: rgba(255, 255, 255, 0.90);
-    backdrop-filter: blur(60px);
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(40px);
   }
 }
 
@@ -28,7 +30,7 @@
   flex-direction: column;
   justify-content: center;
   border-radius: 7%;
-  color: rgba(0, 0, 0, calc((255 - 100) / 255));
+  color: rgba(0, 0, 0, 0.5);
   align-items: center;
 }
 .item:active {
@@ -48,16 +50,14 @@
 .item svg {
   margin: 5px;
 }
-.item.active .icon {
-  transform: scale(1);
-}
+
 .item img {
   display: block;
   width: auto;
 }
 .item.player img {
   border-radius: 0.5em;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 0 7px 0;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 10px -3px;
 }
 
 @media (min-width: 800px) {
