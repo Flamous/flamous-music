@@ -8,10 +8,10 @@
   display: flex;
   color: black;
   font-size: 1rem;
-  padding: 0.325rem 1rem 0.325rem 1.2rem;
+  padding: 0.325rem 0.75rem 0.325rem 1rem;
   border-top: 2px solid rgba(0, 0, 0, 0.02);
 }
-.song-item:active {
+.song-body:active {
   opacity: 0.6;
 }
 .song-list li:first-child .song-item {
@@ -24,7 +24,7 @@
   justify-content: space-between;
 }
 .song-body button {
-  color: black !important; 
+  color: rgba(0, 0, 0, 0.42) !important; 
 }
 .song-title,
 .song-infos {
@@ -54,7 +54,7 @@
 }
 .song-infos {
   font-size: 0.875em;
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(0, 0, 0, 0.5);
 }
 .cover-image {
   border-radius: 0.5rem;
