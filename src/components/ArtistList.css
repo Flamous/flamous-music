@@ -49,4 +49,7 @@
   overflow: hidden;
   width: 6.5rem;
   margin: 0 auto;
+  box-shadow:
+    inset rgba(0, 0, 0, 0.2) 0 0 2px 0,
+    rgba(0, 0, 0, 0.05) 0 2px 12px 0;
 }
