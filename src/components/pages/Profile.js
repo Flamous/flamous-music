@@ -171,7 +171,7 @@ const Library = (props) => (state, actions) => (context) => {
           Logged in as<br /><b>{auth.cognitoUser.attributes.email}</b>
               </div>
               <div>
-                <button style={{ backgroundColor: 'rgb(255,59,48)' }} onclick={logout}>Logout</button>
+                <button style={{ color: 'rgb(255,59,48)' }} class='white' onclick={logout}>Logout</button>
               </div>
             </div>
             <UILink class='row' to='/settings/change-password'>
