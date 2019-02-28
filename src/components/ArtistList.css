@@ -3,15 +3,13 @@
   padding: 0 1em;
   margin: 1rem -1rem;
   display: flex;
-  /* flex-wrap: wrap; */
   overflow-y: auto;
   font-size: 1rem;
 }
 
 .artist-list li {
-  flex-basis: 40%;
-  flex-grow: 1;
   max-width: 50%;
+  flex-grow: 1;
 }
 
 .artist-item {
@@ -19,6 +17,7 @@
   flex-direction: column-reverse;
   color: black;
   padding: 1rem;
+  width: 38vw;
 }
 .artist-item:active {
   opacity: 0.6;
@@ -49,5 +48,5 @@
   border-radius: 50%;
   overflow: hidden;
   width: 6.5rem;
-  /* margin-left: auto; */
+  margin: 0 auto;
 }
