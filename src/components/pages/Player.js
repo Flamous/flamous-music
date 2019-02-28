@@ -9,7 +9,7 @@ import styles from './Player.css'
 import cc from 'classcat'
 
 // import placeholder from '../../assets/song_placeholder.svg'
-import placeholder from '../../assets/kimiko_ishizaka.jpg'
+import placeholder from '../../assets/song_placeholder.svg'
 
 let { snap } = transform
 
