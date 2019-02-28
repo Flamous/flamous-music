@@ -1,4 +1,10 @@
 .home {
+  display: flex;
+  flex-direction: column;
+  display: flow-root;
+}
+
+.home > *:last-child {
   padding-bottom: 6em;
 }
 
