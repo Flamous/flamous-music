@@ -1,7 +1,7 @@
 /** @jsx h */
 import { h } from 'hyperapp'
 import styles from './ArtistList.css'
-import albumCoverPlaceholer from '../assets/song_placeholder.svg'
+import artistPlaceholer from '../assets/artist_placeholder.svg'
 import UIIcon from './UI/UIIcon'
 import UILink from './UI/UILink'
 
@@ -63,7 +63,7 @@ let view = (props, children) => (state) => (context) => {
             </button>
           </div>
           <div class={styles['profile-image']}>
-            <img src={albumCoverPlaceholer} />
+            <img src={artistPlaceholer} />
           </div>
         </UILink>
       </li>
