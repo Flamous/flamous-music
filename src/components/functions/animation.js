@@ -180,17 +180,18 @@ const slideUp = {
 
       function initSwipeBack () {
         if (slideOutInteractive) {
-          let p
+          let p1
+          let p2
           listen(element, 'touchstart')
             .start(event => {
               let startY = handleY.get()
-              p = pointer({ y: startY })
+              p1 = pointer({ y: startY })
                 .pipe(data => data.y)
                 .start(y => {
                   let lel = y - startY
                   if (lel > 15) {
-                    p.stop()
-                    p = pointer({ y: handleY.get() })
+                    p1.stop()
+                    p2 = pointer({ y: handleY.get() })
                       .pipe(data => data.y)
                       .start(handleY)
                   }
@@ -198,8 +199,9 @@ const slideUp = {
 
               listen(document, 'touchend', { once: true })
                 .start(event => {
+                  p1 && p1.stop()
+                  p2 && p2.stop()
                   let deltaY = handleY.get() - startY
-                  p.stop()
                   if (deltaY > 20) {
                     back()
                   } else {
