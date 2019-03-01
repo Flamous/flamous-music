@@ -9,7 +9,8 @@
 }
 .no-sticky .header-nav,
 .no-sticky .header-line {
-  position: static;
+  position: relative;
+  top: 0;
 }
 .header-nav .content {
   max-width: 65rem;
