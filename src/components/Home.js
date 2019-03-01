@@ -123,6 +123,8 @@ const Home = (props) => (context) => {
   return (
     <UIPage {...props} class={styles['home']} nonInteractive key='home'>
       <UIHeader
+        noDynamicTitle
+        noSticky
         nav={{
           end: <button class='white'>Sign Up</button>
         }}
