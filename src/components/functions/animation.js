@@ -257,6 +257,7 @@ const slideUp = {
       spring({
         from: handleY.get(),
         to: targetHeight,
+        velocity: handleY.getVelocity(),
         mass: 1,
         damping: 20,
         stiffness: 160
