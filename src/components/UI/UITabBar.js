@@ -8,6 +8,11 @@ import libraryBlueSVG from '~/assets/icons/library_blue.svg'
 import UIIcon from './UIIcon'
 import cc from 'classcat'
 
+const THRESHOLD = 15
+let lastTouchY = 0
+let YDelta = 0
+let hasFired = false
+
 const UITabBar = (props, children) => (context) => {
   let { actions: { views: { setActive } }, views: { activeView } } = context
 
@@ -16,7 +21,37 @@ const UITabBar = (props, children) => (context) => {
 
     delete props.viewName
 
-    return <div ontouchstart={() => setActive(viewName)} onmousedown={() => setActive(viewName)} {...props}>
+    return <div
+      ontouchstart={event => {
+        window.setTimeout(() => {
+          if (!hasFired && YDelta < 10) {
+            hasFired = true
+            setActive(viewName)
+          }
+        }, 200)
+
+        lastTouchY = event.changedTouches[0].clientY
+      }}
+      onmousedown={() => setActive(viewName)}
+      ontouchmove={event => {
+        let currentTouchY = event.changedTouches[0].clientY
+        let delta = lastTouchY - currentTouchY
+
+        YDelta += delta
+        lastTouchY = currentTouchY
+
+        if (YDelta >= THRESHOLD && !hasFired) {
+          window.history.pushState({ isSwipe: true }, '', '/player')
+          hasFired = true
+        }
+      }}
+      ontouchend={event => {
+        if (!hasFired) setActive(viewName)
+        YDelta = 0
+        hasFired = false
+      }}
+      {...props}
+    >
       {children}
     </div>
   }
