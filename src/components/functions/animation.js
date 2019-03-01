@@ -178,9 +178,48 @@ const slideUp = {
       let bodyHeight = window.innerHeight
       let handleY
 
+      function initSwipeBack () {
+        if (slideOutInteractive) {
+          let p
+          listen(element, 'touchstart')
+            .start(event => {
+              let startY = handleY.get()
+              p = pointer({ y: startY })
+                .pipe(data => data.y)
+                .start(y => {
+                  let lel = y - startY
+                  if (lel > 15) {
+                    p.stop()
+                    p = pointer({ y: handleY.get() })
+                      .pipe(data => data.y)
+                      .start(handleY)
+                  }
+                })
+
+              listen(document, 'touchend', { once: true })
+                .start(event => {
+                  let deltaY = handleY.get() - startY
+                  p.stop()
+                  if (deltaY > 20) {
+                    back()
+                  } else {
+                    spring({
+                      from: handleY.get('y'),
+                      to: 0,
+                      damping: 20,
+                      mass: 0.3,
+                      stiffness: 120
+                    }).start(handleY)
+                  }
+                })
+            })
+        }
+      }
+
       if (initialLoad) {
         window.flamous.setInitialLoad(false)
         handleY = value(0, handleStyler.set('y'))
+        initSwipeBack()
 
         return {
           handleStyler,
@@ -190,21 +229,7 @@ const slideUp = {
 
       handleY = value(bodyHeight, handleStyler.set('y'))
 
-      if (slideOutInteractive) {
-        let p
-        listen(element, 'touchstart')
-          .start(event => {
-            p = pointer({ y: handleY.get() })
-              .pipe(data => data.y)
-              .start(handleY)
-
-            listen(document, 'touchend', { once: true })
-              .start(event => {
-                p.stop()
-                back()
-              })
-          })
-      }
+      initSwipeBack()
 
       if (initialInteractive) {
         let p = pointer({ y: handleY.get() })
