@@ -7,6 +7,10 @@
   z-index: 1000;
   stroke: #007aff;
 }
+.no-sticky .header-nav,
+.no-sticky .header-line {
+  position: relative;
+}
 .header-nav .content {
   max-width: 65rem;
   margin: 0 auto;

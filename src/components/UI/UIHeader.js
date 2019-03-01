@@ -86,11 +86,11 @@ const actions = {
   }
 }
 const view = (state, actions) => (props, children) => (context) => {
-  let { title, nav = {} } = props
+  let { title, nav = {}, noSticky } = props
   let { initObserver } = actions
   let noDynamicTitle = props.hasOwnProperty('noDynamicTitle')
 
-  return <header class={cc(['header', props.class])}>
+  return <header class={cc(['header', props.class, { [styles['no-sticky']]: noSticky }])}>
     <HeaderNav noDynamicTitle={noDynamicTitle} isHeaderTitleHidden={state.isHeaderHidden} title={title} nav={nav}>
       {[
         nav.start,
