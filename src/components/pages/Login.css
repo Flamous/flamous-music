@@ -30,6 +30,7 @@
 }
 .header img {
   height: 1.5em;
+  width: auto;
 }
 .header hr {
   width: 5em;
