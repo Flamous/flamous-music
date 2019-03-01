@@ -1,6 +1,5 @@
 /** @jsx h */
 import { h } from 'hyperapp'
-import { spring, value, styler, listen, pointer, transform } from 'popmotion'
 import { nestable } from 'hyperapp-context'
 import { slideUp } from '../functions/animation'
 import UIIcon from '../UI/UIIcon'
@@ -10,8 +9,6 @@ import cc from 'classcat'
 
 // import placeholder from '../../assets/song_placeholder.svg'
 import placeholder from '../../assets/song_placeholder.svg'
-
-let { snap } = transform
 
 const state = {
   animation: slideUp.state
@@ -26,7 +23,14 @@ const view = (state, actions) => () => (context) => {
 
   return <div
     class={styles['player']}
-    oncreate={(element) => { element.parentNode.actions = actions; startAnimation({ element, initialLoad: context.initialLoad }) }}
+    oncreate={(element) => {
+      element.parentNode.actions = actions
+      startAnimation({
+        element,
+        initialInteractive: window.history.state.isSwipe,
+        initialLoad: context.initialLoad
+      })
+    }}
   >
     <header class={styles['header']}>
       <UILink back class={styles['close']}>
