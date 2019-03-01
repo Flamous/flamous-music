@@ -34,9 +34,7 @@
   color: rgba(0, 0, 0, 0.5);
   align-items: center;
 }
-.item:active {
-  background-color: #f0f0f0;
-}
+
 @media (pointer: fine) {
   .item:hover {
     background-color: #f0f0f0;
@@ -55,6 +53,19 @@
 .item img {
   display: block;
   width: auto;
+}
+.item.player {
+  flex-basis: 0;
+  padding-right: 0.75rem;
+  padding-left: 1rem;
+  cursor: pointer;
+}
+
+@media (pointer: fine) {
+  .item.player:hover {
+    background-color: transparent;
+    opacity: 0.75;
+  }
 }
 .item.player img {
   border-radius: 0.5em;
