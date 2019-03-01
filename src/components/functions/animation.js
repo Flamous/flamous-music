@@ -192,7 +192,7 @@ const slideUp = {
       handleY = value(bodyHeight, handleStyler.set('y'))
 
       if (initialInteractive) {
-        let p = pointer()
+        let p = pointer({ y: handleY.get() })
           .pipe(data => data.y)
           .start(handleY)
 
