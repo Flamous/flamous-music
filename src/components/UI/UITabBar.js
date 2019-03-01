@@ -3,11 +3,8 @@ import { h } from 'hyperapp'
 import { Link } from '@hyperapp/router'
 import styles from './UITabBar.css'
 import placeholderImage from '~/assets/song_placeholder.svg'
-import homeSVG from '~/assets/icons/home.svg'
-import homeBlueSVG from '~/assets/icons/home_blue.svg'
 import librarySVG from '~/assets/icons/library.svg'
 import libraryBlueSVG from '~/assets/icons/library_blue.svg'
-import kitBlueSVG from '~/assets/icons/kit_blue.svg'
 import UIIcon from './UIIcon'
 import cc from 'classcat'
 
@@ -26,7 +23,6 @@ const UITabBar = (props, children) => (context) => {
 
   return <nav class={styles['tab-bar']}>
     <SetActive viewName='home' class={cc([styles['item'], { [styles['active']]: activeView === 'home' }])}>
-      {/* <img class={styles['icon']} alt='Home Icon' src={activeView === 'home' ? homeBlueSVG : homeSVG} /> */}
       <UIIcon icon='music' />
       <span>Explore</span>
     </SetActive>
@@ -37,7 +33,6 @@ const UITabBar = (props, children) => (context) => {
     </SetActive>
 
     <SetActive viewName='profile' class={cc([styles['item'], { [styles['active']]: activeView === 'profile' }])}>
-      {/* <img class={styles['icon']} alt='Profile Icon' src={activeView === 'profile' ? kitBlueSVG : kitSVG} /> */}
       <UIIcon icon='user' />
       <span>Profile</span>
     </SetActive>
