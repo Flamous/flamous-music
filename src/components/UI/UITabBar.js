@@ -12,7 +12,7 @@ const THRESHOLD = 15
 let lastTouchY = 0
 let YDelta = 0
 let hasFired = false
-let isClick = false
+// let isClick = false
 
 const UITabBar = (props, children) => (context) => {
   let { actions: { views: { setActive } }, views: { activeView } } = context
@@ -26,34 +26,36 @@ const UITabBar = (props, children) => (context) => {
       ontouchstart={event => {
         lastTouchY = event.changedTouches[0].clientY
 
-        window.setTimeout(() => {
-          if (!hasFired && YDelta < THRESHOLD - 5) {
-            isClick = true
-          }
-        }, 200)
+        // window.setTimeout(() => {
+        //   if (!hasFired && YDelta < THRESHOLD - 5) {
+        //     isClick = true
+        //   }
+        // }, 200)
       }}
+      onclick={() => setActive(viewName)}
       onmousedown={() => setActive(viewName)}
       ontouchmove={event => {
+        // console.log(event)
         let currentTouchY = event.changedTouches[0].clientY
         let delta = lastTouchY - currentTouchY
 
         YDelta += delta
         lastTouchY = currentTouchY
 
-        if (isClick) {
-          hasFired = true
-          setActive(viewName)
-        }
-
+        // if (isClick) {
+        //   hasFired = true
+        //   setActive(viewName)
+        // }
+        // console.log(YDelta)
         if (YDelta >= THRESHOLD && !hasFired) {
           hasFired = true
           window.history.pushState({ isSwipe: true }, '', '/player')
         }
       }}
       ontouchend={event => {
-        if (!hasFired) setActive(viewName)
+        // if (!hasFired) setActive(viewName)
         YDelta = 0
-        isClick = false
+        // isClick = false
         hasFired = false
       }}
       {...props}
