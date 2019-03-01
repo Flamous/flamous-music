@@ -28,7 +28,9 @@ const view = (state, actions) => () => (context) => {
       startAnimation({
         element,
         initialInteractive: window.history.state.isSwipe,
-        initialLoad: context.initialLoad
+        slideOutInteractive: true,
+        initialLoad: context.initialLoad,
+        back: () => window.history.back()
       })
     }}
   >
