@@ -19,7 +19,7 @@ const UITabBar = (props, children) => (context) => {
 
     delete props.viewName
 
-    return <div onclick={() => setActive(viewName)} {...props}>
+    return <div ontouchstart={() => setActive(viewName)} onmousedown={() => setActive(viewName)} {...props}>
       {children}
     </div>
   }
