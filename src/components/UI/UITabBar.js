@@ -8,7 +8,7 @@ import libraryBlueSVG from '~/assets/icons/library_blue.svg'
 import UIIcon from './UIIcon'
 import cc from 'classcat'
 
-const THRESHOLD = 15
+const THRESHOLD = 10
 let lastTouchY = 0
 let YDelta = 0
 let hasFired = false
