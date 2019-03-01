@@ -163,7 +163,8 @@ const slideUp = {
   state: {
     handleStyler: null,
     handleY: null,
-    started: false
+    started: false,
+    initialInteractive: false
   },
   actions: {
     init: (props) => {
@@ -171,8 +172,8 @@ const slideUp = {
         started: true
       }
     },
-    start: (data) => () => {
-      let { element, initialLoad } = data
+    start: (data) => (state, actions) => {
+      let { element, initialLoad, initialInteractive } = data
 
       let handleStyler = styler(element)
       let bodyHeight = window.innerHeight
@@ -189,6 +190,29 @@ const slideUp = {
       }
 
       handleY = value(bodyHeight, handleStyler.set('y'))
+
+      if (initialInteractive) {
+        let p = pointer()
+          .pipe(data => data.y)
+          .start(handleY)
+
+        listen(document, 'touchend')
+          .start(event => {
+            p.stop()
+            spring({
+              from: handleY.get('y'),
+              to: 0,
+              damping: 20,
+              mass: 0.3,
+              stiffness: 120
+            }).start(handleY)
+          })
+
+        return {
+          handleStyler,
+          handleY
+        }
+      }
 
       spring({
         from: bodyHeight,
