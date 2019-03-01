@@ -8,10 +8,11 @@
   z-index: 1090;
   background-color: white;
   box-shadow:
-    inset rgba(0, 0, 0, 0.2) 0 2px 3px -3px,
+    /* inset rgba(0, 0, 0, 0.2) 0 3px 3px -3px, */
     rgba(0, 0, 0, 0.02) 0 0 30px 0;
   justify-content: center;
   user-select: none;
+  border-top: 1px solid #f0f0f0;
 }
 @supports (backdrop-filter: blur(30px)) {
   .tab-bar {
