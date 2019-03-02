@@ -1,6 +1,9 @@
 .main {
   background-color: #fbf9fa;
   height: 92vh;
+  display: flex;
+  flex-direction: column;
+  display: flow-root;
 }
 
 .main section {
@@ -12,7 +15,7 @@
   border-radius: 0.5rem;
 }
 .main section:last-child {
-  margin-bottom: 6rem;
+  padding-bottom: 4rem;
 }
 .main h3 {
   margin: 0 auto;

@@ -4,7 +4,7 @@
   display: flow-root;
 }
 
-.home > *:last-child {
+.home > article:last-child {
   padding-bottom: 6em;
 }
 
