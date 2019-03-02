@@ -276,9 +276,9 @@ const slideUp = {
                 from: y,
                 to: 0,
                 velocity: velocity,
-                damping: 17,
-                mass: 1.1,
-                stiffness: 100
+                damping: 25,
+                mass: 1,
+                stiffness: 200
               }).start(handleY)
             }
           })
