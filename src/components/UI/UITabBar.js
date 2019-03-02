@@ -12,7 +12,6 @@ const THRESHOLD = 10
 let lastTouchY = 0
 let YDelta = 0
 let hasFired = false
-// let isClick = false
 
 const UITabBar = (props, children) => (context) => {
   let { actions: { views: { setActive } }, views: { activeView } } = context
@@ -23,48 +22,36 @@ const UITabBar = (props, children) => (context) => {
     delete props.viewName
 
     return <div
-      ontouchstart={event => {
-        lastTouchY = event.changedTouches[0].clientY
-
-        // window.setTimeout(() => {
-        //   if (!hasFired && YDelta < THRESHOLD - 5) {
-        //     isClick = true
-        //   }
-        // }, 200)
-      }}
       onclick={() => setActive(viewName)}
       onmousedown={() => setActive(viewName)}
-      ontouchmove={event => {
-        // console.log(event)
-        let currentTouchY = event.changedTouches[0].clientY
-        let delta = lastTouchY - currentTouchY
-
-        YDelta += delta
-        lastTouchY = currentTouchY
-
-        // if (isClick) {
-        //   hasFired = true
-        //   setActive(viewName)
-        // }
-        // console.log(YDelta)
-        if (YDelta >= THRESHOLD && !hasFired) {
-          hasFired = true
-          window.history.pushState({ isSwipe: true }, '', '/player')
-        }
-      }}
-      ontouchend={event => {
-        // if (!hasFired) setActive(viewName)
-        YDelta = 0
-        // isClick = false
-        hasFired = false
-      }}
       {...props}
     >
       {children}
     </div>
   }
 
-  return <nav class={styles['tab-bar']}>
+  return <nav
+    class={styles['tab-bar']}
+    ontouchstart={event => {
+      lastTouchY = event.changedTouches[0].clientY
+    }}
+    ontouchmove={event => {
+      let currentTouchY = event.changedTouches[0].clientY
+      let delta = lastTouchY - currentTouchY
+
+      YDelta += delta
+      lastTouchY = currentTouchY
+
+      if (YDelta >= THRESHOLD && !hasFired) {
+        hasFired = true
+        window.history.pushState({ isSwipe: true }, '', '/player')
+      }
+    }}
+    ontouchend={event => {
+      YDelta = 0
+      hasFired = false
+    }}
+  >
     <SetActive viewName='home' class={cc([styles['item'], { [styles['active']]: activeView === 'home' }])}>
       <UIIcon icon='music' />
       <span>Explore</span>
