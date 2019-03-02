@@ -182,7 +182,7 @@ const slideUp = {
         if (slideOutInteractive) {
           let p1
           let p2
-          listen(element, 'touchstart')
+          let l1 = listen(element, 'touchstart')
             .start(event => {
               let startY = handleY.get()
               p1 = pointer({ y: startY })
@@ -204,6 +204,7 @@ const slideUp = {
                   let deltaY = handleY.get() - startY
                   if (deltaY > 20) {
                     back()
+                    l1.stop()
                   } else {
                     spring({
                       from: handleY.get('y'),
@@ -244,6 +245,7 @@ const slideUp = {
             spring({
               from: handleY.get('y'),
               to: 0,
+              velocity: handleY.getVelocity(),
               damping: 20,
               mass: 0.3,
               stiffness: 120
