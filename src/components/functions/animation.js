@@ -176,7 +176,6 @@ const slideUp = {
     },
     start: (data) => (state, actions) => {
       let { element, initialLoad, initialInteractive, slideOutInteractive, back } = data
-      let { setState } = actions
 
       let handleStyler = styler(element)
       let bodyHeight = window.innerHeight
@@ -206,16 +205,27 @@ const slideUp = {
                   p1 && p1.stop()
                   p2 && p2.stop()
                   let velocity = handleY.getVelocity()
-                  let deltaY = (handleY.get() - startY) + velocity * 2
-                  if (deltaY > 80) {
-                    setState({
-                      lastVelocity: velocity
-                    })
-                    back()
-                    l1.stop()
-                  } else {
+                  let y = handleY.get()
+                  let deltaY = (y - startY) + velocity * 2
+
+                  if (deltaY > 80) { // Go Back (slide out)
+                    let sub = handleY.subscribe({ update: v => {
+                      if (v >= bodyHeight) {
+                        sub.unsubscribe(); back()
+                      }
+                    } })
                     spring({
-                      from: handleY.get('y'),
+                      from: y,
+                      to: bodyHeight,
+                      velocity: velocity,
+                      damping: 17,
+                      mass: 1,
+                      stiffness: 110
+                    }).start(handleY)
+                    l1.stop()
+                  } else { // User didn't swipe enough
+                    spring({
+                      from: y,
                       to: 0,
                       damping: 20,
                       mass: 0.3,
@@ -287,7 +297,7 @@ const slideUp = {
       }
     },
     slideOut: (done) => (state) => {
-      let { handleY, handleStyler, lastVelocity = 0 } = state
+      let { handleY, handleStyler } = state
       let targetHeight = handleStyler.get('height')
 
       handleY.subscribe((val) => {
@@ -302,7 +312,6 @@ const slideUp = {
       spring({
         from: handleY.get(),
         to: targetHeight,
-        velocity: lastVelocity,
         mass: 1,
         damping: 10,
         stiffness: 80
