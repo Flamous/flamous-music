@@ -37,7 +37,7 @@ const Page = (props) => (state, actions) => (context) => {
           <div class='row'>
             <div class={styles['input-container']}>
               <label for='current-password'>Current</label>
-              <input placeholder='Type current password...' oncreate={elem => elem.focus()} type='password' id='current-password' oninput={handleChange} value={state['current-password']} />
+              <input placeholder='Type current password...' type='password' id='current-password' oninput={handleChange} value={state['current-password']} />
             </div>
           </div>
           <div class='row'>
@@ -56,5 +56,5 @@ const Page = (props) => (state, actions) => (context) => {
 }
 
 export default (props) => <UIPage {...props}>
-  <Page />
+  <Page {...props} />
 </UIPage>
