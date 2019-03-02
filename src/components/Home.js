@@ -132,10 +132,10 @@ const Home = (props) => (context) => {
             <UILink to='/signup' class='button white' style={{ fontWeight: '500' }}>Sign Up</UILink>
           </div>
         }}
-        title={<div style={{ textAlign: 'center', width: '100%', margin: '2em 0' }}>
+        title={<div style={{ width: '100%', margin: '3rem 0 2rem' }}>
 
-          <span>Free music</span>
-
+          <span>High-quality music by amazing musicians.</span>
+          <span style={{ fontSize: '1rem', fontWeight: 'normal', display: 'inline-block', paddingLeft: '0.5rem' }}>And it's also free.</span>
         </div>}
       />
       <main class={styles['main']}>
