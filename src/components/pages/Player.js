@@ -126,4 +126,4 @@ const Player = nestable(
   'page-player'
 )
 
-export default (props) => { return <Player onremove={(elem, done) => { elem.actions.animation.slideOut(done) }} {...props} key='player' /> }
+export default (props) => { return <Player onremove={(elem, done) => { elem.actions.animation.slideOut({ done, elem }) }} {...props} key='player' /> }

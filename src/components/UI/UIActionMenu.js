@@ -61,7 +61,7 @@ const UIActionMenu = nestable(
 )
 export default (props) => (
   <UIActionMenu
-    onremove={(elem, done) => { elem.classList.toggle('open'); elem.actions.animation.slideOut(done) }}
+    onremove={(elem, done) => { elem.classList.toggle('open'); elem.actions.animation.slideOut({ done, elem }) }}
     {...props}
     key='action-menu'
     class={styles['action-menu']}

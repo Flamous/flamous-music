@@ -219,4 +219,4 @@ const NewAlbum = nestable(
   'page-new-album'
 )
 
-export default (props) => { return <NewAlbum onremove={(elem, done) => { elem.actions.animation.slideOut(done) }} {...props} /> }
+export default (props) => { return <NewAlbum onremove={(elem, done) => { elem.actions.animation.slideOut({ done, elem }) }} {...props} /> }
