@@ -8,6 +8,7 @@
   overscroll-behavior: contain;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 2px 0;
   background-color: #fafafa;
+  transform: translateY(100%);
 }
 
 @supports (backdrop-filter: blur(10px)) {
