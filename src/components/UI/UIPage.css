@@ -1,3 +1,12 @@
+ui-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
 .page {
   height: 100%;
   width: 100%;
@@ -6,7 +15,7 @@
   top: 0;
   left: 0;
   box-shadow: 0 0 0 2px #f0f0f0;
-  /* background-color: rgb(252, 252, 252);   */
+  background-color: white;  
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   -webkit-perspective: 0;
