@@ -123,7 +123,7 @@ const Player = nestable(
     ...actions
   },
   view,
-  'page-player'
+  'music-player'
 )
 
 export default (props) => { return <Player onremove={(elem, done) => { elem.actions.animation.slideOut({ done, elem }) }} {...props} key='player' /> }
