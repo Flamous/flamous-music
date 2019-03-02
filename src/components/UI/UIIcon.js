@@ -16,7 +16,7 @@ const Use = (props, children) => {
   }
 
   return (
-    <use {...props} oncreate={setLink} onupdate={setLink}>
+    <use {...props} oncreate={setLink}>
       {children}
     </use>
   )
