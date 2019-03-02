@@ -22,7 +22,8 @@
 
 .item {
   font-size: 0.75rem;
-  width: 7rem;
+  flex-basis: 7rem;
+  flex-grow: 1;
   padding: 0.2rem 0.15rem 0.2rem;
   text-align: center;
   cursor: default;
@@ -54,7 +55,7 @@
   width: auto;
 }
 .item.player {
-  flex-basis: 0;
+  flex-basis: 0px;
   padding-right: 0.75rem;
   padding-left: 1rem;
   cursor: pointer;
@@ -72,7 +73,7 @@
   box-shadow: rgba(0, 0, 0, 0.3) 0 2px 10px -3px;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
   .item {
     flex-direction: row;
     align-items: center;
