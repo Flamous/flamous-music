@@ -260,19 +260,21 @@ const slideUp = {
         let l1 = listen(document, 'touchend', { once: true })
           .start(event => {
             p.stop()
-            let deltaY = bodyHeight - (handleY.get() + handleY.getVelocity() * 2)
+            let velocity = handleY.getVelocity()
+            let y = handleY.get()
+            let deltaY = bodyHeight - (y + velocity * 2)
 
             if (deltaY < 50) {
               back()
               l1.stop()
             } else {
               spring({
-                from: handleY.get('y'),
+                from: y,
                 to: 0,
-                velocity: handleY.getVelocity(),
-                damping: 10,
-                mass: 0.3,
-                stiffness: 120
+                velocity: velocity,
+                damping: 17,
+                mass: 1.1,
+                stiffness: 100
               }).start(handleY)
             }
           })
