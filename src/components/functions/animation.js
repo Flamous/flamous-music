@@ -185,6 +185,8 @@ const slideUp = {
       let bodyHeight = window.innerHeight
       let handleY
 
+      disableBodyScroll(element)
+
       function initSwipeBack () {
         if (slideOutInteractive) {
           let p1
@@ -302,9 +304,12 @@ const slideUp = {
         handleY
       }
     },
-    slideOut: (done) => (state) => {
+    slideOut: (options) => (state) => {
+      let { done, element } = options
       let { handleY, handleStyler } = state
       let targetHeight = handleStyler.get('height')
+
+      enableBodyScroll(element)
 
       handleY.subscribe((val) => {
         if (val >= targetHeight) {
