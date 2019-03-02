@@ -23,20 +23,24 @@ const slideIn = {
       }
     },
     start: ({ element, initialLoad, nonInteractive, isActivePage }) => (state, actions) => {
-      console.info('Making interactive')
-
       disableBodyScroll(element)
 
-      if (isActivePage && initialLoad) window.flamous.setInitialLoad(false)
-      if (nonInteractive) return
+      let handleStyler = styler(element)
+      let handleX
+
+      if (isActivePage && initialLoad) {
+        window.flamous.setInitialLoad(false)
+      }
+      if (nonInteractive) {
+        element.style.transform = 'translateX(0)'
+        return
+      }
 
       let { startSwipeBack } = actions
 
-      let handleStyler = styler(element)
-      let handleX = value(0, handleStyler.set('x'))
-
       if (!initialLoad) {
         // Initial slide-in
+        handleX = value(window.innerWidth, handleStyler.set('x'))
         spring({
           from: window.innerWidth,
           to: 0,
@@ -45,7 +49,7 @@ const slideIn = {
           stiffness: 120
         }).start(handleX)
       } else {
-        window.flamous.setInitialLoad(false)
+        handleX = value(0, handleStyler.set('x'))
       }
 
       listen(element, 'touchstart', { passive: true })
