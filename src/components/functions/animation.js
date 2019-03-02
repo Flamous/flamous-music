@@ -171,8 +171,12 @@ const slideUp = {
         started: true
       }
     },
+    setState (changedState) {
+      return changedState
+    },
     start: (data) => (state, actions) => {
       let { element, initialLoad, initialInteractive, slideOutInteractive, back } = data
+      let { setState } = actions
 
       let handleStyler = styler(element)
       let bodyHeight = window.innerHeight
@@ -201,8 +205,12 @@ const slideUp = {
                 .start(event => {
                   p1 && p1.stop()
                   p2 && p2.stop()
-                  let deltaY = (handleY.get() - startY) + handleY.getVelocity() * 2
-                  if (deltaY > 100) {
+                  let velocity = handleY.getVelocity()
+                  let deltaY = (handleY.get() - startY) + velocity * 2
+                  if (deltaY > 80) {
+                    setState({
+                      lastVelocity: velocity
+                    })
                     back()
                     l1.stop()
                   } else {
@@ -244,7 +252,7 @@ const slideUp = {
             p.stop()
             let deltaY = bodyHeight - (handleY.get() + handleY.getVelocity() * 2)
 
-            if (deltaY < 75) {
+            if (deltaY < 50) {
               back()
               l1.stop()
             } else {
@@ -279,8 +287,7 @@ const slideUp = {
       }
     },
     slideOut: (done) => (state) => {
-      let { handleY, handleStyler } = state
-
+      let { handleY, handleStyler, lastVelocity = 0 } = state
       let targetHeight = handleStyler.get('height')
 
       handleY.subscribe((val) => {
@@ -295,7 +302,7 @@ const slideUp = {
       spring({
         from: handleY.get(),
         to: targetHeight,
-        velocity: handleY.getVelocity(),
+        velocity: lastVelocity,
         mass: 1,
         damping: 10,
         stiffness: 80
