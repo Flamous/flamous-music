@@ -266,9 +266,9 @@ const slideUp = {
         let l1 = listen(document, 'touchend', { once: true })
           .start(event => {
             p.stop()
-            let velocity = handleY.getVelocity()
+            let velocity = handleY.getVelocity() * 2
             let y = handleY.get()
-            let deltaY = bodyHeight - (y + velocity * 2)
+            let deltaY = bodyHeight - (y + velocity)
 
             if (deltaY < 50) {
               back()
@@ -279,7 +279,7 @@ const slideUp = {
                 to: 0,
                 velocity: velocity,
                 damping: 25,
-                mass: 1,
+                mass: 1.1,
                 stiffness: 200
               }).start(handleY)
             }
