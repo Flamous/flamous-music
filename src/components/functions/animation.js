@@ -270,8 +270,8 @@ const slideUp = {
             let y = handleY.get()
             let deltaY = bodyHeight - (y + velocity)
 
-            if (deltaY < 50) {
-              back()
+            if (deltaY < 25) {
+              window.requestAnimationFrame(() => { window.requestAnimationFrame(() => back()) })
               l1.stop()
             } else {
               spring({
