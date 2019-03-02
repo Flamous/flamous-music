@@ -126,15 +126,15 @@ const Home = (props) => (context) => {
         noDynamicTitle
         noSticky
         nav={{
-          start: <UILink to='/about' class='button white' style={{ color: 'black', fontWeight: '500' }}>About</UILink>,
+          start: <img style={{ maxWidth: '128px', margin: '0 0.5rem' }} src={logo} />,
           end: <div>
             <UILink to='/login' class='button white' style={{ color: 'black', fontWeight: '500' }}>Login</UILink>
             <UILink to='/signup' class='button white' style={{ fontWeight: '500' }}>Sign Up</UILink>
           </div>
         }}
         title={<div style={{ textAlign: 'center', width: '100%', margin: '2em 0' }}>
-          <img style={{ maxWidth: '128px', margin: '0 auto' }} src={logo} />
-          <span>Free Music</span>
+
+          <span>Free music</span>
 
         </div>}
       />
