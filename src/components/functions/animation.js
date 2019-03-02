@@ -188,7 +188,7 @@ const slideUp = {
               p1 = pointer({ y: startY })
                 .pipe(data => data.y)
                 .start(y => {
-                  let lel = y - startY
+                  let lel = (y - startY)
                   if (lel > 15) {
                     p1.stop()
                     p2 = pointer({ y: handleY.get() })
@@ -201,8 +201,8 @@ const slideUp = {
                 .start(event => {
                   p1 && p1.stop()
                   p2 && p2.stop()
-                  let deltaY = handleY.get() - startY
-                  if (deltaY > 20) {
+                  let deltaY = (handleY.get() - startY) + handleY.getVelocity() * 2
+                  if (deltaY > 100) {
                     back()
                     l1.stop()
                   } else {
@@ -239,17 +239,24 @@ const slideUp = {
           .pipe(data => data.y)
           .start(handleY)
 
-        listen(document, 'touchend', { once: true })
+        let l1 = listen(document, 'touchend', { once: true })
           .start(event => {
             p.stop()
-            spring({
-              from: handleY.get('y'),
-              to: 0,
-              velocity: handleY.getVelocity(),
-              damping: 20,
-              mass: 0.3,
-              stiffness: 120
-            }).start(handleY)
+            let deltaY = bodyHeight - (handleY.get() + handleY.getVelocity() * 2)
+
+            if (deltaY < 75) {
+              back()
+              l1.stop()
+            } else {
+              spring({
+                from: handleY.get('y'),
+                to: 0,
+                velocity: handleY.getVelocity(),
+                damping: 10,
+                mass: 0.3,
+                stiffness: 120
+              }).start(handleY)
+            }
           })
 
         return {
@@ -279,7 +286,9 @@ const slideUp = {
       handleY.subscribe((val) => {
         if (val >= targetHeight) {
           handleY.stop()
-          done()
+          try {
+            done()
+          } catch {}
         }
       })
 
@@ -288,8 +297,8 @@ const slideUp = {
         to: targetHeight,
         velocity: handleY.getVelocity(),
         mass: 1,
-        damping: 20,
-        stiffness: 160
+        damping: 10,
+        stiffness: 80
       }).start(handleY)
     }
   }
