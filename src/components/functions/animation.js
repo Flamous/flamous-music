@@ -309,7 +309,7 @@ const slideUp = {
         handleY
       }
     },
-    slideOut: (options) => (state) => {
+    slideOut: (options = {}) => (state, actions) => {
       let { done, element } = options
       let { handleY, handleStyler } = state
       let targetHeight = handleStyler.get('height')
@@ -320,7 +320,7 @@ const slideUp = {
         if (val >= targetHeight) {
           handleY.stop()
           try {
-            done()
+            done && done()
           } catch {}
         }
       })
