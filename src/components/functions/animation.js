@@ -1,7 +1,7 @@
 import { styler, spring, value, listen, pointer, everyFrame, schedule, transform } from 'popmotion'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
-const { snap } = transform
+const { snap, nonlinearSpring } = transform
 
 const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => val.x)
 
@@ -194,14 +194,19 @@ const slideUp = {
           let l1 = listen(element, 'touchstart')
             .start(event => {
               let startY = handleY.get()
+              let boundingSpring = nonlinearSpring(4, 0)
               p1 = pointer({ y: startY })
                 .pipe(data => data.y)
                 .start(y => {
                   let lel = (y - startY)
-                  if (lel > 15) {
+                  if (Math.abs(lel) > 15) { // Threshold: The animation doesn't start when less than 15 pixels were traveled. Ensures that clicks work
                     p1.stop()
                     p2 = pointer({ y: handleY.get() })
-                      .pipe(data => data.y)
+                      .pipe(data => {
+                        let y = data.y
+                        if (y < 0) return boundingSpring(-y)
+                        return y
+                      })
                       .start(handleY)
                   }
                 })
