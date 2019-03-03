@@ -4,6 +4,7 @@ import { Route } from '@hyperapp/router'
 
 import UIViewRoute from './UI/UIViewRoute'
 import UIView from './UI/UIView'
+import UIRoute from './UI/UIRoute'
 
 import Home from './Home.js'
 import Library from './pages/Library'
@@ -29,9 +30,9 @@ let Routes = () => {
     <UIView displayView='profile' />
     <UIView displayView='library' />
 
+    <UIRoute renderMode='always' path='/player' render={Player} />
     <Route path='/login' render={Login} />
     <Route path='/signup' render={Login} />
-    <Route path='/player' render={Player} />
 
     <Route path='/flamous-license' render={License} />
     <Route path='/create-album' render={NewAlbum} />
