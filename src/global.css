@@ -103,20 +103,20 @@ svg {
 }
 
 :global(.row) {
-  padding: 1rem;
+  padding: 1.2rem;
   display: flex;
   transition: background-color 400ms;
   align-items: center;
   border-bottom: 2px solid rgba(0, 0, 0, 0.02);
 }
 :global(.row):first-child {
-  padding-top: calc(0.8rem + 3px);
-  border-radius: 0.5em 0.5em 0 0;
+  padding-top: calc(1.2rem + 3px);
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 :global(.row):last-child {
   border: none;
-  padding-bottom: calc(0.8rem + 1px);
-  border-radius: 0 0 0.5em 0.5em;
+  padding-bottom: calc(1.2rem + 1px);
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 a:global(.row):hover {
