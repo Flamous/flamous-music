@@ -291,4 +291,4 @@ const Login = nestable(
   'login-page'
 )
 
-export default (props) => { return <Login onremove={(elem, done) => { elem.actions.animation.slideOut(done) }} {...props} /> }
+export default (props) => { return <Login onremove={(elem, done) => { elem.actions.animation.slideOut({ done, elem }) }} {...props} /> }
