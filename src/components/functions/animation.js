@@ -184,6 +184,7 @@ const slideUp = {
       let handleStyler = styler(element)
       let bodyHeight = window.innerHeight
       let handleY
+      let springHandle
 
       disableBodyScroll(element)
 
@@ -193,6 +194,7 @@ const slideUp = {
           let p2
           let l1 = listen(element, 'touchstart')
             .start(event => {
+              springHandle && springHandle.stop()
               let startY = handleY.get()
               let boundingSpring = nonlinearSpring(4, 0)
               p1 = pointer({ y: startY })
@@ -220,6 +222,7 @@ const slideUp = {
                   let deltaY = (y - startY) + velocity * 2
 
                   if (deltaY > 80) { // Go Back (slide out)
+                    l1.stop()
                     let sub = handleY.subscribe({ update: v => {
                       if (v >= bodyHeight) {
                         sub.unsubscribe(); back()
@@ -233,7 +236,6 @@ const slideUp = {
                       mass: 1,
                       stiffness: 110
                     }).start(handleY)
-                    l1.stop()
                   } else { // User didn't swipe enough
                     spring({
                       from: y,
@@ -279,7 +281,7 @@ const slideUp = {
               window.requestAnimationFrame(() => { window.requestAnimationFrame(() => back()) })
               l1.stop()
             } else {
-              spring({
+              springHandle = spring({
                 from: y,
                 to: 0,
                 velocity: velocity,
