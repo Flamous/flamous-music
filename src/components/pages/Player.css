@@ -1,4 +1,4 @@
-music-player {
+/* .music-player {
   position: fixed;
   top: 0;
   left: 0;
@@ -6,6 +6,10 @@ music-player {
   bottom: 0;
   z-index: 1100;
 }
+
+.music-player:not(.open) {
+  display: none;
+} */
 
 .player {
   height: 100%;
@@ -20,6 +24,7 @@ music-player {
   flex-direction: column;
   justify-content: space-between;
   transform: translateY(100%);
+  z-index: 1100;
 }
 .player::after {
   content: '';

@@ -18,20 +18,42 @@ const actions = {
   animation: slideUp.actions
 }
 
-const view = (state, actions) => () => (context) => {
-  let { animation: { start: startAnimation } } = actions
+let matchedPreviously = false
 
-  return <div
-    class={styles['player']}
-    oncreate={(element) => {
-      element.parentNode.actions = actions
+const view = (state, actions) => (props) => (context) => {
+  let { animation: { slideOut, start: startAnimation } } = actions
+  let { isMatch } = props
+  let isSwipe = window.history.state && window.history.state.isSwipe
+  let initialLoad = context.initialLoad
+
+  function onRouteMatch (element) {
+    if (isMatch && !matchedPreviously) {
+      matchedPreviously = true
       startAnimation({
         element,
-        initialInteractive: window.history.state.isSwipe,
+        initialInteractive: isSwipe,
         slideOutInteractive: true,
-        initialLoad: context.initialLoad,
+        initialLoad,
         back: () => window.history.back()
       })
+    }
+  }
+  return <div
+    class={[styles['player']]}
+    oncreate={(element) => {
+      element.parentNode.actions = actions
+
+      onRouteMatch(element)
+    }}
+    onupdate={element => {
+      onRouteMatch(element)
+
+      if (!isMatch && matchedPreviously) {
+        matchedPreviously = false
+        slideOut({
+          element
+        })
+      }
     }}
   >
     <header class={styles['header']}>
@@ -126,4 +148,4 @@ const Player = nestable(
   'music-player'
 )
 
-export default (props) => { return <Player onremove={(elem, done) => { elem.actions.animation.slideOut({ done, elem }) }} {...props} key='player' /> }
+export default (props) => { return <Player {...props} key='player' /> }
