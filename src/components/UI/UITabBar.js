@@ -1,6 +1,6 @@
 /** @jsx h */
 import { h } from 'hyperapp'
-import { Link } from '@hyperapp/router'
+import UILink from './UILink'
 import styles from './UITabBar.css'
 import placeholderImage from '~/assets/song_placeholder.svg'
 import librarySVG from '~/assets/icons/library.svg'
@@ -67,9 +67,9 @@ const UITabBar = (props, children) => (context) => {
       <span>Profile</span>
     </SetActive>
 
-    <Link to='/player' class={cc([styles['item'], styles['player']])}>
+    <UILink to='/player' class={cc([styles['item'], styles['player']])}>
       <img alt='Cover Image' src={placeholderImage} />
-    </Link>
+    </UILink>
   </nav>
 }
 
