@@ -167,7 +167,8 @@ const slideUp = {
   state: {
     handleStyler: null,
     handleY: null,
-    started: false
+    started: false,
+    initialized: false
   },
   actions: {
     init: (props) => {
@@ -180,19 +181,19 @@ const slideUp = {
     },
     start: (data) => (state, actions) => {
       let { element, initialLoad, initialInteractive, slideOutInteractive, back } = data
+      let { initialized, handleStyler, handleY } = state
 
-      let handleStyler = styler(element)
       let bodyHeight = window.innerHeight
-      let handleY
       let springHandle
 
+      handleStyler = handleStyler || styler(element)
       disableBodyScroll(element)
 
       function initSwipeBack () {
         if (slideOutInteractive) {
           let p1
           let p2
-          let l1 = listen(element, 'touchstart')
+          listen(element, 'touchstart')
             .start(event => {
               springHandle && springHandle.stop()
               let startY = handleY.get()
@@ -223,7 +224,6 @@ const slideUp = {
                   let sub
 
                   if (deltaY > 80) { // Go Back (slide out)
-                    l1.stop()
                     sub = handleY.subscribe({ update: v => {
                       if (v >= bodyHeight) {
                         enableBodyScroll(element)
@@ -255,18 +255,19 @@ const slideUp = {
 
       if (initialLoad) {
         window.flamous.setInitialLoad(false)
-        handleY = value(0, handleStyler.set('y'))
+        handleY = handleY || value(0, handleStyler.set('y'))
         initSwipeBack()
 
         return {
           handleStyler,
-          handleY
+          handleY,
+          initialized: true
         }
       }
 
-      handleY = value(bodyHeight, handleStyler.set('y'))
+      handleY = handleY || value(bodyHeight, handleStyler.set('y'))
 
-      initSwipeBack()
+      !initialized && initSwipeBack()
 
       if (initialInteractive) {
         let p = pointer({ y: handleY.get() })
@@ -297,7 +298,8 @@ const slideUp = {
 
         return {
           handleStyler,
-          handleY
+          handleY,
+          initialized: true
         }
       }
 
@@ -311,7 +313,8 @@ const slideUp = {
 
       return {
         handleStyler,
-        handleY
+        handleY,
+        initialized: true
       }
     },
     slideOut: (options = {}) => (state, actions) => {
