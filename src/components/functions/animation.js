@@ -328,7 +328,9 @@ const slideUp = {
           handleStyler.set('y', '100%')
           try {
             done && done()
-          } catch {}
+          } catch (error) {
+            console.warn('Tried to call `done` for a non-existent element.', error)
+          }
 
           return true
         }
