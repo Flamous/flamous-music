@@ -323,10 +323,12 @@ const slideUp = {
       let targetHeight = handleStyler.get('height')
       let handleYHeight = handleY.get()
       let sub
+      let s1
 
       function checkFinished (val) {
         if (val >= targetHeight) {
           handleY.stop()
+          s1 && s1.stop()
           sub && sub.unsubscribe()
           handleStyler.set('y', '100%')
           try {
@@ -344,10 +346,10 @@ const slideUp = {
       if (checkFinished(handleYHeight)) return
 
       sub = handleY.subscribe((val) => {
-        checkFinished()
+        checkFinished(val)
       })
 
-      spring({
+      s1 = spring({
         from: handleYHeight,
         to: targetHeight,
         damping: 17,
