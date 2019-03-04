@@ -220,12 +220,15 @@ const slideUp = {
                   let velocity = handleY.getVelocity()
                   let y = handleY.get()
                   let deltaY = (y - startY) + velocity * 2
+                  let sub
 
                   if (deltaY > 80) { // Go Back (slide out)
                     l1.stop()
-                    let sub = handleY.subscribe({ update: v => {
+                    sub = handleY.subscribe({ update: v => {
                       if (v >= bodyHeight) {
-                        sub.unsubscribe(); back()
+                        enableBodyScroll(element)
+                        sub && sub.unsubscribe()
+                        back()
                       }
                     } })
                     spring({
@@ -273,13 +276,13 @@ const slideUp = {
         let l1 = listen(document, 'touchend', { once: true })
           .start(event => {
             p.stop()
-            let velocity = handleY.getVelocity() * 2
+            let velocity = handleY.getVelocity() * 3
             let y = handleY.get()
             let deltaY = bodyHeight - (y + velocity)
 
             if (deltaY < 25) {
-              window.requestAnimationFrame(() => { window.requestAnimationFrame(() => back()) })
               l1.stop()
+              window.requestAnimationFrame(() => { window.requestAnimationFrame(() => back()) })
             } else {
               springHandle = spring({
                 from: y,
@@ -315,20 +318,32 @@ const slideUp = {
       let { done, element } = options
       let { handleY, handleStyler } = state
       let targetHeight = handleStyler.get('height')
+      let handleYHeight = handleY.get()
+      let sub
 
-      enableBodyScroll(element)
-
-      handleY.subscribe((val) => {
+      function checkFinished (val) {
         if (val >= targetHeight) {
           handleY.stop()
+          sub && sub.unsubscribe()
+          handleStyler.set('y', '100%')
           try {
             done && done()
           } catch {}
+
+          return true
         }
+        return false
+      }
+
+      enableBodyScroll(element)
+      if (checkFinished(handleYHeight)) return
+
+      sub = handleY.subscribe((val) => {
+        checkFinished()
       })
 
       spring({
-        from: handleY.get(),
+        from: handleYHeight,
         to: targetHeight,
         damping: 17,
         mass: 1,
