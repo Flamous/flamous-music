@@ -1,9 +1,10 @@
 import { styler, spring, value, listen, pointer, everyFrame, schedule, transform } from 'popmotion'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
-const { snap, nonlinearSpring } = transform
+const { snap, nonlinearSpring, clamp } = transform
 
 const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => val.x)
+let velocityClamp = clamp(-8000, 8000)
 
 const slideIn = {
   state: {
@@ -197,7 +198,7 @@ const slideUp = {
             .start(event => {
               springHandle && springHandle.stop()
               let startY = handleY.get()
-              let boundingSpring = nonlinearSpring(4, 0)
+              let boundingSpring = nonlinearSpring(5, 0)
               p1 = pointer({ y: startY })
                 .pipe(data => data.y)
                 .start(y => {
@@ -219,8 +220,9 @@ const slideUp = {
                   p1 && p1.stop()
                   p2 && p2.stop()
                   let velocity = handleY.getVelocity()
+                  velocity = velocityClamp(velocity)
                   let y = handleY.get()
-                  let deltaY = (y - startY) + velocity * 2
+                  let deltaY = (y - startY) + velocity
                   let sub
 
                   if (deltaY > 80) { // Go Back (slide out)
@@ -240,12 +242,13 @@ const slideUp = {
                       stiffness: 110
                     }).start(handleY)
                   } else { // User didn't swipe enough
-                    spring({
+                    springHandle = spring({
                       from: y,
                       to: 0,
-                      damping: 20,
-                      mass: 0.3,
-                      stiffness: 120
+                      velocity: velocity,
+                      damping: 25,
+                      mass: 1.1,
+                      stiffness: 200
                     }).start(handleY)
                   }
                 })
@@ -277,11 +280,12 @@ const slideUp = {
         let l1 = listen(document, 'touchend', { once: true })
           .start(event => {
             p.stop()
-            let velocity = handleY.getVelocity() * 3
+            let velocity = handleY.getVelocity() * 2
+            velocity = velocityClamp(velocity)
             let y = handleY.get()
             let deltaY = bodyHeight - (y + velocity)
 
-            if (deltaY < 25) {
+            if (deltaY < 0) {
               l1.stop()
               window.requestAnimationFrame(() => { window.requestAnimationFrame(() => back()) })
             } else {
