@@ -1,65 +1,34 @@
 
-![](https://raw.githubusercontent.com/Flamous/flamous-music/master/src/android-chrome-192x192.png)
+![Flamous Music](https://raw.githubusercontent.com/Flamous/flamous-music/cd2040ba47fd54d67cf3029a242ffe29445a1b14/src/assets/flamous_logo_new.svg?sanitize=true)
 
-# Free (listen-like-you-can) music.
-
-Free music. Share, mix, download and cover songs you find on Flamous Music.
-
-[flamous.io](https://flamous.io/)
-
----
-
-Flamous Music does several things to provide an app-like, seamless experience. We took lots of cues from the best designs around and try to integrate them into a clean, fun and modern experience.
-
-Flamous Music is built with many great technologies, which we are very grateful for. But first, let's talk about what we are trying to achieve from a User Experience perspective.
-
-## UX in Flamous Music
-
-There are several things we incorporate that one might not expect from a typical web app. These little things are very important to us and we will showcase some of them here.
-
-### Swipe interactions
-
-Flamous Music implements several advanced swipe gestures where users normally would not expect such on a mobile website, but are common sense on native platforms. Our goal is to close the gap between the native and web platform and especially leverage all of the web's best features.
-
-**Page swipe back:**
-
-![](readme_assets/SwipeBack.gif)
+Open source music platform for free high-quality music. → [flamous.io](https://flamous.io/)
 
 
-**TrackBar back/forward:**
+## Join us for 1.0
 
-![](readme_assets/TrackBar.gif)
+**18th May 2019**. By then you can listen to original songs and covers from existing public domain music. Sign up and save your favorite ones to you Library and share instantly listenable links with your friends and on social media. We build Flamous as a modern web app so you can listen to music right away without installation.
 
+The current version that is online right now at [flamous.io](https://flamous.io) is working, but has no backend infrastructure that is required for a music platform. This is what we are fixing right now.
 
-**StreamView swipe down:**
-
-![](readme_assets/StreamView.gif)
-
-### Navigation
-
-**Routing && Stacking:**
-
-![](readme_assets/Stacking.gif)
-
-
-**Sticky (dynamic) header:**
-
-![](readme_assets/DynamicHeader.gif)
-
-
-**Modern features**
-
-Flamous Music is built as a Progressive Web App (PWA). As such, we implement offline functionality (only rudimentary as of yet), Media Session API, app icons and much more to be implemented.
+Stay tuned and follow us on [Twitter](https://twitter.com/FlamousMusic).
 
 ---
 
-The newest development version of Flamous Music is live at [next.flamous.io](http://next.flamous.io/). Use it to try new features and see our newest ideas. Please open issues here on GitHub if something is broken, you find bugs, or want some feature/have an idea for improvement.
+## Help Develop Flamous
 
 **Local development**
 
-Flamous Music uses Parcel as its build tool. To run the project locally clone the git repository with your terminal: `git clone [https://github.com/Flamous/flamous-music](https://github.com/Flamous/flamous-music)`. Then change directory cd flamous-music and install all project dependencies with npm install (requires Node.js being installed first). Finally, to see the site in action run npm start and open [http://localhost:1234/](http://localhost:1234/) in your browser. You can start playing with the code and see the changes in your browser right away!
+Flamous Music uses Parcel as its build tool. To run the project locally clone the Git repository with your terminal: `git clone https://github.com/Flamous/flamous-music.git`. Move into the newly cloned directory: `cd flamous-music`, `npm install` to get the dependencies and `npm start` to start local developement server. Now open [http://localhost:1234/](http://localhost:1234/) in your browser and start hacking!
+
+**We need your idea**
+
+If you have the next big thing/idea for a music platform, we'd love to implement it. Share your ideas with us, we don't bite (mostly): hello@flamous.io
 
 ---
+
+## Thanks
+
+Nothing near the size that Flamous has today would have been possible wihout the countless ingenious, beautiful and useful open source projects that we build upon. Thanks.
 
 Contact us: hello@flamous.io
 
