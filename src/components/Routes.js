@@ -11,11 +11,12 @@ import Library from './pages/Library'
 import Profile from './pages/Profile'
 import Login from './pages/Login'
 import NewAlbum from './pages/NewAlbum'
-import AlbumDetails from './pages/AlbumDetails'
+// import AlbumDetails from './pages/AlbumDetails'
 import License from './pages/License'
 import ChangePassword from './pages/ChangePassword'
 import Player from './pages/Player'
 import AlbumEditor from './pages/AlbumEditor'
+import Album from './pages/Album'
 
 let Routes = () => {
   return <span key='routes'>
@@ -24,7 +25,8 @@ let Routes = () => {
     <UIViewRoute path='/library' render={Library} viewName='library' />
     <UIViewRoute path='/profile' render={Profile} viewName='profile' />
     <UIViewRoute path='/settings/change-password' render={ChangePassword} viewName='profile' exact />
-    <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='profile' />
+    {/* <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='profile' /> */}
+    <UIViewRoute path='/albums/:albumId' exact render={Album} viewName='home' />
 
     <UIView displayView='home' />
     <UIView displayView='profile' />
