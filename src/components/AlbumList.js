@@ -43,8 +43,7 @@ let view = (props, children) => (state) => (context) => {
       <li>
         <UILink
           class={styles['album-item']}
-          to='/'
-          // data-long-press-delay='500'
+          to='/albums/1234'
           oncreate={elem => {
             elem.addEventListener('long-press', openActionMenu)
           }}
