@@ -58,6 +58,7 @@ let view = (props, children) => (state) => (context) => {
     })
   }
 
+  console.log(mode)
   return <ul class={styles['song-list']}>
     { songs.length > 0 && songs.map(song => (
       <li>
@@ -75,7 +76,7 @@ let view = (props, children) => (state) => (context) => {
               </span>
               <br />
               <span class={styles['song-infos']}>
-                {song.artist} &middot; {song.album}
+                {song.artist} {mode !== 'album' ? <span>&middot; {song.album}</span> : ''}
               </span>
             </div>
             <button class='white' onclick={openActionMenu}>
