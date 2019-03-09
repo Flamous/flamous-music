@@ -64,7 +64,7 @@
   margin: 0 auto;
   box-shadow:
     inset rgba(0, 0, 0, 0.2) 0 0 1px 0,
-    rgba(0, 0, 0, 0.2) 0 10px 52px -10px;
+    rgba(0, 0, 0, 0.2) 0 8px 48px -16px;
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -107,9 +107,6 @@
   fill: black;
   stroke: black;
   stroke-width: 1px;
-  /* stroke-linecap: round;
-  stroke-linejoin: round; */
-
 }
 .footer {
   display: flex;
