@@ -5,8 +5,48 @@ import albumCoverPlaceholer from '../assets/song_placeholder.svg'
 import UIIcon from './UI/UIIcon'
 import UILink from './UI/UILink'
 
+let ctx = {
+  standalone: [
+    { text: 'Add to Queue',
+      icon: 'corner-down-left'
+    },
+    { text: 'Save to Library',
+      icon: 'heart'
+    },
+    { text: 'Go to Album',
+      icon: 'disc'
+    },
+    { text: 'Go to Artist',
+      icon: 'user'
+    },
+    { text: 'Share Song',
+      icon: 'share-2'
+    },
+    { text: 'Download Audio File',
+      icon: 'download'
+    },
+    { text: 'Report Content',
+      icon: 'slash'
+    }
+  ],
+  album: [
+    { text: 'Save to Library',
+      icon: 'heart'
+    },
+    { text: 'Add to Queue',
+      icon: 'corner-down-left'
+    },
+    { text: 'Go to Artist',
+      icon: 'user'
+    },
+    { text: 'Share Song',
+      icon: 'share-2'
+    }
+  ]
+}
+
 let view = (props, children) => (state) => (context) => {
-  let { songs = [] } = props
+  let { songs = [], mode = 'standalone' } = props
   let { actionMenu } = context.actions
 
   function openActionMenu (event) {
@@ -14,29 +54,7 @@ let view = (props, children) => (state) => (context) => {
     event.stopPropagation()
     actionMenu.open({
       event,
-      items: [
-        { text: 'Add to Queue',
-          icon: 'corner-down-left'
-        },
-        { text: 'Save to Library',
-          icon: 'heart'
-        },
-        { text: 'Go to Album',
-          icon: 'disc'
-        },
-        { text: 'Go to Artist',
-          icon: 'user'
-        },
-        { text: 'Share',
-          icon: 'share-2'
-        },
-        { text: 'Download Audio File',
-          icon: 'download'
-        },
-        { text: 'Report Content',
-          icon: 'slash'
-        }
-      ]
+      items: ctx[mode]
     })
   }
 
@@ -64,9 +82,11 @@ let view = (props, children) => (state) => (context) => {
               <UIIcon icon='more-horizontal' />
             </button>
           </div>
-          <div class={styles['cover-image']}>
-            <img src={albumCoverPlaceholer} />
-          </div>
+          { mode === 'standalone' && (
+            <div class={styles['cover-image']}>
+              <img src={albumCoverPlaceholer} />
+            </div>)
+          }
         </UILink>
       </li>
     ))}
