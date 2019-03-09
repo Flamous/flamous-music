@@ -6,6 +6,7 @@
   user-select: none;
   stroke-linejoin: round;
   stroke-linecap: round;
+  color: black;
 }
 
 .back-button > span {
