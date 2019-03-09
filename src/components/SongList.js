@@ -10,6 +10,8 @@ let view = (props, children) => (state) => (context) => {
   let { actionMenu } = context.actions
 
   function openActionMenu (event) {
+    event.preventDefault()
+    event.stopPropagation()
     actionMenu.open({
       event,
       items: [
