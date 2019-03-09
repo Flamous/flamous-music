@@ -25,3 +25,4 @@ document.addEventListener('touchstart', function (event) {
 document.addEventListener('touchend', cancelLongPress)
 document.addEventListener('touchcancel', cancelLongPress)
 document.addEventListener('touchmove', cancelLongPress)
+document.addEventListener('scroll', cancelLongPress)
