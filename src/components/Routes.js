@@ -17,6 +17,7 @@ import ChangePassword from './pages/ChangePassword'
 import Player from './pages/Player'
 import AlbumEditor from './pages/AlbumEditor'
 import Album from './pages/Album'
+import Artist from './pages/Artist'
 
 let Routes = () => {
   return <span key='routes'>
@@ -27,6 +28,7 @@ let Routes = () => {
     <UIViewRoute path='/settings/change-password' render={ChangePassword} viewName='profile' exact />
     {/* <UIViewRoute path='/albums/:albumId' exact render={AlbumDetails} viewName='profile' /> */}
     <UIViewRoute path='/albums/:albumId' exact render={Album} viewName='home' />
+    <UIViewRoute path='/artists/:artistId' exact render={Artist} viewName='home' />
 
     <UIView displayView='home' />
     <UIView displayView='profile' />
