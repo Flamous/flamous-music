@@ -43,7 +43,7 @@ let view = (props, children) => (state) => (context) => {
       <li>
         <UILink
           class={styles['artist-item']}
-          to='/'
+          to='/artists/1234'
           oncreate={elem => {
             elem.addEventListener('long-press', openActionMenu)
           }}
