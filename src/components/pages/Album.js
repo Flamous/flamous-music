@@ -8,6 +8,7 @@ import UIBackButton from '../UI/UIBackButton'
 import albumPlaceholder from '../../assets/song_placeholder.svg'
 import UIIcon from '../UI/UIIcon'
 import SongList from '../SongList'
+import cc from 'classcat'
 
 let songData = [
   {
@@ -43,22 +44,28 @@ let View = (state, actions) => () => () => {
       <UIHeader
         noDynamicTitle
         title={(
-          <div class={styles['header-inner']}>
-            <div class={styles['header-image']}>
-              <img src={albumPlaceholder} />
-            </div>
-            <div class={styles['header-infos']}>
-              <span class={styles['header-title']}><span>Album title</span></span>
-              <div class={styles['header-items-row']}>
-                <span>Artist 1, Artist 2</span>
-                <button class='white'><UIIcon icon='more-horizontal' /></button>
+          <div class={styles['header']}>
+            <div class={styles['header-inner']}>
+              <div class={styles['header-image']}>
+                <img src={albumPlaceholder} />
               </div>
+              <div class={styles['header-infos']}>
+                <span class={styles['header-title']}>
+                  <span>Album title</span>
+                  <span class={styles['artists']}>Artist 1, Artist 2</span>
+                </span>
+              </div>
+            </div>
+            <div class={styles['header-items-row']}>
+              <button class={cc(['white', styles['album-menu']])}><UIIcon icon='more-horizontal' /></button>
+              <span class={styles['misc']}>13 Songs &middot; 25 Min</span>
+              <button class={styles['shuffle-button']}><UIIcon icon='play' width='20' height='20' />Shuffle</button>
             </div>
           </div>)}
         nav={{
           start: <UIBackButton />,
           middle: 'Album',
-          end: <button class='white'><UIIcon icon='share-2' style={{ strokeWidth: '1.5px' }} /></button>
+          end: <button class='white'><UIIcon icon='share-2' style={{ color: 'black', strokeWidth: '1.5px' }} /></button>
         }}
       />
 

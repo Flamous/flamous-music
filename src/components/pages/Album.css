@@ -2,11 +2,14 @@
   padding-bottom: 4rem;
 }
 
-.header-inner {
+.header {
   font-size: 1rem;
+  width: 100%;
+}
+.header-inner {
   display: flex;
   width: 100%;
-  margin: 1em -0.5em;
+  margin: 2em -0.5em 0.5em;
 }
 .header-inner > * {
   margin: 0.5em;
@@ -18,7 +21,7 @@
   overflow: hidden;
   box-shadow:
     inset rgba(0, 0, 0, 0.2) 0 0 2px 0,
-    rgba(0, 0, 0, .2) 0 8px 36px -8px;
+    rgba(0, 0, 0, .2) 0 8px 24px -8px;
 }
 .header-infos {
   flex-grow: 1;
@@ -30,26 +33,54 @@
   font-size: 1.5em;
   font-weight: 600;
   display: flex;
-  align-items: center;
+  justify-content: center;
   flex-grow: 1;
+  flex-direction: column;
+}
+.artists {
+  margin-top: 0.25rem;
+}
+.artists,
+.header-items-row {
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: normal;
 }
 .header-items-row {
   display: flex;
   margin-top: auto;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
 }
-.header-items-row button {
-  margin-bottom: -1rem;
-  margin-right: -1.6rem;
-}
+
 .header-items-row,
 .header-items-row :global(.icon) {
   color: rgba(0, 0, 0, 0.5);
 }
+.album-menu {
+  margin-left: -1rem;
+}
+.misc {
+  margin-right: auto;
+}
+.shuffle-button {
+  border-radius: 100px;
+  color: white;
+  padding: 0.51rem 1rem 0.5rem;
+  font-weight: 500;
+  margin-right: -0.1em;
+}
+.shuffle-button svg {
+  fill: white;
+  stroke-width: 3px;
+  margin-right: 0.25em;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke: white;
+}
 
 .main {
-  padding: 1rem;
+  padding: 0 1rem 1rem;
 }
 
 .story {
