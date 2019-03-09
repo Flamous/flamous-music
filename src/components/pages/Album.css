@@ -1,0 +1,74 @@
+.album {
+  padding-bottom: 4rem;
+}
+
+.header-inner {
+  font-size: 1rem;
+  display: flex;
+  width: 100%;
+  margin: 1em -0.5em;
+}
+.header-inner > * {
+  margin: 0.5em;
+}
+.header-image {
+  flex-basis: 35%;
+  flex-shrink: 0;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  box-shadow:
+    inset rgba(0, 0, 0, 0.2) 0 0 2px 0,
+    rgba(0, 0, 0, .2) 0 8px 36px -8px;
+}
+.header-infos {
+  flex-grow: 1;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+}
+.header-title {
+  font-size: 1.5em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+.header-items-row {
+  display: flex;
+  margin-top: auto;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.header-items-row button {
+  margin-bottom: -1rem;
+  margin-right: -1.6rem;
+}
+.header-items-row,
+.header-items-row :global(.icon) {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.main {
+  padding: 1rem;
+}
+
+.story {
+  text-align: center;
+  margin: 3em 0;
+}
+.story h3 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9375rem;
+}
+.story blockquote {
+  margin: 1em;
+  font-size: 1.3rem;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.footer {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+}
