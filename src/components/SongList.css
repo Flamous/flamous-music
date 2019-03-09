@@ -9,14 +9,14 @@
   color: black;
   font-size: 1rem;
   padding: 0.4375rem 0.75rem 0.4375rem 1rem;
-  border-top: 2px solid rgba(0, 0, 0, 0.02);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.02);
 }
 .song-body:active {
   opacity: 0.6;
 }
-.song-list li:first-child .song-item {
+/* .song-list li:first-child .song-item {
   border-top: none;
-}
+} */
 .song-body {
   display: flex;
   flex-grow: 1;
