@@ -59,6 +59,12 @@ let ctx = {
   ]
 }
 
+/**
+ * Displays a list of songs
+ * @param {string} [mode=standalone] - Possible values are 'standalone', 'album' or 'artist'. Depending on the mode, different features are enabled/disabled.
+ * @param {Object[]} songs - List of songs to display
+ */
+
 let view = (props, children) => (state) => (context) => {
   let { songs = [], mode = 'standalone' } = props
   let { actionMenu } = context.actions
@@ -72,7 +78,6 @@ let view = (props, children) => (state) => (context) => {
     })
   }
 
-  console.log(mode)
   return <ul class={styles['song-list']}>
     { songs.length > 0 && songs.map(song => (
       <li>
