@@ -8,7 +8,7 @@
 }
 .header-inner {
   display: flex;
-  width: 100%;
+  width: calc(100% + 1.25em);
   margin: 2em -0.5em 0.5em;
 }
 .header-inner > * {
@@ -30,15 +30,15 @@
   flex-direction: column;
 }
 .header-title {
-  font-size: 1.5em;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 500;
   display: flex;
   justify-content: center;
   flex-grow: 1;
   flex-direction: column;
 }
 .artists {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 .artists,
 .header-items-row {
