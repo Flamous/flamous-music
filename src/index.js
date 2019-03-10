@@ -15,6 +15,7 @@ import registerServiceWorker from './modules/serviceWorker'
 import auth from './modules/auth'
 import views from './modules/views'
 import actionMenu from './modules/actionMenu'
+import share from './modules/share'
 
 import './config'
 
@@ -40,6 +41,7 @@ const flamous = app(
     auth: auth.state,
     views: views.state,
     actionMenu: actionMenu.state,
+    shareAPI: Boolean(navigator.share),
     initialLoad: true,
     location: location.state,
     updateAvailable: false,
