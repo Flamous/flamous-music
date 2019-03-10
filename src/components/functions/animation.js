@@ -1,10 +1,12 @@
 import { styler, spring, value, listen, pointer, everyFrame, schedule, transform } from 'popmotion'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
-const { snap, nonlinearSpring, clamp } = transform
+const { snap, nonlinearSpring, clamp, conditional } = transform
 
 const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => val.x)
 let velocityClamp = clamp(-8000, 8000)
+const DRAG_THRESHOLD = 12
+let softClamp = nonlinearSpring(5, 0)
 
 const slideIn = {
   state: {
@@ -193,32 +195,35 @@ const slideUp = {
       function initSwipeBack () {
         if (slideOutInteractive) {
           let p1
-          let p2
+
           listen(element, 'touchstart')
             .start(event => {
               springHandle && springHandle.stop()
               let startY = handleY.get()
-              let boundingSpring = nonlinearSpring(5, 0)
+              let isDrag = false
+              let appliedThreshold
+              let delta
+
               p1 = pointer({ y: startY })
-                .pipe(data => data.y)
-                .start(y => {
-                  let lel = (y - startY)
-                  if (Math.abs(lel) > 15) { // Threshold: The animation doesn't start when less than 15 pixels were traveled. Ensures that clicks work
-                    p1.stop()
-                    p2 = pointer({ y: handleY.get() })
-                      .pipe(data => {
-                        let y = data.y
-                        if (y < 0) return boundingSpring(-y)
-                        return y
-                      })
-                      .start(handleY)
-                  }
-                })
+                .pipe(
+                  data => data.y,
+                  conditional(() => !isDrag, y => { delta = y - startY; return y }),
+                  conditional(y => !isDrag && Math.abs(delta) >= 15, y => {
+                    isDrag = true
+                    appliedThreshold = delta > 0 ? -DRAG_THRESHOLD : DRAG_THRESHOLD
+                    return y
+                  }),
+                  conditional(y => !isDrag && Math.abs(delta) < 15, () => startY),
+                  conditional(y => isDrag, y => y + appliedThreshold),
+                  conditional(y => isDrag && y < 0, y => softClamp(-y))
+                )
+                .start(handleY)
 
               listen(document, 'touchend', { once: true })
                 .start(event => {
+                  isDrag = false
                   p1 && p1.stop()
-                  p2 && p2.stop()
+
                   let velocity = handleY.getVelocity()
                   velocity = velocityClamp(velocity)
                   let y = handleY.get()
