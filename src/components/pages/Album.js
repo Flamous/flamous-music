@@ -68,9 +68,9 @@ let View = (state, actions) => () => (context) => {
           start: <UIBackButton />,
           middle: 'Album',
           end: shareAPI && <button onclick={() => navigator.share({
-            title: 'lel',
-            url: '/',
-            text: 'more lel'
+            title: 'Free high-quality music - Flamous',
+            url: window.location.href,
+            text: 'Some descriptive text...'
           })} class='white'><UIIcon icon='share-2' style={{ color: 'black', strokeWidth: '1.5px' }} /></button>
         }}
       />
