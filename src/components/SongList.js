@@ -97,7 +97,7 @@ let view = (props, children) => (state) => (context) => {
               <UIIcon icon='more-horizontal' />
             </button>
           </div>
-          { mode === 'standalone' && (
+          { mode !== 'album' && (
             <div class={styles['cover-image']}>
               <img src={albumCoverPlaceholer} />
             </div>)
