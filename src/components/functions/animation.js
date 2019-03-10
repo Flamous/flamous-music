@@ -356,7 +356,7 @@ const slideUp = {
       s1 = spring({
         from: handleYHeight,
         to: targetHeight,
-        damping: 17,
+        damping: 13,
         mass: 1,
         stiffness: 110
       }).start(handleY)
