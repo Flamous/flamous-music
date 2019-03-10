@@ -6,10 +6,13 @@ const state = {
 
 const actions = {
   open (options) {
+    let { items = [], event } = options
+    if (items.length === 0) console.warn('actionMenu Module: No items provided')
+
     return {
       isOpen: true,
-      items: options.items,
-      event: options.event
+      items,
+      event
     }
   },
   close: () => {
