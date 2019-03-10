@@ -42,6 +42,20 @@ let ctx = {
     { text: 'Share Song',
       icon: 'share-2'
     }
+  ],
+  artist: [
+    { text: 'Save to Library',
+      icon: 'heart'
+    },
+    { text: 'Add to Queue',
+      icon: 'corner-down-left'
+    },
+    { text: 'Go to Album',
+      icon: 'disc'
+    },
+    { text: 'Share Song',
+      icon: 'share-2'
+    }
   ]
 }
 
