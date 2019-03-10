@@ -38,7 +38,9 @@ let songData = [
   }
 ]
 
-let View = (state, actions) => () => () => {
+let View = (state, actions) => () => (context) => {
+  let { shareAPI } = context
+
   return (
     <div class={styles['album']}>
       <UIHeader
@@ -65,7 +67,11 @@ let View = (state, actions) => () => () => {
         nav={{
           start: <UIBackButton />,
           middle: 'Album',
-          end: <button class='white'><UIIcon icon='share-2' style={{ color: 'black', strokeWidth: '1.5px' }} /></button>
+          end: shareAPI && <button onclick={() => navigator.share({
+            title: 'lel',
+            url: '/',
+            text: 'more lel'
+          })} class='white'><UIIcon icon='share-2' style={{ color: 'black', strokeWidth: '1.5px' }} /></button>
         }}
       />
 
