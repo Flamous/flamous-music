@@ -57,9 +57,9 @@ let View = (state, actions) => () => () => {
               </div>
             </div>
             <div class={styles['header-items-row']}>
-              <button class={cc(['white', styles['album-menu']])}><UIIcon icon='more-horizontal' /></button>
               <span class={styles['misc']}>13 Songs &middot; 25 Min</span>
               <button class={styles['shuffle-button']}><UIIcon icon='play' width='20' height='20' />Shuffle</button>
+              <button class={cc(['white', styles['album-menu']])}><UIIcon icon='more-horizontal' /></button>
             </div>
           </div>)}
         nav={{
