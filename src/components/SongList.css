@@ -8,15 +8,13 @@
   display: flex;
   color: black;
   font-size: 1rem;
-  padding: 0.4375rem 0.75rem 0.4375rem 1rem;
+  padding: 0.4375rem 1rem 0.4375rem 1rem;
   border-bottom: 2px solid rgba(0, 0, 0, 0.02);
 }
 .song-body:active {
   opacity: 0.6;
 }
-/* .song-list li:first-child .song-item {
-  border-top: none;
-} */
+
 .song-body {
   display: flex;
   flex-grow: 1;
@@ -24,7 +22,8 @@
   justify-content: space-between;
 }
 .song-body button {
-  color: rgba(0, 0, 0, 0.42) !important; 
+  color: rgba(0, 0, 0, 0.42) !important;
+  margin-right: -1rem;
 }
 .song-title,
 .song-infos {
@@ -62,5 +61,6 @@
   width: 3rem;
   flex-shrink: 0;
   align-self: center;
+  margin-left: 1rem;
+  margin-right: -0.25rem;
 }
-
