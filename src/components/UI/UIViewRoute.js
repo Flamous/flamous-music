@@ -4,12 +4,11 @@ import { Route } from '@hyperapp/router'
 
 const UIViewRoute = (props, children) => (context) => {
   let { render: RenderComponent, viewName, path } = props
-  let { actions } = context
+  let { actions, location } = context
 
   delete props.render
   delete props.viewName
   delete props.path
-  // console.log('here2')
 
   return (
     <Route
@@ -18,7 +17,7 @@ const UIViewRoute = (props, children) => (context) => {
       render={(matchProps) => {
         actions.views.add({
           viewName,
-          path,
+          path: location.pathname,
           Component: (props, children) => <RenderComponent {...matchProps} {...props} >{children}</RenderComponent>
         })
       }} />
