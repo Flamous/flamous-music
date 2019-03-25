@@ -19,6 +19,10 @@
   padding: 0.75rem 0.25rem;
   color: black;
 }
+.album-item .cover-image {
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
 .album-item:active {
   opacity: 0.6;
 }
