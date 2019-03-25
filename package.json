@@ -24,7 +24,6 @@
     "long-press-event": "^1.0.5",
     "native-web-app": "^1.0.1",
     "normalize.css": "^8.0.1",
-    "picostyle": "^2.1.2",
     "popmotion": "^8.6.4",
     "regenerator-runtime": "^0.13.2",
     "vanilla-lazyload": "^8.17.0",
