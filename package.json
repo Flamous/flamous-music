@@ -6,7 +6,8 @@
   "scripts": {
     "test": "standard && real-favicon check-for-update --fail-on-update ../faviconData.json",
     "start": "parcel src/index.html --no-hmr",
-    "build": "parcel build ./src/index.html --out-dir  build/ && workbox injectManifest workbox-config.js"
+    "build": "parcel build ./src/index.html --out-dir  build/ && workbox injectManifest workbox-config.js",
+    "build-logo-assets": "real-favicon generate faviconDescription.json faviconData.json ./src && real-favicon inject faviconData.json ./src ./src/index.html"
   },
   "author": "Christian Kaindl",
   "license": "MIT",
