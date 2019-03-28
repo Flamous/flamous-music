@@ -1,22 +1,20 @@
 {
-    "name": "Flamous Music",
+    "name": "Flamous",
     "short_name": "Flamous",
     "icons": [
         {
-            "src": "android-chrome-192x192.png?v1=00zQGABoWl",
+            "src": "android-chrome-192x192.png?v=zXbWx2dpa8",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "android-chrome-512x512.png?v1=00zQGABoWl",
+            "src": "android-chrome-512x512.png?v=zXbWx2dpa8",
             "sizes": "512x512",
             "type": "image/png"
         }
     ],
-    "theme_color": "#007aff",
-    "background_color": "#007aff",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
     "display": "standalone",
-    "start_url": "/",
-    "orientation": "portrait",
-    "scope": "/"
+    "orientation": "portrait"
 }
