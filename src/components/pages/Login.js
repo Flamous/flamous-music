@@ -162,7 +162,17 @@ const view = (state, actions) => (props, children) => (context) => {
     oncreate={(element) => { fetchHeroImage(); element.parentNode.actions = actions; startAnimation({ element, initialLoad: context.initialLoad }) }}
   >
     <div class={styles['hero-image']}>
-      <img onload={event => { event.target.parentNode.classList.add('loaded') }} src={heroImage || ''} />
+      <img
+        onload={event => {
+          let heroImageWrapper = event.target.parentNode
+          window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => {
+              heroImageWrapper.classList.add('loaded')
+            })
+          })
+        }}
+        src={heroImage || ''}
+      />
     </div>
     <header class={styles['header']}>
       <div class={styles['top-row']}>
