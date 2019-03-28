@@ -6,7 +6,7 @@ import UIHeader from '../UI/UIHeader'
 import UISpinner from '../UI/UISpinner'
 import styles from './Profile.css'
 import placeholderAlbum from '~/assets/song_placeholder.svg'
-import placeholderUser from '~/assets/profile.svg'
+// import placeholderUser from '~/assets/profile.svg'
 import UIIcon from '../UI/UIIcon'
 import Storage from '@aws-amplify/storage'
 
@@ -51,14 +51,14 @@ const Library = (props) => (state, actions) => (context) => {
 
     let UserImage = inEditMode
       ? (<div class={styles['user-image']}>
-        <img src={placeholderUser} />
+        <UIIcon icon='user' />
         <label for='profile-picture'>
           <button class='white'>Change <UIIcon height='20' width='20' icon='image' /></button>
         </label>
         <input id='profile-picture' oninput={event => { console.log(event.target.files); put({ profilePicture: event.target.files[0] }) }} accept='image/*' type='file' />
       </div>)
       : <div class={styles['user-image']}>
-        <img src={placeholderUser} />
+        <UIIcon icon='user' />
       </div>
 
     return <div class={styles['user-info']}>
