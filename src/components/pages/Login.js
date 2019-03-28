@@ -17,7 +17,7 @@ const actions = {
   animation: slideUp.actions,
   fetchHeroImage: () => (_, actions) => {
     // let url = `https://api.unsplash.com/photos/random?query=musical instrument&featured&orientation=landscape`
-    let url = `https://api.unsplash.com/photos/random?collections=4322548&orientation=landscape`
+    let url = `https://api.unsplash.com/photos/random?collections=4322548`
 
     let headers = new window.Headers()
     headers.append('Authorization', `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`)
