@@ -1,23 +1,29 @@
 {
-	"masterPicture": "src/assets/flamous_logo.svg",
+	"masterPicture": "./src/assets/logo/android.png",
 	"iconsPath": "./",
 	"design": {
 		"ios": {
-			"pictureAspect": "backgroundAndMargin",
-			"backgroundColor": "#007aff",
-			"margin": "0%",
+			"masterPicture": {
+				"type": "url",
+				"content": "./src/assets/logo/ios.png"
+			},
+			"pictureAspect": "noChange",
 			"assets": {
 				"ios6AndPriorIcons": false,
 				"ios7AndLaterIcons": false,
 				"precomposedIcons": false,
 				"declareOnlyDefaultIcon": true
 			},
-			"appName": "Flamous Music"
+			"appName": "Flamous"
 		},
 		"desktopBrowser": {},
 		"windows": {
+			"masterPicture": {
+				"type": "url",
+				"content": "./src/assets/logo/windows_metro.png"
+			},
 			"pictureAspect": "noChange",
-			"backgroundColor": "#2b5797",
+			"backgroundColor": "#4077ff",
 			"onConflict": "override",
 			"assets": {
 				"windows80Ie10Tile": false,
@@ -28,11 +34,15 @@
 					"rectangle": false
 				}
 			},
-			"appName": "Flamous Music"
+			"appName": "Flamous"
 		},
 		"androidChrome": {
-			"pictureAspect": "shadow",
-			"themeColor": "#007aff",
+			"masterPicture": {
+				"type": "url",
+				"content": "./src/assets/logo/android.png"
+			},
+			"pictureAspect": "noChange",
+			"themeColor": "#ffffff",
 			"manifest": {
 				"name": "Flamous",
 				"display": "standalone",
@@ -46,20 +56,24 @@
 			}
 		},
 		"safariPinnedTab": {
+			"masterPicture": {
+				"type": "url",
+				"content": "./src/assets/logo/safari_pinned.png"
+			},
 			"pictureAspect": "blackAndWhite",
-			"threshold": 70.3125,
-			"themeColor": "#007aff"
+			"threshold": 67.96875,
+			"themeColor": "#4077ff"
 		}
 	},
 	"settings": {
 		"scalingAlgorithm": "Mitchell",
 		"errorOnImageTooSmall": false,
 		"readmeFile": false,
-		"htmlCodeFile": true,
+		"htmlCodeFile": false,
 		"usePathAsIs": false
 	},
 	"versioning": {
-		"paramName": "v1",
-		"paramValue": "00zQGABoWl"
+		"paramName": "v",
+		"paramValue": "zXbWx2dpa8"
 	}
 }
