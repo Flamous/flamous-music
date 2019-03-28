@@ -3,7 +3,6 @@ import { h } from 'hyperapp'
 import styles from './SongList.css'
 import albumCoverPlaceholer from '../assets/song_placeholder.svg'
 import UIIcon from './UI/UIIcon'
-import UILink from './UI/UILink'
 
 let ctx = {
   standalone: [
