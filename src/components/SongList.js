@@ -81,7 +81,7 @@ let view = (props, children) => (state) => (context) => {
   return <ul class={styles['song-list']}>
     { songs.length > 0 && songs.map(song => (
       <li>
-        <UILink
+        <div
           class={styles['song-item']}
           to='/'
           oncreate={elem => {
@@ -107,7 +107,7 @@ let view = (props, children) => (state) => (context) => {
               <img src={albumCoverPlaceholer} />
             </div>)
           }
-        </UILink>
+        </div>
       </li>
     ))}
   </ul>
