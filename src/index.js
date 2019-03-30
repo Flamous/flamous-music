@@ -15,6 +15,7 @@ import registerServiceWorker from './modules/serviceWorker'
 import auth from './modules/auth'
 import views from './modules/views'
 import actionMenu from './modules/actionMenu'
+import device from './modules/device'
 
 import './config'
 
@@ -99,7 +100,7 @@ const flamous = app(
     delete context.scrubBar
 
     setContext(context)
-    return <div style={{ display: 'contents' }}>
+    return <div class={device.isStandalone ? 'standalone' : 'not-standalone'} style={{ display: 'contents' }}>
       <UITabBar />
 
       <Routes />
