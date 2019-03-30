@@ -12,6 +12,7 @@
     rgba(0, 0, 0, 0.02) 0 0 12px 0;
   justify-content: center;
   user-select: none;
+  overscroll-behavior: contain;
 }
 @supports (backdrop-filter: blur(30px)) {
   .tab-bar {

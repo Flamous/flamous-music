@@ -144,3 +144,8 @@ textarea {
   background-color: rgba(0, 0, 0, 0.05);
   padding: 0.8em;
 }
+
+:global(.not-standalone),
+:global(.not-standalone) > span {
+  display: block !important;
+}

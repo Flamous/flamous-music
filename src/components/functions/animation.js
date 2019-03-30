@@ -1,5 +1,6 @@
 import { styler, spring, value, listen, pointer, everyFrame, schedule, transform } from 'popmotion'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import device from './../../modules/device'
 
 const { snap, nonlinearSpring, clamp, conditional } = transform
 
@@ -26,6 +27,17 @@ const slideIn = {
       }
     },
     start: ({ element, initialLoad, nonInteractive, isActivePage }) => (state, actions) => {
+      if (!device.isStandalone) {
+        if (isActivePage && initialLoad) {
+          window.flamous.setInitialLoad(false)
+        }
+        if (nonInteractive) {
+          element.style.transform = 'none'
+          return
+        }
+        return
+      }
+
       disableBodyScroll(element)
 
       let handleStyler = styler(element)
@@ -140,6 +152,10 @@ const slideIn = {
       }
     },
     slideOut: (options) => (state, actions) => {
+      if (!device.isStandalone) {
+        options.done()
+        return
+      }
       let { done, element } = options
       let { handleX } = state
       let bodyWidth = window.innerWidth

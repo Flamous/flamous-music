@@ -7,6 +7,7 @@ import styles from './UIPage.css'
 
 const state = {
   animation: slideIn.state,
+  hasLoaded: false,
   back: null,
   child: {}
 }
@@ -18,6 +19,7 @@ const actions = {
   mount () {
 
   },
+  setHasLoaded: () => ({ hasLoaded: true }),
   animation: slideIn.actions,
   setBackLocation: (backUrl) => {
     return {
@@ -36,8 +38,8 @@ const UIPage = nestable(
   { ...actions },
 
   (state, actions) => (props, children) => (context, setContext) => {
-    let { setBackLocation, animation, childPut } = actions
-    let { back } = state
+    let { setBackLocation, animation, childPut, setHasLoaded } = actions
+    let { back, hasLoaded } = state
     let { location } = context
     let { isActivePage } = props
 
@@ -53,13 +55,18 @@ const UIPage = nestable(
 
     return <article
       {...props}
-      class={cc([styles['page'], props.class])}
+      class={cc([styles['page'], { [styles['loaded']]: hasLoaded }, props.class])}
       key={props.key}
-      oncreate={(element) => { element.parentNode.actions = actions; animation.start({ element, isActivePage, initialLoad: context.initialLoad, nonInteractive: props.hasOwnProperty('nonInteractive') }) }}
+      oncreate={(element) => {
+        element.parentNode.actions = actions
+        animation.start({ element, isActivePage, initialLoad: context.initialLoad, nonInteractive: props.hasOwnProperty('nonInteractive') })
+
+        setHasLoaded()
+      }}
     >
       {children}
     </article>
   },
   'ui-page')
 
-export default (props, children) => <UIPage key={props.path} {...props} onremove={(element, done) => { element.actions.animation.slideOut({ done, element }) }}>{children}</UIPage>
+export default (props, children) => <UIPage key={props.path} {...props} class={cc([props.class, { active: props.isActivePage }])} onremove={(element, done) => { element.actions.animation.slideOut({ done, element }) }}>{children}</UIPage>

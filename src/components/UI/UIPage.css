@@ -6,6 +6,13 @@ ui-page {
   bottom: 0;
   overflow: hidden;
 }
+:global(.not-standalone) ui-page:global(.active) {
+  position: relative;
+  overflow: auto;
+}
+:global(.not-standalone) ui-page:not(:global(.active)) {
+  position: absolute;
+}
 
 .page {
   height: 100%;
@@ -21,6 +28,18 @@ ui-page {
   -webkit-perspective: 0;
   z-index: 1;
   transform: translateX(100%);
+}
+:global(.not-standalone) .page {
+  transition: none;
+  opacity: 0;
+  transform: none;
+  position: relative;
+  overflow: auto;
+  height: auto;
+}
+:global(.not-standalone) :global(.active) .page.loaded {
+  transition: opacity 150ms linear;
+  opacity: 1;
 }
 .page > div {
   background-color: white;
