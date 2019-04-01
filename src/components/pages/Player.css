@@ -25,7 +25,7 @@
   justify-content: space-between;
   transform: translateY(100%);
   z-index: 1100;
-  top: 0;
+  bottom: 0;
 }
 .player::after {
   content: '';
