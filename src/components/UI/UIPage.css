@@ -9,9 +9,16 @@ ui-page {
 :global(.not-standalone) ui-page:global(.active) {
   position: relative;
   overflow: auto;
+  top: unset;
+  left: unset;
+  right: unset;
+  bottom: unset;
+  width: 100%;
 }
 :global(.not-standalone) ui-page:not(:global(.active)) {
   position: absolute;
+  height: 0;
+  overflow: hidden;
 }
 
 .page {
