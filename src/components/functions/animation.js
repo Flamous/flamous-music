@@ -1,5 +1,5 @@
 import { styler, spring, value, listen, pointer, everyFrame, schedule, transform } from 'popmotion'
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import device from './../../modules/device'
 
 const { snap, nonlinearSpring, clamp, conditional } = transform
@@ -343,7 +343,7 @@ const slideUp = {
       }
     },
     slideOut: (options = {}) => (state, actions) => {
-      let { done, element } = options
+      let { done } = options
       let { handleY, handleStyler } = state
       let targetHeight = handleStyler.get('height')
       let handleYHeight = handleY.get()
@@ -367,7 +367,7 @@ const slideUp = {
         return false
       }
 
-      enableBodyScroll(element)
+      clearAllBodyScrollLocks()
       if (checkFinished(handleYHeight)) return
 
       sub = handleY.subscribe((val) => {
