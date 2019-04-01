@@ -116,3 +116,7 @@ window.flamous = flamous
 flamous.init()
 
 location.subscribe(flamous.location)
+
+if ('scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual'
+}
