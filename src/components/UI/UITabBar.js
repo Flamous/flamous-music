@@ -36,6 +36,7 @@ const UITabBar = (props, children) => (context) => {
       lastTouchY = event.changedTouches[0].clientY
     }}
     ontouchmove={event => {
+      event.preventDefault()
       let currentTouchY = event.changedTouches[0].clientY
       let delta = lastTouchY - currentTouchY
 
