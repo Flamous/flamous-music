@@ -19,7 +19,7 @@
   transition: opacity 200ms linear;
 }
 .action-menu:global(.open) .background {
-  transition: opacity 325ms linear;
+  transition: opacity 200ms linear;
   opacity: 0.3;
 }
 .container {
@@ -35,7 +35,7 @@
 .action-list {
   list-style-type: none;
   padding: 0;
-  margin: 0 1rem 0.6875rem;
+  margin: 0 0.5rem 0.5rem;
   border-radius: 0.75rem;
   overflow: hidden;
   color: rgba(0, 0, 0, 0.7);
@@ -81,7 +81,7 @@
   color: #00a7ff;
   font-weight: 500;
   text-align: center;
-  margin: 0 1rem 1rem;
+  margin: 0 0.5rem 0.5rem;
   border-radius: 0.75rem;
   background-color: white;
   box-shadow: inset rgba(0, 0, 0, 0.3) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 5px 26px 0;
