@@ -32,7 +32,7 @@ ui-page {
   background-color: white;  
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  -webkit-perspective: 0;
+  /* -webkit-perspective: 0; */
   z-index: 1;
   transform: translateX(100%);
 }
@@ -51,7 +51,4 @@ ui-page {
 .page > div {
   background-color: white;
   min-height: 100%;
-}
-.page > * {
-  -webkit-transform: translate3d(0,0,0); /* Prevent Safari scroll glitching */
 }

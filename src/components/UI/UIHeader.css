@@ -7,6 +7,16 @@
   z-index: 1001;
   stroke: #007aff;
 }
+:global(.not-standalone) .header-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+:global(.not-standalone) .header-nav + .header-title {
+  margin-top: 3rem;
+}
+
 .no-sticky .header-nav,
 .no-sticky .header-line {
   position: relative;
