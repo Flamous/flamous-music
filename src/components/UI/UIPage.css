@@ -43,6 +43,7 @@ ui-page {
   position: relative;
   overflow: auto;
   height: auto;
+  overscroll-behavior: unset;
 }
 :global(.not-standalone) :global(.active) .page.loaded {
   transition: opacity 150ms linear;
