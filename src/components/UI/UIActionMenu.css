@@ -35,7 +35,7 @@
 .action-list {
   list-style-type: none;
   padding: 0;
-  margin: 0 0.5rem 0.5rem;
+  margin: 0 .5rem .375rem;
   border-radius: 0.75rem;
   overflow: hidden;
   color: rgba(0, 0, 0, 0.7);
