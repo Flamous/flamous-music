@@ -13,12 +13,6 @@ const state = {
 }
 
 const actions = {
-  init (props) {
-    // do Something...
-  },
-  mount () {
-
-  },
   setHasLoaded: () => ({ hasLoaded: true }),
   animation: slideIn.actions,
   setBackLocation: (backUrl) => {
