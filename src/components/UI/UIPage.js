@@ -8,6 +8,7 @@ import styles from './UIPage.css'
 const state = {
   animation: slideIn.state,
   hasLoaded: false,
+  isActivePage: false,
   back: null,
   child: {}
 }
@@ -33,10 +34,16 @@ const UIPage = nestable(
   { ...actions },
 
   (state, actions) => (props, children) => (context, setContext) => {
-    let { setBackLocation, animation, childPut, setHasLoaded } = actions
+    let { setBackLocation, animation, childPut, setState } = actions
     let { back, hasLoaded } = state
     let { location } = context
     let { isActivePage } = props
+
+    if (!isActivePage && state.isActivePage) {
+      setState({ isActivePage: false })
+    } else if (isActivePage && !state.isActivePage) {
+      setState({ isActivePage: true })
+    }
 
     setContext({
       ...context,
