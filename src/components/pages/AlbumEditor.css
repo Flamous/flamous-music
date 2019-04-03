@@ -4,7 +4,7 @@
   z-index: 1100;
   position: fixed;
   overflow-y: auto;
-  color: #212121;
+  color: black;
   overscroll-behavior: contain;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 2px 0;
   background-color: #fafafa;
@@ -44,7 +44,7 @@
 }
 
 .main section {
-  box-shadow: rgba(0, 0, 0, 0.2) inset 0 0 2px 0, rgba(0, 0, 0, 0.2) 0 1px 1px -1px, rgba(0, 0, 0, 0.02) 0 2px 12px 0;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.05), rgba(0, 0, 0, 0.03) 0 3px 6px, rgba(0, 0, 0, 0.02) 0 9px 24px;
   background-color: white;
   max-width: 32rem;
   margin: 0 auto;
