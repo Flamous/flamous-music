@@ -14,6 +14,7 @@ const state = {
 
 const actions = {
   setHasLoaded: () => ({ hasLoaded: true }),
+  setState: (state) => ({ ...state }),
   animation: slideIn.actions,
   setBackLocation: (backUrl) => {
     return {
