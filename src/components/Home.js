@@ -4,38 +4,11 @@ import UIPage from './UI/UIPage.js'
 import UILink from './UI/UILink'
 import styles from './Home.css'
 import logo from '~/assets/logo/brand.svg'
-// import dummyPlaceholder from '~/assets/dummy_artists.jpg'
-// import musicKitIcon from '~/assets/icons/kit_blue.svg'
 import UIHeader from './UI/UIHeader.js'
 import SongList from './SongList'
 import AlbumList from './AlbumList'
 import ArtistList from './ArtistList'
 import OpenGraph from './OpenGraph'
-
-// const Header = () => (state) => {
-//   let { auth: { isAuthenticated: isSignedIn } } = state
-//   return <header class={styles['header']}>
-//     <div class={styles['inner']}>
-//       <img src={logo} />
-//       <h1>
-//       Music for<br />Everyone
-//       </h1>
-//       <p>
-//       Free (<UILink to='/license'>listen-like-you-can</UILink>) music. You can use them for commercial and noncommercial purposes.
-//       </p>
-//       {
-//         !isSignedIn && <nav>
-//           <div>
-//             <UILink class='button' to='/signup'>Create Account</UILink>
-//           </div>
-//           <div>
-//             <UILink class='button white' to='/login'>or Sign In</UILink>
-//           </div>
-//         </nav>
-//       }
-//     </div>
-//   </header>
-// }
 
 let songData = [
   {
