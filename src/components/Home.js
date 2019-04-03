@@ -10,6 +10,7 @@ import UIHeader from './UI/UIHeader.js'
 import SongList from './SongList'
 import AlbumList from './AlbumList'
 import ArtistList from './ArtistList'
+import OpenGraph from './OpenGraph'
 
 // const Header = () => (state) => {
 //   let { auth: { isAuthenticated: isSignedIn } } = state
@@ -122,6 +123,10 @@ let artistData = [
 const Home = (props) => (context) => {
   return (
     <UIPage {...props} class={styles['home']} nonInteractive key='home'>
+      <OpenGraph
+        title='Flamous Music'
+        description='Free high-quality music by our amazing community.'
+      />
       <UIHeader
         noDynamicTitle
         noSticky

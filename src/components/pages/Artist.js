@@ -9,6 +9,7 @@ import artistPlaceholder from '../../assets/artist_placeholder.svg'
 import UIIcon from '../UI/UIIcon'
 import SongList from '../SongList'
 import AlbumList from '../AlbumList'
+import OpenGraph from '../OpenGraph'
 
 let songData = [
   {
@@ -59,6 +60,10 @@ let albumData = [
 let View = (state, actions) => () => () => {
   return (
     <div class={styles['artist']}>
+      <OpenGraph
+        title='[Artist Name] on Flamous Music'
+        description='[Artist page description...]'
+      />
       <UIHeader
         noDynamicTitle
         title={(
