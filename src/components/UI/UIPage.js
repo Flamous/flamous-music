@@ -14,14 +14,8 @@ const state = {
 }
 
 const actions = {
-  setHasLoaded: () => ({ hasLoaded: true }),
   setState: (state) => ({ ...state }),
   animation: slideIn.actions,
-  setBackLocation: (backUrl) => {
-    return {
-      back: backUrl || '/'
-    }
-  },
   childPut (obj) {
     return {
       ...obj
@@ -34,7 +28,7 @@ const UIPage = nestable(
   { ...actions },
 
   (state, actions) => (props, children) => (context, setContext) => {
-    let { setBackLocation, animation, childPut, setState } = actions
+    let { animation, childPut, setState } = actions
     let { back, hasLoaded } = state
     let { location } = context
     let { isActivePage } = props
@@ -53,7 +47,9 @@ const UIPage = nestable(
       }
     })
 
-    !back && setBackLocation((props.back && props.back.to) || location.previous)
+    !back && setState({
+      back: (props.back && props.back.to) || location.previous || '/'
+    })
 
     return <article
       {...props}
@@ -63,7 +59,7 @@ const UIPage = nestable(
         element.parentNode.actions = actions
         animation.start({ element, isActivePage, initialLoad: context.initialLoad, nonInteractive: props.hasOwnProperty('nonInteractive') })
 
-        setHasLoaded()
+        setState({ hasLoaded: true })
       }}
     >
       {children}
