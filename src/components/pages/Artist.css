@@ -14,7 +14,8 @@
   margin: 0.5em;
 }
 .header-image {
-  width: 60%;
+  width: 100%;
+  max-width: 200px;
   flex-grow: 0;
   flex-shrink: 0;
   border-radius: 300px;

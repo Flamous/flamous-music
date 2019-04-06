@@ -81,7 +81,9 @@ let View = (state, actions) => () => (context) => {
       />
 
       <main class={styles['main']}>
-        <SongList mode='album' songs={songData} />
+        <section class='centered'>
+          <SongList mode='album' songs={songData} />
+        </section>
 
         <section class={styles['story']}>
           <h3>Album story</h3>

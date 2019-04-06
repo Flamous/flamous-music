@@ -1,5 +1,5 @@
 .header-nav {
-  height: 3rem;
+  height: 3.25rem;
   position: sticky;
   top: 0px;
   font-size: 1rem;
@@ -14,7 +14,7 @@
 }
 
 :global(.not-standalone) .header-nav + .header-title {
-  margin-top: 3rem;
+  margin-top: 3.25rem;
 }
 
 .no-sticky .header-nav,
@@ -109,4 +109,10 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+@media screen and (min-width: 50rem) {
+  .header-nav + .header-title {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+  }
 }

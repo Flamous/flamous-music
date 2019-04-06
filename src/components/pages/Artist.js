@@ -87,11 +87,11 @@ let View = (state, actions) => () => () => {
       />
 
       <main class={styles['main']}>
-        <section>
+        <section class='centered'>
           <h3>Top 5</h3>
           <SongList mode='artist' songs={songData} />
         </section>
-        <section>
+        <section class='centered'>
           <h3>Albums</h3>
           <AlbumList albums={albumData} />
         </section>

@@ -17,7 +17,7 @@
   flex-direction: column-reverse;
   color: black;
   padding: 1rem;
-  width: 38vw;
+  width: 38vmin;
 }
 .artist-item:active {
   opacity: 0.6;

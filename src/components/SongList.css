@@ -11,6 +11,14 @@
   padding: 0.4375rem 1rem 0.4375rem 1rem;
   border-bottom: 2px solid rgba(0, 0, 0, 0.02);
 }
+@media (hover: hover) {
+  .song-item:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  .song-item:hover .song-text::after {
+    background-image: linear-gradient(to left, #fbfbfb, rgba(255, 255, 255, 0));
+  }
+}
 .song-body:active {
   opacity: 0.6;
 }
@@ -64,3 +72,34 @@
   margin-left: 1rem;
   margin-right: -0.25rem;
 }
+
+@media screen and (min-width: 50rem) {
+  .song-list {
+    border: 2px solid rgba(0, 0, 0, 0.04);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+  .song-item {
+    flex-direction: row-reverse;
+  }
+  .cover-image {
+    margin-left: -0.25rem;
+    margin-right: 0.75rem;
+  }
+  .song-text {
+    display: flex;
+    align-items: baseline;
+  }
+  .song-title {
+    min-width: 25rem;
+    max-width: 25rem;
+    overflow: hidden;
+  }
+  .song-text::after {
+    left: 21.5rem;
+    width: 3.5rem;
+  }
+  .song-infos {
+    font-size: 1rem;
+  }
+ }

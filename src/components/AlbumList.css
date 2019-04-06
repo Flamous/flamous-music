@@ -8,7 +8,7 @@
 }
 
 .album-list li {
-  flex-basis: 40%;
+  flex-basis: 270px;
   flex-grow: 1;
   max-width: 50%;
 }

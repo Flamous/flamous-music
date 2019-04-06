@@ -111,7 +111,7 @@ const Home = (props) => (context) => {
         title='Explore'
       />
       <main class={styles['main']}>
-        <section>
+        <section class='centered'>
           <h2>
             Featured Songs
           </h2>
@@ -119,15 +119,16 @@ const Home = (props) => (context) => {
         </section>
 
         <section>
-          <h2>
+          <h2 class={styles['centered']}>
             Artists
           </h2>
           <ArtistList artists={artistData} />
         </section>
 
-        <section>
+        <div class={styles['separator']} />
+        <section class='centered'>
           <h2>
-            Random Albums
+            New Albums
           </h2>
           <AlbumList albums={albumData} />
         </section>
