@@ -11,6 +11,11 @@ img {
   width: 100%;
 }
 
+h2 {
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+
 button, a:global(.button), label:global(.button) {
   appearance: none;
   border: none;
