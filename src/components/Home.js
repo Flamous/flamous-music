@@ -101,8 +101,6 @@ const Home = (props) => (context) => {
         description='Free high-quality music by our amazing community.'
       />
       <UIHeader
-        noDynamicTitle
-        noSticky
         nav={{
           start: <img class={styles['logo']} src={logo} />,
           end: <div>
@@ -110,6 +108,7 @@ const Home = (props) => (context) => {
             <UILink to='/signup' class='button white' style={{ fontWeight: '500' }}>Sign Up</UILink>
           </div>
         }}
+        title='Explore'
       />
       <main class={styles['main']}>
         <section>
