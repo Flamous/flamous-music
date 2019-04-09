@@ -17,9 +17,6 @@ import views from './modules/views'
 import actionMenu from './modules/actionMenu'
 import device from './modules/device'
 
-import './global.css'
-import './normalize.css'
-
 import './config'
 
 import('./long-press-event.js').then((what) => {})
