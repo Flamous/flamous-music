@@ -6,7 +6,7 @@
   "scripts": {
     "test": "standard && real-favicon check-for-update --fail-on-update ../faviconData.json",
     "start": "parcel src/index.html --no-hmr",
-    "build": "parcel build ./src/index.html --out-dir  build/ && workbox injectManifest workbox-config.js",
+    "build": "parcel build ./src/index.html --out-dir  build/ && workbox injectManifest workbox-config.js && generate-robotstxt --config ./robots-txt.config.js src/robots.txt",
     "build-logo-assets": "real-favicon generate faviconDescription.json faviconData.json ./src && real-favicon inject faviconData.json ./src ./src/index.html"
   },
   "author": "Christian Kaindl",
@@ -39,6 +39,7 @@
     "aws-sdk": "^2.427.0",
     "babel-eslint": "^10.0.1",
     "cli-real-favicon": "0.0.7",
+    "generate-robotstxt": "^6.0.1",
     "parcel-bundler": "^1.12.3",
     "postcss-modules": "^1.4.1",
     "standard": "^12.0.1"
