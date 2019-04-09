@@ -4,7 +4,7 @@ import { nestable } from 'hyperapp-context'
 import { slideUp } from '../functions/animation'
 import styles from './Login.css'
 import Auth from '@aws-amplify/auth'
-import flamousLogo from '~/assets/logo/brand.svg'
+import flamousLogo from '~/assets/logo/brand_invert.png'
 import UILink from '../UI/UILink'
 import UISpinner from '../UI/UISpinner'
 
