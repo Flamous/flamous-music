@@ -3,7 +3,7 @@ import { h } from 'hyperapp'
 import UIPage from './UI/UIPage.js'
 import UILink from './UI/UILink'
 import styles from './Home.css'
-import logo from '~/assets/logo/brand.svg'
+import logo from '~/assets/logo/brand_invert.png'
 import UIHeader from './UI/UIHeader.js'
 import SongList from './SongList'
 import AlbumList from './AlbumList'
@@ -101,14 +101,15 @@ const Home = (props) => (context) => {
         description='Free high-quality music by our amazing community.'
       />
       <UIHeader
+        noDynamicTitle
         nav={{
           start: <img class={styles['logo']} src={logo} />,
           end: <div>
-            <UILink to='/login' class='button white' style={{ color: 'black', fontWeight: '500' }}>Login</UILink>
-            <UILink to='/signup' class='button white' style={{ fontWeight: '500' }}>Sign Up</UILink>
+            <UILink to='/login' class='button white' style={{ color: 'black', fontWeight: 'bold' }}>Login</UILink>
+            <UILink to='/signup' class='button white' style={{ fontWeight: 'bold' }}>Sign Up</UILink>
           </div>
         }}
-        title='Explore'
+        title={<div style={{ paddingBottom: '1rem', paddingTop: '1rem' }}>Explore free<br />high-quality music</div>}
       />
       <main class={styles['main']}>
         <section class='centered'>
@@ -118,8 +119,9 @@ const Home = (props) => (context) => {
           <SongList songs={songData} />
         </section>
 
+        <div class={styles['separator']} />
         <section>
-          <h2 class={styles['centered']}>
+          <h2 class='centered'>
             Artists
           </h2>
           <ArtistList artists={artistData} />
