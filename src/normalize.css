@@ -12,7 +12,7 @@
   box-sizing: border-box;
 }
 
-body {
+html {
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -56,4 +56,17 @@ hr {
   margin: 0;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2.9rem;
+}
+h2 {
+  font-size: 1.4rem;
+  font-weight: normal;
 }
