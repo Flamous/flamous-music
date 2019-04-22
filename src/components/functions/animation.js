@@ -3,6 +3,9 @@ import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'bo
 import device from './../../modules/device'
 
 const { snap, nonlinearSpring, clamp, conditional } = transform
+let scrollLockConfig = {
+  reserveScrollBarGap: true
+}
 
 const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => val.x)
 let velocityClamp = clamp(-8000, 8000)
@@ -38,7 +41,7 @@ const slideIn = {
         return
       }
 
-      disableBodyScroll(element)
+      disableBodyScroll(element, scrollLockConfig)
 
       let handleStyler = styler(element)
       let handleX
@@ -206,7 +209,7 @@ const slideUp = {
       let springHandle
 
       handleStyler = handleStyler || styler(element)
-      disableBodyScroll(element)
+      disableBodyScroll(element, scrollLockConfig)
 
       function initSwipeBack () {
         if (slideOutInteractive) {
