@@ -64,7 +64,7 @@ img {
 }
 
 h1 {
-  font-size: 2.9rem;
+  font-size: calc(2.65em + 6*(100vw - 400px)/(1250 - 400));
 }
 h2 {
   font-size: 1.4rem;
