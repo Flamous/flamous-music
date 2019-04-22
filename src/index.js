@@ -8,7 +8,6 @@ import { withContext } from 'hyperapp-context'
 
 import UITabBar from './components/UI/UITabBar'
 import UIActionMenu from './components/UI/UIActionMenu'
-import Routes from './components/Routes'
 
 // Modules
 import registerServiceWorker from './modules/serviceWorker'
@@ -22,6 +21,7 @@ import './global.css'
 import './normalize.css'
 
 import('./long-press-event.js').then((what) => {})
+let Routes = import('./components/Routes.js')
 
 window.regeneratorRuntime = regeneratorRuntime
 
@@ -38,6 +38,7 @@ const app = withContext(_app)
 
 const flamous = app(
   {
+    Routes: null,
     auth: auth.state,
     views: views.state,
     actionMenu: actionMenu.state,
@@ -93,6 +94,9 @@ const flamous = app(
           return data
         }
       }
+    },
+    setState: (newState) => {
+      return { ...newState }
     }
   },
   (state, actions) => (_, setContext) => {
@@ -102,8 +106,8 @@ const flamous = app(
     setContext(context)
     return <div class={device.isStandalone ? 'standalone' : 'not-standalone'} style={{ display: 'contents' }}>
       <UITabBar />
-
-      <Routes />
+      {console.log(state.Routes)}
+      { state.Routes && <state.Routes /> }
       {
         state.actionMenu.isOpen && <UIActionMenu {...state.actionMenu} />
       }
@@ -114,6 +118,13 @@ const flamous = app(
 
 window.flamous = flamous
 flamous.init()
+
+Routes.then((result) => {
+  console.log(result)
+  flamous.setState({
+    Routes: result.default
+  })
+})
 
 location.subscribe(flamous.location)
 
