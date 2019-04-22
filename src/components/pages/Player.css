@@ -63,12 +63,11 @@
 }
 
 .main {
-  /* flex-grow: 1; */
   padding: 1em 1em 0;
 }
 .cover-image {
   width: 100%;
-  max-width: 275px;
+  max-width: 300px;
   margin: 0 auto;
   box-shadow:
     inset rgba(0, 0, 0, 0.2) 0 0 1px 0,
@@ -91,7 +90,7 @@
   color: rgba(0, 0, 0, 0.5);
 }
 .scrubber {
-  margin: 1em -0.3em;
+  margin: .5em -0.3em 1rem;
   display: flex;
   align-items: center;
 }
@@ -126,4 +125,20 @@
 }
 .footer svg {
   stroke-width: 1.5px;
+}
+
+@media (max-height: 600px) {
+  .song-meta-wrapper {
+    display: flex;
+    margin-bottom: 1.5rem;
+  }
+  .song-infos {
+    flex-basis: 60%;
+    flex-shrink: 0; 
+    text-align: left;
+    padding-left: 1rem;
+  }
+  .controls {
+    margin-top: 2rem;
+  }
 }

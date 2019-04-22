@@ -68,12 +68,14 @@ const view = (state, actions) => (props) => (context) => {
       </header>
 
       <main class={styles['main']}>
-        <div class={styles['cover-image']}>
-          <img src={placeholder} />
-        </div>
-        <div class={styles['song-infos']}>
-          <span class={styles['title']}>Song Title</span><br />
-          <span class={styles['artists']}>Artists 1, Artist 2</span>
+        <div class={styles['song-meta-wrapper']}>
+          <div class={styles['cover-image']}>
+            <img src={placeholder} />
+          </div>
+          <div class={styles['song-infos']}>
+            <span class={styles['title']}>Song Title</span><br />
+            <span class={styles['artists']}>Artists 1, Artist 2</span>
+          </div>
         </div>
         <div class={styles['scrubber']}>
           <span>
