@@ -18,6 +18,8 @@ import actionMenu from './modules/actionMenu'
 import device from './modules/device'
 
 import './config'
+import './global.css'
+import './normalize.css'
 
 import('./long-press-event.js').then((what) => {})
 
