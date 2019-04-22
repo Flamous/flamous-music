@@ -106,7 +106,6 @@ const flamous = app(
     setContext(context)
     return <div class={device.isStandalone ? 'standalone' : 'not-standalone'} style={{ display: 'contents' }}>
       <UITabBar />
-      {console.log(state.Routes)}
       { state.Routes && <state.Routes /> }
       {
         state.actionMenu.isOpen && <UIActionMenu {...state.actionMenu} />
@@ -120,7 +119,6 @@ window.flamous = flamous
 flamous.init()
 
 Routes.then((result) => {
-  console.log(result)
   flamous.setState({
     Routes: result.default
   })
