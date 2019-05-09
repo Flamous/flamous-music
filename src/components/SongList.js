@@ -111,7 +111,7 @@ let view = (props, children) => (state) => (context) => {
                 {song.artist} {mode !== 'album' ? <span>&middot; {song.album}</span> : ''}
               </span>
             </div>
-            <button class='white' onmouseup={(e) => openActionMenu(e, 'cursor')} ontouchend={(e) => openActionMenu(e, 'touch')}>
+            <button class='white' onmousedown={(e) => openActionMenu(e, 'cursor')} ontouchend={(e) => openActionMenu(e, 'touch')}>
               <UIIcon icon='more-horizontal' />
             </button>
           </div>
