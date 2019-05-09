@@ -6,8 +6,8 @@ function cancelLongPress (event) {
   clearTimeout(timer)
 }
 
-function fireLongPressEvent (event) {
-  this.dispatchEvent(new window.CustomEvent('long-press', { bubbles: true, cancelable: true }))
+function fireLongPressEvent (data) {
+  this.dispatchEvent(new window.CustomEvent('long-press', { bubbles: true, cancelable: true, detail: data }))
   cancelLongPress()
 }
 
@@ -19,8 +19,12 @@ document.addEventListener('touchstart', function (event) {
     return false
   }
 
-  timer = setTimeout(fireLongPressEvent.bind(el), 500)
+  timer = setTimeout(() => fireLongPressEvent.bind(el)({ initiator: 'touch' }), 500)
 })
+document.oncontextmenu = function onContextMenu (event) {
+  event.preventDefault()
+  fireLongPressEvent.bind(event.target)({ pos: { x: event.clientX, y: event.clientY }, initiator: 'cursor' })
+}
 
 document.addEventListener('touchend', cancelLongPress)
 document.addEventListener('touchcancel', cancelLongPress)
