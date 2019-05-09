@@ -68,11 +68,25 @@ let view = (props, children) => (state) => (context) => {
   let { songs = [], mode = 'standalone' } = props
   let { actionMenu } = context.actions
 
-  function openActionMenu (event) {
+  // openActionMenu should be extracted (probably into a decorator). Maybe something along CtxMenuAction
+  function openActionMenu (event, initiator) {
+    let details = event.detail
+
+    if (!details.initiator) {
+      details = {
+        initiator,
+        pos: {
+          x: event.clientX,
+          y: event.clientY
+        }
+      }
+    }
+
     event.preventDefault()
     event.stopPropagation()
     actionMenu.open({
       event,
+      details,
       items: ctx[mode]
     })
   }
@@ -97,7 +111,7 @@ let view = (props, children) => (state) => (context) => {
                 {song.artist} {mode !== 'album' ? <span>&middot; {song.album}</span> : ''}
               </span>
             </div>
-            <button class='white' onclick={openActionMenu}>
+            <button class='white' onmouseup={(e) => openActionMenu(e, 'cursor')} ontouchend={(e) => openActionMenu(e, 'touch')}>
               <UIIcon icon='more-horizontal' />
             </button>
           </div>
