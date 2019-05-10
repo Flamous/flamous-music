@@ -9,6 +9,7 @@
   box-shadow: 0 0 0 1px rgba(0,0,0,.05), rgba(0, 0, 0, 0.03) 0 3px 6px, rgba(0, 0, 0, 0.02) 0 9px 24px;
   background-color: white;
   max-width: 32rem;
+  width: 100%;
   margin: 0 auto;
   padding: 0.8em 1px 0;
   border-radius: 0.5rem;
