@@ -9,17 +9,40 @@ import placeholderAlbum from '~/assets/song_placeholder.svg'
 // import placeholderUser from '~/assets/profile.svg'
 import UIIcon from '../UI/UIIcon'
 import Storage from '@aws-amplify/storage'
+import Auth from '@aws-amplify/auth'
 
 const Library = (props) => (state, actions) => (context) => {
-  let { auth, actions: { auth: { logout } } } = state
+  let { auth, actions: { auth: { logout, update: refreshUserAttributes } } } = state
   let { page: { put, state: pageState }, auth: { artistId } } = context
   let isAlbums = auth.albums && Object.keys(auth.albums).length > 0
 
+  let preferredUsername = auth.user && auth.user.attributes && auth.user.attributes.preferred_username
+  let name = auth.user && auth.user.attributes && auth.user.attributes.nickname
+
   function handleInput (event) {
-    console.log(event)
+    put({
+      [event.target.id]: event.target.value
+    })
   }
 
   async function saveProfile () {
+    let user = await Auth.currentAuthenticatedUser()
+    try {
+      await Auth.updateUserAttributes(user, {
+        preferred_username: pageState.preferredUsername,
+        nickname: pageState.name
+      })
+
+      refreshUserAttributes({
+        user: await Auth.currentUserInfo()
+      })
+      put({
+        inEditMode: false
+      })
+    } catch (error) {
+      console.error(error)
+    }
+
     await uploadProfileImage()
   }
 
@@ -46,8 +69,12 @@ const Library = (props) => (state, actions) => (context) => {
   let UserHeader = () => {
     let inEditMode = pageState.inEditMode
     let DisplayName = inEditMode
-      ? <input type='text' oninput={handleInput} />
-      : <div class={styles['display-name']}>Display Name</div>
+      ? <input type='text' id='name' placeholder='Type your name...' value={pageState.name} oninput={handleInput} />
+      : <div class={styles['display-name']}>{name || <i>No name set</i>}</div>
+
+    let UserName = inEditMode
+      ? <input type='text' id='preferredUsername' placeholder='Set a username...' value={pageState.preferredUsername} oninput={handleInput} />
+      : <span class={styles['username']}>{preferredUsername ? `@${preferredUsername}` : <i>No username set</i>}</span>
 
     let UserImage = inEditMode
       ? (<div class={styles['user-image']}>
@@ -65,7 +92,7 @@ const Library = (props) => (state, actions) => (context) => {
       { UserImage }
       <div>
         { DisplayName }
-        <span class={styles['username']}>@username</span>
+        { UserName }
       </div>
     </div>
   }
@@ -73,7 +100,9 @@ const Library = (props) => (state, actions) => (context) => {
   function toggleEditMode () {
     let inEditMode = !pageState.inEditMode
     put({
-      inEditMode
+      inEditMode,
+      name,
+      preferredUsername
     })
   }
 
