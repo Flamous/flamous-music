@@ -60,10 +60,13 @@ const view = (state, actions) => (props, children) => (context) => {
         isLoading: true
       })
       try {
-        await Auth.signUp(
-          login.email,
-          login.password
-        )
+        await Auth.signUp({
+          username: login.email,
+          password: login.password,
+          attributes: {
+            nickname: login.name
+          }
+        })
 
         loginActions.update({
           hasSubmittedEmail: true,
