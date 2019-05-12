@@ -16,7 +16,7 @@
 .song-list li:last-child {
   border-bottom: none;
 }
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .song-item:hover {
     background-color: rgba(0, 0, 0, 0.04);
   }
