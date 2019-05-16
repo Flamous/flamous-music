@@ -1,4 +1,5 @@
-import Home from '../components/Home.js'
+// import Home from '../components/Home.js'
+import Home from '../components/pages/Countdown.js'
 import Profile from '../components/pages/Profile'
 import Library from '../components/pages/Library'
 
