@@ -39,12 +39,15 @@ const actions = {
 }
 
 const view = (state, actions) => (props, children) => (context) => {
-  let { login, actions: { login: loginActions, auth } } = context
+  let { auth: { isAuthenticated }, login, actions: { login: loginActions, auth } } = context
   let { animation: { start: startAnimation }, fetchHeroImage } = actions
   let { heroImage } = state
   let isLogin = props.match.path === '/login' // Is either /login or /signup
   let previousUrl = props.location.previous === '/login' || props.location.previous === '/signup' ? '/' : props.location.previous
 
+  if (isAuthenticated) {
+    window.history.replaceState(previousUrl, '', '/profile')
+  }
   function handleInput (event) {
     loginActions.update(
       {
@@ -102,7 +105,8 @@ const view = (state, actions) => (props, children) => (context) => {
         })
 
         auth.init()
-        window.history.replaceState(previousUrl, '', previousUrl)
+        // window.history.replaceState(previousUrl, '', previousUrl)
+        window.history.replaceState(previousUrl, '', '/profile')
       } catch (error) {
         loginActions.update({
           errorMessage: error.message,
@@ -133,7 +137,8 @@ const view = (state, actions) => (props, children) => (context) => {
         isLoading: false
       })
 
-      window.history.replaceState(previousUrl, '', previousUrl)
+      // window.history.replaceState(previousUrl, '', previousUrl)
+      window.history.replaceState(previousUrl, '', '/profile')
     } catch (error) {
       if (error.code === 'UserNotConfirmedException') {
         loginActions.update({
