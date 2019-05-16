@@ -6,7 +6,7 @@ import nativeWebApp from 'native-web-app'
 import { location } from '@hyperapp/router'
 import { withContext } from 'hyperapp-context'
 
-import UITabBar from './components/UI/UITabBar'
+// import UITabBar from './components/UI/UITabBar'
 import UIActionMenu from './components/UI/UIActionMenu'
 
 // Modules
@@ -105,7 +105,7 @@ const flamous = app(
 
     setContext(context)
     return <div class={device.isStandalone ? 'standalone' : 'not-standalone'} style={{ display: 'contents' }}>
-      <UITabBar />
+      {/* <UITabBar /> */}
       { state.Routes && <state.Routes /> }
       {
         state.actionMenu.isOpen && <UIActionMenu {...state.actionMenu} />
