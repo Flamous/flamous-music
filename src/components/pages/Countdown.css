@@ -1,0 +1,23 @@
+.countdown {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.inner-wrapper {
+  padding: 1rem;
+}
+
+.inner-wrapper img {
+  max-width: 12rem;
+  width: 100%;
+  display: inline-block;
+}
