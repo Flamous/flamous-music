@@ -41,7 +41,8 @@ const actions = {
             actions.setAuthenticated({
               cognitoUser: result,
               user: currentUserInfo,
-              s3BasePath: `https://s3.eu-central-1.amazonaws.com/${S3_BUCKET}/protected/${currentUserInfo.id}`
+              s3BasePath: `https://s3.eu-central-1.amazonaws.com/${S3_BUCKET}/protected/${currentUserInfo.id}`,
+              isAuthenticated: true
             })
             actions.fetchUserInfo()
           })
