@@ -1,6 +1,6 @@
 import Amplify from '@aws-amplify/core'
 
-const isProductionContext = process.env.CONTEXT === 'production'
+const isProductionContext = process.env.BRANCH !== 'dev'
 
 const API_ENDPOINT = isProductionContext
   ? process.env.API
