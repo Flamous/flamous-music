@@ -11,7 +11,9 @@
   justify-content: center;
   text-align: center;
 }
-
+.countdown * {
+  user-select: auto !important;
+}
 .inner-wrapper {
   padding: 1rem;
   max-width: 30rem;
@@ -20,14 +22,20 @@
 .divider {
   max-width: 8rem;
   width: 100%;
-  height: 3px;
+  height: 2px;
   border-radius: 10px;
   display: inline-block;
-  background-color: #999;
+  background-color: #555;
 }
 
 .inner-wrapper img {
-  max-height: 3rem;
+  max-width: 12rem;
   width: 100%;
   display: inline-block;
+}
+
+:global(.mce_inline_error[for]) {
+  background-color: white !important;
+  border: none !important;
+  color: orange !important;
 }
