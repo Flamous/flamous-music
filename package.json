@@ -38,6 +38,7 @@
     "autoprefixer": "^9.5.0",
     "aws-sdk": "^2.427.0",
     "babel-eslint": "^10.0.1",
+    "babel-preset-env": "^1.7.0",
     "cli-real-favicon": "0.0.7",
     "generate-robotstxt": "^6.0.1",
     "parcel-bundler": "^1.12.3",
