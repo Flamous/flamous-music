@@ -1,28 +1,18 @@
 
-![Flamous Music](https://raw.githubusercontent.com/Flamous/flamous-music/cd2040ba47fd54d67cf3029a242ffe29445a1b14/src/assets/flamous_logo_new.svg?sanitize=true)
+![Flamous Music](https://raw.githubusercontent.com/Flamous/flamous-music/8ec2770b35a7dfb6cff4fa6f77a3429691bbcbd6/src/assets/logo/brand.svg?sanitize=true)
 
-Open source music platform for free high-quality music. → [flamous.io](https://flamous.io/)
-
-
-## Join us for 1.0
-
-**18th May 2019**. By then you can listen to original songs and covers from existing public domain music. Sign up and save your favorite ones to you Library and share instantly listenable links with your friends and on social media. We build Flamous as a modern web app so you can listen to music right away without installation.
-
-The current version that is online right now at [flamous.io](https://flamous.io) is working, but has no backend infrastructure that is required for a music platform. This is what we are fixing right now.
-
-Stay tuned and follow us on [Twitter](https://twitter.com/FlamousMusic).
+Open source platform for free high-quality music. → [flamous.io](https://flamous.io/)
 
 ---
 
-## Help Develop Flamous
+[![Twitter Follow](https://img.shields.io/twitter/follow/FlamousMusic.svg?label=Follow%20on%20Twitter&style=social)](https://twitter.com/FlamousMusic)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b1b000e0-2c17-42f9-9f1a-0a8c6f88b647/deploy-status)](https://app.netlify.com/sites/flamous-music-client/deploys)
+
+## Flamous development
 
 **Local development**
 
 Flamous Music uses Parcel as its build tool. To run the project locally clone the Git repository with your terminal: `git clone https://github.com/Flamous/flamous-music.git`. Move into the newly cloned directory: `cd flamous-music`, `npm install` to get the dependencies and `npm start` to start local developement server. Now open [http://localhost:1234/](http://localhost:1234/) in your browser and start hacking!
-
-**We need your idea**
-
-If you have the next big thing/idea for a music platform, we'd love to implement it. Share your ideas with us, we don't bite (mostly): hello@flamous.io
 
 ---
 
