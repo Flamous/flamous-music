@@ -1,25 +1,28 @@
 import API, { graphqlOperation } from '@aws-amplify/api'
 import Auth from '@aws-amplify/auth'
 import { getUser, getArtistAlbums } from '../graphql/queries'
-import { createUserAndArtist } from '../graphql/mutations'
+import { createUserAndArtist, createNewArtist } from '../graphql/mutations'
+import { Athena } from 'aws-sdk';
 
-const isProductionContext = process.env.CONTEXT === 'production'
+const isProductionContext = process.env.BRANCH !== 'dev'
 const S3_BUCKET = isProductionContext
   ? process.env.S3_BUCKET
   : process.env.DEV_S3_BUCKET
 
 function gqlApi (options) {
-  let { operation, parameters = {}, callback, errorCallback } = options
-
-  API.graphql(graphqlOperation(operation, parameters))
+  console.info('Flamous: GraphQL action -->', options)
+  let { operation, parameters = {} } = options
+  return new Promise(function (resolve, reject) {
+    API.graphql(graphqlOperation(operation, parameters))
     .then((response) => {
-      callback(response)
+      let unwrappedData = response.data[Object.keys(response.data)[0]]
+      resolve(unwrappedData)
     })
     .catch((error) => {
-      console.error(error)
-
-      typeof errorCallback === 'function' && errorCallback(error)
+      console.warn('Flamous: API call not successful', error)
+      reject(error)
     })
+  })
 }
 
 const state = {
@@ -34,21 +37,24 @@ const state = {
 
 const actions = {
   init: () => (state, actions) => {
+    let currentAuthenticatedUserRes
     Auth.currentAuthenticatedUser()
       .then((result) => {
-        Auth.currentUserInfo()
-          .then((currentUserInfo) => {
-            actions.setAuthenticated({
-              cognitoUser: result,
-              user: currentUserInfo,
-              s3BasePath: `https://s3.eu-central-1.amazonaws.com/${S3_BUCKET}/protected/${currentUserInfo.id}`,
-              isAuthenticated: true
-            })
-            actions.fetchUserInfo()
-          })
+        currentAuthenticatedUserRes = result
+        console.info('Flamous: User has authenticated. Initializing profile now...')
+        return Auth.currentUserInfo()
+      })
+      .then((currentUserInfo) => {
+        actions.setAuthenticated({
+          cognitoUser: currentAuthenticatedUserRes,
+          user: currentUserInfo,
+          s3BasePath: `https://s3.eu-central-1.amazonaws.com/${S3_BUCKET}/protected/${currentUserInfo.id}`,
+          isAuthenticated: true
+        })
+        actions.fetchUserInfo()
       })
       .catch((error) => {
-        console.info(error)
+        console.info('Flamous: No user signed in', error)
       })
   },
   update (data) {
@@ -79,47 +85,34 @@ const actions = {
     }
   },
   fetchUserInfo: () => (state, actions) => {
+    let { user = {} } = state // TODO: Skip the nesting and spread the user info in the init function. Need adaption of some pages (e.g. Profile.js)
+    let { attributes = {} } = user
+    let { artistId, nickname } = attributes
+
     gqlApi({
-      operation: getUser,
-      callback: handleFetch
+      operation: getUser
     })
-
-    function handleFetch (response) {
-      let responseData = response.data[Object.keys(response.data)[0]]
-
-      if (state.tries > 3) {
-        console.error('Flamous: Too many fetch attempts', response)
-        actions.update({
-          isLoadingAlbums: false
+    .then(function (response) {
+      if (response.userNotExists) {
+        console.info('Flamous: No uer connection yet. Creating now...')
+        return gqlApi({
+          operation: createNewArtist,
+          parameters: {
+            name: nickname
+          }
         })
-        return
       }
-
-      if (!responseData) {
-        actions.update({
-          tries: state.tries++
-        })
-        gqlApi({
-          operation: createUserAndArtist,
-          callback: handleFetch
-        })
-
-        return
-      }
-
-      actions.update({
-        ...responseData,
-        isLoadingAlbums: false
-      })
-
-      actions.fetchUserAlbums()
-    }
+    })
+    .then(function (result) {
+      result && result.artistId && console.info(`Flamous: New artist created successfully: `, result)
+    })
+    .catch(console.error)
   },
   fetchUserAlbums: () => (state, actions) => {
     if (!state.artistId) return
     if (state.albums) return
 
-    gqlApi({
+    gqlApi({ // TODO: Upate to new Promise-based gqlApi wrapper
       operation: getArtistAlbums,
       parameters: {
         artistId: state.artistId
