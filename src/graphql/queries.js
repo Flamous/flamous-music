@@ -1,10 +1,12 @@
-const getUser = `query getUser {
-  user {
+export const getUser = `query getUser {
+  getUser {
+    userNotExists
+    userId
     artistId
   }
 }`
 
-const getArtistAlbums = `query getArtistAlbums ($artistId: ID!) {
+export const getArtistAlbums = `query getArtistAlbums ($artistId: ID!) {
   getArtistAlbums (artistId: $artistId) {
     title
     description
@@ -16,7 +18,7 @@ const getArtistAlbums = `query getArtistAlbums ($artistId: ID!) {
   }
 }`
 
-const getAlbum = `query getAlbum ($albumId: ID!) {
+export const getAlbum = `query getAlbum ($albumId: ID!) {
   album(albumId: $albumId) {
     title
     lastUpdated
@@ -25,5 +27,3 @@ const getAlbum = `query getAlbum ($albumId: ID!) {
     coverImagePath
   }
 }`
-
-export { getUser, getArtistAlbums, getAlbum }
