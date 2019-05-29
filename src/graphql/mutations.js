@@ -45,4 +45,11 @@ const createArtist = `mutation createArtist($name: String) {
   }
 }`
 
+export const createNewArtist = `mutation createNewArtist($name: String!) {
+  createNewArtist(name: $name) {
+    artistId
+    name
+  }
+}`
+
 export { createAlbum, deleteAlbum, updateAlbum, createUser, createUserAndArtist, updateUser, createArtist }
