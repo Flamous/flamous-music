@@ -94,6 +94,8 @@ let artistData = [
 ]
 
 const Home = (props) => (context) => {
+  let { auth: { isAuthenticated, cognitoUser } } = context
+
   return (
     <UIPage {...props} class={styles['home']} nonInteractive key='home'>
       <OpenGraph
@@ -104,7 +106,11 @@ const Home = (props) => (context) => {
         noDynamicTitle
         nav={{
           start: <img class={styles['logo']} src={logo} />,
-          end: <div>
+          end: isAuthenticated
+            ? <div>
+            <UILink to='/profile' class='button white' style={{ color: 'black', fontWeight: 'bold' }}>{ cognitoUser.attributes.nickname }</UILink>            
+          </div>
+          : <div>
             <UILink to='/login' class='button white' style={{ color: 'black', fontWeight: 'bold' }}>Login</UILink>
             <UILink to='/signup' class='button white' style={{ fontWeight: 'bold' }}>Sign Up</UILink>
           </div>
