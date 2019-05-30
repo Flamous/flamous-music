@@ -86,13 +86,18 @@ const actions = {
             name: nickname
           }
         })
+      } else {
+        actions.update({
+          artistId: response.artistId
+        })
       }
     })
     .then(function (result) {
       if (result && result.artistId) {
         console.info(`Flamous: New artist created successfully: `, result)
         actions.update({
-          artistId: result.artistId
+          artistId: result.artistId,
+          uploadStatus: response.uploadStatus
         })
       }
     })
