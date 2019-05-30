@@ -108,11 +108,18 @@
   transition: none;
 }
 .cursor .action-list {
+  border-radius: .5rem;
   box-shadow: rgba(0, 0, 0, 0.12) 0 0 3px 0, rgba(0, 0, 0, 0.04) 0 3px 16px, rgba(0, 0, 0, 0.04) 0 6px 40px 0;
 }
 .cursor .action-list li {
   background-color: #fafafa;
-  padding: .8rem 1.2rem;
+  padding: .7rem 1.1rem;
+}
+.cursor .action-list li:first-child {
+  padding-top: calc(.7rem + 3px);
+}
+.cursor .action-list :global(.icon) {
+  right: 1rem;
 }
 .cursor .cancel {
   display: none;
