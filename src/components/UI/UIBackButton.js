@@ -15,11 +15,11 @@ export default (props, children) => (state) => {
 
   return <UILink class={styles['back-button']} back={isBrowserHistoryBack} replace={!isBrowserHistoryBack} to={backLocation}>
     <UIIcon
-      style={{ marginRight: '-0.6em', marginLeft: '-0.75em' }}
+      style={{ marginRight: '-0.4rem', marginLeft: '-0.75rem' }}
       width='36' height='36'
       icon='chevron-left'
     />
-    <p>
+    <p class={styles['text']}>
       <span>{text || 'Back'}</span>
     </p>
   </UILink>
