@@ -2,28 +2,12 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import Auth from '@aws-amplify/auth'
 import { getUser, getArtistAlbums } from '../graphql/queries'
 import { createUserAndArtist, createNewArtist } from '../graphql/mutations'
-import { Athena } from 'aws-sdk';
+import gqlApi from '../components/functions/gqlApi'
 
 const isProductionContext = process.env.BRANCH !== 'dev'
 const S3_BUCKET = isProductionContext
   ? process.env.S3_BUCKET
   : process.env.DEV_S3_BUCKET
-
-function gqlApi (options) {
-  console.info('Flamous: GraphQL action -->', options)
-  let { operation, parameters = {} } = options
-  return new Promise(function (resolve, reject) {
-    API.graphql(graphqlOperation(operation, parameters))
-    .then((response) => {
-      let unwrappedData = response.data[Object.keys(response.data)[0]]
-      resolve(unwrappedData)
-    })
-    .catch((error) => {
-      console.warn('Flamous: API call not successful', error)
-      reject(error)
-    })
-  })
-}
 
 const state = {
   tries: 0,
