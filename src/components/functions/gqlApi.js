@@ -1,4 +1,4 @@
-import API from '@aws-amplify/api'
+import API, { graphqlOperation } from '@aws-amplify/api'
 
 export default function gqlApi (options) {
   console.info('Flamous: GraphQL action -->', options)
