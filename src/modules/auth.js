@@ -31,6 +31,7 @@ const state = {
   cognitoUser: null,
   user: null,
   albums: null,
+  artistId: null,
   isLoadingAlbums: false,
   isLoadingUser: false
 }
@@ -104,7 +105,12 @@ const actions = {
       }
     })
     .then(function (result) {
-      result && result.artistId && console.info(`Flamous: New artist created successfully: `, result)
+      if (result && result.artistId) {
+        console.info(`Flamous: New artist created successfully: `, result)
+        actions.update({
+          artistId: result.artistId
+        })
+      }
     })
     .catch(console.error)
   },
