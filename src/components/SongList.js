@@ -66,7 +66,7 @@ let ctx = {
 
 let view = (props, children) => (state) => (context) => {
   let { actionMenu: { iOpen: actionMenuIsOpen } } = state
-  let { songs = [], mode = 'standalone' } = props
+  let { songs = [], mode = 'standalone', album } = props
   let { actionMenu } = context.actions
 
   // openActionMenu should be extracted (probably into a decorator). Maybe something along CtxMenuAction
@@ -109,7 +109,7 @@ let view = (props, children) => (state) => (context) => {
               </span>
               <br />
               <span class={styles['song-infos']}>
-                {song.artist} {mode !== 'album' ? <span>&middot; {song.album}</span> : ''}
+                {song.artist} {mode !== 'album' ? <span>&middot; {album}</span> : ''}
               </span>
             </div>
             <button class='white' onmousedown={(e) => openActionMenu(e, 'cursor')} onclick={(e) => !actionMenuIsOpen && openActionMenu(e, 'touch')}>
