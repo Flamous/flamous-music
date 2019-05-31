@@ -1,7 +1,6 @@
-import API, { graphqlOperation } from '@aws-amplify/api'
 import Auth from '@aws-amplify/auth'
-import { getUser, getArtistAlbums } from '../graphql/queries'
-import { createUserAndArtist, createNewArtist } from '../graphql/mutations'
+import { getUser, getAlbumList } from '../graphql/queries'
+import { createNewArtist } from '../graphql/mutations'
 import gqlApi from '../components/functions/gqlApi'
 
 const isProductionContext = process.env.BRANCH !== 'dev'
@@ -100,27 +99,32 @@ const actions = {
           uploadStatus: response.uploadStatus
         })
       }
+
+      actions.fetchArtistAlbums()
     })
     .catch(console.error)
   },
-  fetchUserAlbums: () => (state, actions) => {
+  fetchArtistAlbums: () => (state, actions) => {
     if (!state.artistId) return
     if (state.albums) return
 
-    gqlApi({ // TODO: Upate to new Promise-based gqlApi wrapper
-      operation: getArtistAlbums,
+    actions.update({
+      isLoadingAlbums: true
+    })
+
+    gqlApi({
+      operation: getAlbumList,
       parameters: {
         artistId: state.artistId
-      },
-      callback: (response) => {
-        let responseData = response.data[Object.keys(response.data)[0]]
-
-        actions.update({
-          albums: responseData,
-          isLoadingAlbums: false
-        })
       }
     })
+    .then(function handleResponse (response) {
+      actions.update({
+        albums: response,
+        isLoadingAlbums: false
+      })
+    })
+    .catch(console.error)
   }
 }
 
