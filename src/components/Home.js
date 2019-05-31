@@ -9,6 +9,7 @@ import SongList from './SongList'
 import AlbumList from './AlbumList'
 import ArtistList from './ArtistList'
 import OpenGraph from './OpenGraph'
+import UISpinner from './UI/UISpinner.js';
 
 let songData = [
   {
@@ -94,7 +95,7 @@ let artistData = [
 ]
 
 const Home = (props) => (context) => {
-  let { auth: { isAuthenticated, cognitoUser } } = context
+  let { auth: { isAuthenticated, cognitoUser }, isLoadingFeatured, featured } = context
 
   return (
     <UIPage {...props} class={styles['home']} nonInteractive key='home'>
@@ -122,7 +123,11 @@ const Home = (props) => (context) => {
           <h2>
             Featured Songs
           </h2>
-          <SongList songs={songData} />
+          {
+            isLoadingFeatured
+              ? <UISpinner />
+              : <SongList songs={featured.songs} />
+          }
         </section>
 
         <div class={styles['separator']} />
