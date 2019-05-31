@@ -22,8 +22,7 @@ const state = {
 const actions = {
   animation: slideUp.actions
 }
-let outerProgress = 0
-let outerProgress2 = 0
+
 const view = (state, actions) => (props, children) => (context) => {
   let { auth: { artistId, albums, s3BasePath }, new: { album }, actions: { new: newActions, auth: authActions, actionMenu } } = context
   let { animation: { start: startAnimation } } = actions
@@ -32,6 +31,7 @@ const view = (state, actions) => (props, children) => (context) => {
   let activeEdit = album.activeEdit
   let albumUrlParam = props.match && props.match.params.albumId
 
+  let { outerProgress, outerProgress2 } = album
   function handleInput (event, index) {
     let isSongInput = event.target.id.includes('song')
 
@@ -103,14 +103,17 @@ const view = (state, actions) => (props, children) => (context) => {
       level: 'protected',
       contentType: file.type,
       progressCallback (progress) {
-        outerProgress = (progress.loaded / progress.total) * 100
+        newActions.album.update({
+          outerProgress: Math.floor((progress.loaded / progress.total) * 100)
+        })
         console.info(`Uploaded ${(progress.loaded / progress.total) * 100}%`)
       }
     })
     .then(function handleCoverImage (result) {
       console.log(result)
       newActions.album.update({
-        imageSource: result.key
+        imageSource: result.key,
+        outerProgress: undefined
       })
     })
   }
@@ -125,7 +128,9 @@ const view = (state, actions) => (props, children) => (context) => {
       level: 'protected',
       contentType: file.type,
       progressCallback (progress) {
-        outerProgress2 = (progress.loaded / progress.total) * 100
+        newActions.album.update({
+          outerProgress2: Math.floor((progress.loaded / progress.total) * 100)
+        })
         console.info(`Uploaded ${(progress.loaded / progress.total) * 100}%`)
       }
     })
@@ -141,7 +146,8 @@ const view = (state, actions) => (props, children) => (context) => {
       })
       console.log('songs: ', songs)
       newActions.album.update({
-        songs
+        songs,
+        outerProgress2: undefined
       })
     })
     .catch(console.error)
@@ -268,12 +274,12 @@ const view = (state, actions) => (props, children) => (context) => {
         <div class={cc(['row', styles['input-row']])}>
           <div style={{ display: 'flex', width: '100%', alignItems: 'center' }}>
             <div class={styles['cover-image']}>
-              <img src={`${s3BasePath}/${album.imageSource}`} />
+              <img src={album.imageSource ? `${s3BasePath}/${album.imageSource}`: albumPlaceholder} />
               {
                 !album.imageSource && <label for='cover-image' class={cc([styles['cover-image-upload'], 'button', 'white'])}>
                 <UIIcon icon='image' />
                 Upload<br />Image
-                {outerProgress > 0 ? <span><br />{`${outerProgress}%`}</span> : ''}
+                {typeof outerProgress !== 'undefined' ? <span><br />{`${outerProgress}%`}</span> : ''}
               </label>
               }
             </div>
@@ -296,7 +302,7 @@ const view = (state, actions) => (props, children) => (context) => {
                     return <li key={song.songId}>
                     <div class={styles['aside']}>
                       <span class={styles['song-number']}>{index + 1}</span>
-                      <UIIcon icon='check' onclick={
+                      <button onclick={
                         event => {
                           newActions.album.update({
                             isSavingActiveSong: true
@@ -304,16 +310,24 @@ const view = (state, actions) => (props, children) => (context) => {
 
                           saveSong(index)
                         }
-                      } />
+                      }><UIIcon icon='check' /></button>
                     </div>
                     <div class={styles['song-data']}>
                       <input id={`song-${song.songId}`} class={styles['song-title']} type='text' oninput={(event) => handleInput(event, index)} value={song.title} placeholder='Type song title ...' />
                       <div>
-                        <span>Audio: </span>
-                        <label for={`audio-${song.songId}`} class={cc([styles['audio-input'], 'button', 'white'])}>
-                        Upload File
-                        </label>
-                        <input oninput={uploadAudioFile} data-song-id={song.songId} id={`audio-${song.songId}`} class={styles['audio-input']} type='file' accept='*/audio' />
+                        {typeof outerProgress2 !== 'undefined'}
+                        {console.log(outerProgress2)}
+                        {
+                          typeof outerProgress2 !== 'undefined'
+                          ? <span>Uploading... {`${outerProgress2}%`}</span>
+                          : [
+                            <span>Audio: </span>,
+                            <label for={`audio-${song.songId}`} class={cc([styles['audio-input'], 'button', 'white'])}>
+                            Upload File
+                            </label>,
+                            <input oninput={uploadAudioFile} data-song-id={song.songId} id={`audio-${song.songId}`} class={styles['audio-input']} type='file' accept='*/audio' />
+                          ]
+                        }
                       </div>
                     </div>
                   </li>
@@ -321,16 +335,16 @@ const view = (state, actions) => (props, children) => (context) => {
                     return <li key={song.songId} class={cc([styles['normal'], { [styles['inactive']]: activeEdit !== -1 }])}>
                     <div class={styles['aside']}>
                       <span class={styles['song-number']}>{index + 1}</span>
-                      <UIIcon icon='edit-3' onclick={event => {
+                      <button onclick={event => {
                         newActions.album.update({
                           activeEdit: index
                         })
-                      }} />
+                      }} class='white'><UIIcon icon='edit-3' /></button>
                     </div>
                     <div class={styles['song-data']}>
                       <input disabled id={`song-${song.songId}`} class={styles['song-title']} type='text' oninput={(event) => handleInput(event, index)} value={song.title} placeholder='Type song title ...' />
                       <div>
-                        <audio controls src={`${s3BasePath}/${song.audioSource}`}></audio>
+                        <audio controls src={song.audioSource && `${s3BasePath}/${song.audioSource}`}></audio>
                       </div>
                     </div>
                   </li>
