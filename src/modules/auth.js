@@ -16,30 +16,28 @@ const state = {
   albums: null,
   artistId: null,
   isLoadingAlbums: false,
-  isLoadingUser: false
+  isLoadingUser: true
 }
 
 const actions = {
-  init: () => (state, actions) => {
-    let currentAuthenticatedUserRes
-    Auth.currentAuthenticatedUser()
-      .then((result) => {
-        currentAuthenticatedUserRes = result
-        console.info('Flamous: User has authenticated. Initializing profile now...')
-        return Auth.currentUserInfo()
+  init: () => async (state, actions) => {
+    try {
+      let result = await Auth.currentAuthenticatedUser()
+      console.info('Flamous: User has authenticated. Initializing profile now...')
+      let currentUserInfo = await Auth.currentUserInfo()
+      actions.setAuthenticated({
+        cognitoUser: result,
+        user: currentUserInfo,
+        s3BasePath: `https://s3.eu-central-1.amazonaws.com/${S3_BUCKET}/protected/${currentUserInfo.id}`,
+        isAuthenticated: true
       })
-      .then((currentUserInfo) => {
-        actions.setAuthenticated({
-          cognitoUser: currentAuthenticatedUserRes,
-          user: currentUserInfo,
-          s3BasePath: `https://s3.eu-central-1.amazonaws.com/${S3_BUCKET}/protected/${currentUserInfo.id}`,
-          isAuthenticated: true
-        })
-        actions.fetchUserInfo()
+      actions.fetchUserInfo()
+    } catch (error) {
+      console.error(error)
+      actions.update({
+        isLoadingUser: false
       })
-      .catch((error) => {
-        console.info('Flamous: No user signed in', error)
-      })
+    }
   },
   update (data) {
     return data
@@ -68,41 +66,46 @@ const actions = {
       ...obj
     }
   },
-  fetchUserInfo: () => (state, actions) => {
+  fetchUserInfo: () => async (state, actions) => {
     let { user = {} } = state // TODO: Skip the nesting and spread the user info in the init function. Need adaption of some pages (e.g. Profile.js)
     let { attributes = {} } = user
     let { artistId, nickname } = attributes
 
-    gqlApi({
-      operation: getUser
-    })
-    .then(function (response) {
+    try {
+      let response2
+      let response = await gqlApi({
+        operation: getUser
+      })
+
       if (response.userNotExists) {
         console.info('Flamous: No uer connection yet. Creating now...')
-        return gqlApi({
+        response2 = await gqlApi({
           operation: createNewArtist,
           parameters: {
             name: nickname
           }
         })
+
+        if (response2 && response2.artistId) {
+          console.info(`Flamous: New artist created successfully: `, response2)
+          actions.update({
+            artistId: response2.artistId,
+            uploadStatus: response.uploadStatus
+          })
+        }
       } else {
+        console.log('HERERERERER', response)
         actions.update({
           artistId: response.artistId
         })
       }
-    })
-    .then(function (result) {
-      if (result && result.artistId) {
-        console.info(`Flamous: New artist created successfully: `, result)
-        actions.update({
-          artistId: result.artistId,
-          uploadStatus: response.uploadStatus
-        })
-      }
-
+      actions.update({
+        isLoadingUser: false
+      })
       actions.fetchArtistAlbums()
-    })
-    .catch(console.error)
+    } catch (error) {
+      console.error(error)
+    }
   },
   fetchArtistAlbums: () => (state, actions) => {
     if (!state.artistId) return
