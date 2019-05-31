@@ -10,6 +10,8 @@ import UIIcon from '../UI/UIIcon'
 import SongList from '../SongList'
 import cc from 'classcat'
 import OpenGraph from '../OpenGraph'
+import gqlApi from '../functions/gqlApi'
+import { getAlbum, getSongList } from '../../graphql/queries';
 
 let songData = [
   {
@@ -39,11 +41,41 @@ let songData = [
   }
 ]
 
-let View = (state, actions) => () => (context) => {
-  let { shareAPI } = context
+let View = (props, children) => (state, actions)  => {
+  let { shareAPI, page, auth: { artistId, s3BasePath } } = state
+  let albumId = props.match.params && props.match.params.albumId
+  let { state: { songs = [], album = {} } } = page
+
+  function fetchAlbum () {
+    gqlApi({
+      operation: getAlbum,
+      parameters: {
+        albumId,
+        artistId
+      }
+    })
+    .then((result) => {
+      console.log('getalbum: ', result)
+      page.put({
+        album: result
+      })
+    }).catch(console.error)
+
+    gqlApi({
+      operation: getSongList,
+      parameters: {
+        albumId
+      }
+    })
+    .then((result) => {
+      page.put({
+        songs: result
+      })
+    }).catch(console.error)
+  }
 
   return (
-    <div class={styles['album']}>
+    <div class={styles['album']} oncreate={fetchAlbum}>
       <OpenGraph
         title='[Album Name] by [Artist Name]'
         description='Listen to the album [Album Name] on Flamous Music.'
@@ -54,17 +86,17 @@ let View = (state, actions) => () => (context) => {
           <div class={styles['header']}>
             <div class={styles['header-inner']}>
               <div class={styles['header-image']}>
-                <img src={albumPlaceholder} />
+                <img src={album.imageSource ? `${s3BasePath}/${album.imageSource}` : albumPlaceholder} />
               </div>
               <div class={styles['header-infos']}>
                 <span class={styles['header-title']}>
-                  <span>Album title</span>
+                  <span>{album.title}</span>
                   <span class={styles['artists']}>Artist 1, Artist 2</span>
                 </span>
               </div>
             </div>
             <div class={styles['header-items-row']}>
-              <span class={styles['misc']}>13 Songs &middot; 25 Min</span>
+              <span class={styles['misc']}>{songs.length} Songs</span>
               <button class={styles['shuffle-button']}><UIIcon icon='play' width='20' height='20' />Shuffle</button>
               <button class={cc(['white', styles['album-menu']])}><UIIcon icon='more-horizontal' /></button>
             </div>
@@ -82,7 +114,7 @@ let View = (state, actions) => () => (context) => {
 
       <main class={styles['main']}>
         <section class='centered'>
-          <SongList mode='album' songs={songData} />
+          <SongList mode='album' songs={songs} album={album.title} />
         </section>
 
         <section class={styles['story']}>
