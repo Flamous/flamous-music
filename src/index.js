@@ -65,7 +65,8 @@ const flamous = app(
       album: {
         songs: [],
         title: null,
-        isLoading: false
+        isLoading: false,
+        activeEdit: -1
       }
     }
   },
