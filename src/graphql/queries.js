@@ -6,24 +6,33 @@ export const getUser = `query getUser {
   }
 }`
 
-export const getArtistAlbums = `query getArtistAlbums ($artistId: ID!) {
-  getArtistAlbums (artistId: $artistId) {
+export const getAlbumList = `query getAlbumList ($artistId: ID!) {
+  getAlbumList (artistId: $artistId) {
     title
-    description
     albumId
+    artistId
     createdAt
-    lastUpdated
-    artists
-    coverImagePath
+    imageSource
+    published
   }
 }`
 
-export const getAlbum = `query getAlbum ($albumId: ID!) {
-  album(albumId: $albumId) {
+export const getSongList = `query getSongList ($albumId: ID!) {
+  getSongList (albumId: $albumId) {
     title
-    lastUpdated
+    songId
+    artistId
+    audioSource
+  }
+}`
+
+export const getAlbum = `query getAlbum ($albumId: ID!, $artistId: ID!) {
+  getAlbum(albumId: $albumId, artistId: $artistId) {
+    title
+    albumId
+    artistId
     createdAt
-    description
-    coverImagePath
+    imageSource
+    published
   }
 }`

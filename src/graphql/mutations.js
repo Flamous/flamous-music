@@ -1,5 +1,5 @@
 
-const createAlbum = `mutation createAlbum($title: String!, $artistId: ID!) {
+export const createNewAlbum = `mutation createAlbum($title: String!, $artistId: ID!) {
   createAlbum(artistId: $artistId, title: $title) {
       albumId
       title
@@ -12,13 +12,12 @@ const deleteAlbum = `mutation deleteAlbum($albumId: ID!) {
   }
 }`
 
-const updateAlbum = `mutation updateAlbum($albumId: ID!, $description: String, $title: String, $coverImagePath: String) {
-  updateAlbum(albumId: $albumId, title: $title, description: $description, coverImagePath: $coverImagePath) {
+const updateAlbum = `mutation updateAlbum($albumId: ID!, $artistId: ID!, $data: AlbumInput!) {
+  updateAlbum(albumId: $albumId, data: $data, artistId: $artistId) {
     title
-    description
     albumId
     lastUpdated
-    coverImagePath
+    imageSource
   }
 }`
 
@@ -52,4 +51,19 @@ export const createNewArtist = `mutation createNewArtist($name: String!) {
   }
 }`
 
-export { createAlbum, deleteAlbum, updateAlbum, createUser, createUserAndArtist, updateUser, createArtist }
+export const createSong = `mutation createSong($albumId: ID!) {
+  createSong(albumId: $albumId) {
+    songId
+    title
+  }
+}`
+
+export const updateSong = `mutation updateSong($songId: ID!, $albumId: ID!, $songData: SongInput!) {
+  updateSong(songId: $songId, albumId: $albumId, data: $songData) {
+    songId
+    title
+    audioSource
+  }
+}`
+
+export { deleteAlbum, updateAlbum, createUser, createUserAndArtist, updateUser, createArtist }
