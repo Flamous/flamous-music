@@ -4,14 +4,14 @@ import { Route } from '@hyperapp/router'
 
 const UIViewRoute = (props, children) => (context) => {
   let { render: RenderComponent, viewName, path } = props
-  let { actions, location, auth: { isLoadingUser } } = context
+  let { actions, location } = context
 
   delete props.render
   delete props.viewName
   delete props.path
 
   return (
-    !isLoadingUser && <Route
+    <Route
       {...props}
       path={path}
       render={(matchProps) => {

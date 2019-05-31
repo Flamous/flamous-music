@@ -42,11 +42,12 @@ let songData = [
 ]
 
 let View = (props, children) => (state, actions)  => {
-  let { shareAPI, page, auth: { artistId, s3BasePath } } = state
+  let { shareAPI, page, auth: { artistId, s3BasePath, isLoadingUser } } = state
   let albumId = props.match.params && props.match.params.albumId
   let { state: { songs = [], album = {} } } = page
 
   function fetchAlbum () {
+    console.log(artistId)
     gqlApi({
       operation: getAlbum,
       parameters: {
@@ -75,7 +76,7 @@ let View = (props, children) => (state, actions)  => {
   }
 
   return (
-    <div class={styles['album']} oncreate={fetchAlbum}>
+    !isLoadingUser && <div class={styles['album']} oncreate={fetchAlbum}>
       <OpenGraph
         title='[Album Name] by [Artist Name]'
         description='Listen to the album [Album Name] on Flamous Music.'
