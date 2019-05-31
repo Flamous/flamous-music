@@ -26,6 +26,15 @@ const view = (state, actions) => (props) => (context) => {
   let isSwipe = window.history.state && window.history.state.isSwipe
   let initialLoad = context.initialLoad
 
+  let { title } = context.currentSongData
+  let { isPlaying } = context.player
+
+  function togglePlay (index) {
+    console.log(isPlaying)
+    isPlaying && context.actions.pause()
+    !isPlaying && context.actions.play(index)
+  }
+
   function onRouteMatch (element) {
     if (isMatch && !matchedPreviously) {
       matchedPreviously = true
@@ -73,8 +82,8 @@ const view = (state, actions) => (props) => (context) => {
             <img src={placeholder} />
           </div>
           <div class={styles['song-infos']}>
-            <span class={styles['title']}>Song Title</span><br />
-            <span class={styles['artists']}>Artists 1, Artist 2</span>
+            <span class={styles['title']}>{title}</span><br />
+            {/* <span class={styles['artists']}>Artists 1, Artist 2</span> */}
           </div>
         </div>
         <div class={styles['scrubber']}>
@@ -92,8 +101,8 @@ const view = (state, actions) => (props) => (context) => {
           <button class='white'>
             <UIIcon height='36' width='36' icon='rewind' />
           </button>
-          <button class={cc(['white', styles['play']])}>
-            <UIIcon height='48' width='48' icon='pause' />
+          <button onclick={() => togglePlay()} class={cc(['white', styles['play']])}>
+            <UIIcon height='48' width='48' icon={isPlaying ? 'pause' : 'play'} />
           </button>
           <button class='white'>
             <UIIcon height='36' width='36' icon='fast-forward' />

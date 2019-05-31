@@ -16,6 +16,8 @@ import views from './modules/views'
 import actionMenu from './modules/actionMenu'
 import device from './modules/device'
 
+import gqlApi from './components/functions/gqlApi'
+import { getFeatured } from './graphql/queries'
 import './config'
 import './global.css'
 import './normalize.css'
@@ -38,6 +40,12 @@ const app = withContext(_app)
 
 const flamous = app(
   {
+    player: {
+      isPlaying: false,
+      audio: document.getElementById('my-audio'),
+      currentSongData: {}
+    },
+    isLoadingFeatured: true,
     Routes: null,
     auth: auth.state,
     views: views.state,
@@ -73,6 +81,31 @@ const flamous = app(
   {
     init: () => (state, actions) => {
       actions.auth.init()
+
+      // state.player.audio.addEventListener('timeupdate', function timeUpdate (event) {
+      //   console.log(event)
+      //   actions.setState({
+      //     currentSongData: {
+      //       currentTime: 123
+      //     }
+      //   })
+      // })
+
+      gqlApi({
+        operation: getFeatured
+      })
+      .then(function featured (result) {
+        console.log('RESULT', result)
+        // state.player.audio.src = `${state.auth.s3BasePath}/${state.featured.songs[index].audioSource}`
+        actions.setState({
+          currentSongData: result.songs[0],
+          featured: result,
+          isLoadingFeatured: false,
+          player: {
+            audio: document.getElementById('my-audio')
+          }
+        })
+      }).catch(console.error)
     },
     auth: auth.actions,
     views: views.actions,
@@ -87,6 +120,45 @@ const flamous = app(
     setInitialLoad: (boolean) => {
       return {
         initialLoad: boolean
+      }
+    },
+    play: (index) => (state) => {
+      console.log('HEREADFA', index)
+      let song = state.featured.songs[index]
+      state.player.audio.src = `${state.auth.s3BasePath}/${(song && song.audioSource) || state.currentSongData.audioSource}`
+      if ( typeof index !== 'undefined' ) {
+        console.log(state.featured.songs[index].audioSource)
+      }
+      state.player.audio.play()
+
+      if (song) {
+        return {
+          currentSongData: {
+            ...song,
+            index
+          },
+          player: {
+            ...state.player,
+            isPlaying: true
+          }
+        }
+      } else {
+        return {
+          player: {
+            ...state.player,
+            isPlaying: true
+          }
+        }
+      }
+    },
+    pause: () => (state) => {
+      console.log('HEREADFA', state)
+      state.player.audio.pause()
+      return {
+        player: {
+          ...state.player,
+          isPlaying: false
+        }
       }
     },
     new: {
@@ -107,6 +179,7 @@ const flamous = app(
     setContext(context)
     return <div class={device.isStandalone ? 'standalone' : 'not-standalone'} style={{ display: 'contents' }}>
       <UITabBar />
+      <audio id='my-audio'></audio>
       { state.Routes && <state.Routes /> }
       {
         state.actionMenu.isOpen && <UIActionMenu {...state.actionMenu} />

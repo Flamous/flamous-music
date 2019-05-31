@@ -93,8 +93,12 @@ let view = (props, children) => (state) => (context) => {
   }
 
   return <ul class={styles['song-list']}>
-    { songs.length > 0 && songs.map(song => (
-      <li>
+    { songs.length > 0 && songs.map((song, index) => (
+      <li onclick={(event) => {
+        context.actions.play(index)
+        // context.actions.player.audio.play(index)
+
+      }}>
         <div
           class={styles['song-item']}
           to='/'
