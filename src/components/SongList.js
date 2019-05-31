@@ -122,7 +122,7 @@ let view = (props, children) => (state) => (context) => {
           </div>
           { mode !== 'album' && (
             <div class={styles['cover-image']}>
-              <img src={albumCoverPlaceholer} />
+              <img src={song.imageSource || albumCoverPlaceholer} />
             </div>)
           }
         </div>
