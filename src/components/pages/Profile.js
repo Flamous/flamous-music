@@ -82,7 +82,7 @@ const Library = (props) => (state, actions) => (context) => {
         <label for='profile-picture'>
           <button class='white'>Change <UIIcon height='20' width='20' icon='image' /></button>
         </label>
-        <input id='profile-picture' oninput={event => { console.log(event.target.files); put({ profilePicture: event.target.files[0] }) }} accept='image/*' type='file' />
+        <input id='profile-picture' oninput={event => { put({ profilePicture: event.target.files[0] }) }} accept='image/*' type='file' />
       </div>)
       : <div class={styles['user-image']}>
         <UIIcon icon='user' />
@@ -154,26 +154,29 @@ const Library = (props) => (state, actions) => (context) => {
               {
                 !isAlbums && !auth.isLoadingAlbums && <div>
                   <p style={{ textAlign: 'center' }}>
-          You have not created an album yet
+                    You have not created an album yet.
                   </p>
                 </div>
               }
+              {
+              (auth.isLoadingAlbums || auth.isLoadingUser) && <UISpinner />
+            }
               {
                 isAlbums && auth.albums.map((album) => {
                 // let formattedLastUpdated
                 // if (album.lastUpdated) {
                 //   formattedLastUpdated = new Date(album.lastUpdated * 1000).toLocaleDateString(navigator.language, { year: '2-digit', month: 'short', day: 'numeric' })
                 // }
-                  return <li><UILink class={styles['album']} to={`/albums/${album.albumId}`}>
+                  return <li><UILink class={styles['album']} to={`/album-editor/${album.albumId}`}>
                     <div class={styles['image-wrapper']}>
                       <div class={styles['image-inner']}>
-                        <img src={album.coverImagePath ? `${auth.s3BasePath}/albums/${album.albumId}/cover${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
+                        <img src={album.imageSource ? `${auth.s3BasePath}/${album.imageSource}${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
                       </div>
                     </div>
                     <div class={styles['text-wrapper']}>
                       <div>
                         <span class={styles['primary-text']}>{album.title}</span><br />
-                        <span class={styles['secondary-text']}>{Math.ceil(Math.random(10) * 10)} Songs • {Math.ceil(Math.random() * 2500).toLocaleString()} Listeners</span>
+                        <span class={styles['secondary-text']}><i>DRAFT</i></span>
                       </div>
                     </div>
                     <UIIcon width='32' icon='chevron-right' />
@@ -182,15 +185,14 @@ const Library = (props) => (state, actions) => (context) => {
                 })
               }
               <li>
-                <UILink to='create-album' class='button white'><UIIcon icon='plus' /> New Album</UILink>
-                <UILink to='album-editor' class='button white'><UIIcon icon='disc' /> Album Editor Demo</UILink>
-
+                {/* <UILink to='create-album' class='button white'><UIIcon icon='plus' /> New Album</UILink> */}
+                <p style={{ textAlign: 'center' }}>
+                  <UILink to='/album-editor/new' class='button white'><UIIcon icon='plus' /> Create New Album</UILink>
+                </p>
               </li>
             </ul>
 
-            {
-              (auth.isLoadingAlbums || auth.isLoadingUser) && <UISpinner />
-            }
+            
           </section>
 
           <h3>Account</h3>
