@@ -19,6 +19,13 @@
   }
 }
 
+.inactive {
+  pointer-events: none;
+  opacity: .6;
+}
+.normal .song-title {
+  background-color: white;
+}
 .wrapper section:last-child {
   border-radius: 0.5rem 0.5rem 0 0;
 }
@@ -95,9 +102,8 @@
 .album-title input:global(#title) {
   height: 100%;
   max-height: unset;
-  background-color: unset;
-  font-size: 1.2rem;
-  padding: 0;
+  font-size: 1.5rem;
+  padding: .4rem 1rem;
 }
 .album-title input::placeholder,
 .song-title::placeholder  {
@@ -185,14 +191,14 @@ input.audio-input, input.cover-image, input.release-as-single {
 
 .cover-image {
   flex-basis: 50%;
-  max-width: 70px;
+  max-width: 100px;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 7px;
   position: relative;
   box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 2px 0 !important;
 }
 .cover-image img {
-  visibility: hidden;
+  position: relative;
 }
 
 .switch-row {

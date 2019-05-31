@@ -40,7 +40,7 @@ let Routes = () => {
 
     <Route path='/flamous-license' render={License} />
     <Route path='/create-album' render={NewAlbum} />
-    <Route path='/album-editor' render={AlbumEditor} />
+    <Route path='/album-editor/:albumId' render={AlbumEditor} />
   </span>
 }
 
