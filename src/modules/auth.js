@@ -33,7 +33,10 @@ const actions = {
       })
       actions.fetchUserInfo()
     } catch (error) {
-      console.info('user not authenticated', error)
+      console.info('Flamous: No user signed in --> ', error)
+      console.info('Flamous: Proceeding with guest user...')
+
+      let res = await Auth.currentCredentials()
 
       actions.update({
         isLoadingUser: false
