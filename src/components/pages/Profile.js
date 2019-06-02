@@ -169,9 +169,7 @@ const Library = (props) => (state, actions) => (context) => {
                 // }
                   return <li><UILink class={styles['album']} to={`/album-editor/${album.albumId}`}>
                     <div class={styles['image-wrapper']}>
-                      <div class={styles['image-inner']}>
-                        <img src={album.imageSource ? `${auth.s3BasePath}/${album.imageSource}${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
-                      </div>
+                      <img src={album.imageSource ? `${auth.s3BasePath}/${album.imageSource}${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
                     </div>
                     <div class={styles['text-wrapper']}>
                       <div>

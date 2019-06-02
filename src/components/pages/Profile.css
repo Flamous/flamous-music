@@ -71,6 +71,7 @@ section.account {
 .album {
   display: flex;
   align-items: center;
+  padding: .4rem 1rem;
 }
 .album > svg {
   margin-right: 1em;
@@ -84,22 +85,21 @@ section.account {
   color: #424242;
 }
 .image-wrapper {
-  padding: 0.4em 0.8em;
-}
-.image-inner {
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+  position: relative;
   border-radius: 0.2rem;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
-  height: 2.5em;
   overflow: hidden;
+}
+.album img {
+  display: block;
+  width: 100%;
+  position: absolute;
 }
 .album:hover {
   text-decoration: none;
-}
-
-.album img {
-  display: block;
-  height: 100%;
-  position: relative;
 }
 
 .text-wrapper {
@@ -108,6 +108,7 @@ section.account {
   align-self: center;
   color: black;
   width: 100%;
+  padding: 0 3rem 0 1rem;
 }
 
 .row-bottom {
@@ -120,7 +121,7 @@ section.account {
   color: rgba(0, 0, 0, 0.7);
 }
 .primary-text {
-  font-weight: bold;
+  font-size: 1.2rem;
 }
 .secondary-text {
   color: rgba(0, 0, 0, 0.65);
