@@ -65,7 +65,7 @@ let ctx = {
  */
 
 let view = (props, children) => (state) => (context) => {
-  let { actionMenu: { iOpen: actionMenuIsOpen } } = state
+  let { actionMenu: { isOpen: actionMenuIsOpen }, auth: { s3BasePath } } = state
   let { songs = [], mode = 'standalone', album } = props
   let { actionMenu } = context.actions
 
@@ -96,8 +96,6 @@ let view = (props, children) => (state) => (context) => {
     { songs.length > 0 && songs.map((song, index) => {
       return <li onclick={(event) => {
         context.actions.play(index)
-        // context.actions.player.audio.play(index)
-
       }}>
         <div
           class={styles['song-item']}
@@ -122,7 +120,7 @@ let view = (props, children) => (state) => (context) => {
           </div>
           { mode !== 'album' && (
             <div class={styles['cover-image']}>
-              <img src={song.imageSource || albumCoverPlaceholer} />
+              <img src={`${s3BasePath}/${song.imageSource}` || albumCoverPlaceholer} />
             </div>)
           }
         </div>
