@@ -33,7 +33,8 @@ const actions = {
       })
       actions.fetchUserInfo()
     } catch (error) {
-      console.info('user not authenticated')
+      console.info('user not authenticated', error)
+
       actions.update({
         isLoadingUser: false
       })
