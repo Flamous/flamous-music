@@ -23,10 +23,11 @@ let matchedPreviously = false
 const view = (state, actions) => (props) => (context) => {
   let { animation: { slideOut, start: startAnimation } } = actions
   let { isMatch } = props
+  let { auth: { s3BasePath } } = context
   let isSwipe = window.history.state && window.history.state.isSwipe
   let initialLoad = context.initialLoad
 
-  let { title } = context.currentSongData
+  let { title, imageSource } = context.currentSongData || {}
   let { isPlaying } = context.player
 
   function togglePlay (index) {
@@ -79,7 +80,7 @@ const view = (state, actions) => (props) => (context) => {
       <main class={styles['main']}>
         <div class={styles['song-meta-wrapper']}>
           <div class={styles['cover-image']}>
-            <img src={placeholder} />
+            <img src={imageSource ? `${s3BasePath}/${imageSource}` : placeholder} />
           </div>
           <div class={styles['song-infos']}>
             <span class={styles['title']}>{title}</span><br />
