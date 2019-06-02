@@ -4,8 +4,11 @@ export default function gqlApi (options) {
   console.info('Flamous: GraphQL action -->', options)
   let { operation, parameters = {}, authMode = 'AMAZON_COGNITO_USER_POOLS' } = options
   return new Promise(function (resolve, reject) {
-    console.log("Making call with authMode ", authMode)
-    API.graphql(graphqlOperation(operation, parameters), authMode)
+    API.graphql({
+      query: operation,
+      variables: parameters,
+      authMode
+    })
     .then((response) => {
       let unwrappedData = response.data[Object.keys(response.data)[0]]
       resolve(unwrappedData)
