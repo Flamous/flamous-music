@@ -79,7 +79,7 @@ const flamous = app(
     }
   },
   {
-    init: () => (state, actions) => {
+    init: () => async (state, actions) => {
       actions.auth.init()
 
       // state.player.audio.addEventListener('timeupdate', function timeUpdate (event) {
@@ -91,21 +91,23 @@ const flamous = app(
       //   })
       // })
 
-      gqlApi({
-        operation: getFeatured
-      })
-      .then(function featured (result) {
-        console.log('RESULT', result)
-        // state.player.audio.src = `${state.auth.s3BasePath}/${state.featured.songs[index].audioSource}`
+      try {
+        let featuredData = await gqlApi({
+          operation: getFeatured,
+          authMode: 'AWS_IAM'
+        })
+
         actions.setState({
-          currentSongData: result.songs[0],
-          featured: result,
+          currentSongData: featuredData.songs[0],
+          featured: featuredData,
           isLoadingFeatured: false,
           player: {
             audio: document.getElementById('my-audio')
           }
         })
-      }).catch(console.error)
+      } catch (error) {
+        console.error('Flamous: Could not load featured data --> ', error)
+      }
     },
     auth: auth.actions,
     views: views.actions,
