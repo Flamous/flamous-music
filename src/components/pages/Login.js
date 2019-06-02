@@ -27,7 +27,7 @@ const actions = {
     })
       .then(response => response.json())
       .then(result => {
-        actions.setHeroImage(result.urls.regular)
+        result && result.urls && actions.setHeroImage(result.urls.regular)
       })
       .catch(console.warn)
   },
