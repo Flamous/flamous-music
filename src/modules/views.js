@@ -121,8 +121,6 @@ const actions = {
     let { stack } = state
     let newStack = [...stack]
 
-    console.log(`Removing page from stack ${state.scopeId} | page: ${stack[stack.length - 1].path}`)
-
     newStack.pop()
 
     return {

@@ -81,7 +81,6 @@ const view = (state, actions) => (props, children) => (context) => {
           albumId: albumUrlParam
         }
       })
-      console.log(newSong)
     } catch (error) {
       console.error(error)
     }
@@ -96,8 +95,6 @@ const view = (state, actions) => (props, children) => (context) => {
   function uploadCoverImage (event) {
     let file = event.target.files && event.target.files[0]
     let coverImagePath = `albums/${albumUrlParam}/cover`
-
-    console.log(file)
     
     Storage.put(coverImagePath, file, {
       level: 'protected',
@@ -110,7 +107,6 @@ const view = (state, actions) => (props, children) => (context) => {
       }
     })
     .then(function handleCoverImage (result) {
-      console.log(result)
       newActions.album.update({
         imageSource: result.key,
         outerProgress: undefined
@@ -122,7 +118,6 @@ const view = (state, actions) => (props, children) => (context) => {
     let file = event.target.files && event.target.files[0]
     let songId = event.target.dataset.songId
     let audioPath = `albums/${albumUrlParam}/${songId}/audio`
-    console.log(event.target)
     
     Storage.put(audioPath, file, {
       level: 'protected',
@@ -135,8 +130,6 @@ const view = (state, actions) => (props, children) => (context) => {
       }
     })
     .then(function handleSongFile (result) {
-      console.log(result)
-
       let songs = album.songs.map(function filterSong (song) {
         if (song.songId === songId) {
           song.audioSource = result.key
@@ -144,7 +137,7 @@ const view = (state, actions) => (props, children) => (context) => {
 
         return song
       })
-      console.log('songs: ', songs)
+
       newActions.album.update({
         songs,
         outerProgress2: undefined
@@ -177,12 +170,10 @@ const view = (state, actions) => (props, children) => (context) => {
         })
       })
       .then(function albumResult (result) {
-        // console.log(result.title)
-        // newActions.album.update({result})
         newActions.album.update({
           ...result
         })
-        console.log(albumUrlParam)
+
         return gqlApi({
           operation: getSongList,
           parameters: {
@@ -191,7 +182,6 @@ const view = (state, actions) => (props, children) => (context) => {
         })
       })
       .then(function songResults (response) {
-        console.log("SUCCESS", response)
         newActions.album.update({
           songs: response
         })
@@ -222,9 +212,6 @@ const view = (state, actions) => (props, children) => (context) => {
         }
       }
     })
-    .then(function saveResult (saveResult) {
-      console.log("SUCCESS", saveResult)
-    })
     .catch(console.error)
     newActions.album.update({
       activeEdit: -1,
@@ -233,7 +220,6 @@ const view = (state, actions) => (props, children) => (context) => {
   }
 
   function saveAlbumAndExit () {
-    console.log('Title is ', album.title)
     gqlApi({
       operation: updateAlbum,
       parameters: {
@@ -244,9 +230,6 @@ const view = (state, actions) => (props, children) => (context) => {
           imageSource: album.imageSource
         }
       }
-    })
-    .then(function handleSave (saveResult) {
-      console.log("SUCCESS", saveResult)
     })
     .catch(console.error)
   }
@@ -297,7 +280,6 @@ const view = (state, actions) => (props, children) => (context) => {
             <div>
               {
                 album.songs && album.songs.length > 0 && album.songs.map((song, index) => {
-                  console.log(activeEdit)
                   if (index === activeEdit) {
                     return <li key={song.songId}>
                     <div class={styles['aside']}>
@@ -316,7 +298,6 @@ const view = (state, actions) => (props, children) => (context) => {
                       <input id={`song-${song.songId}`} class={styles['song-title']} type='text' oninput={(event) => handleInput(event, index)} value={song.title} placeholder='Type song title ...' />
                       <div>
                         {typeof outerProgress2 !== 'undefined'}
-                        {console.log(outerProgress2)}
                         {
                           typeof outerProgress2 !== 'undefined'
                           ? <span>Uploading... {`${outerProgress2}%`}</span>

@@ -98,7 +98,6 @@ const actions = {
           })
         }
       } else {
-        console.log('HERERERERER', response)
         actions.update({
           artistId: response.artistId
         })

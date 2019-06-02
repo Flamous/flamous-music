@@ -82,15 +82,6 @@ const flamous = app(
     init: () => async (state, actions) => {
       actions.auth.init()
 
-      // state.player.audio.addEventListener('timeupdate', function timeUpdate (event) {
-      //   console.log(event)
-      //   actions.setState({
-      //     currentSongData: {
-      //       currentTime: 123
-      //     }
-      //   })
-      // })
-
       try {
         let featuredData = await gqlApi({
           operation: getFeatured,
@@ -125,12 +116,9 @@ const flamous = app(
       }
     },
     play: (index) => (state) => {
-      console.log('HEREADFA', index)
       let song = state.featured.songs[index]
+
       state.player.audio.src = `${state.auth.s3BasePath}/${(song && song.audioSource) || state.currentSongData.audioSource}`
-      if ( typeof index !== 'undefined' ) {
-        console.log(state.featured.songs[index].audioSource)
-      }
       state.player.audio.play()
 
       if (song) {
@@ -154,7 +142,6 @@ const flamous = app(
       }
     },
     pause: () => (state) => {
-      console.log('HEREADFA', state)
       state.player.audio.pause()
       return {
         player: {

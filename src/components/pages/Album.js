@@ -47,7 +47,6 @@ let View = (props, children) => (state, actions)  => {
   let { state: { songs = [], album = {} } } = page
 
   function fetchAlbum () {
-    console.log(artistId)
     gqlApi({
       operation: getAlbum,
       parameters: {
@@ -56,7 +55,6 @@ let View = (props, children) => (state, actions)  => {
       }
     })
     .then((result) => {
-      console.log('getalbum: ', result)
       page.put({
         album: result
       })

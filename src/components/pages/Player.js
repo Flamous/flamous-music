@@ -31,7 +31,6 @@ const view = (state, actions) => (props) => (context) => {
   let { isPlaying } = context.player
 
   function togglePlay (index) {
-    console.log(isPlaying)
     isPlaying && context.actions.pause()
     !isPlaying && context.actions.play(index)
   }
