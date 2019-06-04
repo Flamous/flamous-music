@@ -14,7 +14,10 @@ let YDelta = 0
 let hasFired = false
 
 const UITabBar = (props, children) => (context) => {
-  let { actions: { views: { setActive } }, views: { activeView } } = context
+  let { actions: { views: { setActive } }, views: { activeView }, currentSongData = {}, auth: { s3BasePath } } = context
+
+  let { imageSource } = currentSongData
+  let imagePath = imageSource ? `${s3BasePath}/${imageSource}` : null
 
   const SetActive = (props, children) => {
     let { viewName } = props
@@ -69,7 +72,7 @@ const UITabBar = (props, children) => (context) => {
     </SetActive>
 
     <UILink to='/player' class={cc([styles['item'], styles['player']])}>
-      <img alt='Cover Image' src={placeholderImage} />
+      <img alt='Cover Image' src={imagePath || placeholderImage} />
     </UILink>
   </nav>
 }
