@@ -57,6 +57,9 @@ const actions = {
   },
   setAuthenticated (obj) {
     if (!obj) {
+      console.info('Flamous: Getting guest user after signout...')
+      Auth.currentCredentials()
+        .catch(console.error)
       return {
         isAuthenticated: false,
         cognitoUser: null,
