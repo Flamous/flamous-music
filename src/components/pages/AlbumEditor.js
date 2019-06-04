@@ -24,7 +24,7 @@ const actions = {
 }
 
 const view = (state, actions) => (props, children) => (context) => {
-  let { auth: { artistId, albums, s3BasePath }, new: { album }, actions: { new: newActions, auth: authActions, actionMenu } } = context
+  let { auth: { artistId, albums, s3BasePath, user }, new: { album }, actions: { new: newActions, auth: authActions, actionMenu } } = context
   let { animation: { start: startAnimation } } = actions
   let previousUrl = props.location.previous === '/album-editor' ? '/' : props.location.previous
 
@@ -94,8 +94,12 @@ const view = (state, actions) => (props, children) => (context) => {
 
   function uploadCoverImage (event) {
     let file = event.target.files && event.target.files[0]
-    let coverImagePath = `albums/${albumUrlParam}/cover`
+    let coverImagePath = `albums/${albumUrlParam}/coverImage`
     
+    /** S3 path
+     *  Amplify's `Storage.put` "protected" level automatically adds the Cognito id of the user that uploaded the file to the path above. The `key` we get back is without the id, but in order to correctly build the image path (the cognito id from the uploader is part of it) we need to prepend this id to the saved key in dynamoDB. Otherwise other users can't build the image path, thus seing a broken image.
+     * TODO: Revisit the general Storage situation before launch. Maybe rename "protected" to something else.
+     */
     Storage.put(coverImagePath, file, {
       level: 'protected',
       contentType: file.type,
@@ -108,7 +112,7 @@ const view = (state, actions) => (props, children) => (context) => {
     })
     .then(function handleCoverImage (result) {
       newActions.album.update({
-        imageSource: result.key,
+        imageSource: prependCognitoUserId(result.key),
         outerProgress: undefined
       })
     })
@@ -118,7 +122,7 @@ const view = (state, actions) => (props, children) => (context) => {
     let file = event.target.files && event.target.files[0]
     let songId = event.target.dataset.songId
     let audioPath = `albums/${albumUrlParam}/${songId}/audio`
-    
+
     Storage.put(audioPath, file, {
       level: 'protected',
       contentType: file.type,
@@ -132,7 +136,7 @@ const view = (state, actions) => (props, children) => (context) => {
     .then(function handleSongFile (result) {
       let songs = album.songs.map(function filterSong (song) {
         if (song.songId === songId) {
-          song.audioSource = result.key
+          song.audioSource = prependCognitoUserId(result.key)
         }
 
         return song
@@ -153,6 +157,9 @@ const view = (state, actions) => (props, children) => (context) => {
     newActions.album.update({
       songs
     })
+  }
+  function prependCognitoUserId (s3Key) {
+    return `${user.id}/${s3Key}`
   }
 
   function fetchAlbum () {
@@ -189,6 +196,9 @@ const view = (state, actions) => (props, children) => (context) => {
           title: "Untitled",
           artistId
         }
+      })
+      .then(function redirect (result) {
+        window.history.replaceState({}, '', `/album-editor/${result.albumId}`)
       })
       .catch(console.error)
     }
@@ -266,7 +276,7 @@ const view = (state, actions) => (props, children) => (context) => {
               <input aria-label='Album Title' id='title' maxlength='50' oninput={handleInput} type='text' value={album.title} placeholder='Your album title...' />
             </div>
           </div>
-          <input id='cover-image' maxlength='40' oninput={uploadCoverImage} class={styles['cover-image']} type='file' accept='*/image' value={album.coverImage} />
+          <input id='cover-image' maxlength='40' oninput={uploadCoverImage} class={styles['cover-image']} type='file' accept='image/*' value={album.coverImage} />
         </div>
 
         <div class={cc(['row', styles['row'], styles['input-row']])}>
@@ -301,7 +311,7 @@ const view = (state, actions) => (props, children) => (context) => {
                             <label for={`audio-${song.songId}`} class={cc([styles['audio-input'], 'button', 'white'])}>
                             Upload File
                             </label>,
-                            <input oninput={uploadAudioFile} data-song-id={song.songId} id={`audio-${song.songId}`} class={styles['audio-input']} type='file' accept='*/audio' />
+                            <input oninput={uploadAudioFile} data-song-id={song.songId} id={`audio-${song.songId}`} class={styles['audio-input']} type='file' accept='audio/*' />
                           ]
                         }
                       </div>
