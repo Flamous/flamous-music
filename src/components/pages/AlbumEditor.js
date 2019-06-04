@@ -24,7 +24,7 @@ const actions = {
 }
 
 const view = (state, actions) => (props, children) => (context) => {
-  let { auth: { artistId, albums, s3BasePath }, new: { album }, actions: { new: newActions, auth: authActions, actionMenu } } = context
+  let { auth: { artistId, albums, s3BasePath, user }, new: { album }, actions: { new: newActions, auth: authActions, actionMenu } } = context
   let { animation: { start: startAnimation } } = actions
   let previousUrl = props.location.previous === '/album-editor' ? '/' : props.location.previous
 
@@ -94,8 +94,12 @@ const view = (state, actions) => (props, children) => (context) => {
 
   function uploadCoverImage (event) {
     let file = event.target.files && event.target.files[0]
-    let coverImagePath = `albums/${albumUrlParam}/cover`
+    let coverImagePath = `albums/${albumUrlParam}/coverImage`
     
+    /** S3 path
+     *  Amplify's `Storage.put` "protected" level automatically adds the Cognito id of the user that uploaded the file to the path above. The `key` we get back is without the id, but in order to correctly build the image path (the cognito id from the uploader is part of it) we need to prepend this id to the saved key in dynamoDB. Otherwise other users can't build the image path, thus seing a broken image.
+     * TODO: Revisit the general Storage situation before launch. Maybe rename "protected" to something else.
+     */
     Storage.put(coverImagePath, file, {
       level: 'protected',
       contentType: file.type,
@@ -108,7 +112,7 @@ const view = (state, actions) => (props, children) => (context) => {
     })
     .then(function handleCoverImage (result) {
       newActions.album.update({
-        imageSource: result.key,
+        imageSource: prependCognitoUserId(result.key),
         outerProgress: undefined
       })
     })
@@ -132,7 +136,7 @@ const view = (state, actions) => (props, children) => (context) => {
     .then(function handleSongFile (result) {
       let songs = album.songs.map(function filterSong (song) {
         if (song.songId === songId) {
-          song.audioSource = result.key
+          song.audioSource = prependCognitoUserId(result.key)
         }
 
         return song
@@ -153,6 +157,9 @@ const view = (state, actions) => (props, children) => (context) => {
     newActions.album.update({
       songs
     })
+  }
+  function prependCognitoUserId (s3Key) {
+    return `${user.id}/${s3Key}`
   }
 
   function fetchAlbum () {

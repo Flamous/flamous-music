@@ -28,7 +28,7 @@ const actions = {
       actions.setAuthenticated({
         cognitoUser: result,
         user: currentUserInfo,
-        s3BasePath: `https://s3.eu-central-1.amazonaws.com/${S3_BUCKET}/protected/${currentUserInfo.id}`,
+        s3BasePath: `https://${S3_BUCKET}.s3.eu-central-1.amazonaws.com/protected`,
         isAuthenticated: true
       })
       actions.fetchUserInfo()
@@ -39,6 +39,8 @@ const actions = {
       let res = await Auth.currentCredentials()
 
       actions.update({
+        s3BasePath: `https://s3.eu-central-1.amazonaws.com/${S3_BUCKET}/protected`,
+        isAuthenticated: false,
         isLoadingUser: false
       })
     }
