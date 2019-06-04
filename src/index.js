@@ -42,9 +42,9 @@ const flamous = app(
   {
     player: {
       isPlaying: false,
-      audio: document.getElementById('my-audio'),
-      currentSongData: {}
+      audio: document.getElementById('my-audio')
     },
+    currentSongData: {},
     isLoadingFeatured: true,
     Routes: null,
     auth: auth.state,
