@@ -43,6 +43,8 @@ export const getFeatured = `query getFeatured {
       title
       imageSource
       audioSource
+      albumId
+      artistId
     }
     albums {
       title
