@@ -84,7 +84,8 @@ const view = (state, actions) => (props, children) => (context) => {
       }
     } else if (!login.hasSubmittedAuthCode) {
       loginActions.update({
-        isLoading: true
+        isLoading: true,
+        hasResentAuthCode: false
       })
       try {
         await Auth.confirmSignUp(
@@ -144,14 +145,15 @@ const view = (state, actions) => (props, children) => (context) => {
         loginActions.update({
           isLoading: true
         })
-        console.info('User is not confirmed. Sending confirm code again.')
+        console.info('User is not confirmed. Redirecting to AuthCode step...')
 
-        await Auth.resendSignUp(
-          login.email
-        )
+        // await Auth.resendSignUp(
+        //   login.email
+        // )
         loginActions.update({
           isLoading: false,
-          hasSubmittedEmail: true
+          hasSubmittedEmail: true,
+          isAuthCodeRedirect: true
         })
         window.history.replaceState({}, '', '/signup')
         return
@@ -162,6 +164,25 @@ const view = (state, actions) => (props, children) => (context) => {
       })
       console.error(error)
     }
+  }
+
+  async function resendAuthCode (event) {
+    event.preventDefault()
+    loginActions.update({
+      isLoading: true,
+      hasResentAuthCode: true,
+      isAuthCodeRedirect: false
+    })
+    try {
+        console.info('Flamous: Resending auth code...')
+        await Auth.resendSignUp(login.email)
+    } catch (error) {
+      console.error('Flamous: there was a problem sending the auth code: ', error)
+    }
+
+    loginActions.update({
+      isLoading: false
+    })
   }
 
   return <div
@@ -265,17 +286,45 @@ const view = (state, actions) => (props, children) => (context) => {
                   </div>
                 }
                 {
-                  login.hasSubmittedEmail && !login.hasSubmittedAuthCode && <div>
+                  login.hasSubmittedEmail && !login.hasSubmittedAuthCode && !login.hasResentAuthCode && <div>
                     {
                       login.isLoading
                         ? <div><UISpinner /><p>Checking code...</p></div>
                         : <div>
                           <p class={styles['info']}>
-                            We sent a verification code to<br /><i>{login.email}</i>
+                            { login.isAuthCodeRedirect
+                            ? 'You have received an authentication code earlier to'
+                            : 'We sent a verification code to'
+                            }
+                            <br /><i>{login.email}</i>
                           </p>
                           <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
                           <div style={{ textAlign: 'center' }}>
-                            <button type='submit'>Confirm</button>
+                            <button type='submit'>Confirm Email</button>
+                            <p>
+                              If your code has expired or did not reach your inbox, we can resend it.
+                              <button onclick={resendAuthCode} class='white'>Resend Code</button>
+                            </p>
+                          </div></div>
+                    }
+                  </div>
+                }
+                {
+                  login.hasSubmittedEmail && !login.hasSubmittedAuthCode && login.hasResentAuthCode && <div>
+                    {
+                      login.isLoading
+                        ? <div><UISpinner /><p>Resending authentication code...</p></div>
+                        : <div>
+                          <p class={styles['info']}>
+                            We sent a new verification code to<br /><i>{login.email}</i>
+                          </p>
+                          <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
+                          <div style={{ textAlign: 'center' }}>
+                            <button type='submit'>Confirm Email</button>
+                            <p>
+                              If your code has expired or did not reach your inbox, we can resend it.
+                              <button onclick={resendAuthCode} class='white'>Resend Code</button>
+                            </p>
                           </div></div>
                     }
                   </div>
