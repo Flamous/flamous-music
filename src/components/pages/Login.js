@@ -4,9 +4,10 @@ import { nestable } from 'hyperapp-context'
 import { slideUp } from '../functions/animation'
 import styles from './Login.css'
 import Auth from '@aws-amplify/auth'
-import flamousLogo from '~/assets/logo/brand_invert.png'
+import flamousLogo from '~/assets/logo/brand.svg'
 import UILink from '../UI/UILink'
 import UISpinner from '../UI/UISpinner'
+import UIIcon from '../UI/UIIcon';
 
 const state = {
   animation: slideUp.state,
@@ -205,42 +206,50 @@ const view = (state, actions) => (props, children) => (context) => {
     </div>
     <header class={styles['header']}>
       <div class={styles['top-row']}>
-        <span><img src={flamousLogo} /></span>
         <UILink replace to={previousUrl} class='button white'>Close</UILink>
+        {
+          isLogin && <UILink class='button white' style={{ fontWeight: 'bold' }} replace to='/signup'>Sign up instead...</UILink>
+        }
+        {
+          !isLogin && <UILink class='button white' style={{ fontWeight: 'bold' }} replace to='/login'>Log in instead...</UILink>
+        }
       </div>
 
-      <h1>
-        {
-          isLogin
-            ? 'Sign In'
-            : 'Create Account'
-        }
-      </h1>
+      
     </header>
 
     <main class={styles['main']}>
+      <h1>
+        <img src={flamousLogo} />
+        <br />
+        {
+          isLogin
+            ? 'Log in'
+            : 'Sign up'
+        }
+      </h1>
       <section>
         {
 
           isLogin
             ? <div>
-              <p>Share your music with the world.</p>
+              {/* <p>Share your music with the world.</p> */}
               <form onsubmit={handleLogin}>
                 {
                   !login.hasSubmittedEmail && <div>
                     {
                       login.isLoading
-                        ? <div><UISpinner /><p>Logging in...</p></div>
+                        ? <div class={styles['loading']}><UISpinner /><p>Logging in...</p></div>
                         : <div>
                           <input aria-label='Email' autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
 
                           <input aria-label='Password' autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
                           {/* <span class={styles['dots']}>••••••••</span> */}
 
-                          <div style={{ textAlign: 'center' }}>
-                            <button type='submit'>Login</button>
-                            <br />
-                            <UILink class='button white' replace to='/signup'>or Create Account</UILink>
+                          <div>
+                            <button type='submit' style={{ fontWeight: 'bold' }}>Log in<UIIcon icon='arrow-right' /></button>
+                            {/* <br />
+                            <UILink class='button white' replace to='/signup'>or Create Account</UILink> */}
                           </div>
 
                           <p class={styles['error']}>
@@ -256,10 +265,10 @@ const view = (state, actions) => (props, children) => (context) => {
               <form onsubmit={handleSubmit}>
                 {
                   !login.hasSubmittedEmail && <div>
-                    <p>Join our community  of music lovers and musicians.</p>
+                    {/* <p>Join our community  of music lovers and musicians.</p> */}
                     {
                       login.isLoading
-                        ? <div><UISpinner /></div>
+                        ? <div class={styles['loading']}><UISpinner /></div>
                         : <div>
                           <label for='name'>Display name</label>
                           <input required autocomplete='username email' id='name' oninput={handleInput} value={login.name} class={styles['input']} type='text' placeholder='E.g. John Baginbu' />
@@ -273,10 +282,10 @@ const view = (state, actions) => (props, children) => (context) => {
                           {/* <label for='name'>Password</label> */}
                           <input aria-label='Password' required autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} placeholder='Password' type='password' />
 
-                          <div style={{ textAlign: 'center' }}>
-                            <button type='submit'>Next</button>
-                            <br />
-                            <UILink class='button white' replace to='/login'>or Log In</UILink>
+                          <div>
+                            <button type='submit'>Let's sign up</button>
+                            {/* <br />
+                            <UILink class='button white' replace to='/login'>or Log In</UILink> */}
                           </div>
 
                           <p class={styles['error']}>
@@ -289,7 +298,7 @@ const view = (state, actions) => (props, children) => (context) => {
                   login.hasSubmittedEmail && !login.hasSubmittedAuthCode && !login.hasResentAuthCode && <div>
                     {
                       login.isLoading
-                        ? <div><UISpinner /><p>Checking code...</p></div>
+                        ? <div class={styles['loading']}><UISpinner /><p>Checking code...</p></div>
                         : <div>
                           <p class={styles['info']}>
                             { login.isAuthCodeRedirect
@@ -299,7 +308,7 @@ const view = (state, actions) => (props, children) => (context) => {
                             <br /><i>{login.email}</i>
                           </p>
                           <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
-                          <div style={{ textAlign: 'center' }}>
+                          <div>
                             <button type='submit'>Confirm Email</button>
                             <p>
                               If your code has expired or did not reach your inbox, we can resend it.
@@ -313,13 +322,13 @@ const view = (state, actions) => (props, children) => (context) => {
                   login.hasSubmittedEmail && !login.hasSubmittedAuthCode && login.hasResentAuthCode && <div>
                     {
                       login.isLoading
-                        ? <div><UISpinner /><p>Resending authentication code...</p></div>
+                        ? <div class={styles['loading']}><UISpinner /><p>Resending authentication code...</p></div>
                         : <div>
                           <p class={styles['info']}>
                             We sent a new verification code to<br /><i>{login.email}</i>
                           </p>
                           <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
-                          <div style={{ textAlign: 'center' }}>
+                          <div>
                             <button type='submit'>Confirm Email</button>
                             <p>
                               If your code has expired or did not reach your inbox, we can resend it.

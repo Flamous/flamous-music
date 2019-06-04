@@ -27,20 +27,18 @@
   display: inline-block;
 }
 
-.header {
-  text-align: center;
+.wrapper h1 {
+  margin-bottom: 1em;
+  margin-top: 0;
 }
-.header img {
-  height: 2.4rem;
+.wrapper h1 img {
+  max-height: 2.2rem;
   width: auto;
+  display: inline;
 }
-.header hr {
-  width: 5em;
-  opacity: 0.2;
-  margin: 1em auto 2em;
-}
+
 .top-row {
-  margin-bottom: 2.3em;
+  margin-top: .5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,20 +47,16 @@
 .top-row > * {
   padding: 1rem;
 }
-
-.main {
-  padding: 0 1em 1em;
+.loading {
+  text-align: center;
 }
-.main section {
-  max-width: 24rem;
+.main {
+  width: 100%;
+  max-width: 25rem;
+  padding: 0 1em 1em;
   margin: 0 auto;
 }
-.main p {
-  text-align: center;
-  margin-bottom: 3em;
-}
 .main input[type='password'] {
-  /* font-size: 1.6rem; */
   letter-spacing: 5px;
 }
 .main input {
@@ -79,61 +73,19 @@
 .input[type='password']:not(:placeholder-shown) {
   font-size: 1.2rem;
 }
-/* .input:placeholder-shown {
-  background-color: white;
-}
-.input:placeholder-shown:hover {
-  background-color: #fafafa;
-}
-.input {
-  position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: transparent;
-  z-index: 2;
-  border-radius: 0.4rem;
-  height: 2.5rem;
-  max-height: 2.5rem;
-  padding: 0 0 0 1.3rem;
-  display: flex;
-  width: 100%;
-  margin: 1rem auto;
-  max-width: 24rem;
-  box-shadow: 0 3px 13px -3px rgba(0, 0, 0, 0.14);
-}
-.input:focus {
-  border-color: #007AFF;
-  box-shadow: inset 0px 1px 3px 0 rgba(0, 0, 0, 0.14), 0 0 3px 0 #007AFF;
-} */
 
 .main input::placeholder {
   font-size: 1rem;
   letter-spacing: 0px;
 }
 
-.dots {
-  transform: translateY(-100%);
-  position: relative;
-  height: 2.5rem;
-  letter-spacing: 5px;
-  font-size: 1.3rem;
-  color: lightgrey;
-  width: 100%;
-  margin: -1rem auto 0;
-  padding-left: 1.3rem;
-  max-width: 24rem;
-  display: block;
-  pointer-events: none;
-  border: 1px solid transparent;
-  display: flex;
-  align-items: center;
-}
-
 .error {
-  color: red;
+  color: #FF2D55;
 }
 
 .hero-image {
   position: absolute;
+  text-align: center;
   top: 0;
   left: 0;
   width: 100%;
