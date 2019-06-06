@@ -3,13 +3,13 @@ import { h } from 'hyperapp'
 import UIPage from './UI/UIPage.js'
 import UILink from './UI/UILink'
 import styles from './Home.css'
-import logo from '~/assets/logo/brand_invert.png'
+import logo from '~/assets/logo/brand.svg'
 import UIHeader from './UI/UIHeader.js'
 import SongList from './SongList'
 import AlbumList from './AlbumList'
 import ArtistList from './ArtistList'
 import OpenGraph from './OpenGraph'
-import UISpinner from './UI/UISpinner.js';
+import UISpinner from './UI/UISpinner.js'
 
 let songData = [
   {
@@ -109,20 +109,21 @@ const Home = (props) => (context) => {
           start: <img class={styles['logo']} src={logo} />,
           end: isAuthenticated
             ? <div>
-            <UILink to='/profile' class='button white' style={{ color: 'black', fontWeight: 'bold' }}>{ cognitoUser.attributes.nickname }</UILink>            
-          </div>
-          : <div>
-            <UILink to='/login' class='button white' style={{ color: 'black', fontWeight: 'bold' }}>Login</UILink>
-            <UILink to='/signup' class='button white' style={{ fontWeight: 'bold' }}>Sign Up</UILink>
-          </div>
+              <UILink to='/profile' class='button white' style={{ color: 'black', fontWeight: 'bold' }}>{ cognitoUser.attributes.nickname }</UILink>
+            </div>
+            : <div>
+              <UILink to='/login' class='button white' style={{ color: 'black', fontWeight: 'bold' }}>Login</UILink>
+              <UILink to='/signup' class='button white' style={{ fontWeight: 'bold' }}>Sign Up</UILink>
+            </div>
         }}
-        title={<div style={{ paddingBottom: '1rem', paddingTop: '1rem' }}>Explore free<br />high-quality music</div>}
+        title={<div style={{ paddingBottom: '1rem', paddingTop: '1rem' }}>Explore</div>}
       />
       <main class={styles['main']}>
         <section class='centered'>
           <h2>
             Featured Songs
           </h2>
+          <UISpinner />
           {
             isLoadingFeatured
               ? <UISpinner />
