@@ -18,8 +18,23 @@ for (let i = 0; i < 12; i++) {
 }
 
 const UISpinner = (props) => {
+  function makeVisible (element) {
+    window.requestAnimationFrame(function frame () { window.requestAnimationFrame(function frame2 () { element.style.opacity = '1' }) })
+  }
+  function hide (element, done) {
+    element.addEventListener('transitionend', function end () {
+      console.log('here')
+      done()
+    })
+    element.style.opacity = '0'
+  }
   return (
-    <div {...props} className={`${(props.className || '')} ${styles['ui-spinner']}`}>
+    <div
+      oncreate={makeVisible}
+      onremove={hide}
+      {...props}
+      className={`${(props.className || '')} ${styles['ui-spinner']}`}
+    >
       {bars}
     </div>
   )
