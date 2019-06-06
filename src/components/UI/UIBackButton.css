@@ -18,9 +18,6 @@
 .text {
   transform: translateY(1px);
 }
-.text span {
-  vertical-align: -moz-middle-with-baseline;
-}
 
 @media (pointer: fine) {
   .back-button:hover {
