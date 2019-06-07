@@ -22,6 +22,8 @@ import './config'
 import './global.css'
 import './normalize.css'
 
+import { Howl } from 'howler'
+
 import('./long-press-event.js').then((what) => {})
 let Routes = import('./components/Routes.js')
 
@@ -40,10 +42,7 @@ const app = withContext(_app)
 
 const flamous = app(
   {
-    player: {
-      isPlaying: false,
-      audio: document.getElementById('my-audio')
-    },
+    isPlaying: false,
     currentSongData: {},
     isLoadingFeatured: true,
     Routes: null,
@@ -88,13 +87,13 @@ const flamous = app(
           authMode: 'AWS_IAM'
         })
 
+        actions.setPlayingContext({
+          songList: featuredData.songs
+        })
+
         actions.setState({
-          currentSongData: featuredData.songs[0],
           featured: featuredData,
-          isLoadingFeatured: false,
-          player: {
-            audio: document.getElementById('my-audio')
-          }
+          isLoadingFeatured: false
         })
       } catch (error) {
         console.error('Flamous: Could not load featured data --> ', error)
@@ -115,39 +114,50 @@ const flamous = app(
         initialLoad: boolean
       }
     },
+    setPlayingContext: (options) => (state) => {
+      let { songList, play: indexToPlay } = options
+      let { auth: { s3BasePath } } = state
+      let songToPlay = songList[indexToPlay || 0]
+      let audioUrl = `${s3BasePath}/${songToPlay.audioSource}`
+
+      let strings = songToPlay.audioSource.split('/')
+      let imageUrl = `${s3BasePath}/${strings[1]}/${strings[2]}/cover`
+      console.log(imageUrl)
+
+      let audio = new Howl({
+        src: audioUrl,
+        format: ['mp3'],
+        html5: true
+      })
+
+      if (typeof indexToPlay !== 'undefined') {
+        audio.play()
+      }
+
+      return {
+        audio,
+        imageUrl,
+        isPlaying: typeof indexToPlay !== 'undefined',
+        currentSongData: songToPlay
+      }
+    },
+    togglePlay: () => (state, actions) => {
+      if (state.isPlaying) actions.pause()
+      else actions.play()
+    },
     play: (index) => (state) => {
-      let song = state.featured.songs[index]
+      let { audio } = state
+      audio.play()
 
-      state.player.audio.src = `${state.auth.s3BasePath}/${(song && song.audioSource) || state.currentSongData.audioSource}`
-      state.player.audio.play()
-
-      if (song) {
-        return {
-          currentSongData: {
-            ...song,
-            index
-          },
-          player: {
-            ...state.player,
-            isPlaying: true
-          }
-        }
-      } else {
-        return {
-          player: {
-            ...state.player,
-            isPlaying: true
-          }
-        }
+      return {
+        isPlaying: true
       }
     },
     pause: () => (state) => {
-      state.player.audio.pause()
+      let { audio } = state
+      audio.pause()
       return {
-        player: {
-          ...state.player,
-          isPlaying: false
-        }
+        isPlaying: false
       }
     },
     new: {
