@@ -283,7 +283,7 @@ const view = (state, actions) => (props, children) => (context) => {
                           <input aria-label='Password' required autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} placeholder='Password' type='password' />
 
                           <div>
-                            <button type='submit'>Let's sign up</button>
+                            <button type='submit'>Let's go<UIIcon icon='arrow-right' /></button>
                             {/* <br />
                             <UILink class='button white' replace to='/login'>or Log In</UILink> */}
                           </div>
