@@ -20,6 +20,7 @@
     "@hyperapp/router": "^0.7.2",
     "body-scroll-lock": "^2.6.1",
     "classcat": "^3.2.5",
+    "howler": "^2.1.2",
     "hyperapp": "^1.2.9",
     "hyperapp-context": "^1.1.0",
     "long-press-event": "^1.0.5",
