@@ -84,7 +84,7 @@ const view = (state, actions) => (props, children) => (context) => {
     } catch (error) {
       console.error(error)
     }
-   
+
     let songs = [...album.songs, newSong]
 
     newActions.album.update({
@@ -95,7 +95,7 @@ const view = (state, actions) => (props, children) => (context) => {
   function uploadCoverImage (event) {
     let file = event.target.files && event.target.files[0]
     let coverImagePath = `albums/${albumUrlParam}/coverImage`
-    
+
     /** S3 path
      *  Amplify's `Storage.put` "protected" level automatically adds the Cognito id of the user that uploaded the file to the path above. The `key` we get back is without the id, but in order to correctly build the image path (the cognito id from the uploader is part of it) we need to prepend this id to the saved key in dynamoDB. Otherwise other users can't build the image path, thus seing a broken image.
      * TODO: Revisit the general Storage situation before launch. Maybe rename "protected" to something else.
@@ -110,12 +110,12 @@ const view = (state, actions) => (props, children) => (context) => {
         console.info(`Uploaded ${(progress.loaded / progress.total) * 100}%`)
       }
     })
-    .then(function handleCoverImage (result) {
-      newActions.album.update({
-        imageSource: prependCognitoUserId(result.key),
-        outerProgress: undefined
+      .then(function handleCoverImage (result) {
+        newActions.album.update({
+          imageSource: prependCognitoUserId(result.key),
+          outerProgress: undefined
+        })
       })
-    })
   }
 
   function uploadAudioFile (event) {
@@ -133,21 +133,21 @@ const view = (state, actions) => (props, children) => (context) => {
         console.info(`Uploaded ${(progress.loaded / progress.total) * 100}%`)
       }
     })
-    .then(function handleSongFile (result) {
-      let songs = album.songs.map(function filterSong (song) {
-        if (song.songId === songId) {
-          song.audioSource = prependCognitoUserId(result.key)
-        }
+      .then(function handleSongFile (result) {
+        let songs = album.songs.map(function filterSong (song) {
+          if (song.songId === songId) {
+            song.audioSource = prependCognitoUserId(result.key)
+          }
 
-        return song
-      })
+          return song
+        })
 
-      newActions.album.update({
-        songs,
-        outerProgress2: undefined
+        newActions.album.update({
+          songs,
+          outerProgress2: undefined
+        })
       })
-    })
-    .catch(console.error)
+      .catch(console.error)
   }
 
   function removeSong (index) {
@@ -171,36 +171,36 @@ const view = (state, actions) => (props, children) => (context) => {
           artistId
         }
       })
-      .then(function albumResult (result) {
-        newActions.album.update({
-          ...result
-        })
+        .then(function albumResult (result) {
+          newActions.album.update({
+            ...result
+          })
 
-        return gqlApi({
-          operation: getSongList,
-          parameters: {
-            albumId: albumUrlParam
-          }
+          return gqlApi({
+            operation: getSongList,
+            parameters: {
+              albumId: albumUrlParam
+            }
+          })
         })
-      })
-      .then(function songResults (response) {
-        newActions.album.update({
-          songs: response
+        .then(function songResults (response) {
+          newActions.album.update({
+            songs: response
+          })
         })
-      })
-      .catch(console.error)
+        .catch(console.error)
     } else {
       gqlApi({
         operation: createNewAlbum,
         parameters: {
-          title: "Untitled",
+          title: 'Untitled',
           artistId
         }
       })
-      .then(function redirect (result) {
-        window.history.replaceState({}, '', `/album-editor/${result.albumId}`)
-      })
-      .catch(console.error)
+        .then(function redirect (result) {
+          window.history.replaceState({}, '', `/album-editor/${result.albumId}`)
+        })
+        .catch(console.error)
     }
   }
 
@@ -217,7 +217,7 @@ const view = (state, actions) => (props, children) => (context) => {
         }
       }
     })
-    .catch(console.error)
+      .catch(console.error)
     newActions.album.update({
       activeEdit: -1,
       isSavingActiveSong: false
@@ -236,7 +236,7 @@ const view = (state, actions) => (props, children) => (context) => {
         }
       }
     })
-    .catch(console.error)
+      .catch(console.error)
   }
 
   return <div
@@ -253,7 +253,7 @@ const view = (state, actions) => (props, children) => (context) => {
       title='Album Editor'
       nav={{
         start: <UILink back class='button white'>Close</UILink>,
-        end: <button onclick={saveAlbumAndExit} class='white' style={{ fontWeight: 'bold' }}>Save &amp; Exit</button>
+        end: <button onclick={saveAlbumAndExit} class='white' style={{ fontWeight: 'bold' }}>Save changes</button>
       }}
     />
 
@@ -262,13 +262,13 @@ const view = (state, actions) => (props, children) => (context) => {
         <div class={cc(['row', styles['input-row']])}>
           <div style={{ display: 'flex', width: '100%', alignItems: 'center' }}>
             <div class={styles['cover-image']}>
-              <img src={album.imageSource ? `${s3BasePath}/${album.imageSource}`: albumPlaceholder} />
+              <img src={album.imageSource ? `${s3BasePath}/${album.imageSource}` : albumPlaceholder} />
               {
                 !album.imageSource && <label for='cover-image' class={cc([styles['cover-image-upload'], 'button', 'white'])}>
-                <UIIcon icon='image' />
-                Upload<br />Image
-                {typeof outerProgress !== 'undefined' ? <span><br />{`${outerProgress}%`}</span> : ''}
-              </label>
+                  <UIIcon icon='image' />
+                  Upload<br />Image
+                  {typeof outerProgress !== 'undefined' ? <span><br />{`${outerProgress}%`}</span> : ''}
+                </label>
               }
             </div>
             <div class={styles['album-title']}>
@@ -287,55 +287,54 @@ const view = (state, actions) => (props, children) => (context) => {
                 album.songs && album.songs.length > 0 && album.songs.map((song, index) => {
                   if (index === activeEdit) {
                     return <li key={song.songId}>
-                    <div class={styles['aside']}>
-                      <span class={styles['song-number']}>{index + 1}</span>
-                      <button onclick={
-                        event => {
-                          newActions.album.update({
-                            isSavingActiveSong: true
-                          })
+                      <div class={styles['aside']}>
+                        <span class={styles['song-number']}>{index + 1}</span>
+                        <button onclick={
+                          event => {
+                            newActions.album.update({
+                              isSavingActiveSong: true
+                            })
 
-                          saveSong(index)
-                        }
-                      }><UIIcon icon='check' /></button>
-                    </div>
-                    <div class={styles['song-data']}>
-                      <input id={`song-${song.songId}`} class={styles['song-title']} type='text' oninput={(event) => handleInput(event, index)} value={song.title} placeholder='Type song title ...' />
-                      <div>
-                        {typeof outerProgress2 !== 'undefined'}
-                        {
-                          typeof outerProgress2 !== 'undefined'
-                          ? <span>Uploading... {`${outerProgress2}%`}</span>
-                          : [
-                            <span>Audio: </span>,
-                            <label for={`audio-${song.songId}`} class={cc([styles['audio-input'], 'button', 'white'])}>
-                            Upload File
-                            </label>,
-                            <input oninput={uploadAudioFile} data-song-id={song.songId} id={`audio-${song.songId}`} class={styles['audio-input']} type='file' accept='audio/*' />
-                          ]
-                        }
+                            saveSong(index)
+                          }
+                        }><UIIcon icon='check' /></button>
                       </div>
-                    </div>
-                  </li>
+                      <div class={styles['song-data']}>
+                        <input id={`song-${song.songId}`} class={styles['song-title']} type='text' oninput={(event) => handleInput(event, index)} value={song.title} placeholder='Type song title ...' />
+                        <div>
+                          {typeof outerProgress2 !== 'undefined'}
+                          {
+                            typeof outerProgress2 !== 'undefined'
+                              ? <span>Uploading... {`${outerProgress2}%`}</span>
+                              : [
+                                <span>Audio: </span>,
+                                <label for={`audio-${song.songId}`} class={cc([styles['audio-input'], 'button', 'white'])}>
+                            Upload File
+                                </label>,
+                                <input oninput={uploadAudioFile} data-song-id={song.songId} id={`audio-${song.songId}`} class={styles['audio-input']} type='file' accept='audio/*' />
+                              ]
+                          }
+                        </div>
+                      </div>
+                    </li>
                   } else {
                     return <li key={song.songId} class={cc([styles['normal'], { [styles['inactive']]: activeEdit !== -1 }])}>
-                    <div class={styles['aside']}>
-                      <span class={styles['song-number']}>{index + 1}</span>
-                      <button onclick={event => {
-                        newActions.album.update({
-                          activeEdit: index
-                        })
-                      }} class='white'><UIIcon icon='edit-3' /></button>
-                    </div>
-                    <div class={styles['song-data']}>
-                      <input disabled id={`song-${song.songId}`} class={styles['song-title']} type='text' oninput={(event) => handleInput(event, index)} value={song.title} placeholder='Type song title ...' />
-                      <div>
-                        <audio controls src={song.audioSource && `${s3BasePath}/${song.audioSource}`}></audio>
+                      <div class={styles['aside']}>
+                        <span class={styles['song-number']}>{index + 1}</span>
+                        <button onclick={event => {
+                          newActions.album.update({
+                            activeEdit: index
+                          })
+                        }} class='white'><UIIcon icon='edit-3' /></button>
                       </div>
-                    </div>
-                  </li>
+                      <div class={styles['song-data']}>
+                        <input disabled id={`song-${song.songId}`} class={styles['song-title']} type='text' oninput={(event) => handleInput(event, index)} value={song.title} placeholder='Type song title ...' />
+                        <div>
+                          <audio controls src={song.audioSource && `${s3BasePath}/${song.audioSource}`} />
+                        </div>
+                      </div>
+                    </li>
                   }
-                  
                 })
               }
             </div>
