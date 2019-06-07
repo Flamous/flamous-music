@@ -23,7 +23,6 @@ const UISpinner = (props) => {
   }
   function hide (element, done) {
     element.addEventListener('transitionend', function end () {
-      console.log('here')
       done()
     })
     element.style.opacity = '0'
