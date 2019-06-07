@@ -16,7 +16,7 @@ const HeaderNav = (props) => {
   let { nav = {}, title, isHeaderTitleHidden, noDynamicTitle } = props
   let { start, middle, end } = nav
 
-  return <div class={styles['header-nav']}>
+  return <div style={cc({ [styles['header-title-hidden']]: isHeaderTitleHidden })} class={cc([styles['header-nav'], { [styles['header-title-hidden']]: isHeaderTitleHidden }])}>
     <div class={styles['content']}>
 
       <div class={styles['container']}>
@@ -26,7 +26,7 @@ const HeaderNav = (props) => {
       </div>
 
       <div class={styles['container']}>
-        <span class={cc([styles['item'], { [styles['header-title-hidden']]: isHeaderTitleHidden }])}>
+        <span class={cc([styles['item']])}>
           {
             noDynamicTitle && <span>{middle && middle}</span>
           }
@@ -70,7 +70,7 @@ const actions = {
     if ('IntersectionObserver' in window) {
       observer = new window.IntersectionObserver(observerChange, {
         threshold: [threshold, 0.01],
-        rootMargin: '-75px 0px 0px 0px'
+        rootMargin: '-40px 0px 0px 0px'
       })
       observer.observe(elem)
     }

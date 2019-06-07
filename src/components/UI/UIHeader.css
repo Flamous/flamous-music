@@ -6,6 +6,7 @@
   background-color: rgba(252, 252, 252, 1);
   z-index: 1001;
   stroke: #007aff;
+  transition: background-color 200ms, box-shadow 200ms;
 }
 :global(.not-standalone) .header-nav {
   position: fixed;
@@ -68,14 +69,19 @@
   right: 0;
   top: 0;
 }
-.header-nav .header-title-hidden .dynamic-title {
+.header-nav.header-title-hidden {
+  transition: background-color 1000ms;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: rgba(0, 0, 0, .1) 0 0 1px, rgba(0, 0, 0, .1) 0 0 3px
+}
+.header-nav.header-title-hidden .dynamic-title {
   transition: opacity 200ms 200ms;
   opacity: 1;
 }
 .header-nav .item .middle {
   transition: opacity 200ms 200ms;
 }
-.header-nav .header-title-hidden .middle {
+.header-nav.header-title-hidden .middle {
   transition: opacity 200ms 0ms;
   opacity: 0;
 }
