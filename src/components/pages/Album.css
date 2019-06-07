@@ -21,8 +21,9 @@
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow:
-    inset rgba(0, 0, 0, 0.2) 0 0 2px 0,
-    rgba(0, 0, 0, .2) 0 8px 24px -8px;
+   rgba(0, 0, 0, 0.1) 0 0 2px 0,
+   rgba(0, 0, 0, .15) 0 3px 9px,
+   rgba(0, 0, 0, .1) 0 7px 24px;
 }
 .header-infos {
   flex-grow: 1;
