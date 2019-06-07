@@ -17,7 +17,7 @@ function buildActions (song) {
       },
       { text: 'Go to Album',
         icon: 'disc',
-        action: function goToArtist({ close }) {
+        action: function goToArtist ({ close }) {
           window.history.pushState({}, '', `/albums/${albumId}`)
           close()
         }
@@ -105,7 +105,10 @@ let view = (props, children) => (state) => (context) => {
   return <ul class={styles['song-list']}>
     { songs.length > 0 && songs.map((song, index) => {
       return <li onclick={(event) => {
-        context.actions.play(index)
+        context.actions.setPlayingContext({
+          songList: songs,
+          play: index
+        })
       }}>
         <div
           class={styles['song-item']}
