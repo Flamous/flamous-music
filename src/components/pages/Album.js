@@ -11,7 +11,7 @@ import SongList from '../SongList'
 import cc from 'classcat'
 import OpenGraph from '../OpenGraph'
 import gqlApi from '../functions/gqlApi'
-import { getAlbum, getSongList } from '../../graphql/queries';
+import { getAlbum, getSongList } from '../../graphql/queries'
 
 let songData = [
   {
@@ -41,7 +41,7 @@ let songData = [
   }
 ]
 
-let View = (props, children) => (state, actions)  => {
+let View = (props, children) => (state, actions) => {
   let { shareAPI, page, auth: { artistId, s3BasePath, isLoadingUser } } = state
   let albumId = props.match.params && props.match.params.albumId
   let { state: { songs = [], album = {} } } = page
@@ -52,13 +52,14 @@ let View = (props, children) => (state, actions)  => {
       parameters: {
         albumId,
         artistId
-      }
+      },
+      authMode: 'AWS_IAM'
     })
-    .then((result) => {
-      page.put({
-        album: result
-      })
-    }).catch(console.error)
+      .then((result) => {
+        page.put({
+          album: result
+        })
+      }).catch(console.error)
 
     gqlApi({
       operation: getSongList,
@@ -66,11 +67,11 @@ let View = (props, children) => (state, actions)  => {
         albumId
       }
     })
-    .then((result) => {
-      page.put({
-        songs: result
-      })
-    }).catch(console.error)
+      .then((result) => {
+        page.put({
+          songs: result
+        })
+      }).catch(console.error)
   }
 
   return (

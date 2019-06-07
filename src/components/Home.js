@@ -123,7 +123,6 @@ const Home = (props) => (context) => {
           <h2>
             Featured Songs
           </h2>
-          <UISpinner />
           {
             isLoadingFeatured
               ? <UISpinner />

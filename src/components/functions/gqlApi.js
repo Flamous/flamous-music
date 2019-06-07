@@ -1,4 +1,4 @@
-import API, { graphqlOperation } from '@aws-amplify/api'
+import API from '@aws-amplify/api'
 
 export default function gqlApi (options) {
   let { operation, parameters = {}, authMode = 'AMAZON_COGNITO_USER_POOLS' } = options
@@ -8,13 +8,13 @@ export default function gqlApi (options) {
       variables: parameters,
       authMode
     })
-    .then((response) => {
-      let unwrappedData = response.data[Object.keys(response.data)[0]]
-      resolve(unwrappedData)
-    })
-    .catch((error) => {
-      console.warn('Flamous: API call not successful --> ', error)
-      reject(error)
-    })
+      .then((response) => {
+        let unwrappedData = response.data[Object.keys(response.data)[0]]
+        resolve(unwrappedData)
+      })
+      .catch((error) => {
+        console.warn('Flamous: API call not successful --> ', error)
+        reject(error)
+      })
   })
 }

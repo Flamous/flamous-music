@@ -168,7 +168,7 @@ const flamous = app(
     setContext(context)
     return <div class={device.isStandalone ? 'standalone' : 'not-standalone'} style={{ display: 'contents' }}>
       <UITabBar />
-      <audio id='my-audio'></audio>
+      <audio id='my-audio' />
       { state.Routes && <state.Routes /> }
       {
         state.actionMenu.isOpen && <UIActionMenu {...state.actionMenu} />
