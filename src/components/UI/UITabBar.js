@@ -56,8 +56,8 @@ const UITabBar = (props, children) => (context) => {
       hasFired = false
     }}
   >
+    {/* <img src={imageUrl || placeholderImage} class={styles['cover-image']} /> */}
     <UILink to='/player' class={styles['top-row']}>
-      <img src={imageUrl || placeholderImage} class={styles['cover-image']} />
       <span class={styles['song-title']}>{title}</span>
       <button class='white' onclick={(event) => { event.stopPropagation(); event.preventDefault(); togglePlay() }}>
         <UIIcon icon={isPlaying ? 'pause' : 'play'} />
