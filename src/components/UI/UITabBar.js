@@ -14,10 +14,10 @@ let YDelta = 0
 let hasFired = false
 
 const UITabBar = (props, children) => (context) => {
-  let { actions: { views: { setActive } }, views: { activeView }, currentSongData = {}, auth: { s3BasePath } } = context
+  let { actions: { togglePlay, views: { setActive } }, views: { activeView }, currentSongData = {}, auth: { s3BasePath }, isPlaying } = context
 
-  let { imageSource } = currentSongData
-  let imagePath = imageSource ? `${s3BasePath}/${imageSource}` : null
+  let { imageSource, title } = currentSongData
+  let imageUrl = imageSource ? `${s3BasePath}/${imageSource}` : null
 
   const SetActive = (props, children) => {
     let { viewName } = props
@@ -56,24 +56,33 @@ const UITabBar = (props, children) => (context) => {
       hasFired = false
     }}
   >
-    <SetActive viewName='home' class={cc([styles['item'], { [styles['active']]: activeView === 'home' }])}>
-      <UIIcon icon='music' />
-      <span>Explore</span>
-    </SetActive>
-
-    <SetActive viewName='library' class={cc([styles['item'], { [styles['active']]: activeView === 'library' }])}>
-      <img class={styles['icon']} alt='Library Icon' src={activeView === 'library' ? libraryBlueSVG : librarySVG} />
-      <span>Library</span>
-    </SetActive>
-
-    <SetActive viewName='profile' class={cc([styles['item'], { [styles['active']]: activeView === 'profile' }])}>
-      <UIIcon icon='user' />
-      <span>Profile</span>
-    </SetActive>
-
-    <UILink to='/player' class={cc([styles['item'], styles['player']])}>
-      <img alt='Cover Image' src={imagePath || placeholderImage} />
+    <UILink to='/player' class={styles['top-row']}>
+      <img src={imageUrl || placeholderImage} class={styles['cover-image']} />
+      <span class={styles['song-title']}>{title}</span>
+      <button class='white' onclick={(event) => { event.stopPropagation(); event.preventDefault(); togglePlay() }}>
+        <UIIcon icon={isPlaying ? 'pause' : 'play'} />
+      </button>
+      <button class='white'>
+        <UIIcon icon='fast-forward' />
+      </button>
     </UILink>
+
+    <div class={styles['bottom-row']}>
+      <SetActive viewName='library' class={cc([styles['item'], { [styles['active']]: activeView === 'library' }])}>
+        <img class={styles['icon']} alt='Library Icon' src={activeView === 'library' ? libraryBlueSVG : librarySVG} />
+        <span>Library</span>
+      </SetActive>
+
+      <SetActive viewName='home' class={cc([styles['item'], { [styles['active']]: activeView === 'home' }])}>
+        <UIIcon icon='music' />
+        <span>Explore</span>
+      </SetActive>
+
+      <SetActive viewName='profile' class={cc([styles['item'], { [styles['active']]: activeView === 'profile' }])}>
+        <UIIcon icon='user' />
+        <span>Profile</span>
+      </SetActive>
+    </div>
   </nav>
 }
 
