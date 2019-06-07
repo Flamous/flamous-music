@@ -26,8 +26,8 @@ export const getSongList = `query getSongList ($albumId: ID!) {
   }
 }`
 
-export const getAlbum = `query getAlbum ($albumId: ID!, $artistId: ID!) {
-  getAlbum(albumId: $albumId, artistId: $artistId) {
+export const getAlbum = `query getAlbum ($albumId: ID!) {
+  getAlbum(albumId: $albumId) {
     title
     albumId
     artistId

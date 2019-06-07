@@ -42,7 +42,7 @@ let songData = [
 ]
 
 let View = (props, children) => (state, actions) => {
-  let { shareAPI, page, auth: { artistId, s3BasePath, isLoadingUser } } = state
+  let { shareAPI, page, auth: { s3BasePath, isLoadingUser } } = state
   let albumId = props.match.params && props.match.params.albumId
   let { state: { songs = [], album = {} } } = page
 
@@ -50,8 +50,7 @@ let View = (props, children) => (state, actions) => {
     gqlApi({
       operation: getAlbum,
       parameters: {
-        albumId,
-        artistId
+        albumId
       },
       authMode: 'AWS_IAM'
     })
@@ -65,7 +64,8 @@ let View = (props, children) => (state, actions) => {
       operation: getSongList,
       parameters: {
         albumId
-      }
+      },
+      authMode: 'AWS_IAM'
     })
       .then((result) => {
         page.put({
