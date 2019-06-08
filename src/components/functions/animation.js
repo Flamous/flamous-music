@@ -260,8 +260,8 @@ const slideUp = {
                     spring({
                       from: y,
                       to: bodyHeight,
-                      velocity: velocity,
-                      damping: 17,
+                      velocity: velocity + 100,
+                      damping: 14,
                       mass: 1,
                       stiffness: 110
                     }).start(handleY)
@@ -270,9 +270,9 @@ const slideUp = {
                       from: y,
                       to: 0,
                       velocity: velocity,
-                      damping: 25,
-                      mass: 1.1,
-                      stiffness: 200
+                      damping: 18,
+                      mass: 1,
+                      stiffness: 110
                     }).start(handleY)
                   }
                 })
