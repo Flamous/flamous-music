@@ -70,37 +70,43 @@ const view = (state, actions) => (props) => (context) => {
         </UILink>
       </header>
 
+      <div class={styles['song-meta-wrapper']}>
+        <div class={styles['cover-image']}>
+          <img src={imageUrl || placeholder} />
+        </div>
+      </div>
+
       <main class={styles['main']}>
-        <div class={styles['song-meta-wrapper']}>
-          <div class={styles['cover-image']}>
-            <img src={imageUrl || placeholder} />
-          </div>
+
+        <div>
           <div class={styles['song-infos']}>
             <span class={styles['title']}>{title}</span><br />
             <span class={styles['artists']}>Artists 1, Artist 2</span>
           </div>
-        </div>
-        <div class={styles['scrubber']}>
-          <span>
-          00:00
-          </span>
-          <div class={styles['slider']}>
-            <span class={styles['thumb']} />
+          <div class={styles['scrubber']}>
+            <div class={styles['slider']}>
+              <span class={styles['thumb']} />
+            </div>
+            <div class={styles['times']}>
+              <span>
+                00:00
+              </span>
+              <span>
+                00:00
+              </span>
+            </div>
           </div>
-          <span>
-          00:00
-          </span>
-        </div>
-        <div class={styles['controls']}>
-          <button class='white'>
-            <UIIcon height='36' width='36' icon='rewind' />
-          </button>
-          <button onclick={() => togglePlay()} class={cc(['white', styles['play']])}>
-            <UIIcon height='56' width='56' icon={isPlaying ? 'pause' : 'play'} />
-          </button>
-          <button class='white'>
-            <UIIcon height='36' width='36' icon='fast-forward' />
-          </button>
+          <div class={styles['controls']}>
+            <button class='white'>
+              <UIIcon height='36' width='36' icon='rewind' />
+            </button>
+            <button onclick={() => togglePlay()} class={cc(['white', styles['play']])}>
+              <UIIcon height='56' width='56' icon={isPlaying ? 'pause' : 'play'} />
+            </button>
+            <button class='white'>
+              <UIIcon height='36' width='36' icon='fast-forward' />
+            </button>
+          </div>
         </div>
       </main>
 
