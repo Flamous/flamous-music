@@ -2,7 +2,6 @@
 import { h } from 'hyperapp'
 import UILink from './UILink'
 import styles from './UITabBar.css'
-import placeholderImage from '~/assets/song_placeholder.svg'
 import librarySVG from '~/assets/icons/library.svg'
 import libraryBlueSVG from '~/assets/icons/library_blue.svg'
 import UIIcon from './UIIcon'
@@ -14,10 +13,9 @@ let YDelta = 0
 let hasFired = false
 
 const UITabBar = (props, children) => (context) => {
-  let { actions: { togglePlay, views: { setActive } }, views: { activeView }, currentSongData = {}, auth: { s3BasePath }, isPlaying } = context
+  let { actions: { togglePlay, views: { setActive } }, views: { activeView }, currentSongData = {}, isPlaying } = context
 
-  let { imageSource, title } = currentSongData
-  let imageUrl = imageSource ? `${s3BasePath}/${imageSource}` : null
+  let { title } = currentSongData
 
   const SetActive = (props, children) => {
     let { viewName } = props
