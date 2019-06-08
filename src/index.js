@@ -121,8 +121,10 @@ const flamous = app(
       let audioUrl = `${s3BasePath}/${songToPlay.audioSource}`
 
       let strings = songToPlay.audioSource.split('/')
-      let imageUrl = `${s3BasePath}/${strings[1]}/${strings[2]}/cover`
-      console.log(imageUrl)
+      let imageUrl = `${s3BasePath}/${strings[0]}/${strings[1]}/${strings[2]}/coverImage`
+      // console.log('STINGS: ', strings)
+      // // let imageUrl = `${s3BasePath}/${imageUrl}`
+      // console.log(imageUrl)
 
       let audio = new Howl({
         src: audioUrl,
