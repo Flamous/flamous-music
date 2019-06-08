@@ -7,7 +7,6 @@ import UILink from '../UI/UILink'
 import styles from './Player.css'
 import cc from 'classcat'
 
-// import placeholder from '../../assets/song_placeholder.svg'
 import placeholder from '../../assets/song_placeholder.svg'
 
 const state = {
@@ -23,16 +22,15 @@ let matchedPreviously = false
 const view = (state, actions) => (props) => (context) => {
   let { animation: { slideOut, start: startAnimation } } = actions
   let { isMatch } = props
-  let { auth: { s3BasePath } } = context
+  let { isPlaying, imageUrl } = context
   let isSwipe = window.history.state && window.history.state.isSwipe
   let initialLoad = context.initialLoad
 
-  let { title, imageSource } = context.currentSongData || {}
-  let { isPlaying } = context.player
+  let { title } = context.currentSongData || {}
 
   function togglePlay (index) {
     isPlaying && context.actions.pause()
-    !isPlaying && context.actions.play(index)
+    !isPlaying && context.actions.play()
   }
 
   function onRouteMatch (element) {
@@ -70,20 +68,16 @@ const view = (state, actions) => (props) => (context) => {
         <UILink back class={styles['close']}>
           <UIIcon height='48' width='48' icon='chevron-down' />
         </UILink>
-        <h1>
-        Playing
-        </h1>
-        {/* <span>from [Playlist]</span> */}
       </header>
 
       <main class={styles['main']}>
         <div class={styles['song-meta-wrapper']}>
           <div class={styles['cover-image']}>
-            <img src={imageSource ? `${s3BasePath}/${imageSource}` : placeholder} />
+            <img src={imageUrl || placeholder} />
           </div>
           <div class={styles['song-infos']}>
             <span class={styles['title']}>{title}</span><br />
-            {/* <span class={styles['artists']}>Artists 1, Artist 2</span> */}
+            <span class={styles['artists']}>Artists 1, Artist 2</span>
           </div>
         </div>
         <div class={styles['scrubber']}>
@@ -102,7 +96,7 @@ const view = (state, actions) => (props) => (context) => {
             <UIIcon height='36' width='36' icon='rewind' />
           </button>
           <button onclick={() => togglePlay()} class={cc(['white', styles['play']])}>
-            <UIIcon height='48' width='48' icon={isPlaying ? 'pause' : 'play'} />
+            <UIIcon height='56' width='56' icon={isPlaying ? 'pause' : 'play'} />
           </button>
           <button class='white'>
             <UIIcon height='36' width='36' icon='fast-forward' />

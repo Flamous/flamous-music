@@ -63,11 +63,12 @@
 }
 
 .main {
-  padding: 1em 1em 0;
+  padding: 1em 2em;
+  height: 100%;
 }
 .cover-image {
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   margin: 0 auto;
   box-shadow:
     rgba(0, 0, 0, 0.1) 0 12px 32px 0px,
@@ -81,17 +82,18 @@
   display: block;
 }
 .song-infos {
-  text-align: center;
-  margin-top: 2em;
+  margin: 1.5rem 0;
+  box-shadow: rgba(0, 0, 0, 0.08) 0 0 2px, rgba(0, 0, 0, 0.1) 0 2px 3px;
 }
 .song-infos .title {
   font-weight: bold;
+  font-size: 1.5rem
 }
 .song-infos .artists {
   color: rgba(0, 0, 0, 0.5);
 }
 .scrubber {
-  margin: .5em -0.3em 1rem;
+  margin: .5em -.75em 1rem;
   display: flex;
   align-items: center;
 }
