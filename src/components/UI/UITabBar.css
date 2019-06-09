@@ -6,11 +6,10 @@
   width: 100%;
   flex-direction: column;
   z-index: 1090;
-  /* box-shadow: #848484 0 0 2px; */
   justify-content: center;
   user-select: none;
   overscroll-behavior: contain;
-  box-shadow: rgba(0, 0, 0, .1) 0 0 1px, rgba(0, 0, 0, .1) 0 0 3px;
+  box-shadow: #f0f0f0 0 -1px, rgba(0, 0, 0, .04) 0 0 6px, rgba(0, 0, 0, .04) 0 0 12px;
 }
 
 .top-row {
@@ -20,7 +19,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background-color: #fafafa;
+  background-color: #fbfbfb;
   font-size: .9rem;
 }
 .top-row > * {
