@@ -71,7 +71,7 @@
 }
 .header-nav.header-title-hidden {
   transition: background-color 1000ms;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.975);
   box-shadow: rgba(0, 0, 0, .1) 0 0 1px, rgba(0, 0, 0, .1) 0 0 3px
 }
 .header-nav.header-title-hidden .dynamic-title {
