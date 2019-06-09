@@ -1,7 +1,7 @@
 .album-list {
   list-style-type: none;
   padding: 0;
-  margin: 1rem -0.75rem;
+  margin: 1rem -0.5rem;
   display: flex;
   flex-wrap: wrap;
   font-size: 0.9375rem;
@@ -20,7 +20,7 @@
   color: black;
 }
 .album-item .cover-image {
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   overflow: hidden;
 }
 .album-item:active {
