@@ -40,8 +40,18 @@ window.addEventListener('beforeinstallprompt', function (event) {
 
 const app = withContext(_app)
 
+// Inspired by https://www.codespeedy.com/convert-seconds-to-hh-mm-ss-format-in-javascript/
+function secondsToFormattedString (totalSeconds) {
+  // let hours = Math.floor(totalSeconds / 3600)
+  totalSeconds %= 3600
+  let minutes = Math.floor(totalSeconds / 60) + ''
+  let seconds = Math.floor(totalSeconds % 60) + ''
+  return `${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`
+}
+
 const flamous = app(
   {
+    currentTime: 0,
     isPlaying: false,
     currentSongData: {},
     isLoadingFeatured: true,
@@ -114,7 +124,7 @@ const flamous = app(
         initialLoad: boolean
       }
     },
-    setPlayingContext: (options) => (state) => {
+    setPlayingContext: (options) => (state, actions) => {
       let { songList, play: indexToPlay } = options
       let { auth: { s3BasePath } } = state
       let songToPlay = songList[indexToPlay || 0]
@@ -122,14 +132,29 @@ const flamous = app(
 
       let strings = songToPlay.audioSource.split('/')
       let imageUrl = `${s3BasePath}/${strings[0]}/${strings[1]}/${strings[2]}/coverImage`
-      // console.log('STINGS: ', strings)
-      // // let imageUrl = `${s3BasePath}/${imageUrl}`
-      // console.log(imageUrl)
 
+      let seekInterval
       let audio = new Howl({
         src: audioUrl,
         format: ['mp3'],
-        html5: true
+        html5: true,
+        onplay: function onplay () {
+          let duration = audio.duration()
+          actions.setState({ duration: secondsToFormattedString(duration) })
+          seekInterval = window.setInterval(function updateSeekPosition () {
+            let currentSeek = audio.seek()
+            actions.setState({
+              currentTime: secondsToFormattedString(Math.round(currentSeek)),
+              songProgress: currentSeek / duration
+            })
+          }, 333)
+        },
+        onpause: function clearSeekInterval () {
+          window.clearInterval(seekInterval)
+        },
+        onend: function clearSeekInterval () {
+          window.clearInterval(seekInterval)
+        }
       })
 
       if (typeof indexToPlay !== 'undefined') {
@@ -147,7 +172,7 @@ const flamous = app(
       if (state.isPlaying) actions.pause()
       else actions.play()
     },
-    play: (index) => (state) => {
+    play: (index) => (state, actions) => {
       let { audio } = state
       audio.play()
 
