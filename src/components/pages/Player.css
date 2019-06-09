@@ -83,6 +83,7 @@
 }
 .cover-image {
   max-width: 350px;
+  width: 100%;
   margin: 0 auto;
   box-shadow:
     rgba(0, 0, 0, 0.1) 0 12px 32px 0px,
