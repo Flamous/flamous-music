@@ -149,6 +149,12 @@ const flamous = app(
     },
     setPlayingContext: (options = {}) => (state, actions) => {
       let { play: indexToPlay } = options
+      let { audio } = state
+      if (audio) {
+        audio.pause()
+        audio.unload()
+      }
+
       actions.initNewSong(options)
 
       if (typeof indexToPlay !== 'undefined') {
