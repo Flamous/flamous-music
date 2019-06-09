@@ -154,6 +154,11 @@ const flamous = app(
         },
         onend: function clearSeekInterval () {
           window.clearInterval(seekInterval)
+        },
+        onload: () => {
+          actions.setState({
+            duration: secondsToFormattedString(audio.duration())
+          })
         }
       })
 
@@ -163,6 +168,8 @@ const flamous = app(
 
       return {
         audio,
+        songProgress: 0,
+        currentTime: secondsToFormattedString(0),
         imageUrl,
         isPlaying: typeof indexToPlay !== 'undefined',
         currentSongData: songToPlay
