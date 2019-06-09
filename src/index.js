@@ -97,10 +97,12 @@ const flamous = app(
           authMode: 'AWS_IAM'
         })
 
+        actions.initMediaSession()
+
         actions.setPlayingContext({
           songList: featuredData.songs
         })
-
+        actions.updateMediaSession()
         actions.setState({
           featured: featuredData,
           isLoadingFeatured: false
@@ -124,7 +126,36 @@ const flamous = app(
         initialLoad: boolean
       }
     },
-    setPlayingContext: (options) => (state, actions) => {
+    initMediaSession: () => (state, actions) => {
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', actions.play)
+        navigator.mediaSession.setActionHandler('pause', actions.pause)
+        navigator.mediaSession.setActionHandler('previoustrack', function () { /* Code excerpted. */ })
+        navigator.mediaSession.setActionHandler('nexttrack', function () { /* Code excerpted. */ })
+      }
+    },
+    updateMediaSession: () => (state, actions) => {
+      let { currentSongData } = state
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new window.MediaMetadata({
+          title: currentSongData.title,
+          artist: currentSongData.artist,
+          album: '---',
+          artwork: [
+            { src: state.imageUrl, sizes: '512x512', type: 'image/png' }
+          ]
+        })
+      }
+    },
+    setPlayingContext: (options = {}) => (state, actions) => {
+      let { play: indexToPlay } = options
+      actions.initNewSong(options)
+
+      if (typeof indexToPlay !== 'undefined') {
+        actions.play()
+      }
+    },
+    initNewSong: (options) => (state, actions) => {
       let { songList, play: indexToPlay } = options
       let { auth: { s3BasePath } } = state
       let songToPlay = songList[indexToPlay || 0]
@@ -154,6 +185,9 @@ const flamous = app(
         },
         onend: function clearSeekInterval () {
           window.clearInterval(seekInterval)
+          actions.setState({
+            isPlaying: false
+          })
         },
         onload: () => {
           actions.setState({
@@ -161,10 +195,6 @@ const flamous = app(
           })
         }
       })
-
-      if (typeof indexToPlay !== 'undefined') {
-        audio.play()
-      }
 
       return {
         audio,
@@ -182,6 +212,7 @@ const flamous = app(
     play: (index) => (state, actions) => {
       let { audio } = state
       audio.play()
+      actions.updateMediaSession()
 
       return {
         isPlaying: true
