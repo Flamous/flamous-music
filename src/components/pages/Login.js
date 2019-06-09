@@ -350,7 +350,7 @@ const view = (state, actions) => (props, children) => (context) => {
       &middot;
       <span>Terms of Use</span>
       &middot;
-      <span>Support: <a href='mailto:hello@flamous.io'>hello@flamous.io</a></span>
+      <span><a href='mailto:hello@flamous.io'>hello@flamous.io</a></span>
 
     </footer>
   </div>

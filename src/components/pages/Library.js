@@ -9,10 +9,10 @@ import styles from './Library.css'
 const Library = (props) => (context, actions) => {
   let { auth } = context
 
-  return <UIPage nonInteractive {...props}>
+  return <UIPage nonInteractive {...props} class={styles['library']}>
     <UIHeader title='Library' />
-    <main>
 
+    <main class={styles['main']}>
       <div style={{ textAlign: 'center' }}>
         {
           !auth.isAuthenticated && <main>
@@ -29,7 +29,7 @@ const Library = (props) => (context, actions) => {
           <UIIcon class={styles['play']} height='48' width='48' icon='play-circle' />
 
           <p class={styles['empty-text']}>
-            Listen to saved songs here<br />Works even when you're offline
+            Fill up you Library<br />by adding some songs.
           </p>
         </section>
       }
