@@ -22,9 +22,10 @@ const UISpinner = (props) => {
     window.requestAnimationFrame(function frame () { window.requestAnimationFrame(function frame2 () { element.style.opacity = '1' }) })
   }
   function hide (element, done) {
-    element.addEventListener('transitionend', function end () {
+    let id = window.setInterval(() => {
+      window.clearInterval(id)
       done()
-    })
+    }, 130)
     element.style.opacity = '0'
   }
   return (
