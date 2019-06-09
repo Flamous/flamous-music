@@ -11,6 +11,10 @@ import ArtistList from './ArtistList'
 import OpenGraph from './OpenGraph'
 import UISpinner from './UI/UISpinner.js'
 
+import cc from 'classcat'
+
+import profilePlaceholder from '~/assets/profile_placeholder.svg'
+
 let songData = [
   {
     title: 'They Say',
@@ -104,19 +108,19 @@ const Home = (props) => (context) => {
         description='Free high-quality music by our amazing community.'
       />
       <UIHeader
-        noDynamicTitle
+        // noDynamicTitle
         nav={{
           start: <img class={styles['logo']} src={logo} />,
           end: isAuthenticated
             ? <div>
-              <UILink to='/profile' class='button white' style={{ color: 'black', fontWeight: 'bold' }}>{ cognitoUser.attributes.nickname }</UILink>
+              <UILink to='/profile' class={cc([styles['profile-image']])} style={{ color: 'black', fontWeight: 'bold' }}><img src={cognitoUser.attributes.picture || profilePlaceholder} /></UILink>
             </div>
             : <div>
               <UILink to='/login' class='button white' style={{ color: 'black', fontWeight: 'bold' }}>Login</UILink>
               <UILink to='/signup' class='button white' style={{ fontWeight: 'bold' }}>Sign Up</UILink>
             </div>
         }}
-        title={<div style={{ paddingBottom: '1rem', paddingTop: '1rem' }}>Explore</div>}
+        title='Explore'
       />
       <main class={styles['main']}>
         <section class='centered'>
