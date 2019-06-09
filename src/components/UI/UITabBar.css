@@ -21,12 +21,17 @@
   position: relative;
   overflow: hidden;
   background-color: #fafafa;
+  font-size: .9rem;
 }
 .top-row > * {
   position: relative;
 }
 .top-row button {
   color: black !important;
+}
+.top-row button svg {
+  fill: black;
+  stroke: none;
 }
 .cover-image {
   position: absolute;
