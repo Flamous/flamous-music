@@ -44,15 +44,21 @@
   justify-content: space-between;
 }
 
-.ambient-image {
+.ambient-wrapper {
+  height: 100%;
+  width: 100%;
   position: absolute;
+  z-index: -1;
+  overflow: hidden;
+}
+.ambient-image {
+  /* position: absolute; */
   height: calc(100% + 40px);
   width: calc(100% + 40px);
   margin: -20px;
   opacity: .05;
   background-repeat: no-repeat;
   background-size: cover;
-  z-index: -1;
   filter: blur(20px);
 }
 .header {

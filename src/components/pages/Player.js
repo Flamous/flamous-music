@@ -64,7 +64,7 @@ const view = (state, actions) => (props) => (context) => {
       }
     }}
   >
-    <div style={{ backgroundImage: `url(${imageUrl || ''})` }} class={styles['ambient-image']} />
+    <div class={styles['ambient-wrapper']}><div style={{ backgroundImage: `url(${imageUrl || ''})` }} class={styles['ambient-image']} /></div>
     <div class={styles['wrapper']}>
       <header class={styles['header']}>
         <UILink back class={styles['close']}>
