@@ -22,7 +22,8 @@ let matchedPreviously = false
 const view = (state, actions) => (props) => (context) => {
   let { animation: { slideOut, start: startAnimation } } = actions
   let { isMatch } = props
-  let { isPlaying, imageUrl } = context
+  let { isPlaying, imageUrl, duration, currentTime, songProgress } = context
+
   let isSwipe = window.history.state && window.history.state.isSwipe
   let initialLoad = context.initialLoad
 
@@ -85,14 +86,15 @@ const view = (state, actions) => (props) => (context) => {
           </div>
           <div class={styles['scrubber']}>
             <div class={styles['slider']}>
+              <span style={{ transform: `translateX(${100 * songProgress}%)` }} class={styles['progress-bar']} />
               <span class={styles['thumb']} />
             </div>
             <div class={styles['times']}>
               <span>
-                00:00
+                {currentTime}
               </span>
               <span>
-                00:00
+                {duration}
               </span>
             </div>
           </div>

@@ -88,7 +88,7 @@
   display: block;
 }
 .song-infos {
-  margin: 1.5rem 0;
+  margin: 0 0 1.5rem 0;
   text-shadow: rgba(0, 0, 0, 0.08) 0 0 2px, rgba(0, 0, 0, 0.1) 0 2px 3px;
 }
 .song-infos .title {
@@ -97,8 +97,7 @@
   font-size: 1.6rem;
 }
 .song-infos .artists {
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .scrubber {
   margin: .5em 0em 1rem;
@@ -111,13 +110,25 @@
   flex-grow: 1;
   margin: 0 1em;
   border-radius: 10px;
-  height: 7px;
+  overflow: hidden;
+  height: 6px;
   background-color: #fafafa;
-  box-shadow: inset rgba(0, 0, 0, 0.1) 0 0 2px 0, inset rgba(0, 0, 0, .05) 0 1px 3px;
+  box-shadow: inset rgba(0, 0, 0, 0.06) 0 0 1px 0, inset rgba(0, 0, 0, .06) 0 1px 5px;
+}
+.progress-bar {
+  border-radius: 100px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: block;
+  right: 100%;
+  background-color: #007AFF;
+  transform: translateX(100%);
 }
 .scrubber .times {
   font-size: .9125rem;
-  padding-top: .2rem;
+  padding-top: .4rem;
+  color: rgba(0, 0, 0, .55);
   width: 100%;
   display: flex;
   justify-content: space-between;
