@@ -86,15 +86,16 @@
   flex-grow: 1;
   display: flex;
   align-items: center;
+  color: rgba(0, 0, 0,.8);
 }
 .cover-image {
   max-width: 350px;
   width: 100%;
   margin: 0 auto;
   box-shadow:
-    rgba(0, 0, 0, 0.1) 0 12px 32px 0px,
-    rgba(0, 0, 0, .1) 0 0 3px,
-    rgba(0, 0, 0, .1) 0 3px 12px;
+  rgba(0, 0, 0, 0.1) 0 12px 32px 0px,
+  rgba(0, 0, 0, .1) 0 0 2px,
+  rgba(0, 0, 0, .1) 0 2px 5px;
   border-radius: 0.5rem;
   overflow: hidden;
   margin: 0 1.8rem;
@@ -104,8 +105,9 @@
   display: block;
 }
 .song-infos {
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1.75rem 0;
   text-shadow: rgba(0, 0, 0, 0.08) 0 0 2px, rgba(0, 0, 0, 0.1) 0 2px 3px;
+  color: rgba(0, 0, 0,.8);
 }
 .song-infos .title {
   font-weight: bold;
@@ -138,14 +140,14 @@
   width: 100%;
   display: block;
   right: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0,.8);
   transform: translateX(100%);
   box-shadow: rgba(0, 0, 0, .3) 0 0 12px;
 }
 .scrubber .times {
   font-size: .9125rem;
   padding-top: .4rem;
-  color: rgba(0, 0, 0, .55);
+  color: rgba(0, 0, 0,.8);
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -159,8 +161,8 @@
   margin-left: 4px;
 }
 .controls svg {
-  fill: black;
-  stroke: black;
+  fill: rgba(0, 0, 0,.8);
+  stroke: rgba(0, 0, 0,.8);
   stroke-width: 1px;
 }
 .footer {
@@ -168,7 +170,7 @@
   justify-content: space-between;
 }
 .footer button {
-  color: rgba(0, 0, 0, 0.6) !important;
+  color: rgba(0, 0, 0,.8) !important;
   margin: 0;
 }
 .footer svg {
