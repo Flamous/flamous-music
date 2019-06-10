@@ -214,6 +214,8 @@ const slideUp = {
       function initSwipeBack () {
         if (slideOutInteractive) {
           let p1
+          let arrow = document.getElementById('player-arrow')
+          // let ambientBg = document.getElementById('ambient-wrapper')
 
           listen(element, 'touchstart')
             .start(event => {
@@ -222,6 +224,13 @@ const slideUp = {
               let isDrag = false
               let appliedThreshold
               let delta
+
+              handleY.subscribe(function handleArrow (val) {
+                if (val < 0) {
+                  arrow.style.transform = `translateY(${-val}px)`
+                  // ambientBg.style.transform = `translateY(${-val}px)`
+                }
+              })
 
               p1 = pointer({ y: startY })
                 .pipe(
@@ -234,9 +243,17 @@ const slideUp = {
                   }),
                   conditional(y => !isDrag && Math.abs(delta) < 15, () => startY),
                   conditional(y => isDrag, y => y + appliedThreshold),
-                  conditional(y => isDrag && y < 0, y => softClamp(-y))
+                  conditional(y => isDrag && y < 0, y => {
+                    let val = softClamp(-y)
+                    // arrow.style.transform = `translateY(${-val}px)`
+                    return val
+                  })
                 )
                 .start(handleY)
+
+              // p1.subscribe(function arrow (val) {
+              //   arrow.style.transform = `translateY(${val}px)`
+              // })
 
               listen(document, 'touchend', { once: true })
                 .start(event => {

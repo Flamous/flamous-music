@@ -64,9 +64,9 @@ const view = (state, actions) => (props) => (context) => {
       }
     }}
   >
-    <div class={styles['ambient-wrapper']}><div style={{ backgroundImage: `url(${imageUrl || ''})` }} class={styles['ambient-image']} /></div>
+    <div id='ambient-wrapper' class={styles['ambient-wrapper']}><div style={{ backgroundImage: `url(${imageUrl || ''})` }} class={styles['ambient-image']} /></div>
     <div class={styles['wrapper']}>
-      <header class={styles['header']}>
+      <header class={styles['header']} id='player-arrow'>
         <UILink back class={styles['close']}>
           <UIIcon height='48' width='48' icon='chevron-down' />
         </UILink>
