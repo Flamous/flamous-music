@@ -10,7 +10,14 @@ let scrollLockConfig = {
 const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => val.x)
 let velocityClamp = clamp(-8000, 8000)
 const DRAG_THRESHOLD = 12
-let softClamp = nonlinearSpring(5, 0)
+
+let softClamp = (function initSoftClamp () {
+  let clampInstance = nonlinearSpring(5, 0)
+  return function (val) {
+    let newVal = clampInstance(-val)
+    return val > newVal ? val : newVal
+  }
+})()
 
 const slideIn = {
   state: {
@@ -244,7 +251,7 @@ const slideUp = {
                   conditional(y => !isDrag && Math.abs(delta) < 15, () => startY),
                   conditional(y => isDrag, y => y + appliedThreshold),
                   conditional(y => isDrag && y < 0, y => {
-                    let val = softClamp(-y)
+                    let val = softClamp(y)
                     // arrow.style.transform = `translateY(${-val}px)`
                     return val
                   })
