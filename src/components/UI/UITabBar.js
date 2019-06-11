@@ -10,10 +10,11 @@ import cc from 'classcat'
 const THRESHOLD = 10
 let lastTouchY = 0
 let YDelta = 0
+let startY
 let hasFired = false
 
 const UITabBar = (props, children) => (context) => {
-  let { actions: { togglePlay, views: { setActive } }, views: { activeView }, currentSongData = {}, isPlaying } = context
+  let { actions: { togglePlay, views: { setActive } }, views: { activeView }, currentSongData = {}, isPlaying, songProgress } = context
 
   let { title } = currentSongData
 
@@ -55,6 +56,10 @@ const UITabBar = (props, children) => (context) => {
     }}
   >
     {/* <img src={imageUrl || placeholderImage} class={styles['cover-image']} /> */}
+    <div class={styles['progress-bar']}>
+      <div style={{ transform: `translateX(${songProgress * 100}%)` }} />
+    </div>
+
     <UILink to='/player' class={styles['top-row']}>
       <span class={styles['song-title']}>{title}</span>
       <button class='white' onclick={(event) => { event.stopPropagation(); event.preventDefault(); togglePlay() }}>
