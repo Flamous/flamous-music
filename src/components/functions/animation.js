@@ -7,8 +7,11 @@ let scrollLockConfig = {
   reserveScrollBarGap: true
 }
 
-const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => val.x)
-let velocityClamp = clamp(-8000, 8000)
+const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => {
+  let x = val.x
+  return x < 0 ? 0 : x
+})
+let velocityClamp = clamp(-5000, 5000)
 const DRAG_THRESHOLD = 12
 
 let softClamp = (function initSoftClamp () {
