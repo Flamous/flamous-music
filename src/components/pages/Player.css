@@ -80,10 +80,9 @@
 }
 
 .main {
-  padding: 1em 2em;
+  padding: 1em 2em 0;
 }
 .song-meta-wrapper {
-  flex-grow: 1;
   display: flex;
   align-items: center;
   color: rgba(0, 0, 0,.8);
@@ -105,7 +104,7 @@
   display: block;
 }
 .song-infos {
-  margin: 0 0 1.75rem 0;
+  margin: 0 0 1.8rem 0;
   text-shadow: rgba(0, 0, 0, 0.08) 0 0 2px, rgba(0, 0, 0, 0.1) 0 2px 3px;
   color: rgba(0, 0, 0,.8);
 }
@@ -130,7 +129,7 @@
   border-radius: 10px;
   overflow: hidden;
   height: 6px;
-  background-color: #fafafa;
+  background-color: rgba(0, 0, 0, .03);
   box-shadow: inset rgba(0, 0, 0, 0.06) 0 0 1px 0, inset rgba(0, 0, 0, .06) 0 1px 5px;
 }
 .progress-bar {
@@ -140,7 +139,7 @@
   width: 100%;
   display: block;
   right: 100%;
-  background-color: rgba(0, 0, 0,.8);
+  background-color: rgba(0, 0, 0,.7);
   transform: translateX(100%);
   box-shadow: rgba(0, 0, 0, .3) 0 0 12px;
 }
@@ -178,17 +177,17 @@
 }
 
 @media (max-height: 600px) {
-  .song-meta-wrapper {
+  /* .song-meta-wrapper {
     display: flex;
     margin-bottom: 1.5rem;
-  }
-  .song-infos {
+  } */
+  /* .song-infos {
     flex-basis: 60%;
     flex-shrink: 0; 
     text-align: left;
     padding-left: 1rem;
-  }
-  .controls {
+  } */
+  /* .controls {
     margin-top: 2rem;
-  }
+  } */
 }

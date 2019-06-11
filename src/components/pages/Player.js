@@ -22,17 +22,12 @@ let matchedPreviously = false
 const view = (state, actions) => (props) => (context) => {
   let { animation: { slideOut, start: startAnimation } } = actions
   let { isMatch } = props
-  let { isPlaying, imageUrl, duration, currentTime, songProgress } = context
+  let { isPlaying, imageUrl, duration, currentTime, songProgress, actions: { togglePlay } } = context
 
   let isSwipe = window.history.state && window.history.state.isSwipe
   let initialLoad = context.initialLoad
 
   let { title } = context.currentSongData || {}
-
-  function togglePlay (index) {
-    isPlaying && context.actions.pause()
-    !isPlaying && context.actions.play()
-  }
 
   function onRouteMatch (element) {
     if (isMatch && !matchedPreviously) {
