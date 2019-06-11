@@ -66,22 +66,13 @@ const slideIn = {
       if (!initialLoad) {
         // Initial slide-in
         handleX = value(window.innerWidth, handleStyler.set('x'))
-        let springInstance = spring({
+        spring({
           from: window.innerWidth,
           to: 0,
-          damping: 23,
-          mass: 0.5,
-          stiffness: 205
-        })
-          .pipe(function (val) {
-            // let returnVal = val < 0 ? 0 : val
-            if (val < 0) {
-              springInstance.stop()
-              return 0
-            }
-            return val
-          })
-          .start(handleX)
+          damping: 20,
+          mass: 0.3,
+          stiffness: 120
+        }).start(handleX)
       } else {
         handleX = value(0, handleStyler.set('x'))
       }
@@ -112,8 +103,12 @@ const slideIn = {
         setAxisLock(true)
         currentPointer.stop()
 
-        currentPointer = pointerX(true, handleX.get())
-          .start(handleX)
+        currentPointer = schedule(
+          everyFrame(),
+          pointerX(true, handleX.get())
+        ).pipe((val) => {
+          return val > 0 ? val : 0
+        }).start(handleX)
       })
 
       let upListener = listen(document, 'touchend', { passive: true })
@@ -190,7 +185,7 @@ const slideIn = {
         to: window.innerWidth,
         velocity: velocity,
         mass: 2,
-        damping: 40,
+        damping: 30,
         stiffness: 300
       }).start(handleX)
     }
@@ -247,25 +242,32 @@ const slideUp = {
               p1 = pointer({ y: startY })
                 .pipe(
                   data => data.y,
-                  conditional(() => !isDrag, y => { delta = y - startY; return y }),
-                  conditional(y => !isDrag && Math.abs(delta) >= 15, y => {
+                  conditional(() => !isDrag, y => {
+                    delta = y - startY
+
+                    if (Math.abs(delta) > DRAG_THRESHOLD) {
                     isDrag = true
                     appliedThreshold = delta > 0 ? -DRAG_THRESHOLD : DRAG_THRESHOLD
-                    return y
+                    }
+                    return startY
                   }),
-                  conditional(y => !isDrag && Math.abs(delta) < 15, () => startY),
-                  conditional(y => isDrag, y => y + appliedThreshold),
-                  conditional(y => isDrag && y < 0, y => {
-                    let val = softClamp(y)
-                    // arrow.style.transform = `translateY(${-val}px)`
-                    return val
+                  conditional(y => isDrag, y => {
+                    // if (y !== 0) {
+                    y += appliedThreshold
+                    // }
+                    if (y < 0) {
+                      return softClamp(y)
+                    }
+                    return y
                   })
-                )
-                .start(handleY)
-
-              // p1.subscribe(function arrow (val) {
-              //   arrow.style.transform = `translateY(${val}px)`
-              // })
+                  // conditional(y => !isDrag && Math.abs(delta) >= 15, y => {
+                  //   isDrag = true
+                  //   appliedThreshold = delta > 0 ? -DRAG_THRESHOLD : DRAG_THRESHOLD
+                  //   return y
+                  // }),
+                  // conditional(y => !isDrag && Math.abs(delta) < 15, () => startY),
+                  // conditional(y => isDrag, y => y + appliedThreshold),
+                ).start(handleY)
 
               listen(document, 'touchend', { once: true })
                 .start(event => {
@@ -299,9 +301,9 @@ const slideUp = {
                       from: y,
                       to: 0,
                       velocity: velocity,
-                      damping: 18,
+                      damping: 20,
                       mass: 1,
-                      stiffness: 110
+                      stiffness: 200
                     }).start(handleY)
                   }
                 })
