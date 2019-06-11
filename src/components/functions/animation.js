@@ -7,11 +7,8 @@ let scrollLockConfig = {
   reserveScrollBarGap: true
 }
 
-const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => {
-  let x = val.x
-  return x < 0 ? 0 : x
-})
-let velocityClamp = clamp(-5000, 5000)
+const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefault: preventDefault }).pipe(val => val.x)
+let velocityClamp = clamp(-8000, 8000)
 const DRAG_THRESHOLD = 12
 
 let softClamp = (function initSoftClamp () {
@@ -69,13 +66,22 @@ const slideIn = {
       if (!initialLoad) {
         // Initial slide-in
         handleX = value(window.innerWidth, handleStyler.set('x'))
-        spring({
+        let springInstance = spring({
           from: window.innerWidth,
           to: 0,
-          damping: 20,
-          mass: 0.3,
-          stiffness: 120
-        }).start(handleX)
+          damping: 23,
+          mass: 0.5,
+          stiffness: 205
+        })
+          .pipe(function (val) {
+            // let returnVal = val < 0 ? 0 : val
+            if (val < 0) {
+              springInstance.stop()
+              return 0
+            }
+            return val
+          })
+          .start(handleX)
       } else {
         handleX = value(0, handleStyler.set('x'))
       }
@@ -106,12 +112,8 @@ const slideIn = {
         setAxisLock(true)
         currentPointer.stop()
 
-        currentPointer = schedule(
-          everyFrame(),
-          pointerX(true, handleX.get())
-        ).pipe((val) => {
-          return val > 0 ? val : 0
-        }).start(handleX)
+        currentPointer = pointerX(true, handleX.get())
+          .start(handleX)
       })
 
       let upListener = listen(document, 'touchend', { passive: true })
