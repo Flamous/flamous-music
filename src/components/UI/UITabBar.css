@@ -9,7 +9,7 @@
   justify-content: center;
   user-select: none;
   overscroll-behavior: contain;
-  box-shadow: #f0f0f0 0 -1px, rgba(0, 0, 0, .04) 0 0 6px, rgba(0, 0, 0, .04) 0 0 12px;
+  box-shadow: rgba(0, 0, 0, .12) 0 0 2px, rgba(0, 0, 0, .03) 0 0 4px, rgba(0, 0, 0, .03) 0 0 9px;
 }
 
 .top-row {
@@ -59,7 +59,7 @@
 .progress-bar > div {
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .bottom-row {
