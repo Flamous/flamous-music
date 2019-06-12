@@ -12,10 +12,10 @@
 } */
 
 .player {
-  height: 100%;
+  height: calc(100% + 1px);
   width: 100%;
   position: fixed;
-  overflow-y: visible;
+  /* overflow-y: visible; */
   color: #212121;
   overscroll-behavior: contain;
   box-shadow: 0 -2px 0 0 #f0f0f0;
@@ -51,15 +51,24 @@
   z-index: -1;
   overflow: hidden;
 }
+.ambient-wrapper::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(0deg, white, transparent);
+}
 .ambient-image {
-  /* position: absolute; */
-  height: calc(100% + 40px);
-  width: calc(100% + 40px);
-  margin: -20px;
-  opacity: .05;
+  height: calc(100% + 90px);
+  width: calc(100% + 90px);
+  margin: -45px;
+  opacity: .2;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: blur(20px);
+  filter: blur(45px);
 }
 .header {
   text-align: center;
