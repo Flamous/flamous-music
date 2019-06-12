@@ -1,8 +1,8 @@
-import { styler, spring, value, listen, pointer, everyFrame, schedule, transform } from 'popmotion'
+import { styler, spring, value, listen, pointer, transform } from 'popmotion'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import device from './../../modules/device'
 
-const { snap, nonlinearSpring, clamp, conditional } = transform
+const { snap, nonlinearSpring, clamp } = transform
 let scrollLockConfig = {
   reserveScrollBarGap: true
 }
@@ -13,11 +13,14 @@ const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefau
 })
 let velocityClamp = clamp(-5000, 5000)
 const DRAG_THRESHOLD = 12
+let snapToDragShreshold = snap(-DRAG_THRESHOLD, DRAG_THRESHOLD)
+let clampToDragShreshold = clamp(-DRAG_THRESHOLD, DRAG_THRESHOLD)
 
 let softClamp = (function initSoftClamp () {
   let clampInstance = nonlinearSpring(5, 0)
   return function (val) {
     let newVal = clampInstance(-val)
+    // console.log(val, ' | ', newVal)
     return val > newVal ? val : newVal
   }
 })()
@@ -226,60 +229,47 @@ const slideUp = {
       handleStyler = handleStyler || styler(element)
       disableBodyScroll(element, scrollLockConfig)
 
+      let arrow = document.getElementById('player-arrow')
+
       function initSwipeBack () {
+        handleY.subscribe(function handleArrow (val) {
+          if (val < 0) {
+            arrow.style.transform = `translateY(${-val}px)`
+          }
+        })
         if (slideOutInteractive) {
           let p1
-          let arrow = document.getElementById('player-arrow')
-          // let ambientBg = document.getElementById('ambient-wrapper')
+          let startY
+          let dragThresholdOffset
+          let dragLock
 
           listen(element, 'touchstart')
             .start(event => {
               springHandle && springHandle.stop()
-              let startY = handleY.get()
-              let isDrag = false
-              let appliedThreshold
-              let delta
-
-              handleY.subscribe(function handleArrow (val) {
-                if (val < 0) {
-                  arrow.style.transform = `translateY(${-val}px)`
-                  // ambientBg.style.transform = `translateY(${-val}px)`
-                }
-              })
+              startY = handleY.get()
+              dragThresholdOffset = 0
+              dragLock = false
 
               p1 = pointer({ y: startY })
                 .pipe(
-                  data => data.y,
-                  conditional(() => !isDrag, y => {
-                    delta = y - startY
-
-                    if (Math.abs(delta) > DRAG_THRESHOLD) {
-                      isDrag = true
-                      appliedThreshold = delta > 0 ? -DRAG_THRESHOLD : DRAG_THRESHOLD
+                  (coords) => coords.y,
+                  function (y) {
+                    let deltaOffset = y - startY
+                    if (Math.abs(deltaOffset) >= DRAG_THRESHOLD && !dragLock) {
+                      dragLock = true
+                      dragThresholdOffset = snapToDragShreshold(deltaOffset)
                     }
-                    return startY
-                  }),
-                  conditional(y => isDrag, y => {
-                    // if (y !== 0) {
-                    y += appliedThreshold
-                    // }
-                    if (y < 0) {
-                      return softClamp(y)
+                    if (!dragLock) {
+                      dragThresholdOffset = clampToDragShreshold(deltaOffset)
                     }
+                    y -= dragThresholdOffset
+                    if (y < 0) return softClamp(y)
                     return y
-                  })
-                  // conditional(y => !isDrag && Math.abs(delta) >= 15, y => {
-                  //   isDrag = true
-                  //   appliedThreshold = delta > 0 ? -DRAG_THRESHOLD : DRAG_THRESHOLD
-                  //   return y
-                  // }),
-                  // conditional(y => !isDrag && Math.abs(delta) < 15, () => startY),
-                  // conditional(y => isDrag, y => y + appliedThreshold),
+                  }
                 ).start(handleY)
 
               listen(document, 'touchend', { once: true })
                 .start(event => {
-                  isDrag = false
                   p1 && p1.stop()
 
                   let velocity = handleY.getVelocity()
