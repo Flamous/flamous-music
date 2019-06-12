@@ -11,7 +11,7 @@ const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefau
   let x = val.x
   return x < 0 ? 0 : x
 })
-let velocityClamp = clamp(-5000, 5000)
+let velocityClamp = clamp(-2000, 2000)
 const DRAG_THRESHOLD = 12
 let snapToDragShreshold = snap(-DRAG_THRESHOLD, DRAG_THRESHOLD)
 let clampToDragShreshold = clamp(-DRAG_THRESHOLD, DRAG_THRESHOLD)
@@ -24,6 +24,23 @@ let softClamp = (function initSoftClamp () {
     return val > newVal ? val : newVal
   }
 })()
+
+function useSpring (options) {
+  let { from, to, velocity = 0, type } = options
+
+  velocity = velocityClamp(velocity) + (velocity >= 0 ? 100 : -100)
+  switch (type) {
+    case 'player':
+      return spring({
+        from,
+        to,
+        velocity,
+        damping: 20,
+        mass: 1,
+        stiffness: 200
+      })
+  }
+}
 
 const slideIn = {
   state: {
@@ -286,22 +303,18 @@ const slideUp = {
                         back()
                       }
                     } })
-                    spring({
+                    useSpring({
                       from: y,
                       to: bodyHeight,
-                      velocity: velocity + 100,
-                      damping: 14,
-                      mass: 1,
-                      stiffness: 110
+                      velocity: velocity,
+                      type: 'player'
                     }).start(handleY)
                   } else { // User didn't swipe enough
-                    springHandle = spring({
+                    springHandle = useSpring({
                       from: y,
                       to: 0,
                       velocity: velocity,
-                      damping: 20,
-                      mass: 1,
-                      stiffness: 200
+                      type: 'player'
                     }).start(handleY)
                   }
                 })
@@ -333,8 +346,7 @@ const slideUp = {
         let l1 = listen(document, 'touchend', { once: true })
           .start(event => {
             p.stop()
-            let velocity = handleY.getVelocity() * 2
-            velocity = velocityClamp(velocity)
+            let velocity = handleY.getVelocity()
             let y = handleY.get()
             let deltaY = bodyHeight - (y + velocity)
 
@@ -342,13 +354,11 @@ const slideUp = {
               l1.stop()
               window.requestAnimationFrame(() => { window.requestAnimationFrame(() => back()) })
             } else {
-              springHandle = spring({
+              springHandle = useSpring({
                 from: y,
                 to: 0,
                 velocity: velocity,
-                damping: 25,
-                mass: 1.1,
-                stiffness: 200
+                type: 'player'
               }).start(handleY)
             }
           })
