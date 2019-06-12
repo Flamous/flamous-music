@@ -8,8 +8,6 @@ import UIIcon from './UIIcon'
 import cc from 'classcat'
 
 const THRESHOLD = 10
-let lastTouchY = 0
-let YDelta = 0
 let startY
 let hasFired = false
 
@@ -35,23 +33,19 @@ const UITabBar = (props, children) => (context) => {
   return <nav
     class={styles['tab-bar']}
     ontouchstart={event => {
-      lastTouchY = event.changedTouches[0].clientY
+      startY = event.changedTouches[0].clientY
     }}
     ontouchmove={event => {
       event.preventDefault()
       let currentTouchY = event.changedTouches[0].clientY
-      let delta = lastTouchY - currentTouchY
+      let delta = startY - currentTouchY
 
-      YDelta += delta
-      lastTouchY = currentTouchY
-
-      if (YDelta >= THRESHOLD && !hasFired) {
+      if (delta >= THRESHOLD && !hasFired) {
         hasFired = true
         window.history.pushState({ isSwipe: true }, '', '/player')
       }
     }}
     ontouchend={event => {
-      YDelta = 0
       hasFired = false
     }}
   >
