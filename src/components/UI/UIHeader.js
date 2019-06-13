@@ -59,7 +59,8 @@ const state = {
 }
 const actions = {
   observerChange: (changes) => ({ threshold }, { setHeaderHidden }) => {
-    if (changes[0].intersectionRatio <= threshold) {
+    console.log(changes[0])
+    if (!changes[0].isIntersecting) {
       setHeaderHidden(true)
     } else {
       setHeaderHidden(false)
@@ -69,8 +70,8 @@ const actions = {
     let observer = null
     if ('IntersectionObserver' in window) {
       observer = new window.IntersectionObserver(observerChange, {
-        threshold: [threshold, 0.01],
-        rootMargin: '-40px 0px 0px 0px'
+        threshold: [threshold],
+        rootMargin: '-53px 0px 0px 0px'
       })
       observer.observe(elem)
     }
@@ -99,9 +100,9 @@ const view = (state, actions) => (props, children) => (context) => {
       ]}
     </HeaderNav>
     {
-      title && <HeaderTitle oncreate={initObserver}>{title}</HeaderTitle>
+      title && <HeaderTitle>{title}</HeaderTitle>
     }
-    <hr class={styles['header-line']} />
+    <hr oncreate={initObserver} class={styles['header-line']} />
   </header>
 }
 const Header = nestable(
