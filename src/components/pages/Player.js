@@ -61,9 +61,9 @@ const view = (state, actions) => (props) => (context) => {
   >
     <div id='ambient-wrapper' class={styles['ambient-wrapper']}><div style={{ backgroundImage: `url(${imageUrl || ''})` }} class={styles['ambient-image']} /></div>
     <div class={styles['wrapper']}>
-      <header class={styles['header']} id='player-arrow'>
+      <header class={styles['header']}>
         <UILink back class={styles['close']}>
-          <UIIcon height='48' width='48' icon='chevron-down' />
+          <UIIcon height='48' width='48' icon='chevron-down' id='player-arrow' />
         </UILink>
       </header>
 
@@ -159,4 +159,4 @@ const Player = nestable(
   'music-player'
 )
 
-export default (props) => { return <Player {...props} key='player' /> }
+export default (props) => { return <Player {...props} class='page-player' key='player' /> }

@@ -20,7 +20,6 @@ let softClamp = (function initSoftClamp () {
   let clampInstance = nonlinearSpring(5, 0)
   return function (val) {
     let newVal = clampInstance(-val)
-    // console.log(val, ' | ', newVal)
     return val > newVal ? val : newVal
   }
 })()
@@ -35,7 +34,7 @@ function useSpring (options) {
         from,
         to,
         velocity,
-        damping: 20,
+        damping: 22,
         mass: 1,
         stiffness: 200
       })
@@ -249,9 +248,14 @@ const slideUp = {
       let arrow = document.getElementById('player-arrow')
 
       function initSwipeBack () {
-        handleY.subscribe(function handleArrow (val) {
-          if (val < 0) {
-            arrow.style.transform = `translateY(${-val}px)`
+        handleY.subscribe({
+          update: function handleArrow (val) {
+            if (val < 0) {
+              arrow.style.transform = `translateY(${-val}px)`
+            }
+          },
+          complete: function arrowComplete () {
+            arrow.style.transform = `translateY(0px)`
           }
         })
         if (slideOutInteractive) {
@@ -259,6 +263,20 @@ const slideUp = {
           let startY
           let dragThresholdOffset
           let dragLock
+
+          let figureOutWhatToDo = function (y) {
+            let deltaOffset = y - startY
+            if (Math.abs(deltaOffset) >= DRAG_THRESHOLD && !dragLock) {
+              dragLock = true
+              dragThresholdOffset = snapToDragShreshold(deltaOffset)
+            }
+            if (!dragLock) {
+              dragThresholdOffset = clampToDragShreshold(deltaOffset)
+            }
+            y -= dragThresholdOffset
+            if (y < 0) return softClamp(y)
+            return y
+          }
 
           listen(element, 'touchstart')
             .start(event => {
@@ -270,19 +288,7 @@ const slideUp = {
               p1 = pointer({ y: startY })
                 .pipe(
                   (coords) => coords.y,
-                  function (y) {
-                    let deltaOffset = y - startY
-                    if (Math.abs(deltaOffset) >= DRAG_THRESHOLD && !dragLock) {
-                      dragLock = true
-                      dragThresholdOffset = snapToDragShreshold(deltaOffset)
-                    }
-                    if (!dragLock) {
-                      dragThresholdOffset = clampToDragShreshold(deltaOffset)
-                    }
-                    y -= dragThresholdOffset
-                    if (y < 0) return softClamp(y)
-                    return y
-                  }
+                  figureOutWhatToDo
                 ).start(handleY)
 
               listen(document, 'touchend', { once: true })
