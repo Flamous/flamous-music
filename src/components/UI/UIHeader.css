@@ -88,9 +88,8 @@
 .header-line {
   border: none;
   margin: 0;
-  position: sticky;
-  top: 3rem;
   border-bottom: 1px solid #dadada;
+  position: relative;
   z-index: 1000;
 }
 
