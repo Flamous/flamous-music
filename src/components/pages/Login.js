@@ -251,7 +251,9 @@ const view = (state, actions) => (props, children) => (context) => {
                             {/* <br />
                             <UILink class='button white' replace to='/signup'>or Create Account</UILink> */}
                           </div>
-
+                          <p >
+                            By signing up, you agree to our <a href='/terms-of-use' target='_blank'>Terms of Use</a> and that you have read our <a href='/privacy-policy' target='_blank'>Privacy Policy</a>.
+                          </p>
                           <p class={styles['error']}>
                             {login.errorMessage && login.errorMessage}
                           </p></div>
