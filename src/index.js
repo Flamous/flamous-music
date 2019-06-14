@@ -130,8 +130,8 @@ const flamous = app(
       if ('mediaSession' in navigator) {
         navigator.mediaSession.setActionHandler('play', actions.play)
         navigator.mediaSession.setActionHandler('pause', actions.pause)
-        navigator.mediaSession.setActionHandler('previoustrack', function () { /* Code excerpted. */ })
-        navigator.mediaSession.setActionHandler('nexttrack', function () { /* Code excerpted. */ })
+        navigator.mediaSession.setActionHandler('previoustrack', actions.playPrevious)
+        navigator.mediaSession.setActionHandler('nexttrack', actions.playNext)
       }
     },
     updateMediaSession: () => (state, actions) => {
@@ -177,23 +177,27 @@ const flamous = app(
         html5: true,
         onplay: function onplay () {
           let duration = audio.duration()
-          actions.setState({ duration: secondsToFormattedString(duration) })
+          let currentSeek = audio.seek()
+
+          actions.setState({
+            duration: secondsToFormattedString(duration),
+            currentTime: secondsToFormattedString(Math.round(currentSeek)),
+            songProgress: currentSeek / duration
+          })
           seekInterval = window.setInterval(function updateSeekPosition () {
             let currentSeek = audio.seek()
             actions.setState({
               currentTime: secondsToFormattedString(Math.round(currentSeek)),
               songProgress: currentSeek / duration
             })
-          }, 333)
+          }, 500)
         },
         onpause: function clearSeekInterval () {
           window.clearInterval(seekInterval)
         },
         onend: function clearSeekInterval () {
           window.clearInterval(seekInterval)
-          actions.setState({
-            isPlaying: false
-          })
+          actions.playNext()
         },
         onload: () => {
           actions.setState({
@@ -204,6 +208,8 @@ const flamous = app(
 
       return {
         audio,
+        songs: songList,
+        songIndex: indexToPlay || 0,
         songProgress: 0,
         currentTime: secondsToFormattedString(0),
         imageUrl,
@@ -230,6 +236,37 @@ const flamous = app(
       return {
         isPlaying: false
       }
+    },
+    playNext: () => (state, actions) => {
+      let { songs, songIndex } = state
+      let length = songs.length
+      let newIndex
+      if (songIndex + 1 < length) {
+        newIndex = songIndex + 1
+      } else {
+        newIndex = 0
+      }
+
+      actions.setPlayingContext({
+        songList: songs,
+        play: newIndex
+      })
+    },
+    playPrevious: () => (state, actions) => {
+      let { songs, songIndex } = state
+      let length = songs.length
+      let newIndex
+
+      if (songIndex - 1 >= 0) {
+        newIndex = songIndex - 1
+      } else {
+        newIndex = length
+      }
+
+      actions.setPlayingContext({
+        songList: songs,
+        play: newIndex
+      })
     },
     new: {
       album: {
