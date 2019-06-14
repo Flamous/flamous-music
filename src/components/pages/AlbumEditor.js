@@ -364,13 +364,13 @@ const view = (state, actions) => (props, children) => (context) => {
           </label>
           <p style={{ color: 'rgba(0, 0, 0, 0.6)' }}>Release your album as a Single when you want to publish a single song, or multiple versions of the same song.<br /><br />For more info, have a look at our <a href='#'>Reference Guide</a></p>
         </div>
-        <div class={cc(['row', styles['input-row']])}>
+        {/* <div class={cc(['row', styles['input-row']])}>
           <label for='story'>
             Story<br />
           </label>
           <p style={{ color: 'rgba(0, 0, 0, 0.6)' }}>Albums with stories maximize their chance to be featured on our social media channels. Your Story is also displayed on the public album page.</p>
           <textarea id='story' rows='4' oninput={handleInput} type='text' value={album.story} placeholder='What went into the album ...' />
-        </div>
+        </div> */}
       </section>
 
       <h3 />
