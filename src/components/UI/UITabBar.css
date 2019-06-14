@@ -9,7 +9,6 @@
   justify-content: center;
   user-select: none;
   overscroll-behavior: contain;
-  box-shadow: rgba(0, 0, 0, .12) 0 0 2px, rgba(0, 0, 0, .03) 0 0 4px, rgba(0, 0, 0, .03) 0 0 9px;
 }
 
 .top-row {
@@ -19,7 +18,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background-color: rgba(250, 250, 250, .975);
+  background-color: rgba(253, 253, 253, .975);
   font-size: .9rem;
 }
 .top-row:active > * {
