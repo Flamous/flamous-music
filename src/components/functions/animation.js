@@ -252,8 +252,6 @@ const slideUp = {
           update: function handleArrow (val) {
             if (val < 0) {
               arrow.style.transform = `translateY(${-val}px)`
-            } else {
-              arrow.style.transform = `translateY(0px)`
             }
           },
           complete: function arrowComplete () {
@@ -296,6 +294,7 @@ const slideUp = {
               listen(document, 'touchend', { once: true })
                 .start(event => {
                   p1 && p1.stop()
+                  if (!dragLock) return
 
                   let velocity = handleY.getVelocity()
                   velocity = velocityClamp(velocity)
