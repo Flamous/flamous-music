@@ -252,6 +252,8 @@ const slideUp = {
           update: function handleArrow (val) {
             if (val < 0) {
               arrow.style.transform = `translateY(${-val}px)`
+            } else {
+              arrow.style.transform = `translateY(0px)`
             }
           },
           complete: function arrowComplete () {
