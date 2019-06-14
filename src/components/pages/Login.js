@@ -7,7 +7,7 @@ import Auth from '@aws-amplify/auth'
 import flamousLogo from '~/assets/logo/brand.svg'
 import UILink from '../UI/UILink'
 import UISpinner from '../UI/UISpinner'
-import UIIcon from '../UI/UIIcon';
+import UIIcon from '../UI/UIIcon'
 
 const state = {
   animation: slideUp.state,
@@ -107,7 +107,6 @@ const view = (state, actions) => (props, children) => (context) => {
         })
 
         auth.init()
-        // window.history.replaceState(previousUrl, '', previousUrl)
         window.history.replaceState(previousUrl, '', '/profile')
       } catch (error) {
         loginActions.update({
@@ -139,7 +138,6 @@ const view = (state, actions) => (props, children) => (context) => {
         isLoading: false
       })
 
-      // window.history.replaceState(previousUrl, '', previousUrl)
       window.history.replaceState(previousUrl, '', '/profile')
     } catch (error) {
       if (error.code === 'UserNotConfirmedException') {
@@ -148,9 +146,6 @@ const view = (state, actions) => (props, children) => (context) => {
         })
         console.info('User is not confirmed. Redirecting to AuthCode step...')
 
-        // await Auth.resendSignUp(
-        //   login.email
-        // )
         loginActions.update({
           isLoading: false,
           hasSubmittedEmail: true,
@@ -175,8 +170,8 @@ const view = (state, actions) => (props, children) => (context) => {
       isAuthCodeRedirect: false
     })
     try {
-        console.info('Flamous: Resending auth code...')
-        await Auth.resendSignUp(login.email)
+      console.info('Flamous: Resending auth code...')
+      await Auth.resendSignUp(login.email)
     } catch (error) {
       console.error('Flamous: there was a problem sending the auth code: ', error)
     }
@@ -214,137 +209,114 @@ const view = (state, actions) => (props, children) => (context) => {
           !isLogin && <UILink class='button white' style={{ fontWeight: 'bold' }} replace to='/login'>Log in instead...</UILink>
         }
       </div>
-
-      
     </header>
 
     <main class={styles['main']}>
       <h1>
         <img src={flamousLogo} />
         <br />
-        {
-          isLogin
-            ? 'Log in'
-            : 'Sign up'
+        {isLogin
+          ? 'Log in'
+          : 'Sign up'
         }
       </h1>
       <section>
-        {
+        {isLogin
+          ? <div>
+            <form onsubmit={handleLogin}>
+              {!login.hasSubmittedEmail && <div>
+                {login.isLoading
+                  ? <div class={styles['loading']}><UISpinner /><p>Logging in...</p></div>
+                  : <div>
+                    <input aria-label='Email' autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
 
-          isLogin
-            ? <div>
-              {/* <p>Share your music with the world.</p> */}
-              <form onsubmit={handleLogin}>
-                {
-                  !login.hasSubmittedEmail && <div>
-                    {
-                      login.isLoading
-                        ? <div class={styles['loading']}><UISpinner /><p>Logging in...</p></div>
-                        : <div>
-                          <input aria-label='Email' autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} type='email' placeholder='E-Mail Address' />
+                    <input aria-label='Password' autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
 
-                          <input aria-label='Password' autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} type='password' placeholder='Password' />
-                          {/* <span class={styles['dots']}>••••••••</span> */}
-
-                          <div>
-                            <button type='submit' style={{ fontWeight: 'bold' }}>Log in<UIIcon icon='arrow-right' /></button>
-                            {/* <br />
-                            <UILink class='button white' replace to='/signup'>or Create Account</UILink> */}
-                          </div>
-                          <p >
-                            By signing up, you agree to our <a href='/terms-of-use' target='_blank'>Terms of Use</a> and that you have read our <a href='/privacy-policy' target='_blank'>Privacy Policy</a>.
-                          </p>
-                          <p class={styles['error']}>
-                            {login.errorMessage && login.errorMessage}
-                          </p></div>
-                    }
-
+                    <div>
+                      <button type='submit' style={{ fontWeight: 'bold' }}>Log in<UIIcon icon='arrow-right' /></button>
+                    </div>
+                    <p >
+                      By signing up, you agree to our <a href='/terms-of-use' target='_blank'>Terms of Use</a> and that you have read our <a href='/privacy-policy' target='_blank'>Privacy Policy</a>.
+                    </p>
+                    <p class={styles['error']}>
+                      {login.errorMessage && login.errorMessage}
+                    </p>
                   </div>
                 }
-              </form>
-            </div>
-            : <div>
-              <form onsubmit={handleSubmit}>
-                {
-                  !login.hasSubmittedEmail && <div>
-                    {/* <p>Join our community  of music lovers and musicians.</p> */}
-                    {
-                      login.isLoading
-                        ? <div class={styles['loading']}><UISpinner /></div>
-                        : <div>
-                          <label for='name'>Display name</label>
-                          <input required autocomplete='username email' id='name' oninput={handleInput} value={login.name} class={styles['input']} type='text' placeholder='E.g. John Baginbu' />
+              </div>
+              }
+            </form>
+          </div>
+          : <div>
+            <form onsubmit={handleSubmit}>
+              {!login.hasSubmittedEmail && <div>
+                {login.isLoading
+                  ? <div class={styles['loading']}><UISpinner /></div>
+                  : <div>
+                    <label for='name'>Display name</label>
+                    <input required autocomplete='username email' id='name' oninput={handleInput} value={login.name} class={styles['input']} type='text' placeholder='E.g. John Baginbu' />
 
-                          {/* <label for='name'>Username</label>
-                          <input id='username' oninput={handleInput} value={login.username} class={styles['input']} type='text' /> */}
+                    <label for='name'>E-Mail</label>
+                    <input required autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} placeholder='E.g. your-email@example.com' type='email' />
 
-                          <label for='name'>E-Mail</label>
-                          <input required autocomplete='email' id='email' oninput={handleInput} value={login.email} class={styles['input']} placeholder='E.g. your-email@example.com' type='email' />
+                    <input aria-label='Password' required autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} placeholder='Password' type='password' />
 
-                          {/* <label for='name'>Password</label> */}
-                          <input aria-label='Password' required autocomplete='current-password' class={styles['input']} id='password' oninput={handleInput} value={login.password} placeholder='Password' type='password' />
+                    <div>
+                      <button type='submit'>Let's go<UIIcon icon='arrow-right' /></button>
+                    </div>
 
-                          <div>
-                            <button type='submit'>Let's go<UIIcon icon='arrow-right' /></button>
-                            {/* <br />
-                            <UILink class='button white' replace to='/login'>or Log In</UILink> */}
-                          </div>
-
-                          <p class={styles['error']}>
-                            {login.errorMessage && login.errorMessage}
-                          </p></div>
-                    }
-                  </div>
+                    <p class={styles['error']}>
+                      {login.errorMessage && login.errorMessage}
+                    </p></div>
                 }
-                {
-                  login.hasSubmittedEmail && !login.hasSubmittedAuthCode && !login.hasResentAuthCode && <div>
-                    {
-                      login.isLoading
-                        ? <div class={styles['loading']}><UISpinner /><p>Checking code...</p></div>
-                        : <div>
-                          <p class={styles['info']}>
-                            { login.isAuthCodeRedirect
-                            ? 'You have received an authentication code earlier to'
-                            : 'We sent a verification code to'
-                            }
-                            <br /><i>{login.email}</i>
-                          </p>
-                          <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
-                          <div>
-                            <button type='submit'>Confirm Email</button>
-                            <p>
+              </div>
+              }
+              {login.hasSubmittedEmail && !login.hasSubmittedAuthCode && !login.hasResentAuthCode && <div>
+                {login.isLoading
+                  ? <div class={styles['loading']}><UISpinner /><p>Checking code...</p></div>
+                  : <div>
+                    <p class={styles['info']}>
+                      { login.isAuthCodeRedirect
+                        ? 'You have received an authentication code earlier to'
+                        : 'We sent a verification code to'
+                      }
+                      <br /><i>{login.email}</i>
+                    </p>
+                    <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
+                    <div>
+                      <button type='submit'>Confirm Email</button>
+                      <p>
                               If your code has expired or did not reach your inbox, we can resend it.
-                              <button onclick={resendAuthCode} class='white'>Resend Code</button>
-                            </p>
-                          </div></div>
-                    }
+                        <button onclick={resendAuthCode} class='white'>Resend Code</button>
+                      </p>
+                    </div>
                   </div>
                 }
+              </div>
+              }
+              {login.hasSubmittedEmail && !login.hasSubmittedAuthCode && login.hasResentAuthCode && <div>
                 {
-                  login.hasSubmittedEmail && !login.hasSubmittedAuthCode && login.hasResentAuthCode && <div>
-                    {
-                      login.isLoading
-                        ? <div class={styles['loading']}><UISpinner /><p>Resending authentication code...</p></div>
-                        : <div>
-                          <p class={styles['info']}>
+                  login.isLoading
+                    ? <div class={styles['loading']}><UISpinner /><p>Resending authentication code...</p></div>
+                    : <div>
+                      <p class={styles['info']}>
                             We sent a new verification code to<br /><i>{login.email}</i>
-                          </p>
-                          <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
-                          <div>
-                            <button type='submit'>Confirm Email</button>
-                            <p>
+                      </p>
+                      <input id='authCode' oninput={handleInput} value={login.authCode} class={styles['input']} type='text' placeholder='Verification Code' />
+                      <div>
+                        <button type='submit'>Confirm Email</button>
+                        <p>
                               If your code has expired or did not reach your inbox, we can resend it.
-                              <button onclick={resendAuthCode} class='white'>Resend Code</button>
-                            </p>
-                          </div></div>
-                    }
-                  </div>
+                          <button onclick={resendAuthCode} class='white'>Resend Code</button>
+                        </p>
+                      </div>
+                    </div>
                 }
-              </form>
-
-            </div>
+              </div>
+              }
+            </form>
+          </div>
         }
-
       </section>
     </main>
     <footer>
@@ -353,7 +325,6 @@ const view = (state, actions) => (props, children) => (context) => {
       <span>Terms of Use</span>
       &middot;
       <span><a href='mailto:hello@flamous.io'>hello@flamous.io</a></span>
-
     </footer>
   </div>
 }
