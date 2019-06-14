@@ -12,7 +12,7 @@ let startY
 let hasFired = false
 
 const UITabBar = (props, children) => (context) => {
-  let { actions: { togglePlay, views: { setActive } }, views: { activeView }, currentSongData = {}, isPlaying, songProgress } = context
+  let { actions: { togglePlay, playNext, views: { setActive } }, views: { activeView }, currentSongData = {}, isPlaying, songProgress } = context
 
   let { title } = currentSongData
 
@@ -59,7 +59,7 @@ const UITabBar = (props, children) => (context) => {
       <button class='white' onclick={(event) => { event.stopPropagation(); event.preventDefault(); togglePlay() }}>
         <UIIcon icon={isPlaying ? 'pause' : 'play'} />
       </button>
-      <button class='white'>
+      <button onclick={(event) => { event.stopPropagation(); event.preventDefault(); playNext() }} class='white'>
         <UIIcon icon='fast-forward' />
       </button>
     </UILink>
