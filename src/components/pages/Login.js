@@ -235,9 +235,6 @@ const view = (state, actions) => (props, children) => (context) => {
                     <div>
                       <button type='submit' style={{ fontWeight: 'bold' }}>Log in<UIIcon icon='arrow-right' /></button>
                     </div>
-                    <p >
-                      By signing up, you agree to our <a href='/terms-of-use' target='_blank'>Terms of Use</a> and that you have read our <a href='/privacy-policy' target='_blank'>Privacy Policy</a>.
-                    </p>
                     <p class={styles['error']}>
                       {login.errorMessage && login.errorMessage}
                     </p>
@@ -264,7 +261,9 @@ const view = (state, actions) => (props, children) => (context) => {
                     <div>
                       <button type='submit'>Let's go<UIIcon icon='arrow-right' /></button>
                     </div>
-
+                    <p >
+                      By signing up, you agree to our <a href='/terms-of-use' target='_blank'>Terms of Use</a> and that you have read our <a href='/privacy-policy' target='_blank'>Privacy Policy</a>.
+                    </p>
                     <p class={styles['error']}>
                       {login.errorMessage && login.errorMessage}
                     </p></div>
