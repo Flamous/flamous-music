@@ -22,7 +22,7 @@ let matchedPreviously = false
 const view = (state, actions) => (props) => (context) => {
   let { animation: { slideOut, start: startAnimation } } = actions
   let { isMatch } = props
-  let { isPlaying, imageUrl, duration, currentTime, songProgress, actions: { togglePlay } } = context
+  let { isPlaying, imageUrl, duration, currentTime, songProgress, actions: { togglePlay, playNext, playPrevious } } = context
 
   let isSwipe = window.history.state && window.history.state.isSwipe
   let initialLoad = context.initialLoad
@@ -95,13 +95,13 @@ const view = (state, actions) => (props) => (context) => {
             </div>
           </div>
           <div class={styles['controls']}>
-            <button class='white'>
+            <button onclick={() => playPrevious()} class='white'>
               <UIIcon height='36' width='36' icon='rewind' />
             </button>
             <button onclick={() => togglePlay()} class={cc(['white', styles['play']])}>
               <UIIcon height='56' width='56' icon={isPlaying ? 'pause' : 'play'} />
             </button>
-            <button class='white'>
+            <button onclick={() => playNext()} class='white'>
               <UIIcon height='36' width='36' icon='fast-forward' />
             </button>
           </div>
