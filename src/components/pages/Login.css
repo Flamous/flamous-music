@@ -36,7 +36,7 @@
   max-height: 2.2rem;
   width: auto;
   display: inline;
-  left: -.3rem;
+  left: -.2rem;
   position: relative;
 }
 
@@ -49,6 +49,7 @@
 
 .top-row > * {
   padding: 1rem;
+  color: rgba(0, 0, 0, 0.8) !important;
 }
 .loading {
   text-align: center;
