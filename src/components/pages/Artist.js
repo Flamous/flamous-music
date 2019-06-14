@@ -57,7 +57,8 @@ let albumData = [
   }
 ]
 
-let View = (state, actions) => () => () => {
+let View = (props, children) => (state) => {
+  let { shareAPI } = state
   return (
     <div class={styles['artist']}>
       <OpenGraph
@@ -82,7 +83,11 @@ let View = (state, actions) => () => () => {
         nav={{
           start: <UIBackButton />,
           middle: 'Artist',
-          end: <button class='white'><UIIcon icon='share-2' style={{ strokeWidth: '1.5px' }} /></button>
+          end: shareAPI && <button onclick={() => navigator.share({
+            title: 'Free high-quality music - Flamous',
+            url: window.location.href,
+            text: 'Some descriptive text...'
+          })} class='white'><UIIcon icon='share-2' style={{ color: 'black', strokeWidth: '1.5px' }} /></button>
         }}
       />
 
