@@ -38,7 +38,7 @@ let Routes = () => {
     <Route path='/login' render={Login} />
     <Route path='/signup' render={Login} />
 
-    <Route path='/flamous-license' render={License} />
+    <Route path='/license' render={License} />
     <Route path='/create-album' render={NewAlbum} />
     <Route path='/album-editor/:albumId' render={AlbumEditor} />
   </span>
