@@ -36,11 +36,9 @@
   stroke: none;
 }
 .cover-image {
-  position: absolute;
-  width: calc(100% + 32px);
-  left: -16px;
-  filter: blur(12px);
-  opacity: .15;
+  width: 2.6rem;
+  border-radius: .25rem;
+  margin: .5rem;
 }
  .song-title {
   flex-grow: 1;

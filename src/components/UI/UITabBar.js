@@ -7,12 +7,14 @@ import libraryBlueSVG from '~/assets/icons/library_blue.svg'
 import UIIcon from './UIIcon'
 import cc from 'classcat'
 
+import coverArtPlaceholder from '~/assets/song_placeholder.svg'
+
 const THRESHOLD = 10
 let startY
 let hasFired = false
 
 const UITabBar = (props, children) => (context) => {
-  let { actions: { togglePlay, playNext, views: { setActive } }, views: { activeView }, currentSongData = {}, isPlaying, songProgress } = context
+  let { actions: { togglePlay, playNext, views: { setActive } }, views: { activeView }, currentSongData = {}, isPlaying, songProgress, imageUrl } = context
 
   let { title } = currentSongData
 
@@ -55,6 +57,7 @@ const UITabBar = (props, children) => (context) => {
     </div>
 
     <UILink to='/player' class={styles['top-row']}>
+      <img src={imageUrl || coverArtPlaceholder} class={styles['cover-image']} />
       <span class={styles['song-title']}>{title}</span>
       <button class='white' onclick={(event) => { event.stopPropagation(); event.preventDefault(); togglePlay() }}>
         <UIIcon icon={isPlaying ? 'pause' : 'play'} />
