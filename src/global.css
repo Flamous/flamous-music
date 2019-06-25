@@ -26,14 +26,18 @@ button, a:global(.button), label:global(.button) {
   align-items: center;
   white-space: nowrap;
   user-select: none;
-  padding: 0.6em 0.9em;
+  padding: 0.35em 0.7em;
+  min-height: 2.2rem;
+  min-width: 3rem;
+  text-align: center;
   border-radius: 0.5em;
   box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.14);
   align-items: center;
+  font-size: 1rem;
 }
 
 button > svg, a:global(.button) > svg {
-  transform: translateY(-1px);
+  opacity: .8;
 }
 
 button:global(.white), a:global(.button):global(.white), label:global(.button):global(.white) {
