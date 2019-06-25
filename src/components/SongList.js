@@ -3,6 +3,7 @@ import { h } from 'hyperapp'
 import styles from './SongList.css'
 import albumCoverPlaceholer from '../assets/song_placeholder.svg'
 import UIIcon from './UI/UIIcon'
+import cc from 'classcat'
 
 function buildActions (song) {
   let { aritstId, albumId } = song
@@ -75,9 +76,11 @@ function buildActions (song) {
  */
 
 let view = (props, children) => (state) => (context) => {
-  let { actionMenu: { isOpen: actionMenuIsOpen }, auth: { s3BasePath } } = state
+  let { actionMenu: { isOpen: actionMenuIsOpen }, auth: { s3BasePath }, currentSongData } = state
   let { songs = [], mode = 'standalone', album } = props
   let { actionMenu } = context.actions
+
+  let { audioSource } = currentSongData
 
   // openActionMenu should be extracted (probably into a decorator). Maybe something along CtxMenuAction?
   function openActionMenu (event, initiator, song) {
@@ -111,7 +114,7 @@ let view = (props, children) => (state) => (context) => {
         })
       }}>
         <div
-          class={styles['song-item']}
+          class={cc([styles['song-item'], { [styles['active-song']]: audioSource === song.audioSource }])}
           to='/'
           oncreate={elem => {
             elem.addEventListener('long-press', (event) => openActionMenu(event, null, song))
