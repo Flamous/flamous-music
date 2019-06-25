@@ -28,7 +28,7 @@ ui-page {
   overflow-y: scroll;
   top: 0;
   left: 0;
-  box-shadow: 0 0 0 2px #f0f0f0;
+  box-shadow: 0 -2px 2px -2px #f0f0f0;
   background-color: white;  
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
