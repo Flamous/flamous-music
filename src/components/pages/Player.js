@@ -77,8 +77,13 @@ const view = (state, actions) => (props) => (context) => {
 
         <div>
           <div class={styles['song-infos']}>
-            <span class={styles['title']}>{title}</span><br />
-            <span class={styles['artists']}>Artists 1, Artist 2</span>
+            <div>
+              <span class={styles['title']}>{title}</span><br />
+              <span class={styles['artists']}>Artists 1, Artist 2</span>
+            </div>
+            <div>
+              <UIIcon icon='share-2' />
+            </div>
           </div>
           <div class={styles['scrubber']}>
             <div class={styles['slider']}>
