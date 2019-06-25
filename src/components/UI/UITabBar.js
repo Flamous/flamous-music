@@ -44,7 +44,7 @@ const UITabBar = (props, children) => (context) => {
 
       if (delta >= THRESHOLD && !hasFired) {
         hasFired = true
-        window.history.pushState({ isSwipe: true }, '', '/player')
+        window.history.pushState({ isSwipe: true, initialY: currentTouchY - delta }, '', '/player')
       }
     }}
     ontouchend={event => {

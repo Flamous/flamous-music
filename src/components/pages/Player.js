@@ -25,6 +25,7 @@ const view = (state, actions) => (props) => (context) => {
   let { isPlaying, imageUrl, duration, currentTime, songProgress, actions: { togglePlay, playNext, playPrevious } } = context
 
   let isSwipe = window.history.state && window.history.state.isSwipe
+  let initialY = window.history.state && window.history.state.initialY
   let initialLoad = context.initialLoad
 
   let { title } = context.currentSongData || {}
@@ -37,6 +38,7 @@ const view = (state, actions) => (props) => (context) => {
         initialInteractive: isSwipe,
         slideOutInteractive: true,
         initialLoad,
+        initialY,
         back: () => window.history.back()
       })
     }

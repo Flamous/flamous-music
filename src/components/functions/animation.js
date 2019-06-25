@@ -1,4 +1,4 @@
-import { styler, spring, value, listen, pointer, transform } from 'popmotion'
+import { styler, spring, value, listen, pointer, transform, merge, tween, everyFrame } from 'popmotion'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import device from './../../modules/device'
 
@@ -236,7 +236,7 @@ const slideUp = {
       return changedState
     },
     start: (data) => (state, actions) => {
-      let { element, initialLoad, initialInteractive, slideOutInteractive, back } = data
+      let { element, initialLoad, initialInteractive, slideOutInteractive, back, initialY } = data
       let { initialized, handleStyler, handleY } = state
 
       let bodyHeight = window.innerHeight
@@ -348,8 +348,25 @@ const slideUp = {
       !initialized && initSwipeBack()
 
       if (initialInteractive) {
+        let snapOffset = 0
+        let lastPointer = initialY
+        // console.log(bodyHeight - initialY)
+        tween({ from: { y: 0 }, to: { y: bodyHeight - lastPointer } })
+          .start(({ y }) => {
+            // console.log('offset: ', y)
+            snapOffset = y
+          })
         let p = pointer({ y: handleY.get() })
           .pipe(data => data.y)
+          .start((y) => {
+            // console.log('current Pointer: ', y)
+            lastPointer = y
+          })
+        everyFrame()
+          .pipe(() => {
+            // console.log('Y POS: ', lastPointer - snapOffset)
+            return lastPointer - snapOffset
+          })
           .start(handleY)
 
         let l1 = listen(document, 'touchend', { once: true })
