@@ -115,7 +115,6 @@ svg {
   transition: background-color 400ms;
   align-items: center;
   position: relative;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.02);
 }
 :global(.row):first-child {
   padding-top: calc(1.2rem + 3px);
