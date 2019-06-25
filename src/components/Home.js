@@ -108,7 +108,7 @@ const Home = (props) => (context) => {
         description='Free high-quality music by our amazing community.'
       />
       <UIHeader
-        // noDynamicTitle
+        noDynamicTitle
         nav={{
           start: <img class={styles['logo']} src={logo} />,
           end: isAuthenticated
