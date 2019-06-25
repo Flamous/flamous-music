@@ -51,7 +51,6 @@ const UITabBar = (props, children) => (context) => {
       hasFired = false
     }}
   >
-    {/* <img src={imageUrl || placeholderImage} class={styles['cover-image']} /> */}
     <div class={styles['progress-bar']}>
       <div style={{ transform: `translateX(${songProgress * 100}%)` }} />
     </div>
