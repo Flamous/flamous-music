@@ -28,6 +28,20 @@
   padding: 2rem 1rem 0.6rem;
 }
 
+.header-edit {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.header-edit span {
+  font-size: 1rem;
+  display: block;
+  position: relative;
+  bottom: -0.15rem;
+  right: -.6rem;
+}
+
 section.account {
   padding: 1px;
   stroke: rgba(0, 0, 0, 0.35);
@@ -130,17 +144,21 @@ section.account {
 .user-info {
   display: flex;
   width: 100%;
-  margin: -0.7rem;
+  margin: 0 -.5rem;
+  padding: .5rem 1rem 0rem;
   font-size: 1rem;
   font-weight: normal;
   align-items: center;
 }
 .user-info > * {
-  margin: 0.7rem 0 0.7rem 0.7rem;
+  margin: .5rem;
 }
 .user-image {
-  flex-basis: 20%;
+  flex-basis: 27%;
   border-radius: 50%;
+  overflow: hidden;
+  /* box-shadow: rgba(0, 0, 0, .1) 0 2px 7px -2px, rgba(0, 0, 0, .1) 0 6px 21px; */
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 7px -2px, rgba(0, 0, 0, .1) 0 7px 40px -14px;
 }
 .user-image img {
   width: 100%;

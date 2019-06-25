@@ -6,7 +6,7 @@ import UIHeader from '../UI/UIHeader'
 import UISpinner from '../UI/UISpinner'
 import styles from './Profile.css'
 import placeholderAlbum from '~/assets/song_placeholder.svg'
-// import placeholderUser from '~/assets/profile.svg'
+import placeholderArtist from '~assets/artist_placeholder.svg'
 import UIIcon from '../UI/UIIcon'
 import Storage from '@aws-amplify/storage'
 import Auth from '@aws-amplify/auth'
@@ -67,7 +67,8 @@ const Library = (props) => (state, actions) => (context) => {
   }
 
   let UserHeader = () => {
-    let inEditMode = pageState.inEditMode
+    // let inEditMode = pageState.inEditMode
+    let inEditMode = false
     let DisplayName = inEditMode
       ? <input type='text' id='name' placeholder='Type your name...' value={pageState.name} oninput={handleInput} />
       : <div class={styles['display-name']}>{name || <i>No name set</i>}</div>
@@ -78,14 +79,14 @@ const Library = (props) => (state, actions) => (context) => {
 
     let UserImage = inEditMode
       ? (<div class={styles['user-image']}>
-        <UIIcon icon='user' />
+        <img src={placeholderArtist} />
         <label for='profile-picture'>
           <button class='white'>Change <UIIcon height='20' width='20' icon='image' /></button>
         </label>
         <input id='profile-picture' oninput={event => { put({ profilePicture: event.target.files[0] }) }} accept='image/*' type='file' />
       </div>)
       : <div class={styles['user-image']}>
-        <UIIcon icon='user' />
+        <img src={placeholderArtist} />
       </div>
 
     return <div class={styles['user-info']}>
@@ -117,16 +118,20 @@ const Library = (props) => (state, actions) => (context) => {
       }
     } else {
       nav = {
-        middle: 'Profile',
-        end: <button onclick={toggleEditMode} class='white'>
-            Edit
-        </button>
+        middle: 'Profile'
       }
     }
 
     return <UIHeader
-      noDynamicTitle
-      title={UserHeader}
+      realTitle='Profile'
+      title={<div class={styles['header-edit']}>
+          Profile
+        <span>
+          <button onclick={toggleEditMode} class='white'>
+            <UIIcon icon='settings' />
+          </button>
+        </span>
+      </div>}
       nav={nav}
     />
   }
@@ -147,6 +152,9 @@ const Library = (props) => (state, actions) => (context) => {
 
       {
         auth.isAuthenticated && <main class={styles['main']}>
+          <div>
+            <UserHeader />
+          </div>
           <h3>Your Albums</h3>
           <section>
 
@@ -159,14 +167,10 @@ const Library = (props) => (state, actions) => (context) => {
                 </div>
               }
               {
-              (auth.isLoadingAlbums || auth.isLoadingUser) && <UISpinner />
-            }
+                (auth.isLoadingAlbums || auth.isLoadingUser) && <UISpinner />
+              }
               {
                 isAlbums && auth.albums.map((album) => {
-                // let formattedLastUpdated
-                // if (album.lastUpdated) {
-                //   formattedLastUpdated = new Date(album.lastUpdated * 1000).toLocaleDateString(navigator.language, { year: '2-digit', month: 'short', day: 'numeric' })
-                // }
                   return <li><UILink class={styles['album']} to={`/album-editor/${album.albumId}`}>
                     <div class={styles['image-wrapper']}>
                       <img src={album.imageSource ? `${auth.s3BasePath}/${album.imageSource}${album.lastUpdated ? `?${album.lastUpdated}` : ''}` : placeholderAlbum} />
@@ -183,14 +187,12 @@ const Library = (props) => (state, actions) => (context) => {
                 })
               }
               <li>
-                {/* <UILink to='create-album' class='button white'><UIIcon icon='plus' /> New Album</UILink> */}
                 <p style={{ textAlign: 'center' }}>
                   <UILink to='/album-editor/new' class='button white'><UIIcon icon='plus' /> Create New Album</UILink>
                 </p>
               </li>
             </ul>
 
-            
           </section>
 
           <h3>Account</h3>
