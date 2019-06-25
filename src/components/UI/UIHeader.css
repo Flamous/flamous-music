@@ -80,6 +80,7 @@
 }
 .header-nav .item .middle {
   transition: opacity 200ms 200ms;
+  opacity: 0;
 }
 .header-nav.header-title-hidden .middle {
   transition: opacity 200ms 0ms;
