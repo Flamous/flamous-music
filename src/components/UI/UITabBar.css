@@ -13,7 +13,7 @@
 }
 
 .top-row {
-  color: black;
+  color: rgba(0, 0, 0, 0.7);
   min-height: 3.25rem;
   display: flex;
   align-items: center;
@@ -22,27 +22,38 @@
   background-color: rgba(253, 253, 253, .975);
   font-size: .9rem;
 }
-.top-row:active > * {
-  opacity: .35;
-}
+
 .top-row > * {
   position: relative;
 }
 .top-row button {
-  color: black !important;
+  color: rgba(0, 0, 0, 0.9) !important;
 }
 .top-row button svg {
-  fill: black;
-  stroke: none;
+  fill: rgba(0, 0, 0, 0.9);
+  stroke: rgba(0, 0, 0, 0.9);
+  stroke-width: 1px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }
+
 .cover-image {
   width: 2.6rem;
   border-radius: .25rem;
   margin: .5rem;
 }
- .song-title {
+.song-title {
   flex-grow: 1;
-  padding: 0 1rem 0;
+  align-self: strech;
+  display: flex;
+  align-items: center;
+  margin-left: .25rem;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+.cover-image:active + .song-title,
+.song-title:active {
+  opacity: .6;  
 }
 .progress-bar {
   height: 2px;
