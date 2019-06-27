@@ -9,7 +9,8 @@
   justify-content: center;
   user-select: none;
   overscroll-behavior: contain;
-  box-shadow: rgba(0, 0, 0, .12) 0 0 2px, rgba(0, 0, 0, .03) 0 0 4px, rgba(0, 0, 0, .03) 0 0 9px;
+  /* box-shadow: rgba(0, 0, 0, .12) 0 0 2px, rgba(0, 0, 0, .03) 0 0 4px, rgba(0, 0, 0, .03) 0 0 9px; */
+  box-shadow: rgba(0, 0, 0, .1) 0 0 8px, rgba(0, 0, 0, .2) 0 10px 10px 8px, rgba(0, 0, 0, .3) 0 36px 20px 20px;
 }
 
 .top-row {
