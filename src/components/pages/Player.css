@@ -95,9 +95,9 @@
   width: 100%;
   margin: 0 auto;
   box-shadow:
-  rgba(0, 0, 0, 0.1) 0 12px 32px 0px,
-  rgba(0, 0, 0, .1) 0 0 2px,
-  rgba(0, 0, 0, .1) 0 2px 5px;
+    rgba(0, 0, 0, 0.2) 0 20px 28px -20px,
+    rgba(0, 0, 0, .1) 0 0 10px,
+    rgba(0, 0, 0, .3) 0 32px 32px -28px;
   border-radius: 0.5rem;
   overflow: hidden;
   margin: 0 1.8rem;
