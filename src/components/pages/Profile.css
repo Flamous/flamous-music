@@ -25,7 +25,7 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   font-weight: normal;
-  padding: 2rem 1rem 0.6rem;
+  padding: 2rem 1.2rem 0.6rem;
 }
 
 .header-edit {
@@ -144,8 +144,9 @@ section.account {
 .user-info {
   display: flex;
   width: 100%;
-  margin: 0 -.5rem;
-  padding: .5rem 1rem 0rem;
+  max-width: 32rem;
+  margin: -.5rem;
+  padding: 1rem .75rem 0;
   font-size: 1rem;
   font-weight: normal;
   align-items: center;
@@ -156,9 +157,9 @@ section.account {
 .user-image {
   flex-basis: 27%;
   border-radius: 50%;
+  flex-shrink: 0;
   overflow: hidden;
-  /* box-shadow: rgba(0, 0, 0, .1) 0 2px 7px -2px, rgba(0, 0, 0, .1) 0 6px 21px; */
-  box-shadow: rgba(0, 0, 0, .1) 0 2px 7px -2px, rgba(0, 0, 0, .1) 0 7px 40px -14px;
+  box-shadow: rgba(0, 0, 0, .2) 0 2px 7px -2px, rgba(0, 0, 0, .3) 0 15px 40px -25px;
 }
 .user-image img {
   width: 100%;
