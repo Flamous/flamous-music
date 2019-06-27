@@ -187,7 +187,7 @@ const Library = (props) => (state, actions) => (context) => {
                 })
               }
               <li>
-                <p style={{ textAlign: 'center' }}>
+                <p style={{ textAlign: 'center', marginBottom: '0' }}>
                   <UILink to='/album-editor/new' class='button white'><UIIcon icon='plus' /> Create New Album</UILink>
                 </p>
               </li>
