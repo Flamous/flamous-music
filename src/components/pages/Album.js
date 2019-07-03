@@ -77,8 +77,8 @@ let View = (props, children) => (state, actions) => {
   return (
     !isLoadingUser && <div class={styles['album']} oncreate={fetchAlbum}>
       <OpenGraph
-        title='[Album Name] by [Artist Name]'
-        description='Listen to the album [Album Name] on Flamous Music.'
+        title={`${album.title} [Album]`}
+        description={`By [artist name] on Flamous Music.`}
       />
       <UIHeader
         noDynamicTitle
