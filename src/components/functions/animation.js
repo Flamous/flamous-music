@@ -1,4 +1,4 @@
-import { styler, spring, value, listen, pointer, transform, merge, tween, everyFrame } from 'popmotion'
+import { styler, spring, value, listen, pointer, transform, tween, everyFrame } from 'popmotion'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import device from './../../modules/device'
 
@@ -11,7 +11,7 @@ const pointerX = (preventDefault = false, x = 0) => pointer({ x: x, preventDefau
   let x = val.x
   return x < 0 ? 0 : x
 })
-let velocityClamp = clamp(-2000, 2000)
+let velocityClamp = clamp(-5000, 5000)
 const DRAG_THRESHOLD = 12
 let snapToDragShreshold = snap(-DRAG_THRESHOLD, DRAG_THRESHOLD)
 let clampToDragShreshold = clamp(-DRAG_THRESHOLD, DRAG_THRESHOLD)
