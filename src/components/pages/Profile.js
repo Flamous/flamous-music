@@ -128,7 +128,7 @@ const Library = (props) => (state, actions) => (context) => {
           Profile
         <span>
           <button onclick={toggleEditMode} class='white'>
-            <UIIcon icon='settings' />
+            Edit <UIIcon icon='edit-3' />
           </button>
         </span>
       </div>}
