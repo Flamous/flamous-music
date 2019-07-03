@@ -52,3 +52,20 @@ export const getFeatured = `query getFeatured {
     }
   }
 }`
+
+export let getArtist = `query getArtist ($artistId: ID!) {
+  getFeatured (artistId: $artistId) {
+    name
+    imageSource
+    songs {
+      title
+      imageSource
+      audioSource
+      albumId
+    }
+    albums {
+      title
+      imageSource
+    }
+  }
+}`

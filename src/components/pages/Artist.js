@@ -11,6 +11,9 @@ import SongList from '../SongList'
 import AlbumList from '../AlbumList'
 import OpenGraph from '../OpenGraph'
 
+import gqlApi from '../functions/gqlApi'
+import { getArtist } from '~/graphql/queries'
+
 let songData = [
   {
     title: 'They Say',
@@ -58,7 +61,32 @@ let albumData = [
 ]
 
 let View = (props, children) => (state) => {
-  let { shareAPI } = state
+  let { shareAPI, auth: { s3BasePath } } = state
+  let artistId = props.match.params && props.match.params.artistId
+  let { page } = state
+  let { state: { albums = [], songs = [], artist = {} } } = page
+
+  let profileImage = artist.imageSource ? `${s3BasePath}/${artist.imageSource}` : artistPlaceholder
+
+  async function fetchArtist () {
+    try {
+      let result = await gqlApi({
+        operation: getArtist,
+        parameters: {
+          artistId
+        },
+        authMode: 'AWS_IAM'
+      })
+
+      console.log('Album fetch result --> ', result)
+      page.put({
+        ...result
+      })
+    } catch (error) {
+      console.error('Flamous: Could not load artist -->', artistId, error)
+    }
+  }
+
   return (
     <div class={styles['artist']}>
       <OpenGraph
@@ -70,10 +98,10 @@ let View = (props, children) => (state) => {
         title={(
           <div class={styles['header-inner']}>
             <div class={styles['header-image']}>
-              <img src={artistPlaceholder} />
+              <img src={profileImage} />
             </div>
             <div class={styles['header-infos']}>
-              <span class={styles['header-title']}><span>Artist title</span></span>
+              <span class={styles['header-title']}><span>{artist.name}</span></span>
               <div class={styles['header-items-row']}>
                 {/* <span>Artist 1, Artist 2</span> */}
                 {/* <button class='white'><UIIcon icon='more-horizontal' /></button> */}
@@ -94,16 +122,16 @@ let View = (props, children) => (state) => {
       <main class={styles['main']}>
         <section class='centered'>
           <h3>Top 5</h3>
-          <SongList mode='artist' songs={songData} />
+          <SongList mode='artist' songs={songs} />
         </section>
         <section class='centered'>
           <h3>Albums</h3>
-          <AlbumList albums={albumData} />
+          <AlbumList albums={albums} />
         </section>
       </main>
 
       <footer class={styles['footer']}>
-        13 Songs &middot; &copy; Artist 1
+        {artist.name}
       </footer>
     </div>
   )
