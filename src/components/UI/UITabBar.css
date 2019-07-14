@@ -12,7 +12,7 @@
   background-color: rgba(255, 255, 255, 0.97);
   /* box-shadow: rgba(0, 0, 0, .12) 0 0 2px, rgba(0, 0, 0, .03) 0 0 4px, rgba(0, 0, 0, .03) 0 0 9px; */
   box-shadow: rgba(0, 0, 0, .1) 0 0 3px, rgba(0, 0, 0, .2) 0 10px 14px 5px, rgba(0, 0, 0, .3) 0 30px 30px 10px;
-  border-radius: .5rem .5rem 0 0;
+  border-radius: .75rem .75rem 0 0;
   overflow: hidden;
 }
 
@@ -44,7 +44,7 @@
 .cover-image {
   width: 3.25rem;
   border-radius: .375rem;
-  margin: .5rem;
+  margin: .75rem .75rem .5rem;
 }
 .title-wrapper {
   flex-grow: 1;
@@ -66,7 +66,7 @@
 .progress-bar {
   height: 4px;
   border-radius: 100px;
-  width: calc(100% - .5rem);
+  width: calc(100% - 1.5rem);
   /* right: 100%; */
   position: relative;
   /* top: 1px; */
@@ -105,7 +105,7 @@
   font-size: 0.75rem;
   flex-basis: 7rem;
   flex-grow: 1;
-  padding: 0.2rem 0.15rem 0.2rem;
+  padding: 0.2rem 0.15rem 0.5rem;
   text-align: center;
   cursor: default;
   display: flex;
