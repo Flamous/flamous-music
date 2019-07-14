@@ -51,13 +51,14 @@ const UITabBar = (props, children) => (context) => {
       hasFired = false
     }}
   >
-    <div class={styles['progress-bar']}>
-      <div style={{ transform: `translateX(${songProgress * 100}%)` }} />
-    </div>
-
     <UILink to='/player' class={styles['top-row']}>
       <img src={imageUrl || coverArtPlaceholder} class={styles['cover-image']} />
-      <span class={styles['song-title']}>{title}</span>
+      <div class={styles['title-wrapper']}>
+        <span class={styles['song-title']}>{title}</span>
+        <div class={styles['progress-bar']}>
+          <div style={{ transform: `translateX(${(songProgress * 100) - 100}%)` }} />
+        </div>
+      </div>
       <button class='white' onclick={(event) => { event.stopPropagation(); event.preventDefault(); togglePlay() }}>
         <UIIcon icon={isPlaying ? 'pause' : 'play'} />
       </button>
@@ -68,13 +69,23 @@ const UITabBar = (props, children) => (context) => {
 
     <div class={styles['bottom-row']}>
       <SetActive viewName='library' class={cc([styles['item'], { [styles['active']]: activeView === 'library' }])}>
-        <img class={styles['icon']} alt='Library Icon' src={activeView === 'library' ? libraryBlueSVG : librarySVG} />
-        <span>Library</span>
+        <UIIcon icon='disc' />
+        <span>Session</span>
+      </SetActive>
+
+      <SetActive viewName='library' class={cc([styles['item'], { [styles['active']]: activeView === 'library' }])}>
+        <UIIcon icon='search' />
+        <span>Search</span>
       </SetActive>
 
       <SetActive viewName='home' class={cc([styles['item'], { [styles['active']]: activeView === 'home' }])}>
         <UIIcon icon='music' />
         <span>Explore</span>
+      </SetActive>
+
+      <SetActive viewName='library' class={cc([styles['item'], { [styles['active']]: activeView === 'library' }])}>
+        <img class={styles['icon']} alt='Library Icon' src={activeView === 'library' ? libraryBlueSVG : librarySVG} />
+        <span>Library</span>
       </SetActive>
 
       <SetActive viewName='profile' class={cc([styles['item'], { [styles['active']]: activeView === 'profile' }])}>

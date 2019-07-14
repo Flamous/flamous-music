@@ -9,8 +9,11 @@
   justify-content: center;
   user-select: none;
   overscroll-behavior: contain;
+  background-color: rgba(255, 255, 255, 0.97);
   /* box-shadow: rgba(0, 0, 0, .12) 0 0 2px, rgba(0, 0, 0, .03) 0 0 4px, rgba(0, 0, 0, .03) 0 0 9px; */
-  box-shadow: rgba(0, 0, 0, .1) 0 0 8px, rgba(0, 0, 0, .2) 0 10px 10px 8px, rgba(0, 0, 0, .3) 0 36px 20px 20px;
+  box-shadow: rgba(0, 0, 0, .1) 0 0 3px, rgba(0, 0, 0, .2) 0 10px 14px 5px, rgba(0, 0, 0, .3) 0 30px 30px 10px;
+  border-radius: .5rem .5rem 0 0;
+  overflow: hidden;
 }
 
 .top-row {
@@ -20,8 +23,8 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background-color: rgba(253, 253, 253, .975);
-  font-size: .9rem;
+  /* background-color: rgba(253, 253, 253, .975); */
+  /* font-size: .9rem; */
 }
 
 .top-row > * {
@@ -39,16 +42,20 @@
 }
 
 .cover-image {
-  width: 2.6rem;
-  border-radius: .25rem;
+  width: 3.25rem;
+  border-radius: .375rem;
   margin: .5rem;
 }
-.song-title {
+.title-wrapper {
   flex-grow: 1;
   align-self: strech;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  /* align-items: center; */
   margin-left: .25rem;
+}
+.song-title {
+  display: block;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.8);
 }
@@ -57,16 +64,20 @@
   opacity: .6;  
 }
 .progress-bar {
-  height: 2px;
-  width: 100%;
-  right: 100%;
+  height: 4px;
+  border-radius: 100px;
+  width: calc(100% - .5rem);
+  /* right: 100%; */
   position: relative;
-  top: 1px;
+  /* top: 1px; */
   z-index: 3;
-  margin-top: -2px;
+  margin-top: .5rem;
+  background-color: rgba(0, 0, 0, .03);
+  overflow: hidden;
 }
 
 .progress-bar > div {
+  transform: translateX(100%);
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
@@ -75,17 +86,17 @@
 .bottom-row {
   display: flex;
   position: relative;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, .1) 0 0 1px, rgba(0, 0, 0, .1) 0 0 3px;
+  /* background-color: white; */
+  /* box-shadow: rgba(0, 0, 0, .1) 0 0 1px, rgba(0, 0, 0, .1) 0 0 3px; */
 }
 
 @supports (backdrop-filter: blur(30px)) {
-  .top-row {
+  /* .top-row {
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(40px);
-  }
-  .bottom-row {
-    background-color: rgba(255, 255, 255, 0.85);
+  } */
+  .tab-bar {
+    background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(40px);
   }
 }
