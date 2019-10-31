@@ -16,6 +16,7 @@
   width: 100%;
   background-color: black;
   opacity: 0;
+  contain: strict;
 }
 .touch .background {
   transition: opacity 200ms linear;
@@ -36,11 +37,12 @@
   padding: 0 .5rem .5rem;
   margin: 0 auto;
   max-width: 32rem;
+  contain: layout paint;
 }
 .cursor .container {
   position: absolute;
   min-width: 19rem;
-  /* padding-right: 2rem; */
+  contain: layout;
 }
 
 .action-list {

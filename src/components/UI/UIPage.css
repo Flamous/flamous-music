@@ -5,6 +5,7 @@ ui-page {
   right: 0;
   bottom: 0;
   overflow: hidden;
+  contain: strict;
 }
 :global(.not-standalone) ui-page:global(.active) {
   position: relative;
@@ -32,7 +33,8 @@ ui-page {
   background-color: white;  
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  /* -webkit-perspective: 0; */
+  box-shadow: rgba(0, 0, 0, .2) 0 0 20px -5px;
+  contain: strict;
   z-index: 1;
   transform: translateX(100%);
 }
@@ -46,7 +48,7 @@ ui-page {
   overscroll-behavior: unset;
 }
 :global(.not-standalone) :global(.active) .page.loaded {
-  transition: opacity 150ms linear;
+  transition: opacity 300ms linear;
   opacity: 1;
 }
 .page > div {

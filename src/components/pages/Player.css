@@ -73,6 +73,9 @@
   stroke-linejoin: round;
   display: block;
 }
+.close svg {
+  contain: strict;
+}
 .header span {
   font-style: italic;
   font-weight: 300;

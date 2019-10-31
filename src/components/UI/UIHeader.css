@@ -7,6 +7,7 @@
   z-index: 1001;
   stroke: #007aff;
   transition: background-color 200ms, box-shadow 200ms;
+  contain: strict;
 }
 :global(.not-standalone) .header-nav {
   position: fixed;
@@ -52,12 +53,6 @@
   font-weight: bold;
 }
 
-@supports (backdrop-filter: blur(30px)) {
-  .header-nav {
-    background-color: rgba(252, 252, 252, 0.85);
-    backdrop-filter: blur(60px);
-  }
-}
 .header-nav pre {
   margin: 0;
 }
@@ -73,6 +68,12 @@
   transition: background-color 1000ms;
   background-color: rgba(255, 255, 255, 0.975);
   box-shadow: rgba(0, 0, 0, .1) 0 0 1px, rgba(0, 0, 0, .1) 0 0 3px
+}
+@supports (backdrop-filter: blur(30px)) {
+  .header-nav {
+    background-color: rgba(252, 252, 252, 0.925);
+    backdrop-filter: blur(20px);
+  }
 }
 .header-nav.header-title-hidden .dynamic-title {
   transition: opacity 200ms 200ms;

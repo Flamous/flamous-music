@@ -10,6 +10,7 @@
   background-color: #fafafa;
   transform: translateY(100%);
   top: 0;
+  contain: strict;
 }
 
 @supports (backdrop-filter: blur(10px)) {
